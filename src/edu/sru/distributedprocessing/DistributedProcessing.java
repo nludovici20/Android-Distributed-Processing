@@ -9,7 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class DistributedProcessing extends Activity {
-    private Button truck_btn, company_btn, button3, button4, button5;
+    private Button vehicles_btn, drivers_btn, shipments_btn, routing_btn, contractor_btn,
+    				depot_btn, warehouse_btn, vehicle_type_btn, maintenance_btn, tech_btn, contact_btn, report_btn;
     private TextView header_txt;
     
     @Override
@@ -19,50 +20,101 @@ public class DistributedProcessing extends Activity {
         
         header_txt = (TextView) findViewById(R.id.header_txt);
         
-        truck_btn = (Button) findViewById(R.id.truck_btn);
-        truck_btn.setOnClickListener(new OnClickListener(){
+        vehicles_btn = (Button) findViewById(R.id.vehicle_btn);
+        vehicles_btn.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(DistributedProcessing.this, "Truck Button Selected", Toast.LENGTH_SHORT).show();
-				header_txt.setText("Truck Info:");
+				
 			}
 		});
         
-        company_btn = (Button) findViewById(R.id.company_btn);
-        company_btn.setOnClickListener(new OnClickListener(){
+        drivers_btn = (Button) findViewById(R.id.drivers_btn);
+        drivers_btn.setOnClickListener(new OnClickListener(){
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(DistributedProcessing.this, "Company Button Selected", Toast.LENGTH_SHORT).show();
-				header_txt.setText("Company Info:");
+			
 			}
         });
         
-        button3 = (Button) findViewById(R.id.button3);
-        button3.setOnClickListener(new OnClickListener(){
+        shipments_btn = (Button) findViewById(R.id.shipments_btn);
+        shipments_btn.setOnClickListener(new OnClickListener(){
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(DistributedProcessing.this, "Button 3 Selected", Toast.LENGTH_SHORT).show();
-				header_txt.setText("Button3 Info:");
+			
 			}
         });
         
-        button4 = (Button) findViewById(R.id.button4);
-        button4.setOnClickListener(new OnClickListener(){
+        routing_btn = (Button) findViewById(R.id.routing_btn);
+        routing_btn.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(DistributedProcessing.this, "Button 4 Selected", Toast.LENGTH_SHORT).show();
-				header_txt.setText("Button4 Info:");
+				
 			}
         });
         
-        button5 = (Button) findViewById(R.id.button5);
-        button5.setOnClickListener(new OnClickListener(){
+        contractor_btn = (Button) findViewById(R.id.contractors_btn);
+        contractor_btn.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(DistributedProcessing.this, "Button 5 Selected", Toast.LENGTH_SHORT).show();
-				header_txt.setText("Button5 Info:");
+				
+			}
+        });
+        
+        depot_btn = (Button) findViewById(R.id.depots_btn);
+        depot_btn.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				
+			}
+        });
+        
+        warehouse_btn = (Button) findViewById(R.id.warehouses_btn);
+        warehouse_btn.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				
+			}
+        });
+        
+        vehicle_type_btn = (Button) findViewById(R.id.vehicle_type_btn);
+        vehicle_type_btn.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				
+			}
+        });
+        
+        maintenance_btn = (Button) findViewById(R.id.maintenance_btn);
+        maintenance_btn.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				
+			}
+        });
+        
+        tech_btn = (Button) findViewById(R.id.technicians_btn);
+        tech_btn.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				
+			}
+        });
+        
+        contact_btn = (Button) findViewById(R.id.contacts_btn);
+        contact_btn.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				
+			}
+        });
+        
+        report_btn = (Button) findViewById(R.id.reports_btn);
+        report_btn.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				
 			}
         });
     }

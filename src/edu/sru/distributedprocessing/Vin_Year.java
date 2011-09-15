@@ -25,12 +25,12 @@ public class Vin_Year extends Activity {
 		  
 		  ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();
 		  HashMap<String, String> map = new HashMap<String, String>();
-		  map.put("VIN", "1982");
-		  map.put("YEAR", "4B7DH3LDJNEE945D");
+		  map.put("VIN", "4B7DH3LDJNEE945D");
+		  map.put("YEAR", "1982");
 		  mylist.add(map);
 		  map = new HashMap<String, String>();
-		  map.put("VIN", "1995");
-		  map.put("YEAR", "56JFBNWUMNSJMWJ6");
+		  map.put("VIN", "56JFBNWUMNSJMWJ6");
+		  map.put("YEAR", "1995");
 		  mylist.add(map);
 		  // ...
 		  SimpleAdapter mSchedule = new SimpleAdapter(this, mylist, R.layout.list_item,

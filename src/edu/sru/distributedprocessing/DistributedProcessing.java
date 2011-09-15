@@ -1,6 +1,7 @@
 package edu.sru.distributedprocessing;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,7 +25,8 @@ public class DistributedProcessing extends Activity {
         vehicles_btn.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				
+				Intent engineIntent = new Intent(DistributedProcessing.this, VehicleTabWidget.class);
+				startActivity(engineIntent);
 			}
 		});
         

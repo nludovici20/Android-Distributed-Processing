@@ -1,29 +1,25 @@
-<RelativeLayout 
-	android:id="@+id/linearLayout1" 
-	android:background="@layout/custom_component1"
-	android:layout_height="fill_parent" 
-	xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent">
-   	
-   <!-- Panel -->
-    <RelativeLayout 
-	    android:layout_height="match_parent" 
-	    android:background="@layout/custom_component1"
-	    android:id="@+id/info_panel" 
-	    android:layout_weight="10"
-	    android:layout_width="match_parent">
-	    <TextView 
-		    android:layout_width="wrap_content" 
-		    android:hint="Welcome To IntelliSims v2.0" 
-		    android:gravity="center_horizontal"
-		    android:id="@+id/header_txt" 
-		    android:layout_centerInParent="true"
-		    android:textSize="18sp"
-		    android:layout_height="wrap_content">
-	    </TextView>          
-	</RelativeLayout>
-	
-	
-	<!-- Sliding Drawer Panel -->
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/tabhost"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@layout/custom_component1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:padding="5dp">
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:padding="5dp" />
+    </LinearLayout>
+    <!-- Sliding Drawer Panel -->
     <SlidingDrawer 
 	    android:id="@+id/slidingDrawer1" 
 	    android:orientation="vertical"
@@ -132,4 +128,5 @@
 	        </RelativeLayout>
 	        </ScrollView>
     </SlidingDrawer>
-</RelativeLayout>
+</TabHost>
+

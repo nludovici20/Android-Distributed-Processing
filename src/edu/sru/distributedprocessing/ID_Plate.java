@@ -34,6 +34,7 @@ public class ID_Plate extends Activity {
 		  map.put("ID", "2");
 		  map.put("LICENSE_PLATE", "KD8-2GX");
 		  mylist.add(map);
+		  map = new HashMap<String, String>();
 		  map.put("ID", "3");
 		  map.put("LICENSE_PLATE", "DEC-DFE1");
 		  mylist.add(map);
@@ -41,6 +42,7 @@ public class ID_Plate extends Activity {
 		  map.put("ID", "4");
 		  map.put("LICENSE_PLATE", "KD8-2GX");
 		  mylist.add(map);
+		  map = new HashMap<String, String>();
 		  map.put("ID", "5");
 		  map.put("LICENSE_PLATE", "DEC-DFE1");
 		  mylist.add(map);
@@ -48,6 +50,7 @@ public class ID_Plate extends Activity {
 		  map.put("ID", "6");
 		  map.put("LICENSE_PLATE", "KD8-2GX");
 		  mylist.add(map);
+		  map = new HashMap<String, String>();
 		  map.put("ID", "7");
 		  map.put("LICENSE_PLATE", "DEC-DFE1");
 		  mylist.add(map);
@@ -55,6 +58,7 @@ public class ID_Plate extends Activity {
 		  map.put("ID", "8");
 		  map.put("LICENSE_PLATE", "KD8-2GX");
 		  mylist.add(map);
+		  map = new HashMap<String, String>();
 		  map.put("ID", "9");
 		  map.put("LICENSE_PLATE", "DEC-DFE1");
 		  mylist.add(map);
@@ -62,6 +66,7 @@ public class ID_Plate extends Activity {
 		  map.put("ID", "10");
 		  map.put("LICENSE_PLATE", "KD8-2GX");
 		  mylist.add(map);
+		  map = new HashMap<String, String>();
 		  map.put("ID", "11");
 		  map.put("LICENSE_PLATE", "DEC-DFE1");
 		  mylist.add(map);
@@ -69,6 +74,7 @@ public class ID_Plate extends Activity {
 		  map.put("ID", "12");
 		  map.put("LICENSE_PLATE", "KD8-2GX");
 		  mylist.add(map);
+		  map = new HashMap<String, String>();
 		  map.put("ID", "13");
 		  map.put("LICENSE_PLATE", "DEC-DFE1");
 		  mylist.add(map);
@@ -76,6 +82,7 @@ public class ID_Plate extends Activity {
 		  map.put("ID", "14");
 		  map.put("LICENSE_PLATE", "KD8-2GX");
 		  mylist.add(map);
+		  map = new HashMap<String, String>();
 		  map.put("ID", "15");
 		  map.put("LICENSE_PLATE", "DEC-DFE1");
 		  mylist.add(map);

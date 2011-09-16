@@ -7,11 +7,11 @@
      android:layout_height="wrap_content"
      android:orientation="horizontal">
  
-     <TextView android:id="@+id/ID_CELL"
+     <TextView android:id="@+id/FIELD1"
          android:layout_width="wrap_content"
          android:layout_height="match_parent"/>
   
-     <TextView android:id="@+id/LICENSE_PLATE_CELL"
+     <TextView android:id="@+id/FIELD2"
          android:layout_width="wrap_content"
          android:gravity="right"
          android:layout_height="match_parent"  android:layout_weight="1"/>

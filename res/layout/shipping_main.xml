@@ -11,15 +11,36 @@
 	    android:id="@+id/info_panel" 
 	    android:layout_weight="10"
 	    android:layout_width="match_parent">
+		<LinearLayout 
+			android:id="@+id/linearLayout1" 
+			android:orientation="horizontal"
+			android:layout_width="match_parent" 
+			android:layout_height="wrap_content">
 	    <TextView 
-		    android:layout_width="wrap_content" 
-		    android:hint="Welcome To IntelliSims v2.0" 
-		    android:gravity="center_horizontal"
-		    android:id="@+id/header_txt" 
-		    android:layout_centerInParent="true"
-		    android:textSize="18sp"
-		    android:layout_height="wrap_content">
-	    </TextView>          
+	    	android:text="Field 1" 
+	    	android:id="@+id/header_txt1"
+	    	android:textSize="22sp"
+	    	android:layout_weight="1" 
+	    	android:layout_width="match_parent" 
+	    	android:layout_height="wrap_content">
+	    </TextView>
+	    <TextView 
+	    	android:text="Field 2" 
+	    	android:id="@+id/header_txt2"
+	    	android:gravity="right" 
+	    	android:textSize="22sp"
+	    	android:layout_weight="1"
+	    	android:layout_width="match_parent" 
+	    	android:layout_height="wrap_content">
+	    </TextView>
+		</LinearLayout>
+		    <ListView 
+			android:id="@+id/listView1" 
+			android:layout_alignParentLeft="true"
+			android:layout_below="@+id/linearLayout1"
+			android:layout_height="match_parent" 
+			android:layout_width="match_parent">
+		</ListView>          
 	</RelativeLayout>
 	
 	
@@ -128,6 +149,13 @@
     				android:layout_width="match_parent" 
     				android:text="Reports" 
     				android:layout_below="@+id/contacts_btn">
+    			</Button>
+    			<Button 
+    				android:layout_height="wrap_content" 
+    				android:id="@+id/options_btn" 
+    				android:layout_width="match_parent" 
+    				android:text="Options" 
+    				android:layout_below="@+id/reports_btn">
     			</Button>
 	        </RelativeLayout>
 	        </ScrollView>

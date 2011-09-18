@@ -1,5 +1,8 @@
 package edu.sru.distributedprocessing;
 
+import edu.sru.distributedprocessing.dialogs.CustomDialogListView;
+import edu.sru.distributedprocessing.editors.VehicleEditor;
+import edu.sru.distributedprocessing.optionslist.Options;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,7 +39,10 @@ public class Main extends Activity {
         about_btn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(Main.this, "Not Available Yet", Toast.LENGTH_LONG).show();
+				/*CustomDialogListView cdl = new CustomDialogListView(Main.this, R.style.CustomDialogTheme);
+				cdl.show();*/
+				Intent engineIntent = new Intent(Main.this, VehicleEditor.class);
+				startActivity(engineIntent);
 			}
 		});
         

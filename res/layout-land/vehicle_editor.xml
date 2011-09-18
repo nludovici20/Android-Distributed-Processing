@@ -1,0 +1,147 @@
+<RelativeLayout 
+	android:id="@+id/relativeLayout1" 
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent" 
+	xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView 
+    	android:layout_height="wrap_content" 
+    	android:layout_alignParentLeft="true" 
+    	style="@style/Heading"
+    	android:textSize="20sp"
+    	android:id="@+id/group_header" 
+    	android:text="Vehicle ID #"
+    	android:layout_width="match_parent">
+    </TextView>
+    <!-- Driver -->
+    <CheckBox android:text="Is Available?" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/CheckBox01" android:layout_toLeftOf="@+id/group_header" android:layout_alignTop="@+id/group_header" android:layout_alignBottom="@+id/group_header"></CheckBox>
+    <CheckBox android:text="Is Available?" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/checkBox1" android:layout_toLeftOf="@+id/group_header" android:layout_alignTop="@+id/group_header" android:layout_alignBottom="@+id/group_header"></CheckBox>
+    <TextView 
+    	android:layout_below="@+id/group_header" 
+    	android:layout_height="wrap_content"
+    	android:layout_alignBottom="@+id/driver_choices"
+    	android:gravity="center" 
+    	android:layout_width="wrap_content" 
+    	android:id="@+id/driver_header" 
+    	android:text="Driver's Name: ">
+    </TextView>
+    <Spinner
+		android:id="@+id/driver_choices"
+		android:layout_below="@+id/group_header"
+		android:layout_toRightOf="@id/driver_header"
+		android:text="Driver's Name: "
+		android:layout_height="wrap_content" 
+		android:layout_width="wrap_content">
+	</Spinner>
+	<!-- Vehicle Type -->
+    <TextView 
+    	android:layout_toLeftOf="@+id/driver_choices" 
+    	android:layout_height="wrap_content" 
+    	android:layout_width="wrap_content"
+    	android:gravity="center"
+    	android:id="@+id/vehicle_type_header" 
+    	android:text="Vehicle's Type: " 
+    	android:layout_alignTop="@+id/driver_choices"
+    	android:layout_alignBottom="@+id/driver_choices">
+    </TextView>
+    <Spinner
+		android:id="@+id/driver_choices"
+		android:layout_below="@+id/group_header"
+		android:layout_alignParentRight="true"
+		android:text="Driver"
+		android:layout_height="wrap_content" 
+		android:layout_width="wrap_content">
+	</Spinner>
+	<!-- Depot -->
+    <TextView 
+	    android:layout_below="@+id/driver_header" 
+	    android:layout_height="wrap_content"
+	    android:paddingLeft="100px"
+	    android:layout_width="wrap_content" 
+	    android:gravity="center"
+	    android:layout_alignBottom="@+id/depot_choices"
+	    android:id="@+id/depot_header" 
+	    android:text="Depot Name: "> 
+    </TextView>
+    <Spinner
+		android:id="@+id/depot_choices"
+		android:layout_below="@id/driver_choices"
+		android:layout_toRightOf="@+id/depot_header"
+		android:layout_height="wrap_content" 
+		android:layout_width="wrap_content">
+	</Spinner>
+	<!-- Vin Number -->
+    <TextView 
+     	android:layout_toRightOf="@+id/depot_choices" 
+      	android:layout_height="wrap_content" 
+      	android:layout_width="wrap_content"
+      	android:paddingLeft="70px"
+      	android:id="@+id/vin_header" 
+      	android:gravity="center"
+      	android:text="VIN #:  " 
+      	android:layout_alignTop="@+id/depot_choices" 
+      	android:layout_alignBottom="@+id/depot_choices">
+      </TextView>
+    <EditText 
+    	android:layout_toRightOf="@+id/vin_header" 
+    	android:layout_height="wrap_content" 
+    	android:id="@+id/vin_edit" 
+    	android:text="VIN Number" 
+    	android:layout_alignTop="@+id/vin_header" 
+    	android:layout_alignBottom="@+id/vin_header" android:layout_width="wrap_content">
+    </EditText>
+    <!-- License Plate -->
+    <TextView 
+    	android:layout_height="wrap_content" 
+    	android:layout_width="wrap_content"
+    	android:layout_alignBottom="@+id/license_edit"
+    	android:gravity="center" 
+    	android:id="@+id/license_header" 
+    	android:text="License Plate #: " 
+    	android:layout_below="@+id/depot_header"> 
+    </TextView>
+    <EditText 
+	    android:layout_toRightOf="@+id/license_header" 
+	    android:layout_below="@+id/depot_choices"
+	    android:layout_height="wrap_content" 
+	    android:layout_width="wrap_content" 
+	    android:id="@+id/license_edit" 
+	    android:text="License Number">
+   </EditText>
+   <!-- Availability -->
+   <CheckBox 
+    	android:text="Is Available?" 
+    	android:layout_below="@+id/year_header"
+    	android:layout_height="wrap_content" 
+    	android:layout_width="wrap_content" 
+    	android:id="@+id/checkBox1"> 
+    </CheckBox>
+    <!-- Manufactured Year -->
+    <TextView 
+    	android:layout_height="wrap_content" 
+    	android:layout_toLeftOf="@+id/year_edit"
+    	android:layout_alignTop="@+id/year_edit"
+    	android:layout_alignBottom="@+id/year_edit"
+    	android:gravity="center"
+    	android:layout_width="wrap_content" 
+    	android:id="@+id/year_header" 
+    	android:text="Manufactured In: ">
+    </TextView>
+    <EditText 
+    	android:layout_height="wrap_content" 
+    	android:layout_width="wrap_content" 
+    	android:id="@+id/year_edit" 
+    	android:text="YEAR" 
+    	android:layout_below="@+id/vin_header" 
+    	android:layout_alignParentRight="true">
+    </EditText>
+    <Button 
+    	android:layout_height="wrap_content" 
+    	android:layout_alignParentRight="true"
+    	android:background="@layout/button_component1"
+    	android:layout_width="wrap_content" 
+    	style="@style/Heading2"
+    	android:id="@+id/save_btn" 
+    	android:layout_alignParentBottom="true" 
+    	android:text="Save Changes">
+    </Button>
+</RelativeLayout>

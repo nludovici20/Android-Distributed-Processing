@@ -1,4 +1,4 @@
-package edu.sru.distributedprocessing.vehicle_panel;
+package edu.sru.distributedprocessing.tools;
 
 public class Vehicles {
 	String plate_number, vin_number, vehicle_type, driver, depot, id, manufactured_year, available;

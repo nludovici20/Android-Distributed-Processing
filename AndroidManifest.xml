@@ -16,6 +16,6 @@
 	<activity android:name=".optionslist.Options"/>
 	<activity android:name=".editors.VehicleEditor" android:screenOrientation="landscape"/>
 	<activity android:name=".dialogs.CustomDialogListView"/>
-	<activity android:name=".NavigationMain"/>
+	<activity android:name="NavigationMain"/>
     </application>
 </manifest>

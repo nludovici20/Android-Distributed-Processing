@@ -5,17 +5,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.CheckBox;
 import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.Toast;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
+import edu.sru.distributedprocessing.Constants;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.R.id;
 import edu.sru.distributedprocessing.R.layout;
@@ -130,6 +133,76 @@ public class Options extends ExpandableListActivity
 		
 		expListAdapter = new FieldOptionAdapter( this,groupNames, field_options );
 		setListAdapter( expListAdapter );
+		
+		
+		/**							**/
+		Button test = (Button) findViewById(R.id.button1);
+		test.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				Collection<String> vehicle = Constants.vehicle_fields.values();
+				Collection<String> driver = Constants.driver_fields.values();
+				Collection<String> shipment = Constants.shipment_fields.values();
+				Collection<String> routing = Constants.routing_fields.values();
+				Collection<String> contractor = Constants.contractor_fields.values();
+				Collection<String> depot = Constants.depot_fields.values();
+				Collection<String> warehouse = Constants.warehouse_fields.values();
+				Collection<String> contact = Constants.contact_fields.values();
+				Collection<String> maintenance = Constants.maintenance_fields.values();
+				Collection<String> report = Constants.report_fields.values();
+				Collection<String> vehicle_type = Constants.vehicle_type_fields.values();
+				Collection<String> technician = Constants.technician_fields.values();
+				Log.v("Distributed-Processing", "*****************************************************");
+				for(int i = 0; i < vehicle.size(); i++){
+					Log.v("Distributed-Processing", "Vehicle Field: " + vehicle.toArray()[i].toString());
+				}
+				Log.v("Distributed-Processing", "*****************************************************");
+				for(int i = 0; i < driver.size(); i++){
+					Log.v("Distributed-Processing", "Driver Field: " + driver.toArray()[i].toString());
+				}
+				Log.v("Distributed-Processing", "*****************************************************");
+				for(int i = 0; i < shipment.size(); i++){
+					Log.v("Distributed-Processing", "Shipment Field: " + shipment.toArray()[i].toString());
+				}
+				Log.v("Distributed-Processing", "*****************************************************");
+				for(int i = 0; i < routing.size(); i++){
+					Log.v("Distributed-Processing", "Routing Field: " + routing.toArray()[i].toString());
+				}
+				Log.v("Distributed-Processing", "*****************************************************");
+				for(int i = 0; i < contractor.size(); i++){
+					Log.v("Distributed-Processing", "Contractor Field: " + contractor.toArray()[i].toString());
+				}
+				Log.v("Distributed-Processing", "*****************************************************");
+				for(int i = 0; i < depot.size(); i++){
+					Log.v("Distributed-Processing", "Depot Field: " + depot.toArray()[i].toString());
+				}
+				Log.v("Distributed-Processing", "*****************************************************");
+				for(int i = 0; i < warehouse.size(); i++){
+					Log.v("Distributed-Processing", "Warehouse Field: " + warehouse.toArray()[i].toString());
+				}
+				Log.v("Distributed-Processing", "*****************************************************");
+				for(int i = 0; i < contact.size(); i++){
+					Log.v("Distributed-Processing", "Contact Field: " + contact.toArray()[i].toString());
+				}
+				Log.v("Distributed-Processing", "*****************************************************");
+				for(int i = 0; i < maintenance.size(); i++){
+					Log.v("Distributed-Processing", "Maintenance Field: " + maintenance.toArray()[i].toString());
+				}
+				Log.v("Distributed-Processing", "*****************************************************");
+				for(int i = 0; i < report.size(); i++){
+					Log.v("Distributed-Processing", "Report Field: " + report.toArray()[i].toString());
+				}
+				Log.v("Distributed-Processing", "*****************************************************");
+				for(int i = 0; i < vehicle_type.size(); i++){
+					Log.v("Distributed-Processing", "Vehicle Type Field: " + vehicle_type.toArray()[i].toString());
+				}
+				Log.v("Distributed-Processing", "*****************************************************");
+				for(int i = 0; i < technician.size(); i++){
+					Log.v("Distributed-Processing", "Technician Field: " + technician.toArray()[i].toString());
+				}
+				Log.v("Distributed-Processing", "*****************************************************");
+			}
+		});
 	}
  	  	 
 
@@ -143,10 +216,123 @@ public class Options extends ExpandableListActivity
 			if(cb.isChecked()){
 				cb.toggle();
 				f.state = !cb.isChecked();
+				if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Vehicles")){
+					try{
+						Constants.vehicle_fields.remove(f.getField());
+					}catch(Exception e){
+						//handle exception
+					}
+				}else
+					if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Drivers")){
+						try{
+							Constants.driver_fields.remove(f.getField());
+						}catch(Exception e){
+							//handle exception
+						}
+					}else
+						if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Shipments")){
+							try{
+								Constants.shipment_fields.remove(f.getField());
+							}catch(Exception e){
+								//handle exception
+							}
+						}else
+							if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Routing")){
+								try{
+									Constants.routing_fields.remove(f.getField());
+								}catch(Exception e){
+									//handle exception
+								}
+							}else
+								if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Contractors")){
+									try{
+										Constants.contractor_fields.remove(f.getField());
+									}catch(Exception e){
+										//handle exception
+									}
+								}else
+									if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Depots")){
+										try{
+											Constants.depot_fields.remove(f.getField());
+										}catch(Exception e){
+											//handle exception
+										}
+									}else
+										if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Warehouses")){
+											try{
+												Constants.warehouse_fields.remove(f.getField());
+											}catch(Exception e){
+												//handle exception
+											}
+										}else
+											if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Vehicle Types")){
+												try{
+													Constants.vehicle_type_fields.remove(f.getField());
+												}catch(Exception e){
+													//handle exception
+												}
+											}else
+												if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Maintenance")){
+													try{
+														Constants.maintenance_fields.remove(f.getField());
+													}catch(Exception e){
+														//handle exception
+													}
+												}else
+													if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Contacts")){
+														try{
+															Constants.contact_fields.remove(f.getField());
+														}catch(Exception e){
+															//handle exception
+														}
+													}else
+														if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Reports")){
+															try{
+																Constants.report_fields.remove(f.getField());
+															}catch(Exception e){
+																//handle exception
+															}
+														}
 				Log.v("Distributed-Processing", groupNames.get(groupPosition).toString() + "-" + f.getField() + ": Unchecked");
 			}else{
 				cb.toggle();
 				f.state = cb.isChecked();
+				if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Vehicles")){
+					Constants.vehicle_fields.put(f.getField(), f.getField());
+				}else
+					if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Drivers")){
+						Constants.driver_fields.put(f.getField(), f.getField());
+					}else
+						if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Shipments")){
+							Constants.shipment_fields.put(f.getField(), f.getField());
+						}else
+							if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Routing")){
+								Constants.routing_fields.put(f.getField(), f.getField());
+							}else
+								if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Contractors")){
+									Constants.contractor_fields.put(f.getField(), f.getField());
+								}else
+									if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Depots")){
+										Constants.depot_fields.put(f.getField(), f.getField());
+									}else
+										if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Warehouses")){
+											Constants.warehouse_fields.put(f.getField(), f.getField());
+										}else
+											if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Vehicle Type")){
+												Constants.vehicle_type_fields.put(f.getField(), f.getField());
+											}else
+												if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Maintenance")){
+													Constants.maintenance_fields.put(f.getField(), f.getField());
+												}else
+													if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Technicians")){
+														Constants.technician_fields.put(f.getField(), f.getField());
+													}else
+														if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Contacts")){
+															Constants.contact_fields.put(f.getField(), f.getField());
+														}else
+															if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Reports")){
+																Constants.report_fields.put(f.getField(), f.getField());
+															}
 				Log.v("Distributed-Processing", groupNames.get(groupPosition).toString() + "-" + f.getField() + ": Checked");
 			}		
     	return false;

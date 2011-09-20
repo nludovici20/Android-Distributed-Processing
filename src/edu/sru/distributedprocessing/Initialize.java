@@ -1,4 +1,6 @@
-package edu.sru.distributedprocessing.vehicle_panel;
+package edu.sru.distributedprocessing;
+
+import edu.sru.distributedprocessing.tools.Vehicles;
 
 public class Initialize {
 	Vehicles v1,v2;

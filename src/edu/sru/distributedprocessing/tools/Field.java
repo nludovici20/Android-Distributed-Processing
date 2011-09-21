@@ -2,7 +2,7 @@ package edu.sru.distributedprocessing.tools;
 
 public class Field {
 	private String fieldName, value;
-	public boolean inView, availablility;
+	public boolean inView;
 	
 	public Field(String fieldName, String value, boolean inView)
 	{
@@ -14,7 +14,15 @@ public class Field {
 	public Field(String fieldName, boolean value, boolean inView)
 	{
 		this.fieldName = fieldName;
-		this.availablility = value;
+		if(value = true)
+		{
+			this.value = "true";
+		}
+		 else
+		 {
+			 this.value = "false";
+		 }
+		
 		this.inView = inView;
 	}
 	
@@ -43,8 +51,8 @@ public class Field {
 		return this.inView;
 	}
 	
-	public boolean isAvailable()
+	public String getAvailability()
 	{
-		return this.availablility;
+		return this.value;
 	}
 }

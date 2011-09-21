@@ -1,6 +1,9 @@
 package edu.sru.distributedprocessing.dialogs;
 
 import edu.sru.distributedprocessing.R;
+import edu.sru.distributedprocessing.editors.VehicleEditor;
+import edu.sru.distributedprocessing.tools.Field;
+import edu.sru.distributedprocessing.tools.Type;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -20,11 +23,13 @@ import android.widget.Toast;
 public class CustomDialogListView extends Dialog 
 {
     Activity activity;	//current activity
+    Type myType;
     
-    public CustomDialogListView(Activity act, int theme) 
+    public CustomDialogListView(Activity act, int theme, Type type) 
     {
         super(act, theme);
         this.activity = act;
+        this.myType = type;
         
     }
     
@@ -55,12 +60,14 @@ public class CustomDialogListView extends Dialog
         		}else 
         			if(clicked.equalsIgnoreCase("Edit Group"))
         			{
-        		
+        				Intent engineIntent = new Intent(activity, VehicleEditor.class);
+        				//engineIntent.putExtra();
+        				activity.startActivity(engineIntent);
         			}else 
         				if(clicked.equalsIgnoreCase("Delete Group"))
         				{
         			
-        		}
+        				}
         		
         		dismissCustomDialog();
            	}

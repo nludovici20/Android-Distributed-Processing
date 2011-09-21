@@ -13,6 +13,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import edu.sru.distributedprocessing.Constants;
 import edu.sru.distributedprocessing.R;
+import edu.sru.distributedprocessing.dialogs.CustomDialogListView;
 import edu.sru.distributedprocessing.tools.Vehicles;
 
 public class VehicleType extends ScreenType 
@@ -61,7 +62,8 @@ public class VehicleType extends ScreenType
 		 {
     		public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) 
     		{
-    			
+    			CustomDialogListView cldv = new CustomDialogListView(act, R.style.CustomDialogTheme, vehicles[arg2]);
+    			cldv.show();
     		}
        });
 	}

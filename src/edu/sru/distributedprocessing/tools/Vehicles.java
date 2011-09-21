@@ -1,6 +1,6 @@
 package edu.sru.distributedprocessing.tools;
 
-public class Vehicles {
+public class Vehicles extends Type {
 	private Field plate_number, vin_number, vehicle_type, driver, depot, id, manufactured_year, available;
 	
 	public Vehicles(String id, String plate_num, String vin_num, String year, 
@@ -124,8 +124,14 @@ public class Vehicles {
 	
 	public boolean isAvailable()
 	{
-		return this.available.isAvailable();
-		
+		if(this.available.getAvailability() == "true")
+		{
+			return true;
+		}
+		 else
+		 {
+			return false;
+		 }
 	}
 	
 }

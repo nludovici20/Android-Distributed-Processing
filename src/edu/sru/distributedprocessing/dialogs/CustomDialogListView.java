@@ -23,13 +23,11 @@ import android.widget.Toast;
 public class CustomDialogListView extends Dialog 
 {
     Activity activity;	//current activity
-    Type myType;
     
     public CustomDialogListView(Activity act, int theme, Type type) 
     {
         super(act, theme);
         this.activity = act;
-        this.myType = type;
         
     }
     
@@ -61,7 +59,7 @@ public class CustomDialogListView extends Dialog
         			if(clicked.equalsIgnoreCase("Edit Group"))
         			{
         				Intent engineIntent = new Intent(activity, VehicleEditor.class);
-        				//engineIntent.putExtra();
+        				//send the vehicle item to the editor
         				activity.startActivity(engineIntent);
         			}else 
         				if(clicked.equalsIgnoreCase("Delete Group"))

@@ -132,6 +132,5 @@ public class Vehicles extends Type {
 		 {
 			return false;
 		 }
-	}
-	
+	}	
 }

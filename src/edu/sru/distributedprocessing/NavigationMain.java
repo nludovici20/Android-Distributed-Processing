@@ -35,6 +35,7 @@ public class NavigationMain extends Activity
 			@Override
 			public void onClick(View v) 
 			{
+				finish();
 				Intent engineIntent = new Intent(NavigationMain.this, IntelliSyncActivity.class);
 				engineIntent.putExtra("Type", "VehicleType");
 				startActivity(engineIntent);

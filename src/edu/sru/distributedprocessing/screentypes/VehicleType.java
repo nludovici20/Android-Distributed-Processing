@@ -7,13 +7,13 @@ import android.app.Activity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import edu.sru.distributedprocessing.Constants;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.dialogs.CustomDialogListView;
+import edu.sru.distributedprocessing.tools.Type;
 import edu.sru.distributedprocessing.tools.Vehicles;
 
 public class VehicleType extends ScreenType 
@@ -80,7 +80,7 @@ public class VehicleType extends ScreenType
 		//save everything and exit
 	}
 
-	public Vehicles[] getVehicles()
+	public Vehicles[] getVehicle()
 	{
 		return this.vehicles;
 	}

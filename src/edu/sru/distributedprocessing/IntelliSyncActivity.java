@@ -45,6 +45,7 @@ public class IntelliSyncActivity extends Activity
 			@Override
 			public void onClick(View v) 
 			{
+				finish();
 				Intent engineIntent = new Intent(IntelliSyncActivity.this, IntelliSyncActivity.class);
 				engineIntent.putExtra("Type", "VehicleType");
 				startActivity(engineIntent);

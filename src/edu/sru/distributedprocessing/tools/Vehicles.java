@@ -1,94 +1,94 @@
 package edu.sru.distributedprocessing.tools;
 
 public class Vehicles {
-	String plate_number, vin_number, vehicle_type, driver, depot, id, manufactured_year, available;
+	private Field plate_number, vin_number, vehicle_type, driver, depot, id, manufactured_year, available;
 	
 	public Vehicles(String id, String plate_num, String vin_num, String year, 
-					String type, String driver, String depot, String avail)
+					String type, String driver, String depot, boolean avail)
 	{
-		this.id = id;
-		this.plate_number = plate_num;
-		this.vin_number = vin_num;
-		this.manufactured_year = year; 
-		this.vehicle_type = type;
-		this.driver = driver;
-		this.depot = depot;
-		this.available = avail;
+		this.id = new Field("ID", id, false);
+		this.plate_number = new Field("License Plate Number", plate_num, false);
+		this.vin_number = new Field("Vin Number", vin_num, false);
+		this.manufactured_year = new Field("Manufactured Year", year, false); 
+		this.vehicle_type = new Field("Vehicle Type", type, false);
+		this.driver = new Field("Driver", driver, false);
+		this.depot = new Field("Depot", depot, false);
+		this.available = new Field("Available?", avail, false);
 	}
 	
 	public void setID(String id)
 	{
-		this.id = id;
+		this.id.setValue(id);
 	}
 	
 	public String getID()
 	{
-		return this.id;
+		return this.id.getValue();
 	}
 	
 	public void setPlateNum(String plate_num)
 	{
-		this.plate_number = plate_num;
+		this.plate_number.setValue(plate_num);
 	}
 	
 	public String getPlateNum()
 	{
-		return this.plate_number;
+		return this.plate_number.getValue();
 	}
 	
 	public void setVinNum(String vin_num)
 	{
-		this.vin_number = vin_num;
+		this.vin_number.setValue(vin_num);
 	}
 	
 	public String getVinNum()
 	{
-		return this.vin_number;
+		return this.vin_number.getValue();
 	}
 	
 	public void setManufacturedYear(String year)
 	{
-		this.manufactured_year = year;
+		this.manufactured_year.setValue(year);
 	}
 	
 	public String getManufacturedYear()
 	{
-		return this.manufactured_year;
+		return this.manufactured_year.getValue();
 	}
 	
 	public void setVehicleType(String type)
 	{
-		this.vehicle_type = type;
+		this.vehicle_type.setValue(type);
 	}
 	
 	public String getVehicleType()
 	{
-		return this.vehicle_type;
+		return this.vehicle_type.getValue();
 	}
 	
 	public void setDriver(String driver)
 	{
-		this.driver = driver;
+		this.driver.setValue(driver);
 	}
 	
 	public String getDriver()
 	{
-		return this.driver;
+		return this.driver.getValue();
 	}
 	
 	public void setDepot(String depot)
 	{
-		this.depot = depot;
+		this.depot.setValue(depot);
 	}
 	
 	public String getDepot()
 	{
-		return this.depot;
+		return this.depot.getValue();
 	}
 	
 	public boolean isAvailable()
 	{
-		return true;
+		return this.available.isAvailable();
 		
 	}
 	

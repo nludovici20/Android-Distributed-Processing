@@ -54,7 +54,7 @@ public class Options extends ExpandableListActivity
 		fields.add( new FieldOption( "Plate Number", false ) ); 
 		fields.add( new FieldOption( "Vin Number", false ) );  	
 		fields.add( new FieldOption( "Manufactured Year", false ) ); 	
-		fields.add( new FieldOption( "Vehicle TYpe", false ) ); 	
+		fields.add( new FieldOption( "Vehicle Type", false ) ); 	
 		fields.add( new FieldOption( "Driver", false ) ); 
 		fields.add( new FieldOption( "Depot", false ) ); 			
 		fields.add( new FieldOption( "Available?", false ) );  
@@ -136,10 +136,14 @@ public class Options extends ExpandableListActivity
 		
 		
 		/**							**/
-		Button test = (Button) findViewById(R.id.button1);
-		test.setOnClickListener(new View.OnClickListener(){
+		Button clear_all = (Button) findViewById(R.id.clear_btn);
+		clear_all.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
+				//clear all (vehicles for now)
+				Constants.vehicle_fields.clear();
+				
+				/*
 				Collection<String> vehicle = Constants.vehicle_fields.values();
 				Collection<String> driver = Constants.driver_fields.values();
 				Collection<String> shipment = Constants.shipment_fields.values();
@@ -201,6 +205,7 @@ public class Options extends ExpandableListActivity
 					Log.v("Distributed-Processing", "Technician Field: " + technician.toArray()[i].toString());
 				}
 				Log.v("Distributed-Processing", "*****************************************************");
+				*/
 			}
 		});
 	}

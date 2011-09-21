@@ -1,6 +1,8 @@
 package edu.sru.distributedprocessing;
 
 import edu.sru.distributedprocessing.optionslist.Options;
+import edu.sru.distributedprocessing.screentypes.ScreenType;
+import edu.sru.distributedprocessing.screentypes.VehicleType;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,28 +12,35 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-public class NavigationMain extends Activity {
+public class IntelliSyncActivity extends Activity {
     private Button vehicle_btn, drivers_btn, shipments_btn, routing_btn, contractors_btn,
     			   depots_btn, warehouses_btn, vehicle_type_btn, maintenance_btn, technicians_btn, 
     			   contacts_btn, reports_btn;
-    private TextView header_txt;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.navigation_main);
+        setContentView(R.layout.intelli_sync_activity);  
         
-        header_txt = (TextView) findViewById(R.id.header_txt1);
-        header_txt.setText("Welcome to the Navigation Menu");
+        String type = getIntent().getExtras().getString("Type");
+       
+        //temp data created here
+        Initialize init = new Initialize();
         
+        if(type.equalsIgnoreCase("VehicleType")){
+        	ScreenType  myType = new VehicleType(this, init.vehicles);
+        	myType.Initialize();
+        }
+        
+       
+        /**				Sliding Drawer Buttons				**/
         vehicle_btn = (Button) findViewById(R.id.vehicle_btn);
         vehicle_btn.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				Intent engineIntent = new Intent(NavigationMain.this, IntelliSyncActivity.class);
+				Intent engineIntent = new Intent(IntelliSyncActivity.this, IntelliSyncActivity.class);
 				engineIntent.putExtra("Type", "VehicleType");
 				startActivity(engineIntent);
 			}
@@ -42,7 +51,7 @@ public class NavigationMain extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(NavigationMain.this, "Drivers Button Selected", Toast.LENGTH_SHORT).show();
+				Toast.makeText(IntelliSyncActivity.this, "Drivers Button Selected", Toast.LENGTH_SHORT).show();
 			}
         });
         
@@ -51,7 +60,7 @@ public class NavigationMain extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(NavigationMain.this, "Shipments Button Selected", Toast.LENGTH_SHORT).show();
+				Toast.makeText(IntelliSyncActivity.this, "Shipments Button Selected", Toast.LENGTH_SHORT).show();
 			}
         });
         
@@ -59,7 +68,7 @@ public class NavigationMain extends Activity {
         routing_btn.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(NavigationMain.this, "Routing Button Selected", Toast.LENGTH_SHORT).show();
+				Toast.makeText(IntelliSyncActivity.this, "Routing Button Selected", Toast.LENGTH_SHORT).show();
 			}
         });
         
@@ -67,7 +76,7 @@ public class NavigationMain extends Activity {
         contractors_btn.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(NavigationMain.this, "Contractors Button Selected", Toast.LENGTH_SHORT).show();
+				Toast.makeText(IntelliSyncActivity.this, "Contractors Button Selected", Toast.LENGTH_SHORT).show();
 			}
         });
         
@@ -75,7 +84,7 @@ public class NavigationMain extends Activity {
         depots_btn.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(NavigationMain.this, "Depots Button Selected", Toast.LENGTH_SHORT).show();
+				Toast.makeText(IntelliSyncActivity.this, "Depots Button Selected", Toast.LENGTH_SHORT).show();
 			}
         });
         
@@ -83,7 +92,7 @@ public class NavigationMain extends Activity {
         warehouses_btn.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(NavigationMain.this, "Warehouses Button Selected", Toast.LENGTH_SHORT).show();
+				Toast.makeText(IntelliSyncActivity.this, "Warehouses Button Selected", Toast.LENGTH_SHORT).show();
 			}
         });
         
@@ -91,7 +100,7 @@ public class NavigationMain extends Activity {
         vehicle_type_btn.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(NavigationMain.this, "Vehicle Type Button Selected", Toast.LENGTH_SHORT).show();
+				Toast.makeText(IntelliSyncActivity.this, "Vehicle Type Button Selected", Toast.LENGTH_SHORT).show();
 			}
         });
         
@@ -99,7 +108,7 @@ public class NavigationMain extends Activity {
         maintenance_btn.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(NavigationMain.this, "Maintenance Button Selected", Toast.LENGTH_SHORT).show();
+				Toast.makeText(IntelliSyncActivity.this, "Maintenance Button Selected", Toast.LENGTH_SHORT).show();
 			}
         });
         
@@ -107,7 +116,7 @@ public class NavigationMain extends Activity {
         technicians_btn.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(NavigationMain.this, "Technicians Button Selected", Toast.LENGTH_SHORT).show();
+				Toast.makeText(IntelliSyncActivity.this, "Technicians Button Selected", Toast.LENGTH_SHORT).show();
 			}
         });
         
@@ -115,7 +124,7 @@ public class NavigationMain extends Activity {
         contacts_btn.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(NavigationMain.this, "Contacts Button Selected", Toast.LENGTH_SHORT).show();
+				Toast.makeText(IntelliSyncActivity.this, "Contacts Button Selected", Toast.LENGTH_SHORT).show();
 			}
         });
         
@@ -123,7 +132,7 @@ public class NavigationMain extends Activity {
         reports_btn.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(NavigationMain.this, "Reports Button Selected", Toast.LENGTH_SHORT).show();
+				Toast.makeText(IntelliSyncActivity.this, "Reports Button Selected", Toast.LENGTH_SHORT).show();
 			}
         });
     }
@@ -139,7 +148,7 @@ public class NavigationMain extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.options_menu_item:
-			Intent engineIntent = new Intent(NavigationMain.this, Options.class);
+			Intent engineIntent = new Intent(IntelliSyncActivity.this, Options.class);
 			startActivity(engineIntent);
 		}
 		return true;

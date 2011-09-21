@@ -19,8 +19,8 @@
 	               android:text="@string/main_no_items"/>
 	</LinearLayout>
 	<Button 
-		android:id="@+id/button1" 
-		android:text="Test" 
+		android:id="@+id/clear_btn" 
+		android:text="Clear Fields" 
 		android:layout_alignParentBottom="true" 
 		android:layout_height="wrap_content" 
 		android:layout_width="match_parent">

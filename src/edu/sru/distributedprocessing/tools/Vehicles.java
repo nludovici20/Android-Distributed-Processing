@@ -15,7 +15,43 @@ public class Vehicles {
 		this.depot = new Field("Depot", depot, false);
 		this.available = new Field("Available?", avail, false);
 	}
-	
+	public Field getField(String fieldName)
+	{
+		if(id.getFieldName().equalsIgnoreCase(fieldName))
+		{
+			return id;
+		}else 
+			if(plate_number.getFieldName().equalsIgnoreCase(fieldName))
+			{
+				return plate_number;
+			}else
+				if(vin_number.getFieldName().equalsIgnoreCase(fieldName))
+				{
+					return vin_number;
+				}else
+					if(manufactured_year.getFieldName().equalsIgnoreCase(fieldName))
+					{
+						return manufactured_year;
+					}else
+						if(vehicle_type.getFieldName().equalsIgnoreCase(fieldName))
+						{
+							return vehicle_type;
+						}else
+							if(driver.getFieldName().equalsIgnoreCase(fieldName))
+							{
+								return driver;
+							}else
+								if(depot.getFieldName().equalsIgnoreCase(fieldName))
+								{
+									return depot;
+								}else
+									if(available.getFieldName().equalsIgnoreCase(fieldName))
+									{
+										return available;
+									}
+		return id;
+			
+	}
 	public void setID(String id)
 	{
 		this.id.setValue(id);

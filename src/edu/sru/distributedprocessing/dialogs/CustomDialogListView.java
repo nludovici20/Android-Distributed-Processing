@@ -42,17 +42,23 @@ public class CustomDialogListView extends Dialog
         lst.setAdapter(new ArrayAdapter<String>(activity,R.layout.custom_popup_row, list));      
         
         //find out which option was selected
-        lst.setOnItemClickListener(new OnItemClickListener() {
-        	
+        lst.setOnItemClickListener(new OnItemClickListener() 
+        {
         	@Override
-        	public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+        	public void onItemClick(AdapterView<?> a, View v, int position, long id) 
+        	{
         		String clicked = ((TextView) v).getText().toString();
         		Log.v("Distributed-Process", clicked);
-        		if(clicked.equalsIgnoreCase("New Group")){
+        		if(clicked.equalsIgnoreCase("New Group"))
+        		{
         			
-        		}else if(clicked.equalsIgnoreCase("Edit Group")){
+        		}else 
+        			if(clicked.equalsIgnoreCase("Edit Group"))
+        			{
         		
-        		}else if(clicked.equalsIgnoreCase("Delete Group")){
+        			}else 
+        				if(clicked.equalsIgnoreCase("Delete Group"))
+        				{
         			
         		}
         		
@@ -63,7 +69,8 @@ public class CustomDialogListView extends Dialog
     }
     
     //close the dialog
-    private void dismissCustomDialog(){
+    private void dismissCustomDialog()
+    {
     	this.dismiss();
     }
     

@@ -2,7 +2,11 @@ package edu.sru.distributedprocessing;
 
 import java.util.Hashtable;
 
-public class Constants {
+public class Constants 
+{
+	/*
+	 * Keeps track of what fields the user wants to view from Options Menu
+	 */
 	public static Hashtable<String, String> vehicle_fields = new Hashtable<String, String>();
 	public static Hashtable<String, String> driver_fields = new Hashtable<String, String>();
 	public static Hashtable<String, String> shipment_fields = new Hashtable<String, String>();

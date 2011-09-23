@@ -13,8 +13,16 @@ public class Vehicles extends Type {
 		this.vehicle_type = new Field("Vehicle Type", type, false);
 		this.driver = new Field("Driver", driver, false);
 		this.depot = new Field("Depot", depot, false);
-		this.available = new Field("Available?", avail, false);
+		if(avail == true)
+		{
+			this.available = new Field("Available?", "true", false);
+		}else
+			{
+				this.available = new Field("Available?", "false", false);
+			}
 	}
+	
+	@Override
 	public Field getField(String fieldName)
 	{
 		if(id.getFieldName().equalsIgnoreCase(fieldName))
@@ -52,85 +60,12 @@ public class Vehicles extends Type {
 		return id;
 			
 	}
-	public void setID(String id)
+	
+	@Override
+	public void setFieldValue(String fieldname, String value)
 	{
-		this.id.setValue(id);
+		getField(fieldname).setValue(value);
 	}
 	
-	public String getID()
-	{
-		return this.id.getValue();
-	}
 	
-	public void setPlateNum(String plate_num)
-	{
-		this.plate_number.setValue(plate_num);
-	}
-	
-	public String getPlateNum()
-	{
-		return this.plate_number.getValue();
-	}
-	
-	public void setVinNum(String vin_num)
-	{
-		this.vin_number.setValue(vin_num);
-	}
-	
-	public String getVinNum()
-	{
-		return this.vin_number.getValue();
-	}
-	
-	public void setManufacturedYear(String year)
-	{
-		this.manufactured_year.setValue(year);
-	}
-	
-	public String getManufacturedYear()
-	{
-		return this.manufactured_year.getValue();
-	}
-	
-	public void setVehicleType(String type)
-	{
-		this.vehicle_type.setValue(type);
-	}
-	
-	public String getVehicleType()
-	{
-		return this.vehicle_type.getValue();
-	}
-	
-	public void setDriver(String driver)
-	{
-		this.driver.setValue(driver);
-	}
-	
-	public String getDriver()
-	{
-		return this.driver.getValue();
-	}
-	
-	public void setDepot(String depot)
-	{
-		this.depot.setValue(depot);
-	}
-	
-	public String getDepot()
-	{
-		return this.depot.getValue();
-	}
-	
-	public boolean isAvailable()
-	{
-		if(this.available.getAvailability() == "true")
-		{
-			return true;
-		}
-		 else
-		 {
-			return false;
-		 }
-	}	
 }

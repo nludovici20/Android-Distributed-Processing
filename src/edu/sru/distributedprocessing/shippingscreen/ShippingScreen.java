@@ -1,4 +1,4 @@
-package edu.sru.distributedprocessing.screentypes;
+package edu.sru.distributedprocessing.shippingscreen;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,16 +16,20 @@ import edu.sru.distributedprocessing.dialogs.CustomDialogListView;
 import edu.sru.distributedprocessing.tools.Type;
 import edu.sru.distributedprocessing.tools.Vehicles;
 
-public class VehicleType extends ScreenType 
+public class ShippingScreen 
 {
-	Vehicles[] vehicles;
+	Type[] type;
 	Activity act;
-	public VehicleType(Activity act, Vehicles[] vehicles)
+	
+	//vehicle constructor
+	public ShippingScreen(Activity act, Vehicles[] vehicles)
 	{
 		this.act = act;
-		this.vehicles = vehicles;		
+		this.type = vehicles;	
 	}
-	@Override
+	
+	//other type constructors
+	
 	public void Initialize() 
 	{
 		//set the vehicle objects in view to the screen
@@ -47,11 +51,11 @@ public class VehicleType extends ScreenType
 		 ListView lv = (ListView) act.findViewById(R.id.listView1);
 		 ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();	
 		 HashMap<String, String> map;		
-		 for(int i = 0; i < vehicles.length; i++)
+		 for(int i = 0; i < type.length; i++)
 		 {
 			 map = new HashMap<String, String>();
-			 map.put(field1.getText().toString(), vehicles[i].getField(field1.getText().toString()).getValue());
-			 map.put(field2.getText().toString(), vehicles[i].getField(field2.getText().toString()).getValue());
+			 map.put(field1.getText().toString(), type[i].getField(field1.getText().toString()).getValue());
+			 map.put(field2.getText().toString(), type[i].getField(field2.getText().toString()).getValue());
 			 mylist.add(map);
 		 }
 		 SimpleAdapter mSchedule = new SimpleAdapter(act, mylist, R.layout.list_item, 
@@ -62,26 +66,24 @@ public class VehicleType extends ScreenType
 		 {
     		public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) 
     		{
-    			CustomDialogListView cldv = new CustomDialogListView(act, R.style.CustomDialogTheme, vehicles[arg2]);
+    			CustomDialogListView cldv = new CustomDialogListView(act, R.style.CustomDialogTheme, type[arg2]);
     			cldv.show();
     		}
        });
 	}
 
-	@Override
 	public void Update() 
 	{
 		//update the data and show on screen
 	}
 
-	@Override
 	public void Finalize() 
 	{
 		//save everything and exit
 	}
 
-	public Vehicles[] getVehicle()
+	public Type[] getType()
 	{
-		return this.vehicles;
+		return this.type;
 	}
 }

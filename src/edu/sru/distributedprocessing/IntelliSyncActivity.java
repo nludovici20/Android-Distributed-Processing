@@ -1,8 +1,7 @@
 package edu.sru.distributedprocessing;
 
 import edu.sru.distributedprocessing.optionslist.Options;
-import edu.sru.distributedprocessing.screentypes.ScreenType;
-import edu.sru.distributedprocessing.screentypes.VehicleType;
+import edu.sru.distributedprocessing.shippingscreen.ShippingScreen;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,16 +25,19 @@ public class IntelliSyncActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.intelli_sync_activity);  
         
-        String type = getIntent().getExtras().getString("Type");
-       
+        String type = getIntent().getExtras().getString("Type");       
+
         //temp data created here
         Initialize init = new Initialize();
         
-        if(type.equalsIgnoreCase("VehicleType"))
-        {
-        	ScreenType  myType = new VehicleType(this, init.vehicles);
-        	myType.Initialize();
+        ShippingScreen ss = null;
+        
+        if(type.equalsIgnoreCase("VehicleType")){
+        	ss = new ShippingScreen(this, init.vehicles);
         }
+        
+        ss.Initialize();
+        
         
        
         /**				Sliding Drawer Buttons				**/

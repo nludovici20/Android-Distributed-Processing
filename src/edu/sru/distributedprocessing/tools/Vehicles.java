@@ -2,6 +2,8 @@ package edu.sru.distributedprocessing.tools;
 
 public class Vehicles extends Type {
 	private Field plate_number, vin_number, vehicle_type, driver, depot, id, manufactured_year, available;
+	private String[] field_names;
+	private Field[] myFields;
 	
 	public Vehicles(String id, String plate_num, String vin_num, String year, 
 					String type, String driver, String depot, boolean avail)
@@ -20,6 +22,7 @@ public class Vehicles extends Type {
 			{
 				this.available = new Field("Available?", "false", false);
 			}
+		myFields = new Field[] { this.id, this.plate_number, this.vin_number, this.manufactured_year, this.vehicle_type, this.driver, this.depot, this.available};
 	}
 	
 	@Override
@@ -65,6 +68,18 @@ public class Vehicles extends Type {
 	public void setFieldValue(String fieldname, String value)
 	{
 		getField(fieldname).setValue(value);
+	}
+
+	@Override
+	public String[] getFields() {
+		
+		field_names = new String[myFields.length];
+		
+		for(int i = 0; i < myFields.length; i++)
+		{
+			field_names[i] = myFields[i].getFieldName().toString();
+		}
+		return field_names;
 	}
 	
 	

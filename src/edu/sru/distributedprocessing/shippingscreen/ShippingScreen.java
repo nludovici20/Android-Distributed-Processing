@@ -10,15 +10,15 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import edu.sru.distributedprocessing.Constants;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.dialogs.CustomDialogListView;
-import edu.sru.distributedprocessing.tools.Type;
-import edu.sru.distributedprocessing.tools.Vehicles;
+import edu.sru.distributedprocessing.tableobjects.Record;
+import edu.sru.distributedprocessing.tableobjects.Vehicles;
+import edu.sru.distributedprocessing.tools.Constants;
 
 public class ShippingScreen 
 {
-	Type[] type;
+	Record[] type;
 	Activity act;
 	
 	//vehicle constructor
@@ -82,7 +82,7 @@ public class ShippingScreen
 		//save everything and exit
 	}
 
-	public Type[] getType()
+	public Record[] getType()
 	{
 		return this.type;
 	}

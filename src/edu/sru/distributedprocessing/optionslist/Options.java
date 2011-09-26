@@ -18,10 +18,10 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
-import edu.sru.distributedprocessing.Constants;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.R.id;
 import edu.sru.distributedprocessing.R.layout;
+import edu.sru.distributedprocessing.tools.Constants;
 import android.util.Log;
 
 public class Options extends ExpandableListActivity

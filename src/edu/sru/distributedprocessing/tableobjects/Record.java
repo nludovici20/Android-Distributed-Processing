@@ -1,6 +1,6 @@
-package edu.sru.distributedprocessing.tools;
+package edu.sru.distributedprocessing.tableobjects;
 
-public abstract class Type
+public abstract class Record
 {
 	public abstract Field getField(String fieldname);
 	public abstract void setFieldValue(String fieldname, String Value);

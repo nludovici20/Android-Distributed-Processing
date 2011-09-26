@@ -1,4 +1,4 @@
-package edu.sru.distributedprocessing.tools;
+package edu.sru.distributedprocessing.tableobjects;
 
 public class Field {
 	private String fieldName, value;

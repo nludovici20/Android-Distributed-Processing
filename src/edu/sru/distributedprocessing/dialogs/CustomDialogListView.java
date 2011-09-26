@@ -2,8 +2,8 @@ package edu.sru.distributedprocessing.dialogs;
 
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.editors.VehicleEditor;
-import edu.sru.distributedprocessing.tools.Field;
-import edu.sru.distributedprocessing.tools.Type;
+import edu.sru.distributedprocessing.tableobjects.Field;
+import edu.sru.distributedprocessing.tableobjects.Record;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -23,9 +23,9 @@ import android.widget.Toast;
 public class CustomDialogListView extends Dialog 
 {
     Activity activity;	//current activity
-    Type type;
+    Record type;
     
-    public CustomDialogListView(Activity act, int theme, Type type) 
+    public CustomDialogListView(Activity act, int theme, Record type) 
     {
         super(act, theme);
         this.activity = act;

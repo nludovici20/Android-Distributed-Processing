@@ -1,6 +1,6 @@
-package edu.sru.distributedprocessing.tools;
+package edu.sru.distributedprocessing.tableobjects;
 
-public class Vehicles extends Type {
+public class Vehicles extends Record {
 	private Field plate_number, vin_number, vehicle_type, driver, depot, id, manufactured_year, available;
 	private String[] field_names;
 	private Field[] myFields;

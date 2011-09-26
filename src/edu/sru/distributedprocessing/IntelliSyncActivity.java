@@ -28,7 +28,7 @@ public class IntelliSyncActivity extends Activity
         String type = getIntent().getExtras().getString("Type");       
 
         //temp data created here
-        Initialize init = new Initialize();
+        Initialize init = new Initialize(this.getBaseContext());
         
         ShippingScreen ss = null;
         

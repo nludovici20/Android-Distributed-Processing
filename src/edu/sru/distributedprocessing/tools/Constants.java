@@ -1,4 +1,4 @@
-package edu.sru.distributedprocessing;
+package edu.sru.distributedprocessing.tools;
 
 import java.util.Hashtable;
 

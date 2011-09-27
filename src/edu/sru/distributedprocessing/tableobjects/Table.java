@@ -29,7 +29,7 @@ public class Table {
 				String[] fields = data[i].getFields();
 				for(int j = 0; j < fields.length; j++)
 				{
-					out.write(data[i].getField(fields[j]).getValue() + " ");
+					out.write(data[i].getField(fields[j]).getValue() + "\t");
 				}
 				out.write("\r\n");
 			}

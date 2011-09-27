@@ -1,5 +1,6 @@
 package edu.sru.distributedprocessing;
 
+import edu.sru.distributedprocessing.editors.VehicleEditor;
 import edu.sru.distributedprocessing.optionslist.Options;
 import android.app.Activity;
 import android.content.Intent;
@@ -153,23 +154,4 @@ public class NavigationMain extends Activity
         });
     }
     
-    @Override
-	public boolean onCreateOptionsMenu(Menu menu) 
-    {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.options_menu, menu);
-		return true;
-	}
-    
-    @Override
-	public boolean onOptionsItemSelected(MenuItem item) 
-    {
-		switch (item.getItemId()) 
-		{
-		case R.id.options_menu_item:
-			Intent engineIntent = new Intent(NavigationMain.this, Options.class);
-			startActivity(engineIntent);
-		}
-		return true;
-	}
 }

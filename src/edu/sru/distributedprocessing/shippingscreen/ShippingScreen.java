@@ -21,15 +21,13 @@ public class ShippingScreen
 	Record[] type;
 	Activity act;
 	
-	//vehicle constructor
-	public ShippingScreen(Activity act, Vehicles[] vehicles)
+	//Table constructor
+	public ShippingScreen(Activity act, Record[] type)
 	{
 		this.act = act;
-		this.type = vehicles;	
+		this.type = type;	
 	}
-	
-	//other type constructors
-	
+		
 	public void Initialize() 
 	{
 		//set the vehicle objects in view to the screen
@@ -53,10 +51,13 @@ public class ShippingScreen
 		 HashMap<String, String> map;		
 		 for(int i = 0; i < type.length; i++)
 		 {
-			 map = new HashMap<String, String>();
-			 map.put(field1.getText().toString(), type[i].getField(field1.getText().toString()).getValue());
-			 map.put(field2.getText().toString(), type[i].getField(field2.getText().toString()).getValue());
-			 mylist.add(map);
+			 if(!(type[i] == null))
+			 {
+				 map = new HashMap<String, String>();
+				 map.put(field1.getText().toString(), type[i].getField(field1.getText().toString()).getValue());
+				 map.put(field2.getText().toString(), type[i].getField(field2.getText().toString()).getValue());
+				 mylist.add(map);
+			 }
 		 }
 		 SimpleAdapter mSchedule = new SimpleAdapter(act, mylist, R.layout.list_item, 
     		  new String[] {field1.getText().toString(), field2.getText().toString()}, new int[] {R.id.FIELD1, R.id.FIELD2});

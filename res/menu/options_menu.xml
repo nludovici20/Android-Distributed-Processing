@@ -4,4 +4,8 @@
 		android:icon="@drawable/options"
 		android:title="Options"
 	/>
+	<item android:id="@+id/new_record_item"
+		android:icon="@drawable/icon"
+		android:title="New Record"
+	/>
 </menu>

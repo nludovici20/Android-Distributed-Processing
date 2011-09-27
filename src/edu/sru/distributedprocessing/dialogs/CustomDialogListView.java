@@ -41,7 +41,7 @@ public class CustomDialogListView extends Dialog
         final ListView lst=(ListView)findViewById(R.id.myList);
         
         //List of options
-        String[] list = {"New Group","Edit Group", "Delete Group"};
+        String[] list = {"Edit Group", "Delete Group"};
         
         lst.setAdapter(new ArrayAdapter<String>(activity,R.layout.custom_popup_row, list));      
         
@@ -53,27 +53,24 @@ public class CustomDialogListView extends Dialog
         	{
         		String clicked = ((TextView) v).getText().toString();
         		Log.v("Distributed-Process", clicked);
-        		if(clicked.equalsIgnoreCase("New Group"))
-        		{
-        			
-        		}else 
-        			if(clicked.equalsIgnoreCase("Edit Group"))
-        			{
-        				Intent engineIntent = new Intent(activity, VehicleEditor.class);
-        				
-        				//send the vehicle item to the editor
-        				for(int i = 0; i < type.getFields().length; i++)
-        				{
-        					engineIntent.putExtra(type.getFields()[i].toString(), type.getField(type.getFields()[i].toString()).getValue());        					
-        				}
-        				engineIntent.putExtra("Fields", type.getFields());
-        				activity.startActivity(engineIntent);
-        			}else 
-        				if(clicked.equalsIgnoreCase("Delete Group"))
-        				{
-        					
-        				}
-        		
+    			if(clicked.equalsIgnoreCase("Edit Group"))
+    			{
+    				Intent engineIntent = new Intent(activity, VehicleEditor.class);
+    				
+    				//send the vehicle item to the editor
+    				for(int i = 0; i < type.getFields().length; i++)
+    				{
+    					engineIntent.putExtra(type.getFields()[i].toString(), type.getField(type.getFields()[i].toString()).getValue());        					
+    				}
+    				engineIntent.putExtra("Fields", type.getFields());
+    				activity.startActivity(engineIntent);
+    			}
+    			else 
+    				if(clicked.equalsIgnoreCase("Delete Group"))
+    				{
+    					
+    				}
+    		
         		dismissCustomDialog();
            	}
         	});

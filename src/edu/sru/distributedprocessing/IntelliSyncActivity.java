@@ -1,5 +1,6 @@
 package edu.sru.distributedprocessing;
 
+import edu.sru.distributedprocessing.editors.VehicleEditor;
 import edu.sru.distributedprocessing.optionslist.Options;
 import edu.sru.distributedprocessing.shippingscreen.ShippingScreen;
 import android.app.Activity;
@@ -176,12 +177,16 @@ public class IntelliSyncActivity extends Activity
     @Override
 	public boolean onOptionsItemSelected(MenuItem item) 
     {
+    	Intent engineIntent;
 		switch (item.getItemId()) 
 		{
 		case R.id.options_menu_item:
-			Intent engineIntent = new Intent(IntelliSyncActivity.this, Options.class);
+			engineIntent = new Intent(IntelliSyncActivity.this, Options.class);
 			startActivity(engineIntent);
-		}
+		
+	    case R.id.new_record_item:
+			//open up a new record creator
+    	}
 		return true;
 	}
 }

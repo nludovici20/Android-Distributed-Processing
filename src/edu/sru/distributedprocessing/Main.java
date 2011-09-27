@@ -34,8 +34,7 @@ public class Main extends Activity
 			@Override
 			public void onClick(View v) 
 			{
-				Intent engineIntent = new Intent(Main.this, Options.class);
-				startActivity(engineIntent);
+				//nothing yet
 			}
 		});
         
@@ -45,10 +44,7 @@ public class Main extends Activity
 			@Override
 			public void onClick(View v) 
 			{
-				/*CustomDialogListView cdl = new CustomDialogListView(Main.this, R.style.CustomDialogTheme);
-				cdl.show();*/
-				Intent engineIntent = new Intent(Main.this, VehicleEditor.class);
-				startActivity(engineIntent);
+				//nothing yet
 			}
 		});
         

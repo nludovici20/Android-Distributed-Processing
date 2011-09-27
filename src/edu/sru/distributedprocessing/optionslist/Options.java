@@ -1,6 +1,7 @@
 package edu.sru.distributedprocessing.optionslist;
 
 import android.app.ExpandableListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
+import edu.sru.distributedprocessing.IntelliSyncActivity;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.R.id;
 import edu.sru.distributedprocessing.R.layout;
@@ -407,5 +409,4 @@ public class Options extends ExpandableListActivity
     	//which group was expanded?
     	Log.v("Distributed-Processing", groupNames.get(groupPosition).toString());
     }
-
 }

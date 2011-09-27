@@ -45,7 +45,7 @@ public class IntelliSyncActivity extends Activity
         vehicle_btn = (Button) findViewById(R.id.vehicle_btn);
         vehicle_btn.setOnClickListener(new OnClickListener()
         {
-			@Override
+			//@Override
 			public void onClick(View v) 
 			{
 				finish();
@@ -58,7 +58,7 @@ public class IntelliSyncActivity extends Activity
         drivers_btn = (Button) findViewById(R.id.drivers_btn);
         drivers_btn.setOnClickListener(new OnClickListener()
         {
-			@Override
+			//@Override
 			public void onClick(View v) 
 			{
 				Toast.makeText(IntelliSyncActivity.this, "Drivers Button Selected", Toast.LENGTH_SHORT).show();
@@ -68,7 +68,7 @@ public class IntelliSyncActivity extends Activity
         shipments_btn = (Button) findViewById(R.id.shipments_btn);
         shipments_btn.setOnClickListener(new OnClickListener()
         {
-			@Override
+			//@Override
 			public void onClick(View v) 
 			{
 				Toast.makeText(IntelliSyncActivity.this, "Shipments Button Selected", Toast.LENGTH_SHORT).show();
@@ -78,7 +78,7 @@ public class IntelliSyncActivity extends Activity
         routing_btn = (Button) findViewById(R.id.routing_btn);
         routing_btn.setOnClickListener(new OnClickListener()
         {
-			@Override
+			//@Override
 			public void onClick(View v) 
 			{
 				Toast.makeText(IntelliSyncActivity.this, "Routing Button Selected", Toast.LENGTH_SHORT).show();
@@ -88,7 +88,7 @@ public class IntelliSyncActivity extends Activity
         contractors_btn = (Button) findViewById(R.id.contractors_btn);
         contractors_btn.setOnClickListener(new OnClickListener()
         {
-			@Override
+			//@Override
 			public void onClick(View v) 
 			{
 				Toast.makeText(IntelliSyncActivity.this, "Contractors Button Selected", Toast.LENGTH_SHORT).show();
@@ -98,7 +98,7 @@ public class IntelliSyncActivity extends Activity
         depots_btn = (Button) findViewById(R.id.depots_btn);
         depots_btn.setOnClickListener(new OnClickListener()
         {
-			@Override
+			//@Override
 			public void onClick(View v) 
 			{
 				Toast.makeText(IntelliSyncActivity.this, "Depots Button Selected", Toast.LENGTH_SHORT).show();
@@ -108,7 +108,7 @@ public class IntelliSyncActivity extends Activity
         warehouses_btn = (Button) findViewById(R.id.warehouses_btn);
         warehouses_btn.setOnClickListener(new OnClickListener()
         {
-			@Override
+			//@Override
 			public void onClick(View v) 
 			{
 				Toast.makeText(IntelliSyncActivity.this, "Warehouses Button Selected", Toast.LENGTH_SHORT).show();
@@ -118,7 +118,7 @@ public class IntelliSyncActivity extends Activity
         vehicle_type_btn = (Button) findViewById(R.id.vehicle_type_btn);
         vehicle_type_btn.setOnClickListener(new OnClickListener()
         {
-			@Override
+			//@Override
 			public void onClick(View v) 
 			{
 				Toast.makeText(IntelliSyncActivity.this, "Vehicle Type Button Selected", Toast.LENGTH_SHORT).show();
@@ -128,7 +128,7 @@ public class IntelliSyncActivity extends Activity
         maintenance_btn = (Button) findViewById(R.id.maintenance_btn);
         maintenance_btn.setOnClickListener(new OnClickListener()
         {
-			@Override
+			//@Override
 			public void onClick(View v) 
 			{
 				Toast.makeText(IntelliSyncActivity.this, "Maintenance Button Selected", Toast.LENGTH_SHORT).show();
@@ -138,7 +138,7 @@ public class IntelliSyncActivity extends Activity
         technicians_btn = (Button) findViewById(R.id.technicians_btn);
         technicians_btn.setOnClickListener(new OnClickListener()
         {
-			@Override
+			//@Override
 			public void onClick(View v) 
 			{
 				Toast.makeText(IntelliSyncActivity.this, "Technicians Button Selected", Toast.LENGTH_SHORT).show();
@@ -148,7 +148,7 @@ public class IntelliSyncActivity extends Activity
         contacts_btn = (Button) findViewById(R.id.contacts_btn);
         contacts_btn.setOnClickListener(new OnClickListener()
         {
-			@Override
+			//@Override
 			public void onClick(View v) 
 			{
 				Toast.makeText(IntelliSyncActivity.this, "Contacts Button Selected", Toast.LENGTH_SHORT).show();
@@ -158,7 +158,7 @@ public class IntelliSyncActivity extends Activity
         reports_btn = (Button) findViewById(R.id.reports_btn);
         reports_btn.setOnClickListener(new OnClickListener()
         {
-			@Override
+			//@Override
 			public void onClick(View v) 
 			{
 				Toast.makeText(IntelliSyncActivity.this, "Reports Button Selected", Toast.LENGTH_SHORT).show();

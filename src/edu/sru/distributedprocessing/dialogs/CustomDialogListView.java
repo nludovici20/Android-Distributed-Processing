@@ -48,7 +48,7 @@ public class CustomDialogListView extends Dialog
         //find out which option was selected
         lst.setOnItemClickListener(new OnItemClickListener() 
         {
-        	@Override
+        	//@Override
         	public void onItemClick(AdapterView<?> a, View v, int position, long id) 
         	{
         		String clicked = ((TextView) v).getText().toString();

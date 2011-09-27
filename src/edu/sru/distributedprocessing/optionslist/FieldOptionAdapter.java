@@ -63,7 +63,7 @@ public class FieldOptionAdapter extends BaseExpandableListAdapter
         
         cb.setOnClickListener(new View.OnClickListener() 
         {
-        	@Override
+        	//@Override
         	public void onClick(View v) 
         	{
         		f.state = cb.isChecked();

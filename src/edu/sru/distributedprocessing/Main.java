@@ -20,7 +20,7 @@ public class Main extends Activity
         Button start_btn = (Button) findViewById(R.id.start_btn);
         start_btn.setOnClickListener(new View.OnClickListener() 
         {
-			@Override
+			//@Override
 			public void onClick(View v) 
 			{
 				Intent engineIntent = new Intent(Main.this, NavigationMain.class);
@@ -31,7 +31,7 @@ public class Main extends Activity
         Button options_btn = (Button) findViewById(R.id.options_btn);
         options_btn.setOnClickListener(new View.OnClickListener() 
         {
-			@Override
+			//@Override
 			public void onClick(View v) 
 			{
 				//nothing yet
@@ -41,7 +41,7 @@ public class Main extends Activity
         Button about_btn = (Button) findViewById(R.id.about_btn);
         about_btn.setOnClickListener(new View.OnClickListener() 
         {
-			@Override
+			//@Override
 			public void onClick(View v) 
 			{
 				//nothing yet
@@ -51,7 +51,7 @@ public class Main extends Activity
         Button quit_btn = (Button) findViewById(R.id.quit_btn);
         quit_btn.setOnClickListener(new View.OnClickListener() 
         {
-			@Override
+			//@Override
 			public void onClick(View v) 
 			{
 				finish();

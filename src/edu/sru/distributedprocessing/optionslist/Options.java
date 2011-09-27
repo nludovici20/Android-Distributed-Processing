@@ -141,7 +141,7 @@ public class Options extends ExpandableListActivity
 			Button clear_all = (Button) findViewById(R.id.clear_btn);
 			clear_all.setOnClickListener(new View.OnClickListener()
 			{
-				@Override
+				//@Override
 				public void onClick(View v) 
 				{
 					//clear all (vehicles for now)

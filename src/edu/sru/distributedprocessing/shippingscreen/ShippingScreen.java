@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import android.app.Activity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -13,7 +14,7 @@ import android.widget.TextView;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.dialogs.CustomDialogListView;
 import edu.sru.distributedprocessing.tableobjects.Record;
-import edu.sru.distributedprocessing.tableobjects.Vehicles;
+import edu.sru.distributedprocessing.tableobjects.VehicleRecord;
 import edu.sru.distributedprocessing.tools.Constants;
 
 public class ShippingScreen 
@@ -30,8 +31,29 @@ public class ShippingScreen
 		
 	public void Initialize() 
 	{
+		Collection<String> fields = null;
 		//set the vehicle objects in view to the screen
-		Collection<String> fields = Constants.vehicle_fields.values();
+		if(this.type[0].getRecordType().equalsIgnoreCase("Vehicle"))
+		{
+			fields = Constants.vehicle_fields.values();
+		}else
+			if(this.type[0].getRecordType().equalsIgnoreCase("Driver"))
+			{
+				fields = Constants.driver_fields.values();
+			}else
+				if(this.type[0].getRecordType().equalsIgnoreCase("Depot"))
+				{
+					fields = Constants.depot_fields.values();
+				}else
+					if(this.type[0].getRecordType().equalsIgnoreCase("Contact"))
+					{
+						fields = Constants.contact_fields.values();
+					}else
+						if(this.type[0].getRecordType().equalsIgnoreCase("Vehicle Type"))
+						{
+							fields = Constants.vehicle_type_fields.values();
+						}
+		
 		TextView field1 = (TextView) act.findViewById(R.id.header_txt1);
 		TextView field2 = (TextView) act.findViewById(R.id.header_txt2);
 		try
@@ -41,8 +63,9 @@ public class ShippingScreen
 		}
 		 catch(Exception e)
 		 {
-			field1.setText("ID");
-			field2.setText("License Plate Number");
+			field1.setText(type[0].getField(type[0].getFields()[0].toString()).getFieldName());
+			field2.setText(type[0].getField(type[0].getFields()[1].toString()).getFieldName());
+			Log.v("Distributed-Processing", "No Fields Selected");
 		 }
 		
 		 //scroll through Vehicles[] and add to listview

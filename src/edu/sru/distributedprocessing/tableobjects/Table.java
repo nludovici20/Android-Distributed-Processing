@@ -47,4 +47,8 @@ public class Table {
 		return this.data;
 	}
 	
+	public String getTableName()
+	{
+		return this.table_name;
+	}
 }

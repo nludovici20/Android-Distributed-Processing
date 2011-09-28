@@ -1,13 +1,15 @@
 package edu.sru.distributedprocessing.tableobjects;
 
-public class Vehicles extends Record {
+public class VehicleRecord extends Record {
 	private Field plate_number, vin_number, vehicle_type, driver, depot, id, manufactured_year, available;
 	private String[] field_names;
 	private Field[] myFields;
+	private String record_type;
 	
-	public Vehicles(String id, String plate_num, String vin_num, String year, 
+	public VehicleRecord(String id, String plate_num, String vin_num, String year, 
 					String type, String driver, String depot, boolean avail)
 	{
+		this.record_type = "Vehicle";
 		this.id = new Field("ID", id, false);
 		this.plate_number = new Field("License Plate Number", plate_num, false);
 		this.vin_number = new Field("Vin Number", vin_num, false);
@@ -80,6 +82,12 @@ public class Vehicles extends Record {
 			field_names[i] = myFields[i].getFieldName().toString();
 		}
 		return field_names;
+	}
+	
+	@Override
+	public String getRecordType()
+	{
+		return this.record_type;
 	}
 	
 	

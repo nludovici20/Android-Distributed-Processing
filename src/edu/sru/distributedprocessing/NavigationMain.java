@@ -49,7 +49,10 @@ public class NavigationMain extends Activity
 			//@Override
 			public void onClick(View v) 
 			{
-				Toast.makeText(NavigationMain.this, "Drivers Button Selected", Toast.LENGTH_SHORT).show();
+				finish();
+				Intent engineIntent = new Intent(NavigationMain.this, IntelliSyncActivity.class);
+				engineIntent.putExtra("Type", "DriverType");
+				startActivity(engineIntent);
 			}
         });
         
@@ -89,7 +92,10 @@ public class NavigationMain extends Activity
 			//@Override
 			public void onClick(View v) 
 			{
-				Toast.makeText(NavigationMain.this, "Depots Button Selected", Toast.LENGTH_SHORT).show();
+				finish();
+				Intent engineIntent = new Intent(NavigationMain.this, IntelliSyncActivity.class);
+				engineIntent.putExtra("Type", "DepotType");
+				startActivity(engineIntent);
 			}
         });
         
@@ -109,7 +115,10 @@ public class NavigationMain extends Activity
 			//@Override
 			public void onClick(View v) 
 			{
-				Toast.makeText(NavigationMain.this, "Vehicle Type Button Selected", Toast.LENGTH_SHORT).show();
+				finish();
+				Intent engineIntent = new Intent(NavigationMain.this, IntelliSyncActivity.class);
+				engineIntent.putExtra("Type", "VehicleTypesType");
+				startActivity(engineIntent);
 			}
         });
         
@@ -139,7 +148,10 @@ public class NavigationMain extends Activity
 			//@Override
 			public void onClick(View v) 
 			{
-				Toast.makeText(NavigationMain.this, "Contacts Button Selected", Toast.LENGTH_SHORT).show();
+				finish();
+				Intent engineIntent = new Intent(NavigationMain.this, IntelliSyncActivity.class);
+				engineIntent.putExtra("Type", "ContactType");
+				startActivity(engineIntent);
 			}
         });
         

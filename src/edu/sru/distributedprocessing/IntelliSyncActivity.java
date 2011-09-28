@@ -3,6 +3,7 @@ package edu.sru.distributedprocessing;
 import edu.sru.distributedprocessing.editors.VehicleEditor;
 import edu.sru.distributedprocessing.optionslist.Options;
 import edu.sru.distributedprocessing.shippingscreen.ShippingScreen;
+import edu.sru.distributedprocessing.tools.Constants;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,9 +34,22 @@ public class IntelliSyncActivity extends Activity
         
         ShippingScreen ss = null;
         
-        if(type.equalsIgnoreCase("VehicleType")){
-        	ss = new ShippingScreen(this, init.vehicles);
-        }
+        if(type.equalsIgnoreCase("VehicleType"))
+        {
+        	ss = new ShippingScreen(this, Constants.vehicle_table.getRecords());
+        }else
+        	if(type.equalsIgnoreCase("DriverType"))
+        	{
+            	ss = new ShippingScreen(this, Constants.driver_table.getRecords());
+            }else
+            	if(type.equalsIgnoreCase("DepotType"))
+            	{
+                	ss = new ShippingScreen(this, Constants.depot_table.getRecords());
+                }else
+                	if(type.equalsIgnoreCase("VehicleTypesType"))
+                	{
+                    	ss = new ShippingScreen(this, Constants.vehicle_type_table.getRecords());
+                    }
         
         ss.Initialize();
         
@@ -61,7 +75,10 @@ public class IntelliSyncActivity extends Activity
 			//@Override
 			public void onClick(View v) 
 			{
-				Toast.makeText(IntelliSyncActivity.this, "Drivers Button Selected", Toast.LENGTH_SHORT).show();
+				finish();
+				Intent engineIntent = new Intent(IntelliSyncActivity.this, IntelliSyncActivity.class);
+				engineIntent.putExtra("Type", "DriverType");
+				startActivity(engineIntent);
 			}
         });
         
@@ -101,7 +118,10 @@ public class IntelliSyncActivity extends Activity
 			//@Override
 			public void onClick(View v) 
 			{
-				Toast.makeText(IntelliSyncActivity.this, "Depots Button Selected", Toast.LENGTH_SHORT).show();
+				finish();
+				Intent engineIntent = new Intent(IntelliSyncActivity.this, IntelliSyncActivity.class);
+				engineIntent.putExtra("Type", "DepotType");
+				startActivity(engineIntent);
 			}
         });
         
@@ -121,7 +141,10 @@ public class IntelliSyncActivity extends Activity
 			//@Override
 			public void onClick(View v) 
 			{
-				Toast.makeText(IntelliSyncActivity.this, "Vehicle Type Button Selected", Toast.LENGTH_SHORT).show();
+				finish();
+				Intent engineIntent = new Intent(IntelliSyncActivity.this, IntelliSyncActivity.class);
+				engineIntent.putExtra("Type", "VehicleTypesType");
+				startActivity(engineIntent);
 			}
         });
         
@@ -151,7 +174,10 @@ public class IntelliSyncActivity extends Activity
 			//@Override
 			public void onClick(View v) 
 			{
-				Toast.makeText(IntelliSyncActivity.this, "Contacts Button Selected", Toast.LENGTH_SHORT).show();
+				finish();
+				Intent engineIntent = new Intent(IntelliSyncActivity.this, IntelliSyncActivity.class);
+				engineIntent.putExtra("Type", "ContactType");
+				startActivity(engineIntent);
 			}
         });
         

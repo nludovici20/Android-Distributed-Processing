@@ -49,7 +49,11 @@ public class IntelliSyncActivity extends Activity
                 	if(type.equalsIgnoreCase("VehicleTypesType"))
                 	{
                     	ss = new ShippingScreen(this, Constants.vehicle_type_table.getRecords());
-                    }
+                    }else
+                    	if(type.equalsIgnoreCase("ContactType"))
+                    	{
+                    		ss = new ShippingScreen(this, Constants.contact_table.getRecords());
+                    	}
         
         ss.Initialize();
         

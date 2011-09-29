@@ -12,7 +12,7 @@ public class DriverRecord extends Record {
 		this.id = new Field("ID", id, false);
 		this.last_name = new Field("Last Name", lastName, false);
 		this.first_name = new Field("First Name", firstName, false);
-		this.vehicle_plate = new Field("License Plate Number", plateNum, false);
+		this.vehicle_plate = new Field("Vehicle Plate No.", plateNum, false);
 		this.license_num = new Field("License Number", licenseNum, false);
 		this.license_expiration = new Field("License Expiration", licenseExp, false);
 		this.license_class = new Field("License Class", licenseClass, false);

@@ -34,34 +34,40 @@ public class NavigationMain extends Activity
             	if(position == 0)
             	{
             		//driver
+            		Toast.makeText(NavigationMain.this, "Vehicle Selected", Toast.LENGTH_SHORT).show();
             		engineIntent.putExtra("Type", "VehicleType");
             		startActivity(engineIntent);
             	}else
             		if(position == 1)
             		{
             			//contact
+                		Toast.makeText(NavigationMain.this, "Contact Selected", Toast.LENGTH_SHORT).show();
             			engineIntent.putExtra("Type", "ContactType");
             			startActivity(engineIntent);
             		}else
             			if(position == 2)
             			{
             				//driver
+                    		Toast.makeText(NavigationMain.this, "Driver Selected", Toast.LENGTH_SHORT).show();
             				engineIntent.putExtra("Type","DriverType");
             				startActivity(engineIntent);
             			}else
                 			if(position == 3)
                 			{
                 				//vehicle type
+                        		Toast.makeText(NavigationMain.this, "Vehicle Type Selected", Toast.LENGTH_SHORT).show();
                 				engineIntent.putExtra("Type", "VehicleTypesType");
                 				startActivity(engineIntent);
                 			}else
                     			if(position == 4)
                     			{
                     				//warehouse
+                            		Toast.makeText(NavigationMain.this, "Warehouse Selected", Toast.LENGTH_SHORT).show();
                     			}else
                         			if(position == 5)
                         			{
                         				//depot
+                                		Toast.makeText(NavigationMain.this, "Depot Selected", Toast.LENGTH_SHORT).show();
                         				engineIntent.putExtra("Type", "DepotType");
                         				startActivity(engineIntent);  
                         			}

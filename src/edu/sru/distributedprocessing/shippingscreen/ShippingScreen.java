@@ -19,14 +19,16 @@ import edu.sru.distributedprocessing.tools.Constants;
 
 public class ShippingScreen 
 {
+	ArrayList<Record> records;
 	Record[] type;
 	Activity act;
 	
 	//Table constructor
-	public ShippingScreen(Activity act, Record[] type)
+	public ShippingScreen(Activity act, ArrayList<Record> rec)
 	{
 		this.act = act;
-		this.type = type;	
+		this.records = rec;
+		this.type = rec.toArray(new Record[1]);	
 	}
 		
 	public void Initialize() 

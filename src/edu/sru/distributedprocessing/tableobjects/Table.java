@@ -1,11 +1,14 @@
 package edu.sru.distributedprocessing.tableobjects;
 
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.util.Log;
 
 public class Table {
 	String table_name;
+	ArrayList<Record> table_data;
 	Record[] data;
 	
 	public Table(String tableName)
@@ -13,9 +16,10 @@ public class Table {
 		this.table_name = tableName;
 	}
 	
-	public void addRecords(Record[] records)
+	public void addRecords(ArrayList<Record> records)
 	{
-		this.data = records;
+		this.table_data = records;
+		this.data = records.toArray(new Record[1]);
 	}
 	
 	public void saveTable(Context context)
@@ -42,9 +46,9 @@ public class Table {
 		}
 	}
 	
-	public Record[] getRecords()
+	public ArrayList<Record> getRecords()
 	{
-		return this.data;
+		return this.table_data;
 	}
 	
 	public String getTableName()

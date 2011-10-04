@@ -6,10 +6,12 @@ import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.dialogs.CustomDialogListView;
 import edu.sru.distributedprocessing.optionslist.Options;
 import edu.sru.distributedprocessing.tableobjects.VehicleRecord;
+import edu.sru.distributedprocessing.tools.Constants;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -38,7 +40,7 @@ public class VehicleEditor extends Activity {
         EditText year_text = (EditText) findViewById(R.id.year_edit); 
         CheckBox avail_box = (CheckBox) findViewById(R.id.available_box);
         Spinner driver_group = (Spinner) findViewById(R.id.driver_choices);
-        Spinner vehicle_group = (Spinner) findViewById(R.id.vehicle_choices);
+        Spinner vehicle_type_group = (Spinner) findViewById(R.id.vehicle_choices);
         Spinner depot_group = (Spinner) findViewById(R.id.depot_choices);
      
         //pull in editable text
@@ -82,6 +84,39 @@ public class VehicleEditor extends Activity {
         					avail_box.toggle();
         			}
         		array_pointer++;
+        	}
+        	if(fields[i].toString().equalsIgnoreCase("Driver"))
+        	{
+        		String[] driver_names = new String[Constants.vehicle_table.getRecords().length];
+        		for(int j = 0; j < Constants.vehicle_table.getRecords().length; j++)
+        		{
+        			driver_names[j] = Constants.vehicle_table.getRecords()[j].getField("Driver").getValue().toString();      			
+        		}
+        		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, driver_names);
+        		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        		driver_group.setAdapter(adapter);  
+        	}
+        	if(fields[i].toString().equalsIgnoreCase("Vehicle Type"))
+        	{
+        		String[] vehicle_type_names = new String[Constants.vehicle_table.getRecords().length];
+        		for(int j = 0; j < Constants.vehicle_table.getRecords().length; j++)
+        		{
+        			vehicle_type_names[j] = Constants.vehicle_table.getRecords()[j].getField("Vehicle Type").getValue().toString();      			
+        		}
+        		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, vehicle_type_names);
+        		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        		vehicle_type_group.setAdapter(adapter);  
+        	}
+        	if(fields[i].toString().equalsIgnoreCase("Depot"))
+        	{
+        		String[] depot_names = new String[Constants.vehicle_table.getRecords().length];
+        		for(int j = 0; j < Constants.vehicle_table.getRecords().length; j++)
+        		{
+        			depot_names[j] = Constants.vehicle_table.getRecords()[j].getField("Depot").getValue().toString();      			
+        		}
+        		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, depot_names);
+        		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        		depot_group.setAdapter(adapter);  
         	}
         }
         

@@ -53,7 +53,7 @@
     <TextView 
 	    android:layout_below="@+id/driver_header" 
 	    android:layout_height="wrap_content"
-	    android:paddingLeft="100px"
+	    android:paddingLeft="25px"
 	    android:layout_width="wrap_content" 
 	    android:gravity="center"
 	    android:layout_alignBottom="@+id/depot_choices"
@@ -72,7 +72,7 @@
      	android:layout_toRightOf="@+id/depot_choices" 
       	android:layout_height="wrap_content" 
       	android:layout_width="wrap_content"
-      	android:paddingLeft="70px"
+      	android:paddingLeft="50px"
       	android:id="@+id/vin_header" 
       	android:gravity="center"
       	android:text="VIN #:  " 

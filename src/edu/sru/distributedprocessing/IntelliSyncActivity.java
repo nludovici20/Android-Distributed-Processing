@@ -36,23 +36,23 @@ public class IntelliSyncActivity extends Activity
         
         if(type.equalsIgnoreCase("VehicleType"))
         {
-        	ss = new ShippingScreen(this, Constants.vehicle_table.getRecords());
+        	ss = new ShippingScreen(this, Constants.vehicle_table.getTableData());
         }else
         	if(type.equalsIgnoreCase("DriverType"))
         	{
-            	ss = new ShippingScreen(this, Constants.driver_table.getRecords());
+            	ss = new ShippingScreen(this, Constants.driver_table.getTableData());
             }else
             	if(type.equalsIgnoreCase("DepotType"))
             	{
-                	ss = new ShippingScreen(this, Constants.depot_table.getRecords());
+                	ss = new ShippingScreen(this, Constants.depot_table.getTableData());
                 }else
                 	if(type.equalsIgnoreCase("VehicleTypesType"))
                 	{
-                    	ss = new ShippingScreen(this, Constants.vehicle_type_table.getRecords());
+                    	ss = new ShippingScreen(this, Constants.vehicle_type_table.getTableData());
                     }else
                     	if(type.equalsIgnoreCase("ContactType"))
                     	{
-                    		ss = new ShippingScreen(this, Constants.contact_table.getRecords());
+                    		ss = new ShippingScreen(this, Constants.contact_table.getTableData());
                     	}
         
         ss.Initialize();

@@ -46,9 +46,14 @@ public class Table {
 		}
 	}
 	
-	public ArrayList<Record> getRecords()
+	public ArrayList<Record> getTableData()
 	{
 		return this.table_data;
+	}
+	
+	public Record[] getRecords()
+	{
+		return this.data;
 	}
 	
 	public String getTableName()

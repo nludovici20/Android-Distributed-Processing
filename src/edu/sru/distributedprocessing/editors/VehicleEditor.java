@@ -1,8 +1,11 @@
 package edu.sru.distributedprocessing.editors;
 
+import java.util.ArrayList;
+
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.dialogs.CustomDialogListView;
 import edu.sru.distributedprocessing.optionslist.Options;
+import edu.sru.distributedprocessing.tableobjects.VehicleRecord;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,16 +29,19 @@ public class VehicleEditor extends Activity {
         //recieve passed in field
         fields = getIntent().getExtras().getStringArray("Fields");
         values = new String[fields.length];
-
-        
-        
+        ArrayList<String> drivers = new ArrayList<String>();
+       
         
         TextView group_header = (TextView) findViewById(R.id.group_header);
         EditText vin_text = (EditText) findViewById(R.id.vin_edit);
         EditText license_text = (EditText) findViewById(R.id.license_edit);
         EditText year_text = (EditText) findViewById(R.id.year_edit); 
         CheckBox avail_box = (CheckBox) findViewById(R.id.available_box);
-        
+        Spinner driver_group = (Spinner) findViewById(R.id.driver_choices);
+        Spinner vehicle_group = (Spinner) findViewById(R.id.vehicle_choices);
+        Spinner depot_group = (Spinner) findViewById(R.id.depot_choices);
+     
+        //pull in editable text
         int array_pointer = 0;
         for(int i = 0; i < fields.length; i++)
         {
@@ -78,8 +85,6 @@ public class VehicleEditor extends Activity {
         	}
         }
         
-        
-        
-        
+       
     }
 }

@@ -13,8 +13,6 @@
     	android:layout_width="match_parent">
     </TextView>
     <!-- Driver -->
-    <CheckBox android:text="Is Available?" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/CheckBox01" android:layout_toLeftOf="@+id/group_header" android:layout_alignTop="@+id/group_header" android:layout_alignBottom="@+id/group_header"></CheckBox>
-    <CheckBox android:text="Is Available?" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/checkBox1" android:layout_toLeftOf="@+id/group_header" android:layout_alignTop="@+id/group_header" android:layout_alignBottom="@+id/group_header"></CheckBox>
     <TextView 
     	android:layout_below="@+id/group_header" 
     	android:layout_height="wrap_content"
@@ -34,7 +32,7 @@
 	</Spinner>
 	<!-- Vehicle Type -->
     <TextView 
-    	android:layout_toLeftOf="@+id/driver_choices" 
+    	android:layout_toLeftOf="@+id/vehicle_choices" 
     	android:layout_height="wrap_content" 
     	android:layout_width="wrap_content"
     	android:gravity="center"
@@ -44,7 +42,7 @@
     	android:layout_alignBottom="@+id/driver_choices">
     </TextView>
     <Spinner
-		android:id="@+id/driver_choices"
+		android:id="@+id/vehicle_choices"
 		android:layout_below="@+id/group_header"
 		android:layout_alignParentRight="true"
 		android:text="Driver"

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import android.content.Context;
 import android.util.Log;
@@ -21,20 +22,21 @@ import edu.sru.distributedprocessing.tools.FileManager;
 public class Initialize 
 {
 	//some generic data
-	public VehicleRecord[] vehicles = new VehicleRecord[2];
-	public ContactRecord[] contacts = new ContactRecord[2];
-	public DepotRecord[] depots = new DepotRecord[2];
-	public DriverRecord[] drivers = new DriverRecord[2];
-	public VehicleTypeRecord[] vehicle_types = new VehicleTypeRecord[2];
+	public ArrayList<Record> vehicles, contacts, depots, drivers, vehicle_types;
 	
 	public Initialize(Context context)
 	{		
+		vehicles = new ArrayList<Record>();
+		contacts = new ArrayList<Record>();
+		depots = new ArrayList<Record>();
+		drivers = new ArrayList<Record>();
+		vehicle_types = new ArrayList<Record>();
 		
-		FileManager.readTextFile(vehicles, context, Constants.vehicle_table.getTableName()+".txt");
-		FileManager.readTextFile(contacts, context, Constants.contact_table.getTableName()+".txt");
-		FileManager.readTextFile(depots, context, Constants.depot_table.getTableName()+".txt");
-		FileManager.readTextFile(drivers, context, Constants.driver_table.getTableName()+".txt");
-		FileManager.readTextFile(vehicle_types, context, Constants.vehicle_type_table.getTableName()+".txt");
+		FileManager.readTextFile(vehicles.toArray(new Record[1]), context, Constants.vehicle_table.getTableName()+".txt");
+		FileManager.readTextFile(contacts.toArray(new Record[1]), context, Constants.contact_table.getTableName()+".txt");
+		FileManager.readTextFile(depots.toArray(new Record[1]), context, Constants.depot_table.getTableName()+".txt");
+		FileManager.readTextFile(drivers.toArray(new Record[1]), context, Constants.driver_table.getTableName()+".txt");
+		FileManager.readTextFile(vehicle_types.toArray(new Record[1]), context, Constants.vehicle_type_table.getTableName()+".txt");
 		
 	}
 	

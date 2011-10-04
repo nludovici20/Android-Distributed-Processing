@@ -146,70 +146,10 @@ public class Options extends ExpandableListActivity
 				{
 					//clear all (vehicles for now)
 					Constants.vehicle_fields.clear();
-					
-					/*
-					Collection<String> vehicle = Constants.vehicle_fields.values();
-					Collection<String> driver = Constants.driver_fields.values();
-					Collection<String> shipment = Constants.shipment_fields.values();
-					Collection<String> routing = Constants.routing_fields.values();
-					Collection<String> contractor = Constants.contractor_fields.values();
-					Collection<String> depot = Constants.depot_fields.values();
-					Collection<String> warehouse = Constants.warehouse_fields.values();
-					Collection<String> contact = Constants.contact_fields.values();
-					Collection<String> maintenance = Constants.maintenance_fields.values();
-					Collection<String> report = Constants.report_fields.values();
-					Collection<String> vehicle_type = Constants.vehicle_type_fields.values();
-					Collection<String> technician = Constants.technician_fields.values();
-					Log.v("Distributed-Processing", "*****************************************************");
-					for(int i = 0; i < vehicle.size(); i++){
-						Log.v("Distributed-Processing", "Vehicle Field: " + vehicle.toArray()[i].toString());
-					}
-					Log.v("Distributed-Processing", "*****************************************************");
-					for(int i = 0; i < driver.size(); i++){
-						Log.v("Distributed-Processing", "Driver Field: " + driver.toArray()[i].toString());
-					}
-					Log.v("Distributed-Processing", "*****************************************************");
-					for(int i = 0; i < shipment.size(); i++){
-						Log.v("Distributed-Processing", "Shipment Field: " + shipment.toArray()[i].toString());
-					}
-					Log.v("Distributed-Processing", "*****************************************************");
-					for(int i = 0; i < routing.size(); i++){
-						Log.v("Distributed-Processing", "Routing Field: " + routing.toArray()[i].toString());
-					}
-					Log.v("Distributed-Processing", "*****************************************************");
-					for(int i = 0; i < contractor.size(); i++){
-						Log.v("Distributed-Processing", "Contractor Field: " + contractor.toArray()[i].toString());
-					}
-					Log.v("Distributed-Processing", "*****************************************************");
-					for(int i = 0; i < depot.size(); i++){
-						Log.v("Distributed-Processing", "Depot Field: " + depot.toArray()[i].toString());
-					}
-					Log.v("Distributed-Processing", "*****************************************************");
-					for(int i = 0; i < warehouse.size(); i++){
-						Log.v("Distributed-Processing", "Warehouse Field: " + warehouse.toArray()[i].toString());
-					}
-					Log.v("Distributed-Processing", "*****************************************************");
-					for(int i = 0; i < contact.size(); i++){
-						Log.v("Distributed-Processing", "Contact Field: " + contact.toArray()[i].toString());
-					}
-					Log.v("Distributed-Processing", "*****************************************************");
-					for(int i = 0; i < maintenance.size(); i++){
-						Log.v("Distributed-Processing", "Maintenance Field: " + maintenance.toArray()[i].toString());
-					}
-					Log.v("Distributed-Processing", "*****************************************************");
-					for(int i = 0; i < report.size(); i++){
-						Log.v("Distributed-Processing", "Report Field: " + report.toArray()[i].toString());
-					}
-					Log.v("Distributed-Processing", "*****************************************************");
-					for(int i = 0; i < vehicle_type.size(); i++){
-						Log.v("Distributed-Processing", "Vehicle Type Field: " + vehicle_type.toArray()[i].toString());
-					}
-					Log.v("Distributed-Processing", "*****************************************************");
-					for(int i = 0; i < technician.size(); i++){
-						Log.v("Distributed-Processing", "Technician Field: " + technician.toArray()[i].toString());
-					}
-					Log.v("Distributed-Processing", "*****************************************************");
-					*/
+					Constants.driver_fields.clear();
+					Constants.contact_fields.clear();
+					Constants.depot_fields.clear();
+					Constants.vehicle_type_fields.clear();
 				}
 			});
 	}

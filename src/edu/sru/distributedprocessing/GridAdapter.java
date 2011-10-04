@@ -2,16 +2,19 @@ package edu.sru.distributedprocessing;
 
 import android.content.Context;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 
-public class ImageAdapter extends BaseAdapter {
+public class GridAdapter extends BaseAdapter {
     private Context mContext;
+    private OnClickListener mListener;
 
-    public ImageAdapter(Context c) {
+    public GridAdapter(Context c, OnClickListener o) {
         mContext = c;
+        mListener = o;
     }
 
     public int getCount() {
@@ -26,20 +29,20 @@ public class ImageAdapter extends BaseAdapter {
         return 0;
     }
 
-    // create a new ImageView for each item referenced by the Adapter
+    // create a new ImageButton for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView;
+        ImageButton buttonView;
         if (convertView == null) {  // if it's not recycled, initialize some attributes
-            imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(150, 150));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8, 8, 8, 8);
+            buttonView = new ImageButton(mContext);
+            buttonView.setLayoutParams(new GridView.LayoutParams(150, 150));
+            buttonView.setBackgroundResource(R.layout.button_component1);
         } else {
-            imageView = (ImageView) convertView;
+            buttonView = (ImageButton) convertView;
         }
-
-        imageView.setImageResource(mThumbIds[position]);
-        return imageView;
+        buttonView.setImageResource(mThumbIds[position]);
+        buttonView.setOnClickListener(mListener);
+        buttonView.setTag(position);
+        return buttonView;
     }
 
     // references to our images

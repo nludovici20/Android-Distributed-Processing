@@ -7,19 +7,24 @@ import android.content.Context;
 import android.util.Log;
 
 public class Table {
-	String table_name;
-	ArrayList<Record> table_data;
-	Record[] data;
+	private String table_name;
+	private ArrayList<Record> table_data;
+	private Record[] data;
+	private int startingIndex;
+	private int tableSize;
 	
 	public Table(String tableName)
 	{
 		this.table_name = tableName;
+		this.startingIndex = 0;
+		this.tableSize = 0;
 	}
 	
 	public void addRecords(ArrayList<Record> records)
 	{
 		this.table_data = records;
 		this.data = records.toArray(new Record[1]);
+		this.tableSize = table_data.size();
 	}
 	
 	public void saveTable(Context context)
@@ -59,5 +64,20 @@ public class Table {
 	public String getTableName()
 	{
 		return this.table_name;
+	}
+	
+	public void setStartingIndex(int index)
+	{
+		this.startingIndex = index;
+	}
+	
+	public int getIndex()
+	{
+		return this.startingIndex;
+	}
+	
+	public int tableSize()
+	{
+		return this.tableSize;
 	}
 }

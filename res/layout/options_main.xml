@@ -3,8 +3,36 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_height="fill_parent"
 	android:layout_width="fill_parent">	
+	
+	<RelativeLayout
+		android:id="@+id/search_line"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		>
+		<EditText 
+			android:text="" 
+			android:hint="0"
+			android:id="@+id/starting_index" 
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content" 
+			android:layout_alignParentRight="true">
+		</EditText>
+		<TextView 
+			android:id="@+id/textView1" 
+			android:gravity="center"
+			style="@style/Heading2"
+			android:textSize="18sp"
+			android:layout_toLeftOf="@+id/starting_index" 
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content" 
+			android:text="Requested Record Index:  " 
+			android:layout_alignTop="@+id/starting_index" 
+			android:layout_alignBottom="@+id/starting_index">
+		</TextView>		
+	</RelativeLayout>
 	<LinearLayout
 	         android:orientation="vertical"
+	         android:layout_below="@+id/search_line"
 	         android:layout_above="@+id/clear_btn"
 	         android:layout_width="fill_parent" 
 	         android:layout_height="fill_parent">

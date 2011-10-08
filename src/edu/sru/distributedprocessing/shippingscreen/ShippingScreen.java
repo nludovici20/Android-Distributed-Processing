@@ -11,6 +11,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.dialogs.CustomDialogListView;
 import edu.sru.distributedprocessing.tableobjects.Record;
@@ -74,19 +75,31 @@ public class ShippingScreen
 		 ListView lv = (ListView) act.findViewById(R.id.listView1);
 		 ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();	
 		 HashMap<String, String> map;		
-		 for(int i = 0; i < type.length; i++)
+		 
+		 int vehicleIndex = Constants.vehicle_table.getIndex() + 10000;
+		 int tableSizeLimit = Constants.vehicle_table.tableSize();
+		 if(vehicleIndex + 100 > tableSizeLimit)
+		 {
+			 vehicleIndex = tableSizeLimit - 100;
+		 }else
+			 if(vehicleIndex < 0)
+			 {
+				 vehicleIndex = 0;
+			 }
+		 for(int i = vehicleIndex; i < (vehicleIndex + 100); i++)
 		 {
 			 if(!(type[i] == null))
 			 {
-				 map = new HashMap<String, String>();
-				 map.put(field1.getText().toString(), type[i].getField(field1.getText().toString()).getValue());
-				 map.put(field2.getText().toString(), type[i].getField(field2.getText().toString()).getValue());
-				 mylist.add(map);
+					 map = new HashMap<String, String>();
+					 map.put(field1.getText().toString(), type[i].getField(field1.getText().toString()).getValue());
+					 map.put(field2.getText().toString(), type[i].getField(field2.getText().toString()).getValue());
+					 mylist.add(map);
 			 }
 		 }
-		 SimpleAdapter mSchedule = new SimpleAdapter(act, mylist, R.layout.list_item, 
+		
+		 SimpleAdapter mRecords = new SimpleAdapter(act, mylist, R.layout.list_item, 
     		  new String[] {field1.getText().toString(), field2.getText().toString()}, new int[] {R.id.FIELD1, R.id.FIELD2});
-		 lv.setAdapter(mSchedule);
+		 lv.setAdapter(mRecords);
 		 lv.setTextFilterEnabled(true);
 		 lv.setOnItemClickListener(new OnItemClickListener() 
 		 {

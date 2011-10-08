@@ -77,11 +77,14 @@ public class FileManager {
 			
 			//Temp Vehicle Records
 			vehicles = new ArrayList<Record>();
-			vehicles.add(new VehicleRecord("1", "DEC-DFE1", "4B7DH3LDJNEE945D", "1982", "Flatbed", "McDonald, Mary", "West Depot", true));
-			vehicles.add(new VehicleRecord("2", "KD8-2GX", "56JFBNWUMNSJMWJ6", "1995", "Flatbed", "Niece, Sue","Garage A3", true));
+			for (int  i = 0; i < 10000; i++)
+			{
+				vehicles.add(new VehicleRecord("" + i + "", "DEC-DFE1", "4B7DH3LDJNEE945D", "1982", "Flatbed", "McDonald, Mary", "West Depot", true));
+			}
 			Constants.vehicle_table.addRecords(vehicles);
-			Constants.vehicle_table.saveTable(context);
+			//Constants.vehicle_table.saveTable(context);
 			
+			/*
 			//Temp Driver Records
 			drivers = new ArrayList<Record>();
 			drivers.add(new DriverRecord("1", "Niece", "Sue", "KD8-2GX", "384-374", "2010-05-23", "A"));
@@ -109,8 +112,8 @@ public class FileManager {
 			vehicle_types.add(new VehicleTypeRecord("2", "Flatbed", "Closed", "M-DJ48DC", "40000", "400", "88"));
 			Constants.vehicle_type_table.addRecords(vehicle_types);
 			Constants.vehicle_type_table.saveTable(context);
-			
-			Log.v("Distributed-Processing", "File not found");
+			*/
+			Log.v("Distributed-Processing", "File not found, generic records created");
 			
 		}
 		

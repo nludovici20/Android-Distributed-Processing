@@ -3,12 +3,13 @@
 	android:background="@layout/custom_component1"
 	android:layout_height="fill_parent" 
 	xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent">
-   	
-   <!-- Panel -->
+	
+   	<!-- Panel -->
     <RelativeLayout 
 	    android:layout_height="match_parent" 
 	    android:background="@layout/custom_component1"
-	    android:id="@+id/info_panel" 
+	    android:id="@+id/info_panel"
+	    android:layout_below="@+id/search_panel" 
 	    android:layout_weight="10"
 	    android:layout_width="match_parent">
 		<LinearLayout 
@@ -19,7 +20,7 @@
 	    <TextView 
 	    	android:text="Field 1" 
 	    	android:id="@+id/header_txt1"
-	    	android:textSize="22sp"
+	    	android:textSize="18sp"
 	    	android:layout_weight="1" 
 	    	android:layout_width="match_parent" 
 	    	android:layout_height="wrap_content">
@@ -28,7 +29,7 @@
 	    	android:text="Field 2" 
 	    	android:id="@+id/header_txt2"
 	    	android:gravity="right" 
-	    	android:textSize="22sp"
+	    	android:textSize="18sp"
 	    	android:layout_weight="1"
 	    	android:layout_width="match_parent" 
 	    	android:layout_height="wrap_content">

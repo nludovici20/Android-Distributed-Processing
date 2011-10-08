@@ -26,6 +26,7 @@ public class Initialize
 		FileManager.readTextFile(drivers.toArray(new Record[1]), context, Constants.driver_table.getTableName()+".txt");
 		FileManager.readTextFile(vehicle_types.toArray(new Record[1]), context, Constants.vehicle_type_table.getTableName()+".txt");
 		
+		//read in data from server
 	}
 	
 	

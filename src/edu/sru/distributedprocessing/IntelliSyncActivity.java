@@ -21,17 +21,16 @@ public class IntelliSyncActivity extends Activity
     			   depots_btn, warehouses_btn, vehicle_type_btn, maintenance_btn, technicians_btn, 
     			   contacts_btn, reports_btn;
     
+    private String type;
+    
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.intelli_sync_activity);  
         
-        String type = getIntent().getExtras().getString("Type");       
+        type = getIntent().getExtras().getString("Type");       
 
-        //temp data created here
-        Initialize init = new Initialize(this.getBaseContext());
-        
         ShippingScreen ss = null;
         
         if(type.equalsIgnoreCase("VehicleType"))
@@ -212,8 +211,10 @@ public class IntelliSyncActivity extends Activity
 		{
 		case R.id.options_menu_item:
 			engineIntent = new Intent(IntelliSyncActivity.this, Options.class);
+			engineIntent.putExtra("Type", type);
 			startActivity(engineIntent);
-		
+			finish();
+			
 	    case R.id.new_record_item:
 			//open up a new record creator
     	}

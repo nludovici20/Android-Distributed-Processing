@@ -16,6 +16,9 @@ public class Main extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+      
+        //temp data created here
+        Initialize init = new Initialize(this.getBaseContext());
         
         Button start_btn = (Button) findViewById(R.id.start_btn);
         start_btn.setOnClickListener(new View.OnClickListener() 

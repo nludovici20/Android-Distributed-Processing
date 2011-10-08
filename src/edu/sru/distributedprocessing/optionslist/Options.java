@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.CheckBox;
 import android.widget.ExpandableListView;
@@ -23,6 +24,7 @@ import edu.sru.distributedprocessing.IntelliSyncActivity;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.R.id;
 import edu.sru.distributedprocessing.R.layout;
+import edu.sru.distributedprocessing.shippingscreen.ShippingScreen;
 import edu.sru.distributedprocessing.tools.Constants;
 import android.util.Log;
 
@@ -32,6 +34,8 @@ public class Options extends ExpandableListActivity
 	private ArrayList<ArrayList<FieldOption>> field_options;
 	private ArrayList<FieldOption> fields;
 	private FieldOptionAdapter expListAdapter;
+	private EditText index;
+	private String type;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -39,6 +43,66 @@ public class Options extends ExpandableListActivity
 	{
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.options_main);
+	    
+	    
+	    type = getIntent().getExtras().getString("Type");
+	    index = (EditText) findViewById(R.id.starting_index);
+	    if(type.equalsIgnoreCase("VehicleType"))
+        {
+	    	try
+	    	{
+	    		index.setText(""+Constants.vehicle_table.getIndex());
+	    	}catch(Exception e)
+	    	{
+	    		//nothing
+	    	}
+	    	Log.v("Distributed-Processing", "" + Constants.vehicle_table.getIndex());
+        }else
+        	if(type.equalsIgnoreCase("DriverType"))
+        	{
+        		try
+    	    	{
+    	    		index.setText(""+Constants.driver_table.getIndex());
+    	    	}catch(Exception e)
+    	    	{
+    	    		//nothing
+    	    	}            	
+    	    	Log.v("Distributed-Processing", "" + Constants.driver_table.getIndex());
+            }else
+            	if(type.equalsIgnoreCase("DepotType"))
+            	{
+            		try
+        	    	{
+        	    		index.setText(""+Constants.depot_table.getIndex());
+        	    	}catch(Exception e)
+        	    	{
+        	    		//nothing
+        	    	}                
+        	    	Log.v("Distributed-Processing", "" + Constants.depot_table.getIndex());
+                }else
+                	if(type.equalsIgnoreCase("VehicleTypesType"))
+                	{
+                		try
+            	    	{
+            	    		index.setText(""+Constants.vehicle_type_table.getIndex());
+            	    	}catch(Exception e)
+            	    	{
+            	    		//nothing
+            	    	}          
+            	    	Log.v("Distributed-Processing", "" + Constants.vehicle_type_table.getIndex());
+                    }else
+                    	if(type.equalsIgnoreCase("ContactType"))
+                    	{
+                    		try
+                	    	{
+                	    		index.setText(""+Constants.contact_table.getIndex());
+                	    	}catch(Exception e)
+                	    	{
+                	    		//nothing
+                	    	}
+                	    	Log.v("Distributed-Processing", "" + Constants.contact_table.getIndex());
+                    	}
+	    
 	    
 	    groupNames = new ArrayList<String>();
 	    	groupNames.add( "Vehicles" );    groupNames.add( "Drivers" );
@@ -348,5 +412,36 @@ public class Options extends ExpandableListActivity
     {
     	//which group was expanded?
     	Log.v("Distributed-Processing", groupNames.get(groupPosition).toString());
+    }
+    
+    @Override
+    public void onBackPressed()
+    {
+    	if(type.equalsIgnoreCase("VehicleType"))
+        {
+    		Constants.vehicle_table.setStartingIndex(Integer.parseInt(index.getText().toString()));
+        }else
+        	if(type.equalsIgnoreCase("DriverType"))
+        	{
+        		Constants.driver_table.setStartingIndex(Integer.parseInt(index.getText().toString()));
+            }else
+            	if(type.equalsIgnoreCase("DepotType"))
+            	{
+            		Constants.depot_table.setStartingIndex(Integer.parseInt(index.getText().toString()));
+                }else
+                	if(type.equalsIgnoreCase("VehicleTypesType"))
+                	{
+                		Constants.vehicle_type_table.setStartingIndex(Integer.parseInt(index.getText().toString()));
+                    }else
+                    	if(type.equalsIgnoreCase("ContactType"))
+                    	{
+                    		Constants.contact_table.setStartingIndex(Integer.parseInt(index.getText().toString()));
+                    	}
+    	finish();
+    	Intent engineIntent = new Intent(Options.this, IntelliSyncActivity.class);
+    	Log.v("Distributed-Processing", type);
+    	engineIntent.putExtra("Type", type);
+    	startActivity(engineIntent);
+    	
     }
 }

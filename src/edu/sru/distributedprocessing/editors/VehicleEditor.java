@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 public class VehicleEditor extends Activity {
 	String[] fields, values;
+	String tableName;
 	
     /** Called when the activity is first created. */
     @Override
@@ -33,6 +34,7 @@ public class VehicleEditor extends Activity {
         values = new String[fields.length];
         ArrayList<String> drivers = new ArrayList<String>();
        
+        tableName = "Vehicle Table";
         
         TextView group_header = (TextView) findViewById(R.id.group_header);
         EditText vin_text = (EditText) findViewById(R.id.vin_edit);
@@ -87,10 +89,10 @@ public class VehicleEditor extends Activity {
         	}
         	if(fields[i].toString().equalsIgnoreCase("Driver"))
         	{
-        		String[] driver_names = new String[Constants.vehicle_table.getRecords().length];
-        		for(int j = 0; j < Constants.vehicle_table.getRecords().length; j++)
+        		String[] driver_names = new String[Constants.db.getTable(tableName).getRecords().length];
+        		for(int j = 0; j < Constants.db.getTable(tableName).getRecords().length; j++)
         		{
-        			driver_names[j] = Constants.vehicle_table.getRecords()[j].getField("Driver").getValue().toString();      			
+        			driver_names[j] = Constants.db.getTable(tableName).getRecords()[j].getField("Driver").getValue().toString();      			
         		}
         		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, driver_names);
         		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -98,10 +100,10 @@ public class VehicleEditor extends Activity {
         	}
         	if(fields[i].toString().equalsIgnoreCase("Vehicle Type"))
         	{
-        		String[] vehicle_type_names = new String[Constants.vehicle_table.getRecords().length];
-        		for(int j = 0; j < Constants.vehicle_table.getRecords().length; j++)
+        		String[] vehicle_type_names = new String[Constants.db.getTable(tableName).getRecords().length];
+        		for(int j = 0; j < Constants.db.getTable(tableName).getRecords().length; j++)
         		{
-        			vehicle_type_names[j] = Constants.vehicle_table.getRecords()[j].getField("Vehicle Type").getValue().toString();      			
+        			vehicle_type_names[j] = Constants.db.getTable(tableName).getRecords()[j].getField("Vehicle Type").getValue().toString();      			
         		}
         		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, vehicle_type_names);
         		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -109,10 +111,10 @@ public class VehicleEditor extends Activity {
         	}
         	if(fields[i].toString().equalsIgnoreCase("Depot"))
         	{
-        		String[] depot_names = new String[Constants.vehicle_table.getRecords().length];
-        		for(int j = 0; j < Constants.vehicle_table.getRecords().length; j++)
+        		String[] depot_names = new String[Constants.db.getTable(tableName).getRecords().length];
+        		for(int j = 0; j < Constants.db.getTable(tableName).getRecords().length; j++)
         		{
-        			depot_names[j] = Constants.vehicle_table.getRecords()[j].getField("Depot").getValue().toString();      			
+        			depot_names[j] = Constants.db.getTable(tableName).getRecords()[j].getField("Depot").getValue().toString();      			
         		}
         		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, depot_names);
         		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

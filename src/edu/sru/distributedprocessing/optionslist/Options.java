@@ -51,56 +51,56 @@ public class Options extends ExpandableListActivity
         {
 	    	try
 	    	{
-	    		index.setText(""+Constants.vehicle_table.getIndex());
+	    		index.setText(""+Constants.db.getTable("Vehicle Table").getIndex());
 	    	}catch(Exception e)
 	    	{
 	    		//nothing
 	    	}
-	    	Log.v("Distributed-Processing", "" + Constants.vehicle_table.getIndex());
+	    	Log.v("Distributed-Processing", "" + Constants.db.getTable("Vehicle Table").getIndex());
         }else
         	if(type.equalsIgnoreCase("DriverType"))
         	{
         		try
     	    	{
-    	    		index.setText(""+Constants.driver_table.getIndex());
+    	    		index.setText(""+Constants.db.getTable("Driver Table").getIndex());
     	    	}catch(Exception e)
     	    	{
     	    		//nothing
     	    	}            	
-    	    	Log.v("Distributed-Processing", "" + Constants.driver_table.getIndex());
+    	    	Log.v("Distributed-Processing", "" + Constants.db.getTable("Driver Table").getIndex());
             }else
             	if(type.equalsIgnoreCase("DepotType"))
             	{
             		try
         	    	{
-        	    		index.setText(""+Constants.depot_table.getIndex());
+        	    		index.setText(""+Constants.db.getTable("Depot Table").getIndex());
         	    	}catch(Exception e)
         	    	{
         	    		//nothing
         	    	}                
-        	    	Log.v("Distributed-Processing", "" + Constants.depot_table.getIndex());
+        	    	Log.v("Distributed-Processing", "" + Constants.db.getTable("Depot Table").getIndex());
                 }else
                 	if(type.equalsIgnoreCase("VehicleTypesType"))
                 	{
                 		try
             	    	{
-            	    		index.setText(""+Constants.vehicle_type_table.getIndex());
+            	    		index.setText(""+Constants.db.getTable("Vehicle Type Table").getIndex());
             	    	}catch(Exception e)
             	    	{
             	    		//nothing
             	    	}          
-            	    	Log.v("Distributed-Processing", "" + Constants.vehicle_type_table.getIndex());
+            	    	Log.v("Distributed-Processing", "" + Constants.db.getTable("Vehicle Type Table").getIndex());
                     }else
                     	if(type.equalsIgnoreCase("ContactType"))
                     	{
                     		try
                 	    	{
-                	    		index.setText(""+Constants.contact_table.getIndex());
+                	    		index.setText(""+Constants.db.getTable("Contact Table").getIndex());
                 	    	}catch(Exception e)
                 	    	{
                 	    		//nothing
                 	    	}
-                	    	Log.v("Distributed-Processing", "" + Constants.contact_table.getIndex());
+                	    	Log.v("Distributed-Processing", "" + Constants.db.getTable("Contact Table").getIndex());
                     	}
 	    
 	    
@@ -419,24 +419,25 @@ public class Options extends ExpandableListActivity
     {
     	if(type.equalsIgnoreCase("VehicleType"))
         {
-    		Constants.vehicle_table.setStartingIndex(Integer.parseInt(index.getText().toString()));
+    		Constants.db.getTable("Vehicle Table").setStartingIndex(Integer.parseInt(index.getText().toString()));
         }else
         	if(type.equalsIgnoreCase("DriverType"))
         	{
-        		Constants.driver_table.setStartingIndex(Integer.parseInt(index.getText().toString()));
+        		Constants.db.getTable("Driver Table").setStartingIndex(Integer.parseInt(index.getText().toString()));
             }else
             	if(type.equalsIgnoreCase("DepotType"))
             	{
-            		Constants.depot_table.setStartingIndex(Integer.parseInt(index.getText().toString()));
+            		Constants.db.getTable("Depot Table").setStartingIndex(Integer.parseInt(index.getText().toString()));
                 }else
                 	if(type.equalsIgnoreCase("VehicleTypesType"))
                 	{
-                		Constants.vehicle_type_table.setStartingIndex(Integer.parseInt(index.getText().toString()));
+                		Constants.db.getTable("Vehicle Type Table").setStartingIndex(Integer.parseInt(index.getText().toString()));
                     }else
                     	if(type.equalsIgnoreCase("ContactType"))
                     	{
-                    		Constants.contact_table.setStartingIndex(Integer.parseInt(index.getText().toString()));
+                    		Constants.db.getTable("Contact Table").setStartingIndex(Integer.parseInt(index.getText().toString()));
                     	}
+    	Constants.db.saveDB(this);
     	finish();
     	Intent engineIntent = new Intent(Options.this, IntelliSyncActivity.class);
     	Log.v("Distributed-Processing", type);

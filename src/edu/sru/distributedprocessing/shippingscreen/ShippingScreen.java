@@ -40,32 +40,32 @@ public class ShippingScreen
 		if(this.type[0].getRecordType().equalsIgnoreCase("Vehicle"))
 		{
 			fields = Constants.vehicle_fields.values();
-			vehicleIndex = Constants.vehicle_table.getIndex();
-			tableSizeLimit = Constants.vehicle_table.tableSize();
+			vehicleIndex = Constants.db.getTable("Vehicle Table").getIndex();
+			tableSizeLimit = Constants.db.getTable("Vehicle Table").tableSize();
 		}else
 			if(this.type[0].getRecordType().equalsIgnoreCase("Driver"))
 			{
 				fields = Constants.driver_fields.values();
-				vehicleIndex = Constants.driver_table.getIndex();
-				tableSizeLimit = Constants.driver_table.tableSize();
+				vehicleIndex = Constants.db.getTable("Driver Table").getIndex();
+				tableSizeLimit = Constants.db.getTable("Driver Table").tableSize();
 			}else
 				if(this.type[0].getRecordType().equalsIgnoreCase("Depot"))
 				{
 					fields = Constants.depot_fields.values();
-					vehicleIndex = Constants.depot_table.getIndex();
-					tableSizeLimit = Constants.depot_table.tableSize();
+					vehicleIndex = Constants.db.getTable("Depot Table").getIndex();
+					tableSizeLimit = Constants.db.getTable("Depot Table").tableSize();
 				}else
 					if(this.type[0].getRecordType().equalsIgnoreCase("Contact"))
 					{
 						fields = Constants.contact_fields.values();
-						vehicleIndex = Constants.contact_table.getIndex();
-						tableSizeLimit = Constants.contact_table.tableSize();
+						vehicleIndex = Constants.db.getTable("Contact Table").getIndex();
+						tableSizeLimit = Constants.db.getTable("Contact Table").tableSize();
 					}else
 						if(this.type[0].getRecordType().equalsIgnoreCase("Vehicle Type"))
 						{
 							fields = Constants.vehicle_type_fields.values();
-							vehicleIndex = Constants.vehicle_type_table.getIndex();
-							tableSizeLimit = Constants.vehicle_type_table.tableSize();
+							vehicleIndex = Constants.db.getTable("Vehicle Type Table").getIndex();
+							tableSizeLimit = Constants.db.getTable("Vehicle Type Table").tableSize();
 						}
 		
 		TextView field1 = (TextView) act.findViewById(R.id.header_txt1);

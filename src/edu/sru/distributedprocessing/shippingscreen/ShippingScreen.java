@@ -35,35 +35,36 @@ public class ShippingScreen
 		
 	public void Initialize() 
 	{
-		Collection<String> fields = null;
+		//Collection<String> fields = null;
+		String[] fields = new String[2];
 		//set the vehicle objects in view to the screen
 		if(this.type[0].getRecordType().equalsIgnoreCase("Vehicle"))
 		{
-			fields = Constants.vehicle_fields.values();
+			fields = Constants.db.getTable("Vehicle Table").getFieldsInView().toArray(new String[1]);
 			vehicleIndex = Constants.db.getTable("Vehicle Table").getIndex();
 			tableSizeLimit = Constants.db.getTable("Vehicle Table").tableSize();
 		}else
 			if(this.type[0].getRecordType().equalsIgnoreCase("Driver"))
 			{
-				fields = Constants.driver_fields.values();
+				fields = Constants.db.getTable("Driver Table").getFieldsInView().toArray(new String[1]);
 				vehicleIndex = Constants.db.getTable("Driver Table").getIndex();
 				tableSizeLimit = Constants.db.getTable("Driver Table").tableSize();
 			}else
 				if(this.type[0].getRecordType().equalsIgnoreCase("Depot"))
 				{
-					fields = Constants.depot_fields.values();
+					fields = Constants.db.getTable("Depot Table").getFieldsInView().toArray(new String[1]);
 					vehicleIndex = Constants.db.getTable("Depot Table").getIndex();
 					tableSizeLimit = Constants.db.getTable("Depot Table").tableSize();
 				}else
 					if(this.type[0].getRecordType().equalsIgnoreCase("Contact"))
 					{
-						fields = Constants.contact_fields.values();
+						fields = Constants.db.getTable("Contact Table").getFieldsInView().toArray(new String[1]);
 						vehicleIndex = Constants.db.getTable("Contact Table").getIndex();
 						tableSizeLimit = Constants.db.getTable("Contact Table").tableSize();
 					}else
 						if(this.type[0].getRecordType().equalsIgnoreCase("Vehicle Type"))
 						{
-							fields = Constants.vehicle_type_fields.values();
+							fields = Constants.db.getTable("Vehicle Type Table").getFieldsInView().toArray(new String[1]);
 							vehicleIndex = Constants.db.getTable("Vehicle Type Table").getIndex();
 							tableSizeLimit = Constants.db.getTable("Vehicle Type Table").tableSize();
 						}
@@ -72,8 +73,8 @@ public class ShippingScreen
 		TextView field2 = (TextView) act.findViewById(R.id.header_txt2);
 		try
 		{
-			field1.setText(fields.toArray()[0].toString());
-			field2.setText(fields.toArray()[1].toString());
+			field1.setText(fields[0].toString());
+			field2.setText(fields[1].toString());
 		}
 		 catch(Exception e)
 		 {

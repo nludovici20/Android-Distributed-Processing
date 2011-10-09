@@ -25,6 +25,7 @@ import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.R.id;
 import edu.sru.distributedprocessing.R.layout;
 import edu.sru.distributedprocessing.shippingscreen.ShippingScreen;
+import edu.sru.distributedprocessing.tableobjects.Table;
 import edu.sru.distributedprocessing.tools.Constants;
 import android.util.Log;
 
@@ -117,7 +118,7 @@ public class Options extends ExpandableListActivity
 	     fields = new ArrayList<FieldOption>();
 	     	//Vehicle Fields
 			fields.add( new FieldOption( "ID", false ) );  			
-			fields.add( new FieldOption( "Plate Number", false ) ); 
+			fields.add( new FieldOption( "License Plate Number", false ) ); 
 			fields.add( new FieldOption( "Vin Number", false ) );  	
 			fields.add( new FieldOption( "Manufactured Year", false ) ); 	
 			fields.add( new FieldOption( "Vehicle Type", false ) ); 	
@@ -209,11 +210,10 @@ public class Options extends ExpandableListActivity
 				public void onClick(View v) 
 				{
 					//clear all (vehicles for now)
-					Constants.vehicle_fields.clear();
-					Constants.driver_fields.clear();
-					Constants.contact_fields.clear();
-					Constants.depot_fields.clear();
-					Constants.vehicle_type_fields.clear();
+					for(int i = 0; i < Constants.db.getTables().length; i++)
+					{
+						Constants.db.getTables()[i].getFieldsInView().clear();
+					}
 				}
 			});
 	}
@@ -236,7 +236,7 @@ public class Options extends ExpandableListActivity
 				{
 					try
 					{
-						Constants.vehicle_fields.remove(f.getField());
+						Constants.db.getTable("Vehicle Table").getFieldsInView().remove(f.getField());
 					}
 					 catch(Exception e)
 					 {
@@ -247,7 +247,7 @@ public class Options extends ExpandableListActivity
 					{
 						try
 						{
-							Constants.driver_fields.remove(f.getField());
+							Constants.db.getTable("Driver Table").getFieldsInView().remove(f.getField());
 						}
 						 catch(Exception e)
 						 {
@@ -258,7 +258,7 @@ public class Options extends ExpandableListActivity
 						{
 							try
 							{
-								Constants.shipment_fields.remove(f.getField());
+								Constants.db.getTable("Shipment Table").getFieldsInView().remove(f.getField());
 							}
 							 catch(Exception e)
 							 {
@@ -269,7 +269,7 @@ public class Options extends ExpandableListActivity
 							{
 								try
 								{
-									Constants.routing_fields.remove(f.getField());
+									Constants.db.getTable("Routing Table").getFieldsInView().remove(f.getField());
 								}
 								 catch(Exception e)
 								 {
@@ -280,7 +280,7 @@ public class Options extends ExpandableListActivity
 								{
 									try
 									{
-										Constants.contractor_fields.remove(f.getField());
+										Constants.db.getTable("Contractor Table").getFieldsInView().remove(f.getField());
 									}
 									 catch(Exception e)
 									 {
@@ -291,7 +291,7 @@ public class Options extends ExpandableListActivity
 									{
 										try
 										{
-											Constants.depot_fields.remove(f.getField());
+											Constants.db.getTable("Depot Table").getFieldsInView().remove(f.getField());
 										}
 										 catch(Exception e)
 										 {
@@ -302,7 +302,7 @@ public class Options extends ExpandableListActivity
 										{
 											try
 											{
-												Constants.warehouse_fields.remove(f.getField());
+												Constants.db.getTable("Warehouse Table").getFieldsInView().remove(f.getField());
 											}
 											 catch(Exception e)
 											 {
@@ -313,7 +313,7 @@ public class Options extends ExpandableListActivity
 											{
 												try
 												{
-													Constants.vehicle_type_fields.remove(f.getField());
+													Constants.db.getTable("Vehicle Type Table").getFieldsInView().remove(f.getField());
 												}
 												 catch(Exception e)
 												 {
@@ -324,7 +324,7 @@ public class Options extends ExpandableListActivity
 												{
 													try
 													{
-														Constants.maintenance_fields.remove(f.getField());
+														Constants.db.getTable("Maintenance Table").getFieldsInView().remove(f.getField());
 													}
 													 catch(Exception e)
 													 {
@@ -335,7 +335,7 @@ public class Options extends ExpandableListActivity
 													{
 														try
 														{
-															Constants.contact_fields.remove(f.getField());
+															Constants.db.getTable("Contact Table").getFieldsInView().remove(f.getField());
 														}catch(Exception e){
 															//handle exception
 														}
@@ -344,7 +344,7 @@ public class Options extends ExpandableListActivity
 														{
 															try
 															{
-																Constants.report_fields.remove(f.getField());
+																Constants.db.getTable("Report Table").getFieldsInView().remove(f.getField());
 															}
 															 catch(Exception e)
 															 {
@@ -357,51 +357,135 @@ public class Options extends ExpandableListActivity
 				f.state = cb.isChecked();
 				if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Vehicles"))
 				{
-					Constants.vehicle_fields.put(f.getField(), f.getField());
+					if (Constants.db.getTable("Vehicle Table").getFieldsInView().size() < 2)
+					{
+						Constants.db.getTable("Vehicle Table").addField(f.getField());
+					}else
+					{
+						Toast.makeText(this, "Two fields already selected, clear fields to add more", Toast.LENGTH_SHORT).show();
+						cb.toggle();
+					}
 				}else
 					if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Drivers"))
 					{
-						Constants.driver_fields.put(f.getField(), f.getField());
+						if (Constants.db.getTable("Driver Table").getFieldsInView().size() < 2)
+						{
+							Constants.db.getTable("Driver Table").addField(f.getField());
+						}else
+						{
+							Toast.makeText(this, "Two fields already selected, clear fields to add more", Toast.LENGTH_SHORT).show();
+							cb.toggle();
+						}
 					}else
 						if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Shipments"))
 						{
-							Constants.shipment_fields.put(f.getField(), f.getField());
+							if (Constants.db.getTable("Shipment Table").getFieldsInView().size() < 2)
+							{
+								Constants.db.getTable("Shipment Table").addField(f.getField());
+							}else
+							{
+								Toast.makeText(this, "Two fields already selected, clear fields to add more", Toast.LENGTH_SHORT).show();
+								cb.toggle();
+							}
 						}else
 							if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Routing"))
 							{
-								Constants.routing_fields.put(f.getField(), f.getField());
+								if (Constants.db.getTable("Routing Table").getFieldsInView().size() < 2)
+								{
+									Constants.db.getTable("Routing Table").addField(f.getField());
+								}else
+								{
+									Toast.makeText(this, "Two fields already selected, clear fields to add more", Toast.LENGTH_SHORT).show();
+									cb.toggle();
+								}
 							}else
 								if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Contractors"))
 								{
-									Constants.contractor_fields.put(f.getField(), f.getField());
+									if (Constants.db.getTable("Contractor Table").getFieldsInView().size() < 2)
+									{
+										Constants.db.getTable("Contractor Table").addField(f.getField());
+									}else
+									{
+										Toast.makeText(this, "Two fields already selected, clear fields to add more", Toast.LENGTH_SHORT).show();
+										cb.toggle();
+									}
 								}else
 									if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Depots"))
 									{
-										Constants.depot_fields.put(f.getField(), f.getField());
+										if (Constants.db.getTable("Depot Table").getFieldsInView().size() < 2)
+										{
+											Constants.db.getTable("Depot Table").addField(f.getField());
+										}else
+										{
+											Toast.makeText(this, "Two fields already selected, clear fields to add more", Toast.LENGTH_SHORT).show();
+											cb.toggle();
+										}
 									}else
 										if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Warehouses"))
 										{
-											Constants.warehouse_fields.put(f.getField(), f.getField());
+											if (Constants.db.getTable("Warehouse Table").getFieldsInView().size() < 2)
+											{
+												Constants.db.getTable("Warehouse Table").addField(f.getField());
+											}else
+											{
+												Toast.makeText(this, "Two fields already selected, clear fields to add more", Toast.LENGTH_SHORT).show();
+												cb.toggle();
+											}
 										}else
 											if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Vehicle Type"))
 											{
-												Constants.vehicle_type_fields.put(f.getField(), f.getField());
+												if (Constants.db.getTable("Vehicle Type Table").getFieldsInView().size() < 2)
+												{
+													Constants.db.getTable("Vehicle Type Table").addField(f.getField());
+												}else
+												{
+													Toast.makeText(this, "Two fields already selected, clear fields to add more", Toast.LENGTH_SHORT).show();
+													cb.toggle();
+												}
 											}else
 												if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Maintenance"))
 												{
-													Constants.maintenance_fields.put(f.getField(), f.getField());
+													if (Constants.db.getTable("Maintenance Table").getFieldsInView().size() < 2)
+													{
+														Constants.db.getTable("Maintenance Table").addField(f.getField());
+													}else
+													{
+														Toast.makeText(this, "Two fields already selected, clear fields to add more", Toast.LENGTH_SHORT).show();
+														cb.toggle();
+													}
 												}else
 													if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Technicians"))
 													{
-														Constants.technician_fields.put(f.getField(), f.getField());
+														if (Constants.db.getTable("Technician Table").getFieldsInView().size() < 2)
+														{
+															Constants.db.getTable("Technician Table").addField(f.getField());
+														}else
+														{
+															Toast.makeText(this, "Two fields already selected, clear fields to add more", Toast.LENGTH_SHORT).show();
+															cb.toggle();
+														}
 													}else
 														if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Contacts"))
 														{
-															Constants.contact_fields.put(f.getField(), f.getField());
+															if (Constants.db.getTable("Contact Table").getFieldsInView().size() < 2)
+															{
+																Constants.db.getTable("Contact Table").addField(f.getField());
+															}else
+															{
+																Toast.makeText(this, "Two fields already selected, clear fields to add more", Toast.LENGTH_SHORT).show();
+																cb.toggle();
+															}
 														}else
 															if(groupNames.get(groupPosition).toString().equalsIgnoreCase("Reports"))
 															{
-																Constants.report_fields.put(f.getField(), f.getField());
+																if (Constants.db.getTable("Report Table").getFieldsInView().size() < 2)
+																{
+																	Constants.db.getTable("Report Table").addField(f.getField());
+																}else
+																{
+																	Toast.makeText(this, "Two fields already selected, clear fields to add more", Toast.LENGTH_SHORT).show();
+																	cb.toggle();
+																}
 															}
 				Log.v("Distributed-Processing", groupNames.get(groupPosition).toString() + "-" + f.getField() + ": Checked");
 			}		

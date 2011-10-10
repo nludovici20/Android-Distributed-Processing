@@ -25,16 +25,16 @@ public class Initialize
 		//create tables
 		vehicle_table = new Table("Vehicle Table");
 		driver_table = new Table("Driver Table");
-		shipment_table = new Table("Shipment Table");
+		depot_table = new Table("Depot Table");
+		contact_table = new Table("Contact Table");
+		vehicle_type_table = new Table("Vehicle Type Table");
+		/*shipment_table = new Table("Shipment Table");
 		routing_table = new Table("Routing Table");
 		contractor_table = new Table("Contractor Table");
-		depot_table = new Table("Depot Table");
 		warehouse_table = new Table("Warehouse Table");
-		vehicle_type_table = new Table("Vehicle Type Table");
 		maintenance_table = new Table("Maintenance Table");
 		technician_table = new Table("Technician Table");
-		contact_table = new Table("Contact Table");
-		report_table = new Table("Report Table");
+		report_table = new Table("Report Table");*/
 		
 				
 		//read in data from server (for now create temp data)
@@ -89,16 +89,16 @@ public class Initialize
 		//add tables to database
 		Constants.db.addTable(vehicle_table);
 		Constants.db.addTable(driver_table);
-		Constants.db.addTable(shipment_table);
+		Constants.db.addTable(depot_table);
+		Constants.db.addTable(vehicle_type_table);
+		Constants.db.addTable(contact_table);
+		/*Constants.db.addTable(shipment_table);
 		Constants.db.addTable(routing_table);
 		Constants.db.addTable(contractor_table);
-		Constants.db.addTable(depot_table);
 		Constants.db.addTable(warehouse_table);
-		Constants.db.addTable(vehicle_type_table);
 		Constants.db.addTable(maintenance_table);
 		Constants.db.addTable(technician_table);
-		Constants.db.addTable(contact_table);
-		Constants.db.addTable(report_table);
+		Constants.db.addTable(report_table);*/
 		
 		
 		

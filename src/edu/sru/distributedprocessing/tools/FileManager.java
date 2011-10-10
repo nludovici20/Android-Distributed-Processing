@@ -22,7 +22,6 @@ public class FileManager {
 	{
 		String line;
 		int index;
-		int i = 0;
 		// try opening the myfilename.txt
 		try 
 		{
@@ -38,10 +37,18 @@ public class FileManager {
 				// read every line of the file into the line-variable, on line at the time
 				while (( line = buffreader.readLine()) != null)
 				{
-					index = Integer.parseInt(line);
+					String[] temp = line.split("  ");
 					//read starting index for each table and set accordingly
-					Constants.db.getTables()[i].setStartingIndex(index);
-					i++;
+					for(int i = 0; i < Constants.db.getTables().length; i++)
+					{
+						if(Constants.db.getTables()[i].getTableName().equalsIgnoreCase(temp[0]))
+						{
+							Constants.db.getTables()[i].getFieldsInView().clear();
+							Constants.db.getTables()[i].setStartingIndex(Integer.parseInt(temp[1]));
+							Constants.db.getTables()[i].addField(temp[2]);
+							Constants.db.getTables()[i].addField(temp[3]);
+						}
+					}
 				}
 			}
 			// close the file again
@@ -64,8 +71,22 @@ public class FileManager {
 			OutputStreamWriter out = new OutputStreamWriter(context.openFileOutput(Constants.db.getDBName() + ".txt", context.MODE_PRIVATE));
 			for(int i = 0; i < tables.length; i++)
 			{
-				out.write("" + tables[i].getIndex());
-				out.write("\r\n");
+				try
+				{
+					out.write(tables[i].getTableName() + "  " + tables[i].getIndex() + "  " + tables[i].getFieldsInView().get(0) + "  " + tables[i].getFieldsInView().get(1));
+					out.write("\r\n");
+				}catch (Exception e)
+				{
+					try
+					{
+						out.write(tables[i].getTableName() + "  " + tables[i].getIndex() + "  " + tables[i].getRecords()[0].getFields()[0] + "  " + tables[i].getRecords()[0].getFields()[1]);
+						out.write("\r\n");
+						Log.v("Distributed-Processing", "Default write");
+					}catch(Exception ex)
+					{
+						Log.v("Distributed-Processing", "Error write");
+					}
+				}
 			}
 			
 			out.close();

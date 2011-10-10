@@ -1,5 +1,7 @@
 package edu.sru.distributedprocessing;
 
+import java.io.IOException;
+
 import edu.sru.distributedprocessing.editors.VehicleEditor;
 import edu.sru.distributedprocessing.optionslist.Options;
 import android.app.Activity;
@@ -54,6 +56,11 @@ public class Main extends Activity
 			//@Override
 			public void onClick(View v) 
 			{
+				try {
+					Initialize.tcp.finish();
+				} catch (Exception e) {
+					//handle exception
+				}
 				finish();
 			}
 		});        

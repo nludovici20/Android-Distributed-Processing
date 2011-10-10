@@ -21,7 +21,7 @@ public class TCPClient extends Thread
 	private boolean running;
 	private final Object sendLock = new Object();
 	
-	TCPClient(final String host, final int port) throws IOException
+	public TCPClient(final String host, final int port) throws IOException
 	{
 		this.host = host;
 		this.port = port;InetAddress serverAddr = InetAddress.getByName(host); 
@@ -40,9 +40,12 @@ public class TCPClient extends Thread
 		{
 			try 
 			{
-				data = in.readLine();
-				//handle data
-				Log.d("Received",data);
+				if(in.ready())
+				{
+					data = in.readLine();
+					//handle data
+					Log.d("TCP",data);
+				}
 			} 
 			catch (IOException e) 
 			{
@@ -52,7 +55,7 @@ public class TCPClient extends Thread
 		}				
 	}
 	
-	private final void send(final String data)
+	public final void send(final String data)
 	{
 		synchronized(sendLock)
 		{

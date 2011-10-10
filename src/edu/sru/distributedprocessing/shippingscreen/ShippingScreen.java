@@ -38,36 +38,22 @@ public class ShippingScreen
 		//Collection<String> fields = null;
 		String[] fields = new String[2];
 		//set the vehicle objects in view to the screen
-		if(this.type[0].getRecordType().equalsIgnoreCase("Vehicle"))
+		Log.v("Distributed-Processing", type[0].getRecordType() + "  " + Constants.db.getTables()[0].getRecords()[0].getRecordType());
+		for(int i = 0; i < Constants.db.getTables().length; i++)
 		{
-			fields = Constants.db.getTable("Vehicle Table").getFieldsInView().toArray(new String[1]);
-			vehicleIndex = Constants.db.getTable("Vehicle Table").getIndex();
-			tableSizeLimit = Constants.db.getTable("Vehicle Table").tableSize();
-		}else
-			if(this.type[0].getRecordType().equalsIgnoreCase("Driver"))
+			try
 			{
-				fields = Constants.db.getTable("Driver Table").getFieldsInView().toArray(new String[1]);
-				vehicleIndex = Constants.db.getTable("Driver Table").getIndex();
-				tableSizeLimit = Constants.db.getTable("Driver Table").tableSize();
-			}else
-				if(this.type[0].getRecordType().equalsIgnoreCase("Depot"))
+				if(type[0].getRecordType().equalsIgnoreCase(Constants.db.getTables()[i].getRecords()[0].getRecordType()))
 				{
-					fields = Constants.db.getTable("Depot Table").getFieldsInView().toArray(new String[1]);
-					vehicleIndex = Constants.db.getTable("Depot Table").getIndex();
-					tableSizeLimit = Constants.db.getTable("Depot Table").tableSize();
-				}else
-					if(this.type[0].getRecordType().equalsIgnoreCase("Contact"))
-					{
-						fields = Constants.db.getTable("Contact Table").getFieldsInView().toArray(new String[1]);
-						vehicleIndex = Constants.db.getTable("Contact Table").getIndex();
-						tableSizeLimit = Constants.db.getTable("Contact Table").tableSize();
-					}else
-						if(this.type[0].getRecordType().equalsIgnoreCase("Vehicle Type"))
-						{
-							fields = Constants.db.getTable("Vehicle Type Table").getFieldsInView().toArray(new String[1]);
-							vehicleIndex = Constants.db.getTable("Vehicle Type Table").getIndex();
-							tableSizeLimit = Constants.db.getTable("Vehicle Type Table").tableSize();
-						}
+					fields = Constants.db.getTables()[i].getFieldsInView().toArray(new String[1]);
+					vehicleIndex = Constants.db.getTables()[i].getIndex();
+					tableSizeLimit = Constants.db.getTables()[i].tableSize();
+				}
+			}catch (Exception e)
+			{
+				//handle
+			}
+		}
 		
 		TextView field1 = (TextView) act.findViewById(R.id.header_txt1);
 		TextView field2 = (TextView) act.findViewById(R.id.header_txt2);

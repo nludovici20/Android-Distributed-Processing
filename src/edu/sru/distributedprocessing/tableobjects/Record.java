@@ -6,4 +6,5 @@ public abstract class Record
 	public abstract void setFieldValue(String fieldname, String Value);
 	public abstract String[] getFields();
 	public abstract String getRecordType();
+	public abstract String getGroupName();
 }

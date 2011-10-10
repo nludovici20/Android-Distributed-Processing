@@ -8,7 +8,7 @@ public class DepotRecord extends Record {
 	
 	public DepotRecord(String id, String name, String address, String city, String state, String zip, String latitude, String longitude)
 	{
-		this.record_type = "Depot";
+		this.record_type = "DepotType";
 		this.id = new Field("ID", id, false);
 		this.depot_name = new Field("Depot Name", name, false);
 		this.depot_address = new Field("Depot Address", address, false);
@@ -84,6 +84,11 @@ public class DepotRecord extends Record {
 	public String getRecordType() 
 	{
 		return this.record_type;
+	}
+
+	@Override
+	public String getGroupName() {
+		return "Depots";
 	}
 	
 	

@@ -8,7 +8,7 @@ public class VehicleTypeRecord extends Record {
 	
 	public VehicleTypeRecord(String id, String vehicleType, String subType, String model, String maxWeight, String maxRange, String length)
 	{
-		this.record_type = "Vehicle Type";
+		this.record_type = "VehicleTypeType";
 		this.id = new Field("ID", id, false);
 		this.vehicle_type = new Field("Vehicle Type", vehicleType, false);
 		this.sub_type = new Field("Sub Type", subType, false);
@@ -77,6 +77,11 @@ public class VehicleTypeRecord extends Record {
 	@Override
 	public String getRecordType() {
 		return this.record_type;
+	}
+
+	@Override
+	public String getGroupName() {
+		return "Vehicle Types";
 	}
 		
 }

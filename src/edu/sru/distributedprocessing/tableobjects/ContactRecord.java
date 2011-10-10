@@ -8,7 +8,7 @@ public class ContactRecord extends Record {
 	
 	public ContactRecord(String id, String lastName, String firstName, String middleInitial, String primaryPhone, String workPhone)
 	{
-		this.record_type = "Contact";
+		this.record_type = "ContactType";
 		this.id = new Field("ID", id, false);
 		this.last_name = new Field("Last Name", lastName, false);
 		this.first_name = new Field("First Name", firstName, false);
@@ -73,6 +73,11 @@ public class ContactRecord extends Record {
 	public String getRecordType() 
 	{
 		return this.record_type;
+	}
+
+	@Override
+	public String getGroupName() {
+		return "Contacts";
 	}
 	
 	

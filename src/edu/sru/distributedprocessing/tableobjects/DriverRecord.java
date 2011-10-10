@@ -8,7 +8,7 @@ public class DriverRecord extends Record {
 	
 	public DriverRecord(String id, String lastName, String firstName, String plateNum, String licenseNum, String licenseExp, String licenseClass)
 	{
-		this.record_type = "Driver";
+		this.record_type = "DriverType";
 		this.id = new Field("ID", id, false);
 		this.last_name = new Field("Last Name", lastName, false);
 		this.first_name = new Field("First Name", firstName, false);
@@ -78,6 +78,11 @@ public class DriverRecord extends Record {
 	public String getRecordType() 
 	{
 		return this.record_type;
+	}
+
+	@Override
+	public String getGroupName() {
+		return "Drivers";
 	}
 	
 	

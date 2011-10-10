@@ -9,7 +9,7 @@ public class VehicleRecord extends Record {
 	public VehicleRecord(String id, String plate_num, String vin_num, String year, 
 					String type, String driver, String depot, boolean avail)
 	{
-		this.record_type = "Vehicle";
+		this.record_type = "VehicleType";
 		this.id = new Field("ID", id, false);
 		this.plate_number = new Field("License Plate Number", plate_num, false);
 		this.vin_number = new Field("Vin Number", vin_num, false);
@@ -88,6 +88,11 @@ public class VehicleRecord extends Record {
 	public String getRecordType()
 	{
 		return this.record_type;
+	}
+
+	@Override
+	public String getGroupName() {
+		return "Vehicles";
 	}
 	
 	

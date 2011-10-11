@@ -1,8 +1,11 @@
 package edu.sru.distributedprocessing;
 
+import edu.sru.distributedprocessing.tableobjects.Table;
+import edu.sru.distributedprocessing.tools.Constants;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.GridView;
@@ -22,18 +25,33 @@ public class NavigationMain extends Activity implements OnClickListener
 
 	@Override
 	public void onClick(View v) {
-		Intent engineIntent = new Intent(NavigationMain.this, IntelliSyncActivity.class);
+		Intent engineIntent = new Intent(NavigationMain.this, IntelliSyncActivity.class);		
     	if(v.getTag().equals(0))
     	{
     		//driver
     		Toast.makeText(NavigationMain.this, "Vehicle Selected", Toast.LENGTH_SHORT).show();
-    		engineIntent.putExtra("Type", "VehicleType");
+    		
+//    		Table tbl = Constants.db.getTable("vehicles");
+//    		Initialize.tcp.sendDataRequest(
+//    				tbl.getTableName(), tbl.getDBName(tbl.getFieldsInView().get(0))
+//    				,tbl.getDBName(tbl.getFieldsInView().get(1))
+//    				,tbl.getIndex());
+    		
+			engineIntent.putExtra("Type", "VehicleType");
     		startActivity(engineIntent);
     	}else
     		if(v.getTag().equals(1))
     		{
     			//contact
         		Toast.makeText(NavigationMain.this, "Contact Selected", Toast.LENGTH_SHORT).show();
+        		
+        		
+//        		Table tbl = Constants.db.getTable("contacts");
+//        		Initialize.tcp.sendDataRequest(
+//        				tbl.getTableName(), tbl.getDBName(tbl.getFieldsInView().get(0))
+//        				,tbl.getDBName(tbl.getFieldsInView().get(1))
+//        				,tbl.getIndex());
+        		
     			engineIntent.putExtra("Type", "ContactType");
     			startActivity(engineIntent);
     		}else
@@ -41,6 +59,13 @@ public class NavigationMain extends Activity implements OnClickListener
     			{
     				//driver
             		Toast.makeText(NavigationMain.this, "Driver Selected", Toast.LENGTH_SHORT).show();
+            		
+//            		Table tbl = Constants.db.getTable("drivers");
+//            		Initialize.tcp.sendDataRequest(
+//            				tbl.getTableName(), tbl.getDBName(tbl.getFieldsInView().get(0))
+//            				,tbl.getDBName(tbl.getFieldsInView().get(1))
+//            				,tbl.getIndex());
+            		
     				engineIntent.putExtra("Type","DriverType");
     				startActivity(engineIntent);
     			}else
@@ -48,7 +73,14 @@ public class NavigationMain extends Activity implements OnClickListener
         			{
         				//vehicle type
                 		Toast.makeText(NavigationMain.this, "Vehicle Type Selected", Toast.LENGTH_SHORT).show();
-        				engineIntent.putExtra("Type", "VehicleTypesType");
+        				
+//                		Table tbl = Constants.db.getTable("vehicle type");
+//                		Initialize.tcp.sendDataRequest(
+//                				tbl.getTableName(), tbl.getDBName(tbl.getFieldsInView().get(0))
+//                				,tbl.getDBName(tbl.getFieldsInView().get(1))
+//                				,tbl.getIndex());
+                		
+                		engineIntent.putExtra("Type", "VehicleTypesType");
         				startActivity(engineIntent);
         			}else
             			if(v.getTag().equals(4))
@@ -60,7 +92,15 @@ public class NavigationMain extends Activity implements OnClickListener
                 			{
                 				//depot
                         		Toast.makeText(NavigationMain.this, "Depot Selected", Toast.LENGTH_SHORT).show();
-                				engineIntent.putExtra("Type", "DepotType");
+                        		
+//                        		Table tbl = Constants.db.getTable("depots");
+//                        		Initialize.tcp.sendDataRequest(
+//                        				tbl.getTableName(), tbl.getDBName(tbl.getFieldsInView().get(0))
+//                        				,tbl.getDBName(tbl.getFieldsInView().get(1))
+//                        				,tbl.getIndex());
+                        		
+                        		
+                        		engineIntent.putExtra("Type", "DepotType");
                 				startActivity(engineIntent);  
                 			}
 	}

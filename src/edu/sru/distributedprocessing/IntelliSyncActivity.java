@@ -3,10 +3,12 @@ package edu.sru.distributedprocessing;
 import edu.sru.distributedprocessing.editors.VehicleEditor;
 import edu.sru.distributedprocessing.optionslist.Options;
 import edu.sru.distributedprocessing.shippingscreen.ShippingScreen;
+import edu.sru.distributedprocessing.tableobjects.Table;
 import edu.sru.distributedprocessing.tools.Constants;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -33,26 +35,13 @@ public class IntelliSyncActivity extends Activity
 
         ShippingScreen ss = null;
         
-        if(type.equalsIgnoreCase("VehicleType"))
+        for(int i = 0; i < Constants.db.getTables().length; i++)
         {
-        	ss = new ShippingScreen(this, Constants.db.getTable("Vehicle Table").getTableData());
-        }else
-        	if(type.equalsIgnoreCase("DriverType"))
-        	{
-            	ss = new ShippingScreen(this, Constants.db.getTable("Driver Table").getTableData());
-            }else
-            	if(type.equalsIgnoreCase("DepotType"))
-            	{
-                	ss = new ShippingScreen(this, Constants.db.getTable("Depot Table").getTableData());
-                }else
-                	if(type.equalsIgnoreCase("VehicleTypesType"))
-                	{
-                    	ss = new ShippingScreen(this, Constants.db.getTable("Vehicle Type Table").getTableData());
-                    }else
-                    	if(type.equalsIgnoreCase("ContactType"))
-                    	{
-                    		ss = new ShippingScreen(this, Constants.db.getTable("Contact Table").getTableData());
-                    	}
+        	 if(type.equalsIgnoreCase(Constants.db.getTables()[i].getRecordType()))
+             {
+             	ss = new ShippingScreen(this, Constants.db.getTables()[i]);
+             }
+        }
         
         ss.Initialize();
         
@@ -67,6 +56,12 @@ public class IntelliSyncActivity extends Activity
 			{
 				finish();
 				Intent engineIntent = new Intent(IntelliSyncActivity.this, IntelliSyncActivity.class);
+				
+//				Table tbl = Constants.db.getTable("vehicles");
+//        		String str = "\0" + tbl.getTableName() + "\0" +	tbl.getDBName(tbl.getFieldsInView().get(0)) + "\0" + tbl.getDBName(tbl.getFieldsInView().get(1)) + "\0" + + tbl.getIndex() + "\0";
+//    			Initialize.tcp.send(str);
+//    			Log.d("TCP", str);
+				
 				engineIntent.putExtra("Type", "VehicleType");
 				startActivity(engineIntent);
 			}
@@ -80,6 +75,12 @@ public class IntelliSyncActivity extends Activity
 			{
 				finish();
 				Intent engineIntent = new Intent(IntelliSyncActivity.this, IntelliSyncActivity.class);
+				
+//				Table tbl = Constants.db.getTable("drivers");
+//        		String str = "\0" + tbl.getTableName() + "\0" +	tbl.getDBName(tbl.getFieldsInView().get(0)) + "\0" + tbl.getDBName(tbl.getFieldsInView().get(1)) + "\0" + + tbl.getIndex() + "\0";
+//    			Initialize.tcp.send(str);
+//    			Log.d("TCP", str);
+				
 				engineIntent.putExtra("Type", "DriverType");
 				startActivity(engineIntent);
 			}
@@ -123,6 +124,12 @@ public class IntelliSyncActivity extends Activity
 			{
 				finish();
 				Intent engineIntent = new Intent(IntelliSyncActivity.this, IntelliSyncActivity.class);
+				
+//				Table tbl = Constants.db.getTable("depots");
+//        		String str = "\0" + tbl.getTableName() + "\0" +	tbl.getDBName(tbl.getFieldsInView().get(0)) + "\0" + tbl.getDBName(tbl.getFieldsInView().get(1)) + "\0" + + tbl.getIndex() + "\0";
+//    			Initialize.tcp.send(str);
+//    			Log.d("TCP", str);
+    			
 				engineIntent.putExtra("Type", "DepotType");
 				startActivity(engineIntent);
 			}
@@ -146,6 +153,12 @@ public class IntelliSyncActivity extends Activity
 			{
 				finish();
 				Intent engineIntent = new Intent(IntelliSyncActivity.this, IntelliSyncActivity.class);
+//				
+//				Table tbl = Constants.db.getTable("vehicle type");
+//        		String str = "\0" + tbl.getTableName() + "\0" +	tbl.getDBName(tbl.getFieldsInView().get(0)) + "\0" + tbl.getDBName(tbl.getFieldsInView().get(1)) + "\0" + + tbl.getIndex() + "\0";
+//    			Initialize.tcp.send(str);
+//    			Log.d("TCP", str);
+    			
 				engineIntent.putExtra("Type", "VehicleTypesType");
 				startActivity(engineIntent);
 			}
@@ -179,6 +192,12 @@ public class IntelliSyncActivity extends Activity
 			{
 				finish();
 				Intent engineIntent = new Intent(IntelliSyncActivity.this, IntelliSyncActivity.class);
+				
+//				Table tbl = Constants.db.getTable("contacts");
+//        		String str = "\0" + tbl.getTableName() + "\0" +	tbl.getDBName(tbl.getFieldsInView().get(0)) + "\0" + tbl.getDBName(tbl.getFieldsInView().get(1)) + "\0" + + tbl.getIndex() + "\0";
+//    			Initialize.tcp.send(str);
+//    			Log.d("TCP", str);
+    			
 				engineIntent.putExtra("Type", "ContactType");
 				startActivity(engineIntent);
 			}

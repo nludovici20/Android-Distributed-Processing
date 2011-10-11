@@ -4,6 +4,7 @@ import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.editors.VehicleEditor;
 import edu.sru.distributedprocessing.tableobjects.Field;
 import edu.sru.distributedprocessing.tableobjects.Record;
+import edu.sru.distributedprocessing.tableobjects.Table;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -23,9 +24,9 @@ import android.widget.Toast;
 public class CustomDialogListView extends Dialog 
 {
     Activity activity;	//current activity
-    Record type;
+    Table type;
     
-    public CustomDialogListView(Activity act, int theme, Record type) 
+    public CustomDialogListView(Activity act, int theme, Table type) 
     {
         super(act, theme);
         this.activity = act;
@@ -57,14 +58,14 @@ public class CustomDialogListView extends Dialog
     			{
     				Intent engineIntent = new Intent(activity, VehicleEditor.class);
     				
-    				//send the vehicle item to the editor
+    			/*	//send the vehicle item to the editor
     				for(int i = 0; i < type.getFields().length; i++)
     				{
     					engineIntent.putExtra(type.getFields()[i].toString(), type.getField(type.getFields()[i].toString()).getValue());        					
     				}
     				engineIntent.putExtra("Fields", type.getFields());
     				activity.startActivity(engineIntent);
-    			}
+    			 */}
     			else 
     				if(clicked.equalsIgnoreCase("Delete Group"))
     				{

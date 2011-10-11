@@ -1,18 +1,20 @@
 package edu.sru.distributedprocessing.tableobjects;
 
 public class Field {
-	private String fieldName, value;
+	private String fieldName, value, databaseName;
 	public boolean inView;
 	
-	public Field(String fieldName, String value, boolean inView)
+	public Field(String databaseName, String fieldName, String value, boolean inView)
 	{
+		this.databaseName = databaseName;
 		this.fieldName = fieldName;
 		this.value = value;
 		this.inView = inView;
 	}
 	
-	public Field(String fieldName, boolean value, boolean inView)
+	public Field(String databaseName, String fieldName, boolean value, boolean inView)
 	{
+		this.databaseName = databaseName;
 		this.fieldName = fieldName;
 		if(value = true)
 		{
@@ -54,5 +56,11 @@ public class Field {
 	public String getAvailability()
 	{
 		return this.value;
+	}
+	
+	public String getDBName()
+	{
+		return databaseName;
+		
 	}
 }

@@ -15,7 +15,7 @@ import android.widget.Toast;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.dialogs.CustomDialogListView;
 import edu.sru.distributedprocessing.tableobjects.Record;
-import edu.sru.distributedprocessing.tableobjects.VehicleRecord;
+import edu.sru.distributedprocessing.tableobjects.Table;
 import edu.sru.distributedprocessing.tools.Constants;
 
 public class ShippingScreen 
@@ -24,13 +24,14 @@ public class ShippingScreen
 	private Record[] type;
 	private Activity act;
 	private int vehicleIndex, tableSizeLimit;
+	private Table table;
 	
 	//Table constructor
-	public ShippingScreen(Activity act, ArrayList<Record> rec)
+	public ShippingScreen(Activity act, Table table)
 	{
 		this.act = act;
-		this.records = rec;
-		this.type = rec.toArray(new Record[1]);	
+		this.table = table;
+		this.type = table.getRecords();	
 	}
 		
 	public void Initialize() 
@@ -38,12 +39,12 @@ public class ShippingScreen
 		//Collection<String> fields = null;
 		String[] fields = new String[2];
 		//set the vehicle objects in view to the screen
-		Log.v("Distributed-Processing", type[0].getRecordType() + "  " + Constants.db.getTables()[0].getRecords()[0].getRecordType());
+		Log.v("Distributed-Processing", table.getRecordType() + "  " + Constants.db.getTables()[0].getRecordType());
 		for(int i = 0; i < Constants.db.getTables().length; i++)
 		{
 			try
 			{
-				if(type[0].getRecordType().equalsIgnoreCase(Constants.db.getTables()[i].getRecords()[0].getRecordType()))
+				if(table.getRecordType().equalsIgnoreCase(Constants.db.getTables()[i].getRecordType()))
 				{
 					fields = Constants.db.getTables()[i].getFieldsInView().toArray(new String[1]);
 					vehicleIndex = Constants.db.getTables()[i].getIndex();
@@ -64,8 +65,8 @@ public class ShippingScreen
 		}
 		 catch(Exception e)
 		 {
-			field1.setText(type[0].getField(type[0].getFields()[0].toString()).getFieldName());
-			field2.setText(type[0].getField(type[0].getFields()[1].toString()).getFieldName());
+			field1.setText(table.getFields()[0]);
+			field2.setText(table.getFields()[1]);
 			Log.v("Distributed-Processing", "No Fields Selected");
 		 }
 		
@@ -87,8 +88,8 @@ public class ShippingScreen
 			 if(!(type[i] == null))
 			 {
 					 map = new HashMap<String, String>();
-					 map.put(field1.getText().toString(), type[i].getField(field1.getText().toString()).getValue());
-					 map.put(field2.getText().toString(), type[i].getField(field2.getText().toString()).getValue());
+					 map.put(field1.getText().toString(), type[i].getFields()[0]);
+					 map.put(field2.getText().toString(), type[i].getFields()[1]);
 					 mylist.add(map);
 			 }
 		 }
@@ -101,8 +102,8 @@ public class ShippingScreen
 		 {
     		public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) 
     		{
-    			CustomDialogListView cldv = new CustomDialogListView(act, R.style.CustomDialogTheme, type[arg2]);
-    			cldv.show();
+    			//CustomDialogListView cldv = new CustomDialogListView(act, R.style.CustomDialogTheme, type[arg2]);
+    			//cldv.show();
     		}
        });
 	}

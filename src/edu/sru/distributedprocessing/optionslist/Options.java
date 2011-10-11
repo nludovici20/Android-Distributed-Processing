@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
+import edu.sru.distributedprocessing.Initialize;
 import edu.sru.distributedprocessing.IntelliSyncActivity;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.R.id;
@@ -53,7 +54,7 @@ public class Options extends ExpandableListActivity
 		{
 			try
 			{
-				if(type.equalsIgnoreCase(Constants.db.getTables()[i].getRecords()[0].getRecordType()))
+				if(type.equalsIgnoreCase(Constants.db.getTables()[i].getRecordType()))
 				{
 					index.setText(""+Constants.db.getTables()[i].getIndex());
 				}
@@ -194,7 +195,7 @@ public class Options extends ExpandableListActivity
 				{
 					try
 					{
-						if(groupNames.get(groupPosition).toString().equalsIgnoreCase(Constants.db.getTables()[i].getRecords()[0].getGroupName()))
+						if(groupNames.get(groupPosition).toString().equalsIgnoreCase(Constants.db.getTables()[i].getGroupName()))
 						{
 								Constants.db.getTables()[i].getFieldsInView().remove(f.getField());
 						}
@@ -212,7 +213,7 @@ public class Options extends ExpandableListActivity
 				{
 					try
 					{
-						if(groupNames.get(groupPosition).toString().equalsIgnoreCase(Constants.db.getTables()[i].getRecords()[0].getGroupName()))
+						if(groupNames.get(groupPosition).toString().equalsIgnoreCase(Constants.db.getTables()[i].getGroupName()))
 						{
 							if (Constants.db.getTables()[i].getFieldsInView().size() < 2)
 							{
@@ -246,9 +247,12 @@ public class Options extends ExpandableListActivity
 		{
     		try
     		{
-				if(type.equalsIgnoreCase(Constants.db.getTables()[i].getRecords()[i].getRecordType()))
+				if(type.equalsIgnoreCase(Constants.db.getTables()[i].getRecordType()))
 				{
 					Constants.db.getTables()[i].setStartingIndex(Integer.parseInt(index.getText().toString()));
+					String str = "\0" + Constants.db.getTables()[i].getTableName() + "\0" +	Constants.db.getTables()[i].getDBName(Constants.db.getTables()[i].getFieldsInView().get(0)) + "\0" + 	Constants.db.getTables()[i].getDBName(Constants.db.getTables()[i].getFieldsInView().get(1)) + "\0" + + Constants.db.getTables()[i].getIndex() + "\0";
+					Initialize.tcp.send(str);
+					Log.d("TCP", str);
 				}
     		}catch (Exception e)
     		{

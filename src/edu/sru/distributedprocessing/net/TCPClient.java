@@ -5,6 +5,10 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter; 
 import java.net.InetAddress;
 import java.net.Socket; 
+import java.util.ArrayList;
+
+import edu.sru.distributedprocessing.tableobjects.Record;
+import edu.sru.distributedprocessing.tools.Constants;
 import android.util.Log;
  
  
@@ -20,6 +24,10 @@ public class TCPClient extends Thread
 	private final PrintWriter out;
 	private boolean running;
 	private final Object sendLock = new Object();
+	static final char GET = 0;
+	static final char CHANGE = 1;
+	static final char INSERT = 2;
+	private String lastTable;
 	
 	public TCPClient(final String host, final int port) throws IOException
 	{
@@ -36,14 +44,33 @@ public class TCPClient extends Thread
 	{ 
 		running = true;
 		String data;
+		boolean read;
 		while (running)
 		{
 			try 
 			{
-				if(in.ready())
+				synchronized(sendLock)
+				{
+					read = in.ready();
+					if(read)
+						data = in.readLine();
+				}
+				if(read)
 				{
 					data = in.readLine();
 					//handle data
+					switch (data.charAt(0))
+					{
+					case GET:
+						recieveRequest(lastTable, data);
+					case CHANGE:
+						changeRequest(data);
+					case INSERT:
+						insertRequest(data);
+					default:
+						Log.v("TCP", "Default Case");
+						
+					}
 					Log.d("TCP",data);
 				}
 			} 
@@ -55,11 +82,44 @@ public class TCPClient extends Thread
 		}				
 	}
 	
+	private void insertRequest(String data) {
+				
+	}
+
+	private void changeRequest(String data) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void recieveRequest(String tableName, String data) {
+		ArrayList<Record> rec = new ArrayList<Record>();
+		for(int i = 0; i < Constants.db.getTables().length; i++)
+		{
+			if(tableName.equalsIgnoreCase(Constants.db.getTables()[i].getTableName()))
+			{
+				Constants.db.getTables()[i].deleteRecords();
+				//parse data and insert to rec
+				// Split data by "\0"?
+			}
+		}
+		
+	}
+
 	public final void send(final String data)
 	{
 		synchronized(sendLock)
 		{
 			out.println(data);
+		}
+	}
+	
+	public final void sendDataRequest(String tablename, String field1, String field2, int index)
+	{
+		this.lastTable = tablename;
+		String str = "\0" + tablename + "\0" +	field1 + "\0" + field2 + "\0" + index + "\0";
+		synchronized(sendLock)
+		{
+			out.println(str);
 		}
 	}
 	

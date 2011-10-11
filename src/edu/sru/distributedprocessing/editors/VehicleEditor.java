@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.dialogs.CustomDialogListView;
 import edu.sru.distributedprocessing.optionslist.Options;
-import edu.sru.distributedprocessing.tableobjects.VehicleRecord;
 import edu.sru.distributedprocessing.tools.Constants;
 import android.app.Activity;
 import android.content.Intent;
@@ -92,7 +91,7 @@ public class VehicleEditor extends Activity {
         		String[] driver_names = new String[Constants.db.getTable(tableName).getRecords().length];
         		for(int j = 0; j < Constants.db.getTable(tableName).getRecords().length; j++)
         		{
-        			driver_names[j] = Constants.db.getTable(tableName).getRecords()[j].getField("Driver").getValue().toString();      			
+        			//driver_names[j] = Constants.db.getTable(tableName).getRecords()[j].getFields()[j];      			
         		}
         		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, driver_names);
         		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -103,7 +102,7 @@ public class VehicleEditor extends Activity {
         		String[] vehicle_type_names = new String[Constants.db.getTable(tableName).getRecords().length];
         		for(int j = 0; j < Constants.db.getTable(tableName).getRecords().length; j++)
         		{
-        			vehicle_type_names[j] = Constants.db.getTable(tableName).getRecords()[j].getField("Vehicle Type").getValue().toString();      			
+        			//vehicle_type_names[j] = Constants.db.getTable(tableName).getRecords()[j].getField("Vehicle Type").getValue().toString();      			
         		}
         		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, vehicle_type_names);
         		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -114,7 +113,7 @@ public class VehicleEditor extends Activity {
         		String[] depot_names = new String[Constants.db.getTable(tableName).getRecords().length];
         		for(int j = 0; j < Constants.db.getTable(tableName).getRecords().length; j++)
         		{
-        			depot_names[j] = Constants.db.getTable(tableName).getRecords()[j].getField("Depot").getValue().toString();      			
+        			//depot_names[j] = Constants.db.getTable(tableName).getRecords()[j].getField("Depot").getValue().toString();      			
         		}
         		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, depot_names);
         		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

@@ -8,13 +8,8 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.util.Log;
-import edu.sru.distributedprocessing.tableobjects.ContactRecord;
-import edu.sru.distributedprocessing.tableobjects.DepotRecord;
-import edu.sru.distributedprocessing.tableobjects.DriverRecord;
 import edu.sru.distributedprocessing.tableobjects.Record;
 import edu.sru.distributedprocessing.tableobjects.Table;
-import edu.sru.distributedprocessing.tableobjects.VehicleRecord;
-import edu.sru.distributedprocessing.tableobjects.VehicleTypeRecord;
 
 public class FileManager {
 	
@@ -79,7 +74,7 @@ public class FileManager {
 				{
 					try
 					{
-						out.write(tables[i].getTableName() + "  " + tables[i].getIndex() + "  " + tables[i].getRecords()[0].getFields()[0] + "  " + tables[i].getRecords()[0].getFields()[1]);
+						out.write(tables[i].getTableName() + "  " + tables[i].getIndex() + "  " + tables[i].getFields()[0] + "  " + tables[i].getFields()[1]);
 						out.write("\r\n");
 						Log.v("Distributed-Processing", "Default write");
 					}catch(Exception ex)

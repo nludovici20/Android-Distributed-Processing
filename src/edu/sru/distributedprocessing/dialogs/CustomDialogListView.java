@@ -2,13 +2,9 @@ package edu.sru.distributedprocessing.dialogs;
 
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.editors.VehicleEditor;
-import edu.sru.distributedprocessing.tableobjects.Field;
-import edu.sru.distributedprocessing.tableobjects.Record;
 import edu.sru.distributedprocessing.tableobjects.Table;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,10 +12,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class CustomDialogListView extends Dialog 
 {

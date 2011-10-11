@@ -100,6 +100,18 @@ public class TCPClient extends Thread
 				Constants.db.getTables()[i].deleteRecords();
 				//parse data and insert to rec
 				// Split data by "\0"?
+				String[] temp = data.split("\0");
+				for(int j = 0; j < temp.length; j++)
+				{
+					Log.v("TCP", temp[j]);
+					String[] name = temp[j].split(",");
+					rec.add(new Record(name[0], name[1]));
+					for(int k = 0; k < name.length; k++)
+					{
+						Log.v("TCP", name[k]);
+					}
+				}
+				Constants.db.getTables()[i].addRecords(rec);
 			}
 		}
 		

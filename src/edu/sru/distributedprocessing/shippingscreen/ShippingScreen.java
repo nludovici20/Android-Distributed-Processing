@@ -85,12 +85,18 @@ public class ShippingScreen
 			 }
 		 for(int i = vehicleIndex; i < (vehicleIndex + 100); i++)
 		 {
-			 if(!(type[i] == null))
+			 try{
+				 if(!(type[i] == null))
+				 {
+						 map = new HashMap<String, String>();
+						 map.put(field1.getText().toString(), type[i].getFields()[0]);
+						 map.put(field2.getText().toString(), type[i].getFields()[1]);
+						 mylist.add(map);
+				 }
+			 }
+			 catch(Exception e)
 			 {
-					 map = new HashMap<String, String>();
-					 map.put(field1.getText().toString(), type[i].getFields()[0]);
-					 map.put(field2.getText().toString(), type[i].getFields()[1]);
-					 mylist.add(map);
+				 
 			 }
 		 }
 		

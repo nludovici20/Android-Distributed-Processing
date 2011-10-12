@@ -57,10 +57,10 @@ public class IntelliSyncActivity extends Activity
 				finish();
 				Intent engineIntent = new Intent(IntelliSyncActivity.this, IntelliSyncActivity.class);
 				
-//				Table tbl = Constants.db.getTable("vehicles");
-//        		String str = "\0" + tbl.getTableName() + "\0" +	tbl.getDBName(tbl.getFieldsInView().get(0)) + "\0" + tbl.getDBName(tbl.getFieldsInView().get(1)) + "\0" + + tbl.getIndex() + "\0";
-//    			Initialize.tcp.send(str);
-//    			Log.d("TCP", str);
+				Table tbl = Constants.db.getTable("vehicles");
+        		String str = "\0" + tbl.getTableName() + "\0" +	tbl.getDBName(tbl.getFieldsInView().get(0)) + "\0" + tbl.getDBName(tbl.getFieldsInView().get(1)) + "\0" + + tbl.getIndex() + "\0";
+    			Initialize.tcp.send(str);
+    			Log.d("TCP", str);
 				
 				engineIntent.putExtra("Type", "VehicleType");
 				startActivity(engineIntent);
@@ -76,10 +76,10 @@ public class IntelliSyncActivity extends Activity
 				finish();
 				Intent engineIntent = new Intent(IntelliSyncActivity.this, IntelliSyncActivity.class);
 				
-//				Table tbl = Constants.db.getTable("drivers");
-//        		String str = "\0" + tbl.getTableName() + "\0" +	tbl.getDBName(tbl.getFieldsInView().get(0)) + "\0" + tbl.getDBName(tbl.getFieldsInView().get(1)) + "\0" + + tbl.getIndex() + "\0";
-//    			Initialize.tcp.send(str);
-//    			Log.d("TCP", str);
+				Table tbl = Constants.db.getTable("drivers");
+        		String str = "\0" + tbl.getTableName() + "\0" +	tbl.getDBName(tbl.getFieldsInView().get(0)) + "\0" + tbl.getDBName(tbl.getFieldsInView().get(1)) + "\0" + + tbl.getIndex() + "\0";
+    			Initialize.tcp.send(str);
+    			Log.d("TCP", str);
 				
 				engineIntent.putExtra("Type", "DriverType");
 				startActivity(engineIntent);
@@ -125,10 +125,10 @@ public class IntelliSyncActivity extends Activity
 				finish();
 				Intent engineIntent = new Intent(IntelliSyncActivity.this, IntelliSyncActivity.class);
 				
-//				Table tbl = Constants.db.getTable("depots");
-//        		String str = "\0" + tbl.getTableName() + "\0" +	tbl.getDBName(tbl.getFieldsInView().get(0)) + "\0" + tbl.getDBName(tbl.getFieldsInView().get(1)) + "\0" + + tbl.getIndex() + "\0";
-//    			Initialize.tcp.send(str);
-//    			Log.d("TCP", str);
+				Table tbl = Constants.db.getTable("depots");
+        		String str = "\0" + tbl.getTableName() + "\0" +	tbl.getDBName(tbl.getFieldsInView().get(0)) + "\0" + tbl.getDBName(tbl.getFieldsInView().get(1)) + "\0" + + tbl.getIndex() + "\0";
+    			Initialize.tcp.send(str);
+    			Log.d("TCP", str);
     			
 				engineIntent.putExtra("Type", "DepotType");
 				startActivity(engineIntent);
@@ -153,11 +153,11 @@ public class IntelliSyncActivity extends Activity
 			{
 				finish();
 				Intent engineIntent = new Intent(IntelliSyncActivity.this, IntelliSyncActivity.class);
-//				
-//				Table tbl = Constants.db.getTable("vehicle type");
-//        		String str = "\0" + tbl.getTableName() + "\0" +	tbl.getDBName(tbl.getFieldsInView().get(0)) + "\0" + tbl.getDBName(tbl.getFieldsInView().get(1)) + "\0" + + tbl.getIndex() + "\0";
-//    			Initialize.tcp.send(str);
-//    			Log.d("TCP", str);
+	
+				Table tbl = Constants.db.getTable("vehicle type");
+        		String str = "\0" + tbl.getTableName() + "\0" +	tbl.getDBName(tbl.getFieldsInView().get(0)) + "\0" + tbl.getDBName(tbl.getFieldsInView().get(1)) + "\0" + + tbl.getIndex() + "\0";
+    			Initialize.tcp.send(str);
+    			Log.d("TCP", str);
     			
 				engineIntent.putExtra("Type", "VehicleTypesType");
 				startActivity(engineIntent);
@@ -193,10 +193,10 @@ public class IntelliSyncActivity extends Activity
 				finish();
 				Intent engineIntent = new Intent(IntelliSyncActivity.this, IntelliSyncActivity.class);
 				
-//				Table tbl = Constants.db.getTable("contacts");
-//        		String str = "\0" + tbl.getTableName() + "\0" +	tbl.getDBName(tbl.getFieldsInView().get(0)) + "\0" + tbl.getDBName(tbl.getFieldsInView().get(1)) + "\0" + + tbl.getIndex() + "\0";
-//    			Initialize.tcp.send(str);
-//    			Log.d("TCP", str);
+				Table tbl = Constants.db.getTable("contacts");
+        		String str = "\0" + tbl.getTableName() + "\0" +	tbl.getDBName(tbl.getFieldsInView().get(0)) + "\0" + tbl.getDBName(tbl.getFieldsInView().get(1)) + "\0" + + tbl.getIndex() + "\0";
+    			Initialize.tcp.send(str);
+    			Log.d("TCP", str);
     			
 				engineIntent.putExtra("Type", "ContactType");
 				startActivity(engineIntent);

@@ -31,11 +31,11 @@ public class NavigationMain extends Activity implements OnClickListener
     		//driver
     		Toast.makeText(NavigationMain.this, "Vehicle Selected", Toast.LENGTH_SHORT).show();
     		
-//    		Table tbl = Constants.db.getTable("vehicles");
-//    		Initialize.tcp.sendDataRequest(
-//    				tbl.getTableName(), tbl.getDBName(tbl.getFieldsInView().get(0))
-//    				,tbl.getDBName(tbl.getFieldsInView().get(1))
-//    				,tbl.getIndex());
+    		Table tbl = Constants.db.getTable("vehicles");
+    		Initialize.tcp.sendDataRequest(
+    				tbl.getTableName(), tbl.getDBName(tbl.getFieldsInView().get(0))
+    				,tbl.getDBName(tbl.getFieldsInView().get(1))
+    				,tbl.getIndex());
     		
 			engineIntent.putExtra("Type", "VehicleType");
     		startActivity(engineIntent);
@@ -44,13 +44,12 @@ public class NavigationMain extends Activity implements OnClickListener
     		{
     			//contact
         		Toast.makeText(NavigationMain.this, "Contact Selected", Toast.LENGTH_SHORT).show();
-        		
-        		
-//        		Table tbl = Constants.db.getTable("contacts");
-//        		Initialize.tcp.sendDataRequest(
-//        				tbl.getTableName(), tbl.getDBName(tbl.getFieldsInView().get(0))
-//        				,tbl.getDBName(tbl.getFieldsInView().get(1))
-//        				,tbl.getIndex());
+        			
+        		Table tbl = Constants.db.getTable("contacts");
+        		Initialize.tcp.sendDataRequest(
+        				tbl.getTableName(), tbl.getDBName(tbl.getFieldsInView().get(0))
+        				,tbl.getDBName(tbl.getFieldsInView().get(1))
+        				,tbl.getIndex());
         		
     			engineIntent.putExtra("Type", "ContactType");
     			startActivity(engineIntent);
@@ -60,11 +59,11 @@ public class NavigationMain extends Activity implements OnClickListener
     				//driver
             		Toast.makeText(NavigationMain.this, "Driver Selected", Toast.LENGTH_SHORT).show();
             		
-//            		Table tbl = Constants.db.getTable("drivers");
-//            		Initialize.tcp.sendDataRequest(
-//            				tbl.getTableName(), tbl.getDBName(tbl.getFieldsInView().get(0))
-//            				,tbl.getDBName(tbl.getFieldsInView().get(1))
-//            				,tbl.getIndex());
+            		Table tbl = Constants.db.getTable("drivers");
+            		Initialize.tcp.sendDataRequest(
+            				tbl.getTableName(), tbl.getDBName(tbl.getFieldsInView().get(0))
+            				,tbl.getDBName(tbl.getFieldsInView().get(1))
+            				,tbl.getIndex());
             		
     				engineIntent.putExtra("Type","DriverType");
     				startActivity(engineIntent);
@@ -74,11 +73,11 @@ public class NavigationMain extends Activity implements OnClickListener
         				//vehicle type
                 		Toast.makeText(NavigationMain.this, "Vehicle Type Selected", Toast.LENGTH_SHORT).show();
         				
-//                		Table tbl = Constants.db.getTable("vehicle type");
-//                		Initialize.tcp.sendDataRequest(
-//                				tbl.getTableName(), tbl.getDBName(tbl.getFieldsInView().get(0))
-//                				,tbl.getDBName(tbl.getFieldsInView().get(1))
-//                				,tbl.getIndex());
+                		Table tbl = Constants.db.getTable("vehicle type");
+                		Initialize.tcp.sendDataRequest(
+                				tbl.getTableName(), tbl.getDBName(tbl.getFieldsInView().get(0))
+                				,tbl.getDBName(tbl.getFieldsInView().get(1))
+                				,tbl.getIndex());
                 		
                 		engineIntent.putExtra("Type", "VehicleTypesType");
         				startActivity(engineIntent);
@@ -93,11 +92,11 @@ public class NavigationMain extends Activity implements OnClickListener
                 				//depot
                         		Toast.makeText(NavigationMain.this, "Depot Selected", Toast.LENGTH_SHORT).show();
                         		
-//                        		Table tbl = Constants.db.getTable("depots");
-//                        		Initialize.tcp.sendDataRequest(
-//                        				tbl.getTableName(), tbl.getDBName(tbl.getFieldsInView().get(0))
-//                        				,tbl.getDBName(tbl.getFieldsInView().get(1))
-//                        				,tbl.getIndex());
+                        		Table tbl = Constants.db.getTable("depots");
+                        		Initialize.tcp.sendDataRequest(
+                        				tbl.getTableName(), tbl.getDBName(tbl.getFieldsInView().get(0))
+                        				,tbl.getDBName(tbl.getFieldsInView().get(1))
+                        				,tbl.getIndex());
                         		
                         		
                         		engineIntent.putExtra("Type", "DepotType");

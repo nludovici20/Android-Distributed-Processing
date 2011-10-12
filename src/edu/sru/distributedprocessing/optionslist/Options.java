@@ -250,9 +250,12 @@ public class Options extends ExpandableListActivity
 				if(type.equalsIgnoreCase(Constants.db.getTables()[i].getRecordType()))
 				{
 					Constants.db.getTables()[i].setStartingIndex(Integer.parseInt(index.getText().toString()));
-					String str = "\0" + Constants.db.getTables()[i].getTableName() + "\0" +	Constants.db.getTables()[i].getDBName(Constants.db.getTables()[i].getFieldsInView().get(0)) + "\0" + 	Constants.db.getTables()[i].getDBName(Constants.db.getTables()[i].getFieldsInView().get(1)) + "\0" + + Constants.db.getTables()[i].getIndex() + "\0";
-					Initialize.tcp.send(str);
-					Log.d("TCP", str);
+					Table tbl = Constants.db.getTables()[i];
+					Initialize.tcp.sendDataRequest(
+		    				tbl.getTableName(), tbl.getDBName(tbl.getFieldsInView().get(0))
+		    				,tbl.getDBName(tbl.getFieldsInView().get(1))
+		    				,tbl.getIndex());
+					//Log.d("TCP", str);
 				}
     		}catch (Exception e)
     		{

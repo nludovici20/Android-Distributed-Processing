@@ -10,11 +10,7 @@ import java.util.ArrayList;
 import edu.sru.distributedprocessing.tableobjects.Record;
 import edu.sru.distributedprocessing.tools.Constants;
 import android.util.Log;
- 
- 
- 
- 
- 
+  
 public class TCPClient extends Thread
 {
 	private final String host;
@@ -101,17 +97,22 @@ public class TCPClient extends Thread
 				//parse data and insert to rec
 				// Split data by "\0"?
 				String[] temp = data.split("\0");
-				for(int j = 0; j < temp.length; j++)
+				for(int j = 2; j < (2*Integer.parseInt(temp[1]))+2; j++)
 				{
-					Log.v("TCP", temp[j]);
-					String[] name = temp[j].split(",");
-					rec.add(new Record(name[0], name[1]));
-					for(int k = 0; k < name.length; k++)
+					try
 					{
-						Log.v("TCP", name[k]);
+						String field1, field2;
+						field1 = temp[j];
+						field2 = temp[++j];
+						rec.add(new Record((j/2) + " " + field1, field2));
+						Log.d("TCP", field1 + " " + field2);
+					}catch (Exception e)
+					{
+						
 					}
 				}
 				Constants.db.getTables()[i].addRecords(rec);
+				Log.d("TCP", ""+ Constants.db.getTables()[i].getRecords().length);
 			}
 		}
 		

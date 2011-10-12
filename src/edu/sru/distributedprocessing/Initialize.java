@@ -21,7 +21,7 @@ public class Initialize
 	
 	public Initialize(Context context)
 	{		
-		/*
+		
 		try
 		{
 			tcp = new TCPClient("10.1.42.71", 4004);
@@ -30,7 +30,7 @@ public class Initialize
 		}catch (Exception e)
 		{
 			Log.d("TCP", "ERROR CONNECTING");
-		}*/
+		}
 		
 		contactFields = new String[] { "ID", "Last Name", "First Name", "Middle Initial", "Primary Phone", "Work Phone" };
 		dbContactFields = new String[] { "idContacts", "LastName", "FirstName", "MiddleInitial", "PrimaryPhone", "WorkPhone" };
@@ -61,7 +61,7 @@ public class Initialize
 		
 				
 		//read in data from server (for now create temp data)
-		
+	
 		
 		//Temp Vehicle Records
 		vehicles = new ArrayList<Record>();

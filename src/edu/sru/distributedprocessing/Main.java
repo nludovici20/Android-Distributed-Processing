@@ -36,7 +36,9 @@ public class Main extends Activity
 			//@Override
 			public void onClick(View v) 
 			{
-				//nothing yet
+				Intent engineIntent = new Intent(Main.this, Options.class);
+				engineIntent.putExtra("Type", "VehicleType");
+				startActivity(engineIntent);
 			}
 		});
         

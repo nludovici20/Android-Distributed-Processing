@@ -40,7 +40,8 @@
 	     <ExpandableListView 
 	     		   android:id="@+id/android:list"
 	               android:layout_width="fill_parent" 
-	               android:layout_height="fill_parent"/>
+	               android:layout_height="fill_parent"
+	               android:groupIndicator="@drawable/expandable_listview_arrows"/>
 	 
 	     <TextView android:id="@+id/android:empty"
 	               android:layout_width="fill_parent" 

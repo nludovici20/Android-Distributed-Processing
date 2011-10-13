@@ -251,10 +251,10 @@ public class Options extends ExpandableListActivity
 				{
 					Constants.db.getTables()[i].setStartingIndex(Integer.parseInt(index.getText().toString()));
 					Table tbl = Constants.db.getTables()[i];
-					Initialize.tcp.sendDataRequest(
-		    				tbl.getTableName(), tbl.getDBName(tbl.getFieldsInView().get(0))
-		    				,tbl.getDBName(tbl.getFieldsInView().get(1))
-		    				,tbl.getIndex());
+//					Initialize.tcp.sendDataRequest(
+//		    				tbl.getTableName(), tbl.getDBName(tbl.getFieldsInView().get(0))
+//		    				,tbl.getDBName(tbl.getFieldsInView().get(1))
+//		    				,tbl.getIndex());
 					//Log.d("TCP", str);
 				}
     		}catch (Exception e)

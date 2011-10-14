@@ -42,10 +42,9 @@ public class Initialize
 		dbVehicleTypeFields = new String[] { "idVehicleType", "Type", "SubType", "Model", "MaxWeight", "MaxRange", "Length" };
 		vehicleFields = new String[] { "ID", "License Plate Number", "Vin Number", "Manufactured Year", "Vehicle Type", "Driver", "Depot", "Available?" };
 		dbVehicleFields = new String[] { "idVehicles", "PlateNumber", "VINNumber", "ManufacturedYear", "VehicleType", "Driver", "Depot", "Available?" };
-		
-		
+				
 		//create tables
-		contact_table = new Table("contacts", contactFields, dbContactFields, "ContactType", "Vehicles");
+		contact_table = new Table("contacts", contactFields, dbContactFields, "ContactType", "Contacts");
 		depot_table = new Table("depots", depotFields, dbDepotFields, "DepotType", "Depots");
 		driver_table = new Table("drivers", driverFields, dbDriverFields, "DriverType", "Drivers");
 		vehicle_type_table = new Table("vehicle type", vehicleTypeFields, dbVehicleTypeFields, "VehicleTypeType", "Vehicle Types");
@@ -60,55 +59,7 @@ public class Initialize
 		report_table = new Table("Report Table");*/
 		
 				
-		//read in data from server (for now create temp data)
-	
-		
-		//Temp Vehicle Records
-		vehicles = new ArrayList<Record>();
-		for (int  i = 0; i < 1000; i++)
-		{
-			vehicles.add(new Record("" + i + "", "DEC-DFE1"));
-		}
-		vehicle_table.addRecords(vehicles);
-		//Constants.vehicle_table.saveTable(context);
-		
-		
-		//Temp Driver Records
-		drivers = new ArrayList<Record>();
-		for (int  i = 0; i < 1000; i++)
-		{
-			drivers.add(new Record("" + i + "", "Niece"));
-		}
-		driver_table.addRecords(drivers);
-		//Constants.driver_table.saveTable(context);
-		
-		//Temp Contact Records
-		contacts = new ArrayList<Record>();
-		for (int  i = 0; i < 1000; i++)
-		{
-			contacts.add(new Record("" + i + "", "Adams"));
-		}
-		contact_table.addRecords(contacts);
-		//Constants.contact_table.saveTable(context);
-		
-		//Temp Depot Records
-		depots = new ArrayList<Record>();
-		for (int  i = 0; i < 1000; i++)
-		{
-			depots.add(new Record("" + i + "", "East Depot"));
-		}
-		depot_table.addRecords(depots);
-		//Constants.depot_table.saveTable(context);
-		
-		//Temp Vehicle Type Records
-		vehicle_types = new ArrayList<Record>();
-		for (int  i = 0; i < 1000; i++)
-		{
-			vehicle_types.add(new Record("" + i + "", "Flatbed"));
-		}
-		vehicle_type_table.addRecords(vehicle_types);
-		//Constants.vehicle_type_table.saveTable(context);
-		
+		//read in data from server (for now create temp data)	
 		
 		//add tables to database
 		Constants.db.addTable(vehicle_table);

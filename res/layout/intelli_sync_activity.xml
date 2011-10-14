@@ -70,19 +70,25 @@
 	        android:layout_height="match_parent">
     			<Button 
     				android:layout_height="wrap_content" 
+    				android:tag="vehicles"
+    				android:onClick="onClick"
     				android:id="@+id/vehicle_btn" 
     				android:layout_width="match_parent" 
     				android:text="Vehicles"> 
     			</Button>
 	      		<Button 
     				android:layout_height="wrap_content" 
+    				android:tag="drivers"
+    				android:onClick="onClick"
     				android:id="@+id/drivers_btn" 
     				android:layout_width="match_parent" 
     				android:text="Drivers" 
     				android:layout_below="@+id/vehicle_btn">
     			</Button>
     			<Button 
-    				android:layout_height="wrap_content" 
+    				android:layout_height="wrap_content"
+    				android:tag="shipments"
+    				android:onClick="onClick" 
     				android:id="@+id/shipments_btn" 
     				android:layout_width="match_parent" 
     				android:text="Shipments" 
@@ -90,6 +96,8 @@
     			</Button>
     			<Button 
     				android:layout_height="wrap_content" 
+    				android:tag="routing"
+    				android:onClick="onClick"
     				android:id="@+id/routing_btn" 
     				android:layout_width="match_parent" 
     				android:text="Routing" 
@@ -97,6 +105,8 @@
     			</Button>
     			<Button 
     				android:layout_height="wrap_content" 
+    				android:tag="contractors"
+    				android:onClick="onClick"
     				android:id="@+id/contractors_btn" 
     				android:layout_width="match_parent" 
     				android:text="Contractors" 
@@ -104,41 +114,53 @@
     			</Button>
     			<Button 
     				android:layout_height="wrap_content" 
+    				android:tag="depots"
     				android:id="@+id/depots_btn" 
+    				android:onClick="onClick"
     				android:layout_width="match_parent" 
     				android:text="Depots" 
     				android:layout_below="@+id/contractors_btn">
     			</Button>
     			<Button 
     				android:layout_height="wrap_content" 
+    				android:tag="warehouses"
     				android:id="@+id/warehouses_btn" 
+    				android:onClick="onClick"
     				android:layout_width="match_parent" 
     				android:text="Warehouses" 
     				android:layout_below="@+id/depots_btn">
     			</Button>
     			<Button 
     				android:layout_height="wrap_content" 
+    				android:tag="vehicle type"
     				android:id="@+id/vehicle_type_btn" 
+    				android:onClick="onClick"
     				android:layout_width="match_parent" 
     				android:text="Vehicle Type" 
     				android:layout_below="@+id/depots_btn">
     			</Button>
     			<Button 
     				android:layout_height="wrap_content" 
+    				android:tag="maintenance"
     				android:id="@+id/maintenance_btn" 
+    				android:onClick="onClick"
     				android:layout_width="match_parent" 
     				android:text="Maintenance" 
     				android:layout_below="@+id/vehicle_type_btn">
     			</Button>
     			<Button 
-    				android:layout_height="wrap_content" 
+    				android:layout_height="wrap_content"
+    				android:tag="technicians" 
+    				android:onClick="onClick"
     				android:id="@+id/technicians_btn" 
     				android:layout_width="match_parent" 
     				android:text="Technicians" 
     				android:layout_below="@+id/maintenance_btn">
     			</Button>
     			<Button 
-    				android:layout_height="wrap_content" 
+    				android:layout_height="wrap_content"
+    				android:tag="contacts"
+    				android:onClick="onClick" 
     				android:id="@+id/contacts_btn" 
     				android:layout_width="match_parent" 
     				android:text="Contacts" 
@@ -146,17 +168,12 @@
     			</Button>
     			<Button 
     				android:layout_height="wrap_content" 
+    				android:tag="reports"
+    				android:onClick="onClick"
     				android:id="@+id/reports_btn" 
     				android:layout_width="match_parent" 
     				android:text="Reports" 
     				android:layout_below="@+id/contacts_btn">
-    			</Button>
-    			<Button 
-    				android:layout_height="wrap_content" 
-    				android:id="@+id/options_btn" 
-    				android:layout_width="match_parent" 
-    				android:text="Options" 
-    				android:layout_below="@+id/reports_btn">
     			</Button>
 	        </RelativeLayout>
 	        </ScrollView>

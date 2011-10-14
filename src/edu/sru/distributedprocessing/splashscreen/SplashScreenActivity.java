@@ -19,7 +19,7 @@ public class SplashScreenActivity extends Activity {
 		final int splashDisplayTime = 3000;
 		
 		// create a thread to show splash up to splash time
-		Thread splashThread = new Thread() {
+		final Thread splashThread = new Thread() {
 		
 			int wait = 0;
 			

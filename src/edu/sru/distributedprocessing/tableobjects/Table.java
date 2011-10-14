@@ -35,6 +35,9 @@ public class Table {
 		{
 			dbFields.put(fieldNames[i], dbNames[i]);
 		}
+		
+		fieldsInView.add(fieldNames[0]);
+		fieldsInView.add(fieldNames[1]);
 	}
 	
 	public String[] getFields()
@@ -62,8 +65,6 @@ public class Table {
 		this.table_data = records;
 		this.data = records.toArray(new Record[1]);
 		this.tableSize = table_data.size();
-		fieldsInView.add(fieldNames[0]);
-		fieldsInView.add(fieldNames[1]);
 	}
 	
 	public void deleteRecords()

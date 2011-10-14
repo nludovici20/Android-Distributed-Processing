@@ -17,14 +17,14 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class IntelliSyncActivity extends Activity 
+public class IntelliSyncActivity extends Activity implements View.OnClickListener
 {
     private Button vehicle_btn, drivers_btn, shipments_btn, routing_btn, contractors_btn,
     			   depots_btn, warehouses_btn, vehicle_type_btn, maintenance_btn, technicians_btn, 
     			   contacts_btn, reports_btn;
     
     private String type;
-    
+    public static ShippingScreen ss;
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {
@@ -33,7 +33,7 @@ public class IntelliSyncActivity extends Activity
         
         type = getIntent().getExtras().getString("Type");       
 
-        ShippingScreen ss = null;
+        ss = null;
         
         for(int i = 0; i < Constants.db.getTables().length; i++)
         {
@@ -49,6 +49,20 @@ public class IntelliSyncActivity extends Activity
        
         /**				Sliding Drawer Buttons				**/
         vehicle_btn = (Button) findViewById(R.id.vehicle_btn);
+        drivers_btn = (Button) findViewById(R.id.drivers_btn);
+        shipments_btn = (Button) findViewById(R.id.shipments_btn);
+        routing_btn = (Button) findViewById(R.id.routing_btn);
+        contractors_btn = (Button) findViewById(R.id.contractors_btn);
+        depots_btn = (Button) findViewById(R.id.depots_btn);
+        warehouses_btn = (Button) findViewById(R.id.warehouses_btn);
+        vehicle_type_btn = (Button) findViewById(R.id.vehicle_type_btn);
+        maintenance_btn = (Button) findViewById(R.id.maintenance_btn);
+        technicians_btn = (Button) findViewById(R.id.technicians_btn);
+        contacts_btn = (Button) findViewById(R.id.contacts_btn);  
+        reports_btn = (Button) findViewById(R.id.reports_btn);
+        
+       
+        /*
         vehicle_btn.setOnClickListener(new OnClickListener()
         {
 			//@Override
@@ -67,7 +81,6 @@ public class IntelliSyncActivity extends Activity
 			}
 		});
         
-        drivers_btn = (Button) findViewById(R.id.drivers_btn);
         drivers_btn.setOnClickListener(new OnClickListener()
         {
 			//@Override
@@ -86,7 +99,6 @@ public class IntelliSyncActivity extends Activity
 			}
         });
         
-        shipments_btn = (Button) findViewById(R.id.shipments_btn);
         shipments_btn.setOnClickListener(new OnClickListener()
         {
 			//@Override
@@ -96,7 +108,6 @@ public class IntelliSyncActivity extends Activity
 			}
         });
         
-        routing_btn = (Button) findViewById(R.id.routing_btn);
         routing_btn.setOnClickListener(new OnClickListener()
         {
 			//@Override
@@ -106,7 +117,6 @@ public class IntelliSyncActivity extends Activity
 			}
         });
         
-        contractors_btn = (Button) findViewById(R.id.contractors_btn);
         contractors_btn.setOnClickListener(new OnClickListener()
         {
 			//@Override
@@ -116,7 +126,6 @@ public class IntelliSyncActivity extends Activity
 			}
         });
         
-        depots_btn = (Button) findViewById(R.id.depots_btn);
         depots_btn.setOnClickListener(new OnClickListener()
         {
 			//@Override
@@ -135,7 +144,6 @@ public class IntelliSyncActivity extends Activity
 			}
         });
         
-        warehouses_btn = (Button) findViewById(R.id.warehouses_btn);
         warehouses_btn.setOnClickListener(new OnClickListener()
         {
 			//@Override
@@ -145,7 +153,6 @@ public class IntelliSyncActivity extends Activity
 			}
         });
         
-        vehicle_type_btn = (Button) findViewById(R.id.vehicle_type_btn);
         vehicle_type_btn.setOnClickListener(new OnClickListener()
         {
 			//@Override
@@ -164,7 +171,6 @@ public class IntelliSyncActivity extends Activity
 			}
         });
         
-        maintenance_btn = (Button) findViewById(R.id.maintenance_btn);
         maintenance_btn.setOnClickListener(new OnClickListener()
         {
 			//@Override
@@ -174,7 +180,6 @@ public class IntelliSyncActivity extends Activity
 			}
         });
         
-        technicians_btn = (Button) findViewById(R.id.technicians_btn);
         technicians_btn.setOnClickListener(new OnClickListener()
         {
 			//@Override
@@ -184,7 +189,6 @@ public class IntelliSyncActivity extends Activity
 			}
         });
         
-        contacts_btn = (Button) findViewById(R.id.contacts_btn);
         contacts_btn.setOnClickListener(new OnClickListener()
         {
 			//@Override
@@ -203,7 +207,6 @@ public class IntelliSyncActivity extends Activity
 			}
         });
         
-        reports_btn = (Button) findViewById(R.id.reports_btn);
         reports_btn.setOnClickListener(new OnClickListener()
         {
 			//@Override
@@ -211,7 +214,37 @@ public class IntelliSyncActivity extends Activity
 			{
 				Toast.makeText(IntelliSyncActivity.this, "Reports Button Selected", Toast.LENGTH_SHORT).show();
 			}
-        });
+        });*/
+    }
+    
+    @Override
+    public void onClick(View v)
+    {
+    	Toast.makeText(IntelliSyncActivity.this, v.getTag().toString(), Toast.LENGTH_SHORT).show();
+    	
+    	for(int i = 0; i < Constants.db.getTables().length; i++)
+    	{
+    		if(v.getTag().toString().equalsIgnoreCase(Constants.db.getTables()[i].getTableName()))
+    		{
+    			try
+    			{
+	    			finish();
+	    			Intent engineIntent = new Intent(IntelliSyncActivity.this, IntelliSyncActivity.class);
+	    			Table tbl = Constants.db.getTable(v.getTag().toString());
+	    			
+	    			Initialize.tcp.sendDataRequest(tbl);
+	    			
+	    			//Log.d("TCP", str);
+	    			
+	    			engineIntent.putExtra("Type", tbl.getRecordType());
+	    			startActivity(engineIntent);
+	    			
+    			}catch (Exception e)
+    			{
+    				//error
+    			}
+    		}
+    	}
     }
     
     @Override

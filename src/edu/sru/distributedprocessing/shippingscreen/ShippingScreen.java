@@ -116,7 +116,7 @@ public class ShippingScreen
 
 	public void Update() 
 	{
-		//update the data and show on screen
+		Initialize();
 	}
 
 	public void Finalize() 

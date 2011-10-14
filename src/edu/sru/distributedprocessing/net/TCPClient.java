@@ -7,7 +7,10 @@ import java.net.InetAddress;
 import java.net.Socket; 
 import java.util.ArrayList;
 
+import edu.sru.distributedprocessing.IntelliSyncActivity;
+import edu.sru.distributedprocessing.shippingscreen.ShippingScreen;
 import edu.sru.distributedprocessing.tableobjects.Record;
+import edu.sru.distributedprocessing.tableobjects.Table;
 import edu.sru.distributedprocessing.tools.Constants;
 import android.util.Log;
   
@@ -24,6 +27,7 @@ public class TCPClient extends Thread
 	static final char CHANGE = 1;
 	static final char INSERT = 2;
 	private String lastTable;
+	private int numFields;
 	
 	public TCPClient(final String host, final int port) throws IOException
 	{
@@ -96,22 +100,28 @@ public class TCPClient extends Thread
 				Constants.db.getTables()[i].deleteRecords();
 				//parse data and insert to rec
 				// Split data by "\0"?
-				String[] temp = data.split("\0");
-				for(int j = 2; j < (2*Integer.parseInt(temp[1]))+2; j++)
+				String[] temp = data.substring(1).split("\0");
+				for(int j = 0; j < (temp.length); j++)
 				{
 					try
 					{
-						String field1, field2;
-						field1 = temp[j];
-						field2 = temp[++j];
-						rec.add(new Record((j/2) + " " + field1, field2));
-						Log.d("TCP", field1 + " " + field2);
+						String id;
+						id = temp[j];
+						String[] fields = new String[numFields];
+						for(int k = 0; k < fields.length; k++)
+						{
+							fields[k] = temp[++j];
+						}
+						
+						rec.add(new Record(id, fields));
+						//Log.d("TCP", field1 + " " + field2);
 					}catch (Exception e)
 					{
 						
 					}
 				}
 				Constants.db.getTables()[i].addRecords(rec);
+				IntelliSyncActivity.ss.Update();
 				Log.d("TCP", ""+ Constants.db.getTables()[i].getRecords().length);
 			}
 		}
@@ -126,10 +136,28 @@ public class TCPClient extends Thread
 		}
 	}
 	
-	public final void sendDataRequest(String tablename, String field1, String field2, int index)
+	/*
+	public final void sendDataRequest(String tablename, int index, String field1, String field2)
 	{
 		this.lastTable = tablename;
-		String str = "\0" + tablename + "\0" +	field1 + "\0" + field2 + "\0" + index + "\0";
+		String str = "\0" + tablename + "\0" +index + "\0" +	field1 + "\0" + field2;
+		synchronized(sendLock)
+		{
+			out.println(str);
+		}
+	}*/
+	
+	public final void sendDataRequest(Table tbl)
+	{		
+		this.lastTable = tbl.getTableName();
+		this.numFields = tbl.getFieldsInView().size();
+		String str = "\0" + lastTable + "\0" + tbl.getIndex();
+		
+		for(int i = 0; i < numFields; i++)
+		{
+			str+="\0" + tbl.getFieldsInView().get(i);
+		}
+		
 		synchronized(sendLock)
 		{
 			out.println(str);

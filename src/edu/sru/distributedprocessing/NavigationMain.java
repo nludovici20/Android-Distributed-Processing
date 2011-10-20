@@ -32,11 +32,8 @@ public class NavigationMain extends Activity implements OnClickListener
     		Toast.makeText(NavigationMain.this, "Vehicle Selected", Toast.LENGTH_SHORT).show();
     		
     		Table tbl = Constants.db.getTable("vehicles");
-    		Initialize.tcp.sendDataRequest(
-    				tbl.getTableName(), tbl.getIndex(), tbl.getDBName(tbl.getFieldsInView().get(0))
-    				,tbl.getDBName(tbl.getFieldsInView().get(1)));
     		
-    		//Initialize.tcp.sendDataRequest(tbl);
+    		Initialize.tcp.sendDataRequest(tbl);
     		    		
 			engineIntent.putExtra("Type", tbl.getRecordType());
     		startActivity(engineIntent);
@@ -47,11 +44,7 @@ public class NavigationMain extends Activity implements OnClickListener
         		Toast.makeText(NavigationMain.this, "Contact Selected", Toast.LENGTH_SHORT).show();
         			
         		Table tbl = Constants.db.getTable("contacts");
-        		
-//        		Initialize.tcp.sendDataRequest(
-//        				tbl.getTableName(), tbl.getIndex(), tbl.getDBName(tbl.getFieldsInView().get(0))
-//        				,tbl.getDBName(tbl.getFieldsInView().get(1)));
-		
+    		
         		Initialize.tcp.sendDataRequest(tbl);
         		
     			engineIntent.putExtra("Type", "ContactType");

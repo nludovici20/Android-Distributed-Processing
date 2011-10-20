@@ -1,6 +1,7 @@
 package edu.sru.distributedprocessing;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import android.content.Context;
 import android.util.Log;
@@ -24,13 +25,14 @@ public class Initialize
 		
 		try
 		{
-			tcp = new TCPClient("10.1.42.71", 4004);
+			tcp = new TCPClient("10.1.43.123", 4004);
 			tcp.start();
 			tcp.send("Hello Server, From Client");
 		}catch (Exception e)
 		{
 			Log.d("TCP", "ERROR CONNECTING");
 		}
+		
 		
 		contactFields = new String[] { "ID", "Last Name", "First Name", "Middle Initial", "Primary Phone", "Work Phone" };
 		dbContactFields = new String[] { "idContacts", "LastName", "FirstName", "MiddleInitial", "PrimaryPhone", "WorkPhone" };
@@ -74,9 +76,7 @@ public class Initialize
 		Constants.db.addTable(maintenance_table);
 		Constants.db.addTable(technician_table);
 		Constants.db.addTable(report_table);*/
-		
-		
-		
+				
 		try
 		{
 			FileManager.readTextFile(context);
@@ -85,5 +85,4 @@ public class Initialize
 			//handle exception
 		} 
 	}
-	
 }

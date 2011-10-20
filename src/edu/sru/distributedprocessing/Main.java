@@ -2,6 +2,7 @@ package edu.sru.distributedprocessing;
 
 import java.io.IOException;
 
+import edu.sru.distributedprocessing.editors.ContactEditor;
 import edu.sru.distributedprocessing.editors.VehicleEditor;
 import edu.sru.distributedprocessing.optionslist.Options;
 import android.app.Activity;
@@ -19,6 +20,8 @@ public class Main extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
       
+        Initialize init = new Initialize(getBaseContext());
+        
         Button start_btn = (Button) findViewById(R.id.start_btn);
         start_btn.setOnClickListener(new View.OnClickListener() 
         {
@@ -48,7 +51,8 @@ public class Main extends Activity
 			//@Override
 			public void onClick(View v) 
 			{
-				//nothing yet
+				Intent engineIntent = new Intent(Main.this, ContactEditor.class);
+				startActivity(engineIntent);
 			}
 		});
         

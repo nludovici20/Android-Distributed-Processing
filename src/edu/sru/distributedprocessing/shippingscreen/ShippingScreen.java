@@ -25,6 +25,7 @@ public class ShippingScreen
 	private Activity act;
 	private int vehicleIndex, tableSizeLimit;
 	private Table table;
+	private SimpleAdapter mRecords;
 	
 	//Table constructor
 	public ShippingScreen(Activity act, Table table)
@@ -100,7 +101,7 @@ public class ShippingScreen
 			 }
 		 }
 		
-		 SimpleAdapter mRecords = new SimpleAdapter(act, mylist, R.layout.list_item, 
+		 mRecords = new SimpleAdapter(act, mylist, R.layout.list_item, 
     		  new String[] {field1.getText().toString(), field2.getText().toString()}, new int[] {R.id.FIELD1, R.id.FIELD2});
 		 lv.setAdapter(mRecords);
 		 lv.setTextFilterEnabled(true);
@@ -116,7 +117,7 @@ public class ShippingScreen
 
 	public void Update() 
 	{
-		Initialize();
+		
 	}
 
 	public void Finalize() 
@@ -127,5 +128,11 @@ public class ShippingScreen
 	public Record[] getType()
 	{
 		return this.type;
+	}
+	
+	public void refreshListItems()
+	{
+		mRecords.notifyDataSetChanged();
+		Log.d("TCP", "List Refresh Notified");
 	}
 }

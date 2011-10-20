@@ -251,9 +251,9 @@ public class Options extends ExpandableListActivity
 				{
 					Constants.db.getTables()[i].setStartingIndex(Integer.parseInt(index.getText().toString()));
 					Table tbl = Constants.db.getTables()[i];
-					/*Initialize.tcp.sendDataRequest(
-    				tbl.getTableName(), tbl.getIndex(), tbl.getDBName(tbl.getFieldsInView().get(0))
-    				,tbl.getDBName(tbl.getFieldsInView().get(1)));*/
+//					Initialize.tcp.sendDataRequest(
+//    				tbl.getTableName(), tbl.getIndex(), tbl.getDBName(tbl.getFieldsInView().get(0))
+//    				,tbl.getDBName(tbl.getFieldsInView().get(1)));
 					
 					Initialize.tcp.sendDataRequest(tbl);
 					

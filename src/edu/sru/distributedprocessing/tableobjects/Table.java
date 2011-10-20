@@ -69,7 +69,13 @@ public class Table {
 	
 	public void deleteRecords()
 	{
-		this.table_data.clear();
+		try
+		{
+			this.table_data.clear();			
+		}catch (Exception e)
+		{
+			//
+		}
 	}
 	
 	public void addField(String field)

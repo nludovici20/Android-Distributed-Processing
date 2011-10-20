@@ -28,8 +28,7 @@ public class SplashScreenActivity extends Activity {
 				try {
 					super.run();
 					
-					//temp data created here
-					Initialize init = new Initialize(SplashScreenActivity.this);
+					//pull from server
 					
 					//wait certain amount of time
 					while (wait < splashDisplayTime) {
@@ -39,8 +38,7 @@ public class SplashScreenActivity extends Activity {
 				} catch (Exception e) {
 					//handle
 				} finally {
-					//after splash screen, pull up main activity
-					startActivity(new Intent(SplashScreenActivity.this, Main.class));
+					//after splash screen, return to activity
 					finish();
 				}
 			}

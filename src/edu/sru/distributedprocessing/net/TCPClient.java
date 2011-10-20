@@ -23,11 +23,14 @@ public class TCPClient extends Thread
 	private final PrintWriter out;
 	private boolean running;
 	private final Object sendLock = new Object();
-	static final char GET = 0;
-	static final char CHANGE = 1;
-	static final char INSERT = 2;
+	static final char GET_TABLE = 0;
+	static final char GET_RECORD = 1;
+	static final char CHANGE = 2;
+	static final char INSERT = 3;
+	static final char DELETE = 4;
 	private String lastTable;
 	private int numFields;
+	//private Queue<String> sendQueue = new Queue<String>();
 	
 	public TCPClient(final String host, final int port) throws IOException
 	{
@@ -43,13 +46,13 @@ public class TCPClient extends Thread
 	public final void run() 
 	{ 
 		running = true;
-		String data;
+		String data = null;
 		boolean read;
 		while (running)
 		{
 			try 
 			{
-				synchronized(sendLock)
+				//synchronized(sendLock)
 				{
 					read = in.ready();
 					if(read)
@@ -57,16 +60,19 @@ public class TCPClient extends Thread
 				}
 				if(read)
 				{
-					data = in.readLine();
 					//handle data
 					switch (data.charAt(0))
 					{
-					case GET:
-						recieveRequest(lastTable, data);
+					case GET_TABLE:
+						recieveTableRequest(lastTable, data);
+					case GET_RECORD:
+						recieveRecordRequest(data);
 					case CHANGE:
-						changeRequest(data);
+						recieveChangeRequest(data);
 					case INSERT:
-						insertRequest(data);
+						recieveInsertRequest(data);
+					case DELETE:
+						recieveDeleteRequest(data);
 					default:
 						Log.v("TCP", "Default Case");
 						
@@ -82,47 +88,55 @@ public class TCPClient extends Thread
 		}				
 	}
 	
-	private void insertRequest(String data) {
-				
-	}
-
-	private void changeRequest(String data) {
+	private void recieveDeleteRequest(String data) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void recieveRequest(String tableName, String data) {
+	private void recieveRecordRequest(String data) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void recieveInsertRequest(String data) {
+				
+	}
+
+	private void recieveChangeRequest(String data) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void recieveTableRequest(String tableName, String data) {
 		ArrayList<Record> rec = new ArrayList<Record>();
 		for(int i = 0; i < Constants.db.getTables().length; i++)
 		{
 			if(tableName.equalsIgnoreCase(Constants.db.getTables()[i].getTableName()))
 			{
 				Constants.db.getTables()[i].deleteRecords();
-				//parse data and insert to rec
-				// Split data by "\0"?
+				
 				String[] temp = data.substring(1).split("\0");
 				for(int j = 0; j < (temp.length); j++)
 				{
 					try
 					{
-						String id;
-						id = temp[j];
-						String[] fields = new String[numFields];
-						for(int k = 0; k < fields.length; k++)
+						String[] fields = new String[2];
+						for(int k = 0; k < fields.length -1; k++)
 						{
-							fields[k] = temp[++j];
+							fields[0] = temp[j];
+							fields[1] = temp[++j];
+							Log.d("TCP", fields[0].toString() + " " + fields[1].toString());
 						}
 						
-						rec.add(new Record(id, fields));
-						//Log.d("TCP", field1 + " " + field2);
+						rec.add(new Record(fields));
 					}catch (Exception e)
 					{
-						
+						Log.d("TCP", "ERROR Creating Record");
 					}
 				}
 				Constants.db.getTables()[i].addRecords(rec);
-				IntelliSyncActivity.ss.Update();
-				Log.d("TCP", ""+ Constants.db.getTables()[i].getRecords().length);
+				//IntelliSyncActivity.ss.refreshListItems(); //notify list values changed
+				//Log.d("TCP", ""+ Constants.db.getTables()[i].getRecords().length);
 			}
 		}
 		
@@ -130,37 +144,46 @@ public class TCPClient extends Thread
 
 	public final void send(final String data)
 	{
-		synchronized(sendLock)
+		//synchronized(sendLock)
 		{
 			out.println(data);
 		}
 	}
 	
-	/*
+	
 	public final void sendDataRequest(String tablename, int index, String field1, String field2)
 	{
 		this.lastTable = tablename;
-		String str = "\0" + tablename + "\0" +index + "\0" +	field1 + "\0" + field2;
-		synchronized(sendLock)
+		String str = "\0" + tablename + "\0" +index + "\0" + field1 + "\0" + field2;
+		//synchronized(sendLock)
 		{
 			out.println(str);
 		}
-	}*/
+	}
 	
 	public final void sendDataRequest(Table tbl)
 	{		
 		this.lastTable = tbl.getTableName();
-		this.numFields = tbl.getFieldsInView().size();
+		if(tbl.getFieldsInView().size() < 2)
+		{
+			this.numFields = 2;
+		}else
+		{
+			this.numFields = tbl.getFieldsInView().size();
+		}
 		String str = "\0" + lastTable + "\0" + tbl.getIndex();
-		
+
 		for(int i = 0; i < numFields; i++)
 		{
-			str+="\0" + tbl.getFieldsInView().get(i);
+			str+="\0" + tbl.getDBName(tbl.getFieldsInView().get(i));
 		}
 		
-		synchronized(sendLock)
+		Log.d("TCP", "In Send, Before SendLock");
+		//synchronized(sendLock)
 		{
+			Log.d("TCP", "SendLock");
 			out.println(str);
+			Log.d("TCP", "Sent Successful");
 		}
 	}
 	

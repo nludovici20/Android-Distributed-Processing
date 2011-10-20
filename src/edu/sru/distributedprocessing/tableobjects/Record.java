@@ -18,6 +18,11 @@ public class Record
 		this.id = id;
 		this.fields = fields;
 	}
+	
+	public Record(String[] fields)
+	{
+		this.fields = fields;
+	}
 		
 	
 	public String[] getFields()

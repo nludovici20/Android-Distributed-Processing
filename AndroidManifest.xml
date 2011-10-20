@@ -7,16 +7,17 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application android:icon="@drawable/sync" android:label="@string/app_name">
-        <activity android:name=".splashscreen.SplashScreenActivity"
+        <activity android:name="Main"
                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-	<activity android:name="Main"/>
+	<activity android:name=".splashscreen.SplashScreenActivity"/>
 	<activity android:name=".optionslist.Options"/>
 	<activity android:name=".editors.VehicleEditor" android:screenOrientation="landscape"/>
+	<activity android:name=".editors.ContactEditor" android:screenOrientation="landscape"/>
 	<activity android:name=".dialogs.CustomDialogListView"/>
 	<activity android:name="NavigationMain"/>
 	<activity android:name="IntelliSyncActivity"/>

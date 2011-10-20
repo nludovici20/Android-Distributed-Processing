@@ -82,17 +82,25 @@ public class TCPClient extends Thread
 	}
 	
 	private void recieveDeleteRequest(String data) {
-		// TODO Auto-generated method stub
+		String[] temp = data.split("\1");
+		
+		//temp[n] is tablename
+		//temp[n+1] is index of deleted record
+		
+		for(int i = 0; i < temp.length; i++)
+		{
+			Constants.db.getTable(temp[i]).deleteRecord(Integer.parseInt(temp[++i]));
+		}
 		
 	}
 	
-	public void sendDeleteRequest()
+	public final void sendDeleteRequest(String tablename, int indexOfDeletedRecord)
 	{
-		
+		String str = "\1" + tablename + "\1" + indexOfDeletedRecord;
+		out.println(str);
 	}
 
 	private void recieveRecordRequest(String data) {
-		// TODO Auto-generated method stub
 		
 	}
 	

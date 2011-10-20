@@ -69,15 +69,13 @@ public class Table {
 	
 	public void deleteRecords()
 	{
-		try
-		{
-			this.table_data.clear();			
-		}catch (Exception e)
-		{
-			//
-		}
+		this.table_data.clear();			
 	}
 	
+	public void deleteRecord(int index)
+	{
+		this.table_data.remove(index);
+	}
 	public void addField(String field)
 	{
 		if(fieldsInView.size() < 2)

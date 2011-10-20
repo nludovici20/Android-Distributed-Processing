@@ -64,10 +64,6 @@ public class NavigationMain extends Activity implements OnClickListener
             		
             		Table tbl = Constants.db.getTable("drivers");
             		
-//            		Initialize.tcp.sendDataRequest(
-//            				tbl.getTableName(), tbl.getIndex(), tbl.getDBName(tbl.getFieldsInView().get(0))
-//            				,tbl.getDBName(tbl.getFieldsInView().get(1)));
-            		
             		Initialize.tcp.sendDataRequest(tbl);
             		
     				engineIntent.putExtra("Type","DriverType");
@@ -79,11 +75,7 @@ public class NavigationMain extends Activity implements OnClickListener
                 		Toast.makeText(NavigationMain.this, "Vehicle Type Selected", Toast.LENGTH_SHORT).show();
         				
                 		Table tbl = Constants.db.getTable("vehicle type");
-                		
-//                		Initialize.tcp.sendDataRequest(
-//                				tbl.getTableName(), tbl.getIndex(), tbl.getDBName(tbl.getFieldsInView().get(0))
-//                				,tbl.getDBName(tbl.getFieldsInView().get(1)));
-                		
+                		               		
                 		Initialize.tcp.sendDataRequest(tbl);
                 		
                 		engineIntent.putExtra("Type", "VehicleTypesType");
@@ -100,11 +92,6 @@ public class NavigationMain extends Activity implements OnClickListener
                         		Toast.makeText(NavigationMain.this, "Depot Selected", Toast.LENGTH_SHORT).show();
                         		
                         		Table tbl = Constants.db.getTable("depots");
-                        		
-                        		
-//                        		Initialize.tcp.sendDataRequest(
-//                        				tbl.getTableName(), tbl.getIndex(), tbl.getDBName(tbl.getFieldsInView().get(0))
-//                        				,tbl.getDBName(tbl.getFieldsInView().get(1)));
                         		
                         		Initialize.tcp.sendDataRequest(tbl);
                         		

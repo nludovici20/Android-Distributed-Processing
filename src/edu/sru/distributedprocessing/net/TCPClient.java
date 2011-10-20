@@ -22,7 +22,7 @@ public class TCPClient extends Thread
 	private final BufferedReader in;
 	private final PrintWriter out;
 	private boolean running;
-	private final Object sendLock = new Object();
+	//private final Object sendLock = new Object();
 	static final char GET_TABLE = 0;
 	static final char GET_RECORD = 1;
 	static final char CHANGE = 2;
@@ -30,7 +30,6 @@ public class TCPClient extends Thread
 	static final char DELETE = 4;
 	private String lastTable;
 	private int numFields;
-	//private Queue<String> sendQueue = new Queue<String>();
 	
 	public TCPClient(final String host, final int port) throws IOException
 	{
@@ -39,7 +38,6 @@ public class TCPClient extends Thread
 		Log.d("TCP", "C: Connecting..."); 
 		this.socket = new Socket(serverAddr, port);
 		this.in =  new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		//this.out = new PrintWriter( new BufferedWriter( new OutputStreamWriter(socket.getOutputStream())),true);
 		out = new PrintWriter(socket.getOutputStream(),true);
 	}
 	
@@ -52,14 +50,9 @@ public class TCPClient extends Thread
 		{
 			try 
 			{
-				//synchronized(sendLock)
+				if(in.ready())
 				{
-					read = in.ready();
-					if(read)
-						data = in.readLine();
-				}
-				if(read)
-				{
+					data = in.readLine();
 					//handle data
 					switch (data.charAt(0))
 					{
@@ -92,18 +85,38 @@ public class TCPClient extends Thread
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void sendDeleteRequest()
+	{
+		
+	}
 
 	private void recieveRecordRequest(String data) {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	public void getRecordRequest()
+	{
 		
 	}
 
 	private void recieveInsertRequest(String data) {
 				
 	}
+	
+	public void sendInsertRequest()
+	{
+		
+	}
 
 	private void recieveChangeRequest(String data) {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	public void sendChangeRequest()
+	{
 		
 	}
 
@@ -135,30 +148,17 @@ public class TCPClient extends Thread
 					}
 				}
 				Constants.db.getTables()[i].addRecords(rec);
-				//IntelliSyncActivity.ss.refreshListItems(); //notify list values changed
-				//Log.d("TCP", ""+ Constants.db.getTables()[i].getRecords().length);
+				
+				try
+				{
+					IntelliSyncActivity.ss.refreshListItems(); //notify list values changed
+				}catch (Exception e)
+				{
+				
+				}
 			}
 		}
 		
-	}
-
-	public final void send(final String data)
-	{
-		//synchronized(sendLock)
-		{
-			out.println(data);
-		}
-	}
-	
-	
-	public final void sendDataRequest(String tablename, int index, String field1, String field2)
-	{
-		this.lastTable = tablename;
-		String str = "\0" + tablename + "\0" +index + "\0" + field1 + "\0" + field2;
-		//synchronized(sendLock)
-		{
-			out.println(str);
-		}
 	}
 	
 	public final void sendDataRequest(Table tbl)
@@ -177,14 +177,13 @@ public class TCPClient extends Thread
 		{
 			str+="\0" + tbl.getDBName(tbl.getFieldsInView().get(i));
 		}
-		
-		Log.d("TCP", "In Send, Before SendLock");
-		//synchronized(sendLock)
-		{
-			Log.d("TCP", "SendLock");
-			out.println(str);
-			Log.d("TCP", "Sent Successful");
-		}
+
+		out.println(str);
+	}
+
+	public final void send(final String data)
+	{
+		out.println(data);
 	}
 	
 	public final void finish() throws InterruptedException, IOException

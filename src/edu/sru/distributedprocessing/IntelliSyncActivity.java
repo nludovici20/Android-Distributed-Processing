@@ -79,11 +79,6 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
 	    			Table tbl = Constants.db.getTable(v.getTag().toString());
 	    			
 	    			Initialize.tcp.sendDataRequest(tbl);
-//	    			Initialize.tcp.sendDataRequest(
-//            				tbl.getTableName(), tbl.getIndex(), tbl.getDBName(tbl.getFieldsInView().get(0))
-//            				,tbl.getDBName(tbl.getFieldsInView().get(1)));
-	    			
-	    			//Log.d("TCP", str);
 	    			
 	    			engineIntent.putExtra("Type", tbl.getRecordType());
 	    			startActivity(engineIntent);

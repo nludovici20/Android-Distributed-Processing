@@ -18,10 +18,12 @@ public class Table {
 	private String[] dbNames, fieldNames;
 	private Hashtable<String, String> dbFields;
 	String recordType, groupName;
+	private int tableID;
 	
-	public Table(String tableName, String[] fieldNames, String[] dbNames, String recordType, String groupName)
+	public Table(String tableName, int tableID, String[] fieldNames, String[] dbNames, String recordType, String groupName)
 	{
 		this.table_name = tableName;
+		this.tableID = tableID;
 		this.startingIndex = 0;
 		this.tableSize = 0;
 		fieldsInView = new ArrayList<String>();
@@ -65,6 +67,13 @@ public class Table {
 		this.table_data = records;
 		this.data = records.toArray(new Record[1]);
 		this.tableSize = table_data.size();
+	}
+	
+	public void addRecord(Record rec)
+	{
+		this.table_data.add(rec);
+		this.data = this.table_data.toArray(new Record[1]);
+		this.tableSize = this.table_data.size();
 	}
 	
 	public void deleteRecords()
@@ -117,5 +126,10 @@ public class Table {
 	public int tableSize()
 	{
 		return this.tableSize;
+	}
+	
+	public int getTableID()
+	{
+		return this.tableID;
 	}
 }

@@ -9,22 +9,25 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 
 public class GridAdapter extends BaseAdapter {
-    private Context mContext;
-    private OnClickListener mListener;
+    private Context mContext; //current context
+    private OnClickListener mListener; //grid object listener
 
     public GridAdapter(Context c, OnClickListener o) {
-        mContext = c;
-        mListener = o;
+        mContext = c; //set context
+        mListener = o; //set OnClickListener
     }
 
+    //get number of objects in the gridview
     public int getCount() {
         return mThumbIds.length;
     }
 
+    //get grid object at position 
     public Object getItem(int position) {
         return null;
     }
 
+    //get the grid objects ID at position
     public long getItemId(int position) {
         return 0;
     }
@@ -32,11 +35,14 @@ public class GridAdapter extends BaseAdapter {
     // create a new ImageButton for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageButton buttonView;
-        if (convertView == null) {  // if it's not recycled, initialize some attributes
+        if (convertView == null) 
+        {
+        	//initialize a new imagebutton object
             buttonView = new ImageButton(mContext);
             buttonView.setLayoutParams(new GridView.LayoutParams(150, 150));
             buttonView.setBackgroundResource(R.layout.button_component1);
-        } else {
+        } else 
+        {
             buttonView = (ImageButton) convertView;
         }
         buttonView.setImageResource(mThumbIds[position]);

@@ -13,8 +13,7 @@ import edu.sru.distributedprocessing.tools.FileManager;
 
 public class Initialize 
 {
-	//some generic data
-	private ArrayList<Record> vehicles, contacts, depots, drivers, vehicle_types;
+	//declaration of table(s), field(s), and TCP Client
 	private Table vehicle_table, driver_table, shipment_table, routing_table, contractor_table, depot_table, warehouse_table,
 				  vehicle_type_table, maintenance_table, technician_table, contact_table, report_table;
 	public static TCPClient tcp;
@@ -23,17 +22,18 @@ public class Initialize
 	public Initialize(Context context)
 	{		
 		
+		//initialize a new Client and connect with server
 		try
 		{
-			tcp = new TCPClient("10.1.43.123", 4004);
-			tcp.start();
-			tcp.send("Hello Server, From Client");
+			tcp = new TCPClient("10.1.43.123", 4004); //connect to server
+			tcp.start(); //start the thread
+			tcp.send("Hello Server, From Client"); //send initial message to server
 		}catch (Exception e)
 		{
 			Log.d("TCP", "ERROR CONNECTING");
 		}
 		
-		
+		//different fields available for tables
 		contactFields = new String[] { "ID", "Last Name", "First Name", "Middle Initial", "Primary Phone", "Work Phone" };
 		dbContactFields = new String[] { "idContacts", "LastName", "FirstName", "MiddleInitial", "PrimaryPhone", "WorkPhone" };
 		depotFields = new String[] { "ID", "Depot Name", "Depot Address", "City", "State", "Zip Code", "Latitude", "Longitude" };
@@ -45,12 +45,12 @@ public class Initialize
 		vehicleFields = new String[] { "ID", "License Plate Number", "Vin Number", "Manufactured Year", "Vehicle Type", "Driver", "Depot", "Available?" };
 		dbVehicleFields = new String[] { "idVehicles", "PlateNumber", "VINNumber", "ManufacturedYear", "VehicleType", "Driver", "Depot", "Available?" };
 				
-		//create tables
-		contact_table = new Table("contacts", contactFields, dbContactFields, "ContactType", "Contacts");
-		depot_table = new Table("depots", depotFields, dbDepotFields, "DepotType", "Depots");
-		driver_table = new Table("drivers", driverFields, dbDriverFields, "DriverType", "Drivers");
-		vehicle_type_table = new Table("vehicle type", vehicleTypeFields, dbVehicleTypeFields, "VehicleTypeType", "Vehicle Types");
-		vehicle_table = new Table("vehicles", vehicleFields, dbVehicleFields, "VehicleType", "Vehicles");
+		//initialize tables
+		contact_table = new Table("contacts", 1 , contactFields, dbContactFields, "ContactType", "Contacts");
+		depot_table = new Table("depots", 2, depotFields, dbDepotFields, "DepotType", "Depots");
+		driver_table = new Table("drivers", 3, driverFields, dbDriverFields, "DriverType", "Drivers");
+		vehicle_type_table = new Table("vehicle type", 4,  vehicleTypeFields, dbVehicleTypeFields, "VehicleTypeType", "Vehicle Types");
+		vehicle_table = new Table("vehicles", 5,  vehicleFields, dbVehicleFields, "VehicleType", "Vehicles");
 	
 		/*shipment_table = new Table("Shipment Table");
 		routing_table = new Table("Routing Table");
@@ -79,10 +79,11 @@ public class Initialize
 				
 		try
 		{
+			//read starting info from text file
 			FileManager.readTextFile(context);
 		}catch(Exception e)
 		{
-			//handle exception
+			Log.v("ADP", "Initialize.class - Error reading file");
 		} 
 	}
 }

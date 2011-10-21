@@ -1,6 +1,5 @@
 package edu.sru.distributedprocessing;
 
-import edu.sru.distributedprocessing.editors.VehicleEditor;
 import edu.sru.distributedprocessing.optionslist.Options;
 import edu.sru.distributedprocessing.shippingscreen.ShippingScreen;
 import edu.sru.distributedprocessing.tableobjects.Table;
@@ -13,28 +12,28 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.Toast;
 
 public class IntelliSyncActivity extends Activity implements View.OnClickListener
-{
-    private Button vehicle_btn, drivers_btn, shipments_btn, routing_btn, contractors_btn,
-    			   depots_btn, warehouses_btn, vehicle_type_btn, maintenance_btn, technicians_btn, 
-    			   contacts_btn, reports_btn;
+{    
+    private String type; //navigation type
+    public static ShippingScreen ss; //shipping screen list
     
-    private String type;
-    public static ShippingScreen ss;
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.intelli_sync_activity);  
         
+        //passed in navigation type
         type = getIntent().getExtras().getString("Type");       
-
-        ss = null;
         
+        ss = null; //initialize shipping screen
+        
+        /*
+         * loop through tables looking for corresponding type
+         * initialize shipping screen with correct table
+         */
         for(int i = 0; i < Constants.db.getTables().length; i++)
         {
         	 if(type.equalsIgnoreCase(Constants.db.getTables()[i].getRecordType()))
@@ -43,49 +42,44 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
              }
         }
         
-        ss.Initialize();
-        
-        
-       
-        /**				Sliding Drawer Buttons				**/
-        vehicle_btn = (Button) findViewById(R.id.vehicle_btn);
-        drivers_btn = (Button) findViewById(R.id.drivers_btn);
-        shipments_btn = (Button) findViewById(R.id.shipments_btn);
-        routing_btn = (Button) findViewById(R.id.routing_btn);
-        contractors_btn = (Button) findViewById(R.id.contractors_btn);
-        depots_btn = (Button) findViewById(R.id.depots_btn);
-        warehouses_btn = (Button) findViewById(R.id.warehouses_btn);
-        vehicle_type_btn = (Button) findViewById(R.id.vehicle_type_btn);
-        maintenance_btn = (Button) findViewById(R.id.maintenance_btn);
-        technicians_btn = (Button) findViewById(R.id.technicians_btn);
-        contacts_btn = (Button) findViewById(R.id.contacts_btn);  
-        reports_btn = (Button) findViewById(R.id.reports_btn);
-        
+        ss.Initialize(); //initialize some stuff
+                
     }
     
+    
+    /*
+     * Method that handles different views onclick methods if set in xml layout
+     * Used to find which button was clicked and handle accordingly
+     */
     @Override
     public void onClick(View v)
     {
+    	//alert user which table button was selected
     	Toast.makeText(IntelliSyncActivity.this, v.getTag().toString(), Toast.LENGTH_SHORT).show();
     	
+    	//loop through tables
     	for(int i = 0; i < Constants.db.getTables().length; i++)
     	{
+    		//find which table was selected
     		if(v.getTag().toString().equalsIgnoreCase(Constants.db.getTables()[i].getTableName()))
     		{
     			try
     			{
-	    			finish();
-	    			Intent engineIntent = new Intent(IntelliSyncActivity.this, IntelliSyncActivity.class);
-	    			Table tbl = Constants.db.getTable(v.getTag().toString());
+	    			finish(); //end current activity
 	    			
+	    			//start a new activity
+	    			Intent engineIntent = new Intent(IntelliSyncActivity.this, IntelliSyncActivity.class);
+	    			
+	    			//pull in data from server corresponding with table
+	    			Table tbl = Constants.db.getTable(v.getTag().toString());
 	    			Initialize.tcp.sendDataRequest(tbl);
 	    			
-	    			engineIntent.putExtra("Type", tbl.getRecordType());
+	    			engineIntent.putExtra("Type", tbl.getRecordType()); //add navigation type
 	    			startActivity(engineIntent);
 	    			
     			}catch (Exception e)
     			{
-    				//error
+    				Log.v("ADP", "IntellysincActivity.class - TCP Request");
     			}
     		}
     	}

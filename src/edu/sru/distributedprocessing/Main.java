@@ -1,13 +1,11 @@
 package edu.sru.distributedprocessing;
 
-import java.io.IOException;
-
 import edu.sru.distributedprocessing.editors.ContactEditor;
-import edu.sru.distributedprocessing.editors.VehicleEditor;
 import edu.sru.distributedprocessing.optionslist.Options;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -20,7 +18,7 @@ public class Main extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
       
-        Initialize init = new Initialize(getBaseContext());
+        Initialize init = new Initialize(getBaseContext()); 
         
         Button start_btn = (Button) findViewById(R.id.start_btn);
         start_btn.setOnClickListener(new View.OnClickListener() 
@@ -65,9 +63,9 @@ public class Main extends Activity
 				try {
 					Initialize.tcp.finish();
 				} catch (Exception e) {
-					//handle exception
+					Log.v("ADP", "Main.class - Error finishing tcp thread");
 				}
-				finish();
+				finish(); //finish current activity
 			}
 		});        
         

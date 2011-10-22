@@ -47,19 +47,16 @@ public class CustomDialogListView extends Dialog
         	public void onItemClick(AdapterView<?> a, View v, int position, long id) 
         	{
         		String clicked = ((TextView) v).getText().toString();
-        		Log.v("Distributed-Process", clicked);
+        		Log.v("ADP", "CustomDialogListView.class - " + clicked);
     			if(clicked.equalsIgnoreCase("Edit Group"))
     			{
     				Intent engineIntent = new Intent(activity, VehicleEditor.class);
     				
-    			/*	//send the vehicle item to the editor
-    				for(int i = 0; i < type.getFields().length; i++)
-    				{
-    					engineIntent.putExtra(type.getFields()[i].toString(), type.getField(type.getFields()[i].toString()).getValue());        					
-    				}
+    				//pull in entire record from db
+    				
     				engineIntent.putExtra("Fields", type.getFields());
     				activity.startActivity(engineIntent);
-    			 */}
+    			 }
     			else 
     				if(clicked.equalsIgnoreCase("Delete Group"))
     				{

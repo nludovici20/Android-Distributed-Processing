@@ -47,9 +47,13 @@ public class Options extends ExpandableListActivity
 	    setContentView(R.layout.options_main);
 	    
 	    
-	    type = getIntent().getExtras().getString("Type");
-	    index = (EditText) findViewById(R.id.starting_index);
+	    type = getIntent().getExtras().getString("Type"); //type of records
+	    index = (EditText) findViewById(R.id.starting_index); //starting index of list
 	    
+	    /*
+	     * loop through tables
+	     * if passed in type = tables records type, set index from table
+	     */
 		for(int i = 0; i < Constants.db.getTables().length; i++)
 		{
 			try
@@ -60,11 +64,12 @@ public class Options extends ExpandableListActivity
 				}
 			}catch (Exception e)
 			{
-				//handle
+				Log.v("ADP", "Options.class - Error setting index");
 			}
-			Log.v("Distributed-Processing", "" + Constants.db.getTables()[i].getIndex());
+			Log.v("ADP", "" + "Options.class - " + Constants.db.getTables()[i].getIndex());
 		}
 			    
+		//add the group names (navigation panel elements)
 	    groupNames = new ArrayList<String>();
 	    	groupNames.add( "Vehicles" );    groupNames.add( "Drivers" );
 		    groupNames.add( "Shipments" );   groupNames.add( "Routing" );
@@ -72,7 +77,8 @@ public class Options extends ExpandableListActivity
 		    groupNames.add( "Warehouses" );  groupNames.add( "Vehicle Type" );
 		    groupNames.add( "Maintenance" ); groupNames.add( "Technicians" );
 		    groupNames.add( "Contacts" );	 groupNames.add( "Reports" );
-		    
+		   
+		 //child options in the groupNames (field elements)
 	    field_options = new ArrayList<ArrayList<FieldOption>>(); 
 	     
 	     fields = new ArrayList<FieldOption>();
@@ -168,7 +174,7 @@ public class Options extends ExpandableListActivity
 				//@Override
 				public void onClick(View v) 
 				{
-					//clear all (vehicles for now)
+					//clear all fields in view
 					for(int i = 0; i < Constants.db.getTables().length; i++)
 					{
 						Constants.db.getTables()[i].getFieldsInView().clear();
@@ -186,50 +192,58 @@ public class Options extends ExpandableListActivity
     {
 		CheckBox cb = (CheckBox) v.findViewById(R.id.check_box);
 		final FieldOption f = (FieldOption)expListAdapter.getChild(groupPosition, fieldPosition);
+		
+			//check if childs check box is selected or not
 			if(cb.isChecked())
 			{
-				cb.toggle();
-				f.state = !cb.isChecked();
+				cb.toggle(); //if already checked, and clicked toggle state
+				f.state = !cb.isChecked(); //set new state
 				
+				//loop through tables
 				for(int i = 0; i < Constants.db.getTables().length; i++)
 				{
 					try
 					{
+						//if groupName is same as tables groupName
 						if(groupNames.get(groupPosition).toString().equalsIgnoreCase(Constants.db.getTables()[i].getGroupName()))
 						{
-								Constants.db.getTables()[i].getFieldsInView().remove(f.getField());
+								Constants.db.getTables()[i].getFieldsInView().remove(f.getField()); //remove the field unchecked from fieldsInView
 						}
 					}catch(Exception e)
 					 {
-						//handle exception
+						Log.v("ADP", "Options.class - Error removing child (field) from fieldsInView");
 					 }	
 				}	
 				Log.v("Distributed-Processing", groupNames.get(groupPosition).toString() + "-" + f.getField() + ": Unchecked");
 			}else{
-				cb.toggle();
-				f.state = cb.isChecked();
+				cb.toggle(); //if not checked, toggle state
+				f.state = cb.isChecked(); //set new state
 				
+				//loop through tables
 				for(int i = 0; i < Constants.db.getTables().length; i++)
 				{
 					try
 					{
+						//if groupName selected is same as tables groupName
 						if(groupNames.get(groupPosition).toString().equalsIgnoreCase(Constants.db.getTables()[i].getGroupName()))
 						{
+							//if able to add a new fieldInView
 							if (Constants.db.getTables()[i].getFieldsInView().size() < 2)
 							{
-								Constants.db.getTables()[i].addField(f.getField());
+								Constants.db.getTables()[i].addField(f.getField()); //add new field
 							}else
 							{
+								//alert user that fieldsInView are at max capacity
 								Toast.makeText(this, "Two fields already selected, clear fields to add more", Toast.LENGTH_SHORT).show();
-								cb.toggle();
+								cb.toggle(); //toggle child's checkbox
 							}
 						}
 					}catch(Exception e)
 					{
-						//handle
+						Log.v("ADP", "Options.class - Error adding new fieldInview");
 					}
 				}
-				Log.v("Distributed-Processing", groupNames.get(groupPosition).toString() + "-" + f.getField() + ": Checked");
+				Log.v("ADP", "Options.class - " + groupNames.get(groupPosition).toString() + "-" + f.getField() + ": Checked");
 			}		
     	return false;
     }
@@ -237,34 +251,42 @@ public class Options extends ExpandableListActivity
     public void  onGroupExpand  (int groupPosition) 
     {
     	//which group was expanded?
-    	Log.v("Distributed-Processing", groupNames.get(groupPosition).toString());
+    	Log.v("ADP", "Options.class - " + groupNames.get(groupPosition).toString());
     }
     
+    /*
+     * (non-Javadoc)
+     * @see android.app.Activity#onBackPressed()
+     */
     @Override
     public void onBackPressed()
     {
+    	//loop through tables
     	for(int i = 0; i < Constants.db.getTables().length; i++)
 		{
     		try
     		{
+    			//if type of table passed in = tables recordType
 				if(type.equalsIgnoreCase(Constants.db.getTables()[i].getRecordType()))
 				{
+					//set appropriate starting index
 					Constants.db.getTables()[i].setStartingIndex(Integer.parseInt(index.getText().toString()));
-					Table tbl = Constants.db.getTables()[i];
-					
-					Initialize.tcp.sendDataRequest(tbl);
+					Table tbl = Constants.db.getTables()[i]; //create temp table
+				
+					Initialize.tcp.sendDataRequest(tbl); //request table from database
 				}
     		}catch (Exception e)
     		{
-    			//handle
+    			Log.v("ADP", "Options.class - Error sending request to server");
     		}
 		}
-    	Constants.db.saveDB(this);
-    	finish();
-    	Intent engineIntent = new Intent(Options.this, IntelliSyncActivity.class);
-    	Log.v("Distributed-Processing", type);
-    	engineIntent.putExtra("Type", type);
-    	startActivity(engineIntent);
+ 
+    	Constants.db.saveDB(this); //save db attributes to file
+    	finish(); //finish activity
+    	Intent engineIntent = new Intent(Options.this, IntelliSyncActivity.class); //create a new intent
+    	Log.v("ADP", "Options.class - " + type);
+    	engineIntent.putExtra("Type", type); //send in the type
+    	startActivity(engineIntent); //start the activity
     	
     }
 }

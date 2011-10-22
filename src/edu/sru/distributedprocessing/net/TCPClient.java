@@ -35,7 +35,7 @@ public class TCPClient extends Thread
 	{
 		this.host = host;
 		this.port = port;InetAddress serverAddr = InetAddress.getByName(host); 
-		Log.d("TCP", "C: Connecting..."); 
+		Log.d("ADP", "TCPClient.class - C: Connecting..."); 
 		this.socket = new Socket(serverAddr, port);
 		this.in =  new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		out = new PrintWriter(socket.getOutputStream(),true);
@@ -179,7 +179,7 @@ public class TCPClient extends Thread
 			{
 				Constants.db.getTables()[i].deleteRecords(); //clear out any old records
 				
-				//split data recieved by appropriate char
+				//split data recieved by appropriate char indicator
 				String[] temp = data.substring(1).split("\0");
 				for(int j = 0; j < (temp.length); j++)
 				{

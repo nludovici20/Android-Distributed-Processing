@@ -109,8 +109,8 @@ public class ShippingScreen
 		 {
     		public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) 
     		{
-    			//CustomDialogListView cldv = new CustomDialogListView(act, R.style.CustomDialogTheme, type[arg2]);
-    			//cldv.show();
+    			CustomDialogListView cldv = new CustomDialogListView(act, R.style.CustomDialogTheme, table);
+    			cldv.show();
     		}
        });
 	}

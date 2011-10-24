@@ -46,11 +46,11 @@ public class Initialize
 		dbVehicleFields = new String[] { "idVehicles", "PlateNumber", "VINNumber", "ManufacturedYear", "VehicleType", "Driver", "Depot", "Available?" };
 				
 		//initialize tables
-		contact_table = new Table("contacts", 1 , contactFields, dbContactFields, "ContactType", "Contacts");
-		depot_table = new Table("depots", 2, depotFields, dbDepotFields, "DepotType", "Depots");
-		driver_table = new Table("drivers", 3, driverFields, dbDriverFields, "DriverType", "Drivers");
-		vehicle_type_table = new Table("vehicle type", 4,  vehicleTypeFields, dbVehicleTypeFields, "VehicleTypeType", "Vehicle Types");
-		vehicle_table = new Table("vehicles", 5,  vehicleFields, dbVehicleFields, "VehicleType", "Vehicles");
+		contact_table = new Table("contacts", contactFields, dbContactFields, "ContactType", "Contacts");
+		depot_table = new Table("depots", depotFields, dbDepotFields, "DepotType", "Depots");
+		driver_table = new Table("drivers",driverFields, dbDriverFields, "DriverType", "Drivers");
+		vehicle_type_table = new Table("vehicle type", vehicleTypeFields, dbVehicleTypeFields, "VehicleTypeType", "Vehicle Types");
+		vehicle_table = new Table("vehicles", vehicleFields, dbVehicleFields, "VehicleType", "Vehicles");
 	
 		/*shipment_table = new Table("Shipment Table");
 		routing_table = new Table("Routing Table");

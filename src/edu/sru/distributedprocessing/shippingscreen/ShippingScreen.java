@@ -109,7 +109,8 @@ public class ShippingScreen
 		 {
     		public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) 
     		{
-    			CustomDialogListView cldv = new CustomDialogListView(act, R.style.CustomDialogTheme, table);
+    			CustomDialogListView cldv = new CustomDialogListView(act, R.style.CustomDialogTheme, table, arg2);
+    			Log.v("ADP", "ShippingScreen.class - tablename: " + table.getTableName() + " Record ID: " + arg2);
     			cldv.show();
     		}
        });

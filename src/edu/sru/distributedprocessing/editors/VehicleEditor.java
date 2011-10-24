@@ -1,6 +1,7 @@
 package edu.sru.distributedprocessing.editors;
 
 import edu.sru.distributedprocessing.R;
+import edu.sru.distributedprocessing.tools.Constants;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.CheckBox;
@@ -36,6 +37,7 @@ public class VehicleEditor extends Activity {
          *  Read from record and insert into corresponding editor items
          * 
          */
+       
         
         /*
          * For Driver, Vehicle Type, and Depot Pull in entire column from database

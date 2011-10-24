@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket; 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import edu.sru.distributedprocessing.IntelliSyncActivity;
 import edu.sru.distributedprocessing.shippingscreen.ShippingScreen;
@@ -62,7 +63,7 @@ public class TCPClient extends Thread
 					case GET_TABLE:
 						recieveTableRequest(lastTable, data);
 					case GET_RECORD:
-						recieveRecordRequest(data);
+						recieveRecordRequest(lastTable, data);
 					case CHANGE:
 						recieveChangeRequest(data);
 					case INSERT:
@@ -110,7 +111,15 @@ public class TCPClient extends Thread
 		out.println(str); //send str to server
 	}
 
-	private void recieveRecordRequest(String data) {
+	private void recieveRecordRequest(String tableName, String data) {
+		Constants.record.clear();
+		String[] temp = data.substring(1).split("\1");
+		int length = Constants.db.getTable(tableName).getFields().length;
+		for(int i = 0; i < length; i++)
+		{
+			Constants.record.put(Constants.db.getTable(tableName).getFields()[i], temp[i]);
+			Log.v("ADP", "TCPClient.class - Field: " + Constants.db.getTable(tableName).getFields()[i] + " Value: " + temp[i]);
+		}
 		
 	}
 	

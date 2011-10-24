@@ -1,8 +1,14 @@
 package edu.sru.distributedprocessing.dialogs;
 
+import edu.sru.distributedprocessing.Initialize;
 import edu.sru.distributedprocessing.R;
+import edu.sru.distributedprocessing.editors.ContactEditor;
+import edu.sru.distributedprocessing.editors.DepotEditor;
+import edu.sru.distributedprocessing.editors.DriverEditor;
 import edu.sru.distributedprocessing.editors.VehicleEditor;
+import edu.sru.distributedprocessing.editors.VehicleTypeEditor;
 import edu.sru.distributedprocessing.tableobjects.Table;
+import edu.sru.distributedprocessing.tools.Constants;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -19,12 +25,14 @@ public class CustomDialogListView extends Dialog
 {
     Activity activity;	//current activity
     Table type;
+    int index;
     
-    public CustomDialogListView(Activity act, int theme, Table type) 
+    public CustomDialogListView(Activity act, int theme, Table type, int index) 
     {
         super(act, theme);
         this.activity = act;
         this.type = type;
+        this.index = index;
     }
     
     @Override
@@ -36,7 +44,7 @@ public class CustomDialogListView extends Dialog
         final ListView lst=(ListView)findViewById(R.id.myList);
         
         //List of options
-        String[] list = {"Edit Group", "Delete Group"};
+        String[] list = {"Edit Record", "Delete Record"};
         
         lst.setAdapter(new ArrayAdapter<String>(activity,R.layout.custom_popup_row, list));      
         
@@ -48,17 +56,41 @@ public class CustomDialogListView extends Dialog
         	{
         		String clicked = ((TextView) v).getText().toString();
         		Log.v("ADP", "CustomDialogListView.class - " + clicked);
-    			if(clicked.equalsIgnoreCase("Edit Group"))
+        		Intent engineIntent = null;
+    			if(clicked.equalsIgnoreCase("Edit Record"))
     			{
-    				Intent engineIntent = new Intent(activity, VehicleEditor.class);
+    				for(int i = 0; i < Constants.db.getTables().length; i++)
+    				{
+    					if (type.getTableName().equalsIgnoreCase("contacts"))
+						{
+    						engineIntent = new Intent(activity, ContactEditor.class);
+						}else
+							if (type.getTableName().equalsIgnoreCase("depots"))
+							{
+								engineIntent = new Intent(activity, DepotEditor.class);
+							}else
+								if (type.getTableName().equalsIgnoreCase("drivers"))
+								{
+									engineIntent = new Intent(activity, DriverEditor.class);
+								}else
+									if (type.getTableName().equalsIgnoreCase("vehicle type"))
+									{
+										engineIntent = new Intent(activity, VehicleTypeEditor.class);
+									}else
+										if (type.getTableName().equalsIgnoreCase("vehicles"))
+										{
+											engineIntent = new Intent(activity, VehicleEditor.class);
+										}
+    				}
     				
     				//pull in entire record from db
+    				Initialize.tcp.getRecordRequest(type.getTableName(), index);
     				
     				engineIntent.putExtra("Fields", type.getFields());
     				activity.startActivity(engineIntent);
     			 }
     			else 
-    				if(clicked.equalsIgnoreCase("Delete Group"))
+    				if(clicked.equalsIgnoreCase("Delete Record"))
     				{
     					
     				}

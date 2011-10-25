@@ -33,7 +33,7 @@ public class NavigationMain extends Activity implements OnClickListener
     		
     		Table tbl = Constants.db.getTable("vehicles");
     		
-    		Initialize.tcp.sendDataRequest(tbl);
+    		Initialize.tcp.sendTableRequest(tbl);
     		    		
 			engineIntent.putExtra("Type", tbl.getRecordType());
     		startActivity(engineIntent);
@@ -45,7 +45,9 @@ public class NavigationMain extends Activity implements OnClickListener
         			
         		Table tbl = Constants.db.getTable("contacts");
     		
-        		Initialize.tcp.sendDataRequest(tbl);
+        		Initialize.tcp.sendTableRequest(tbl);
+        		Initialize.tcp.sendChangeRequest(tbl.getTableName(),  new String[] { "one", "two", "three", "four", "five"});
+        		Initialize.tcp.sendInsertRequest(tbl.getTableName(), (int)Math.random()*10, new String[] { "one", "two", "three", "four", "five"});
         		
     			engineIntent.putExtra("Type", "ContactType");
     			startActivity(engineIntent);
@@ -57,7 +59,7 @@ public class NavigationMain extends Activity implements OnClickListener
             		
             		Table tbl = Constants.db.getTable("drivers");
             		
-            		Initialize.tcp.sendDataRequest(tbl);
+            		Initialize.tcp.sendTableRequest(tbl);
             		
     				engineIntent.putExtra("Type","DriverType");
     				startActivity(engineIntent);
@@ -69,7 +71,7 @@ public class NavigationMain extends Activity implements OnClickListener
         				
                 		Table tbl = Constants.db.getTable("vehicle type");
                 		               		
-                		Initialize.tcp.sendDataRequest(tbl);
+                		Initialize.tcp.sendTableRequest(tbl);
                 		
                 		engineIntent.putExtra("Type", "VehicleTypesType");
         				startActivity(engineIntent);
@@ -86,7 +88,7 @@ public class NavigationMain extends Activity implements OnClickListener
                         		
                         		Table tbl = Constants.db.getTable("depots");
                         		
-                        		Initialize.tcp.sendDataRequest(tbl);
+                        		Initialize.tcp.sendTableRequest(tbl);
                         		
                         		engineIntent.putExtra("Type", "DepotType");
                 				startActivity(engineIntent);  

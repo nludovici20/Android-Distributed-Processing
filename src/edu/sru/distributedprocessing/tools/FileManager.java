@@ -48,11 +48,11 @@ public class FileManager {
 			}
 			// close the file again
 			fis.close();
-			Log.v("Distributed-Processing", "Successfully read from file");
+			Log.v("ADP", "FileManager.class - Successfully read from file");
 		}
 		catch (Exception e)
 		{
-			Log.v("Distributed-Processing", "File not read");
+			Log.v("ADP", "FileManager.class - File not read");
 			
 		}
 		
@@ -76,20 +76,20 @@ public class FileManager {
 					{
 						out.write(tables[i].getTableName() + "  " + tables[i].getIndex() + "  " + tables[i].getFields()[0] + "  " + tables[i].getFields()[1]);
 						out.write("\r\n");
-						Log.v("Distributed-Processing", "Default write");
+						Log.v("ADP", "FileManager.class - Default write");
 					}catch(Exception ex)
 					{
-						Log.v("Distributed-Processing", "Error write");
+						Log.v("ADP", "FileManager.class - Error write");
 					}
 				}
 			}
 			
 			out.close();
-			Log.v("Distributed-Processing", "File Created Successfully");
+			Log.v("ADP", "FileManager.class - File Created Successfully");
 		}
 		catch(Exception e)
 		{
-			Log.v("Distributed-Processing", "Error creating file");
+			Log.v("ADP", "FileManager.class - Error creating file");
 		}
 	}
 }

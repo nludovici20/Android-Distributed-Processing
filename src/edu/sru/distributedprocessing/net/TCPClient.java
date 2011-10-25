@@ -62,14 +62,19 @@ public class TCPClient extends Thread
 					{
 					case GET_TABLE:
 						recieveTableRequest(lastTable, data);
+						break;
 					case GET_RECORD:
 						recieveRecordRequest(lastTable, data);
+						break;
 					case CHANGE:
 						recieveChangeRequest(data);
+						break;
 					case INSERT:
 						recieveInsertRequest(data);
+						break;
 					case DELETE:
 						recieveDeleteRequest(data);
+						break;
 					default:
 						Log.v("ADP", "TCPClient.class - Default Case");
 						
@@ -107,20 +112,23 @@ public class TCPClient extends Thread
 	 */
 	public final void sendDeleteRequest(String tablename, int indexOfDeletedRecord)
 	{
+		Log.v("ADP", "/******** Send Delete Request ********\"");
 		String str = "\4" + tablename + "\4" + indexOfDeletedRecord; //construct the string
 		out.println(str); //send str to server
+		Log.v("ADP", "/******** END Send Delete Request ********\"");
 	}
 
 	private void recieveRecordRequest(String tableName, String data) {
+		Log.v("ADP", "/******** Recieve Record Request ********\"");
 		Constants.record.clear();
 		String[] temp = data.substring(1).split("\1");
 		int length = Constants.db.getTable(tableName).getFields().length;
-		for(int i = 0; i < length; i++)
+		for(int i = 0; i < length-1; i++)
 		{
 			Constants.record.put(Constants.db.getTable(tableName).getFields()[i], temp[i]);
 			Log.v("ADP", "TCPClient.class - Field: " + Constants.db.getTable(tableName).getFields()[i] + " Value: " + temp[i]);
 		}
-		
+		Log.v("ADP", "/******** End Recieve Record Request ********\"");
 	}
 	
 	/*
@@ -128,15 +136,18 @@ public class TCPClient extends Thread
 	 */
 	public void getRecordRequest(String tablename, int indexOfRecord)
 	{
+		Log.v("ADP", "/******** Get Record Request ********\"");
 		this.lastTable = tablename; //set table in view
 		String str = "\1" + tablename + "\1" + indexOfRecord; //construct appropriate string
 		out.println(str); //send to server
+		Log.v("ADP", "/******** End Get Record Request ********\"");
 	}
 
 	/*
 	 * recieve inserted data and handle accordingly
 	 */
 	private void recieveInsertRequest(String data) {
+		Log.v("ADP", "/******** Recieve Insert Request ********\"");
 		String[] temp = data.substring(1).split("\3"); //split data by designated char
 		
 		//loop until no more elements in temp
@@ -148,6 +159,7 @@ public class TCPClient extends Thread
 			Constants.db.getTable(this.lastTable).addRecord(new Record(fields));
 			Log.d("ADP", "TCPClient.class - " + fields[0] + " " + fields[1]);
 		}
+		Log.v("ADP", "/******** End Insert Request ********\"");
 	}
 	
 	/*
@@ -155,6 +167,7 @@ public class TCPClient extends Thread
 	 */
 	public void sendInsertRequest(String tablename, int indexOfNewRecord, String[] rec)
 	{
+		Log.v("ADP", "/******** Send Insert Request ********\"");
 		this.lastTable = tablename; //set table in view
 		String str = "\3" + tablename + "\3" + indexOfNewRecord; //create string to send
 		for(int i = 0; i < rec.length; i++)
@@ -162,9 +175,13 @@ public class TCPClient extends Thread
 			str+="\3" + rec[i]; //append string to send with elements of new record
 		} 
 		out.println(str); //send request to server
+		Log.v("ADP", "TCPClient.class - Sent: " + str);
+		Log.v("ADP", "/******** End Send Insert Request ********\"");
 	}
 
-	private void recieveChangeRequest(String data) {
+	private void recieveChangeRequest(String data) 
+	{
+		Log.v("ADP", "/******** Recieve Change Request ********\"");
 		//tablename, id of record changed, fieldInView1, fieldInView2 <- changes to inview
 		String[] temp = data.substring(1).split("\2");
 		ArrayList<Record> rec = new ArrayList<Record>();
@@ -189,11 +206,13 @@ public class TCPClient extends Thread
 			}
 			
 		}
+		Log.v("ADP", "/******** End Recieve Change Request ********\"");
 		
 	}
 	
 	public void sendChangeRequest(String tablename, String[] rec)
 	{
+		Log.v("ADP", "/******** Send Change Request ********\"");
 		String str = "\2" + tablename; //tablename where record is getting changed
 		for(int i = 0; i < rec.length; i++)
 		{
@@ -205,12 +224,16 @@ public class TCPClient extends Thread
 		}
 		
 		out.println(str);
+		Log.v("ADP", "TCPClient.class - Sent: " + str);
+		Log.v("ADP", "/******** End Send Change Request ********\"");
 	}
 
 	/*
 	 * recieve an entire table for the fieldsInView()
 	 */
-	private void recieveTableRequest(String tableName, String data) {
+	private void recieveTableRequest(String tableName, String data) 
+	{
+		Log.v("ADP", "/******** Recieve Table Request ********\"");
 		ArrayList<Record> rec = new ArrayList<Record>(); //record holders
 		
 		//loop through tables
@@ -219,7 +242,12 @@ public class TCPClient extends Thread
 			//find table selected
 			if(tableName.equalsIgnoreCase(Constants.db.getTables()[i].getTableName()))
 			{
-				Constants.db.getTables()[i].deleteRecords(); //clear out any old records
+				try{
+					Constants.db.getTables()[i].deleteRecords(); //clear out any old records
+				}catch(Exception e)
+				{
+					Log.v("ADP", "TCPClient.class - Error deleting records");
+				}
 				
 				//split data recieved by appropriate char indicator
 				String[] temp = data.substring(1).split("\0");
@@ -228,9 +256,10 @@ public class TCPClient extends Thread
 					try
 					{
 						String[] fields = new String[2]; //fields array
-						for(int k = 0; k < fields.length -1; k++)
+						for(int k = 0; k < fields.length - 1; k++)
 						{
-							fields[0] = temp[j]; //temp[j] = fieldInView(1)
+							//fields[0] = temp[j]; 	//temp[j] = id
+							fields[0] = temp[j]; 	//temp[++j] = fieldInView(1)
 							fields[1] = temp[++j]; //temp[++j] = fieldInView(2)
 							//log data
 							Log.v("ADP", "TCPClient.class - " + fields[0].toString() + " " + fields[1].toString());
@@ -247,20 +276,23 @@ public class TCPClient extends Thread
 				try
 				{
 					IntelliSyncActivity.ss.refreshListItems(); //notify list values changed
+					Log.v("ADP", "TCPClient.class - Refreshed List Items Successfully");
 				}catch (Exception e)
 				{
-				
+					Log.v("ADP", "TCPClient.class - Error Refreshing list items");
 				}
 			}
 		}
+		Log.v("ADP", "/******** End Recieve Table Request ********\"");
 		
 	}
 	
 	/*
 	 * send the server a data request - entire table
 	 */
-	public final void sendDataRequest(Table tbl)
+	public final void sendTableRequest(Table tbl)
 	{		
+		Log.v("ADP", "/******** Send Table Request ********\"");
 		this.lastTable = tbl.getTableName(); //current table in view
 		if(tbl.getFieldsInView().size() < 2)
 		{
@@ -276,8 +308,9 @@ public class TCPClient extends Thread
 		{
 			str+="\0" + tbl.getDBName(tbl.getFieldsInView().get(i)); //append string
 		}
- 
+		Log.v("ADP", "TCPClient.class - Sent: " + str);
 		out.println(str); //send request to server
+		Log.v("ADP", "/******** End Send Data Request ********\"");
 	}
 
 	public final void send(final String data)

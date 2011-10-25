@@ -273,7 +273,7 @@ public class Options extends ExpandableListActivity
 					Constants.db.getTables()[i].setStartingIndex(Integer.parseInt(index.getText().toString()));
 					Table tbl = Constants.db.getTables()[i]; //create temp table
 				
-					Initialize.tcp.sendDataRequest(tbl); //request table from database
+					Initialize.tcp.sendTableRequest(tbl); //request table from database
 				}
     		}catch (Exception e)
     		{

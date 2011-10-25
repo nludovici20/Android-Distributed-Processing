@@ -72,7 +72,7 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
 	    			
 	    			//pull in data from server corresponding with table
 	    			Table tbl = Constants.db.getTable(v.getTag().toString());
-	    			Initialize.tcp.sendDataRequest(tbl);
+	    			Initialize.tcp.sendTableRequest(tbl);
 	    			
 	    			engineIntent.putExtra("Type", tbl.getRecordType()); //add navigation type
 	    			startActivity(engineIntent);

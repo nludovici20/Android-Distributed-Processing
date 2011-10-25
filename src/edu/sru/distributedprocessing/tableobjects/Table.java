@@ -126,8 +126,4 @@ public class Table {
 		return this.tableSize;
 	}
 	
-	public int getTableID()
-	{
-		return this.tableID;
-	}
 }

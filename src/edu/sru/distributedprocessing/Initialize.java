@@ -30,7 +30,7 @@ public class Initialize
 			tcp.send("Hello Server, From Client"); //send initial message to server
 		}catch (Exception e)
 		{
-			Log.d("TCP", "ERROR CONNECTING");
+			Log.d("ADP", "ERROR CONNECTING");
 		}
 		
 		//different fields available for tables

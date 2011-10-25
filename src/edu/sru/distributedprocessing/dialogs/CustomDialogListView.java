@@ -1,6 +1,7 @@
 package edu.sru.distributedprocessing.dialogs;
 
 import edu.sru.distributedprocessing.Initialize;
+import edu.sru.distributedprocessing.IntelliSyncActivity;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.editors.ContactEditor;
 import edu.sru.distributedprocessing.editors.DepotEditor;
@@ -93,6 +94,12 @@ public class CustomDialogListView extends Dialog
     				if(clicked.equalsIgnoreCase("Delete Record"))
     				{
     					Initialize.tcp.sendDeleteRequest(type.getTableName(), index);
+    					try{
+    						IntelliSyncActivity.ss.refreshListItems();    						
+    					}catch (Exception e)
+    					{
+    						Log.v("ADP", "CustomDialogListView.class - Error refreshing list");
+    					}
     					Log.v("ADP", "CustomDialogListView.class - Delete Table: " + type.getTableName() + " Index of Record to delete: " + index);
     				}
     		

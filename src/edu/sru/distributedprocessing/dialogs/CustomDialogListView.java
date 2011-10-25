@@ -92,7 +92,8 @@ public class CustomDialogListView extends Dialog
     			else 
     				if(clicked.equalsIgnoreCase("Delete Record"))
     				{
-    					
+    					Initialize.tcp.sendDeleteRequest(type.getTableName(), index);
+    					Log.v("ADP", "CustomDialogListView.class - Delete Table: " + type.getTableName() + " Index of Record to delete: " + index);
     				}
     		
         		dismissCustomDialog();

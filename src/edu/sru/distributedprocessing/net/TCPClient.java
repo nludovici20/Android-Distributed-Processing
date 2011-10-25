@@ -92,12 +92,12 @@ public class TCPClient extends Thread
 	private void recieveDeleteRequest(String data) {
 		String[] temp = data.substring(1).split("\4");
 		
-		//temp[n] is tablename
+		//temp[0] is tablename
 		//temp[n+1] is index of deleted record
-		for(int i = 0; i < temp.length; i++)
+		for(int i = 1; i < temp.length; i++)
 		{
 			//delete record at index passed in
-			Constants.db.getTable(temp[i]).deleteRecord(Integer.parseInt(temp[++i]));
+			Constants.db.getTable(temp[0]).deleteRecord(Integer.parseInt(temp[i]));
 		}
 		
 	}
@@ -165,13 +165,46 @@ public class TCPClient extends Thread
 	}
 
 	private void recieveChangeRequest(String data) {
-		// TODO Auto-generated method stub
+		//tablename, id of record changed, fieldInView1, fieldInView2 <- changes to inview
+		String[] temp = data.substring(1).split("\2");
+		ArrayList<Record> rec = new ArrayList<Record>();
+		
+		for(int i = 0; i < temp.length; i++)
+		{
+			//temp[++i] = id of record changed
+			for(int j = 0; j < Constants.db.getTable(temp[i]).getRecords().length; j++)
+			{
+				//if at the record to be inserted, insert else add original record
+				if(j == Integer.parseInt(temp[++i]))
+				{
+					String inView1 = temp[++i];
+					String inView2 = temp[++i];
+					rec.add(new Record(""+j, inView1, inView2));
+					Log.v("ADP", "TCPClient.class - changed record: ID - " + j + " Field1.value: " + inView1 + " Field2.value: " + inView2);
+				}else
+				{
+					rec.add(Constants.db.getTable(temp[i]).getRecords()[j]);
+				}
+				
+			}
+			
+		}
 		
 	}
 	
-	public void sendChangeRequest()
+	public void sendChangeRequest(String tablename, String[] rec)
 	{
+		String str = "\2" + tablename; //tablename where record is getting changed
+		for(int i = 0; i < rec.length; i++)
+		{
+			/*
+			 * loop through records (including ID # 
+			 * and add to string to be sent to database to update
+			 */
+			str+="\2" + rec[i];
+		}
 		
+		out.println(str);
 	}
 
 	/*

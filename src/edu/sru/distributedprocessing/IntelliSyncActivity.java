@@ -45,6 +45,22 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
         
         ss.Initialize(); //initialize some stuff
         
+        runOnUiThread(new Runnable(){
+        	@Override 
+        	public void run(){
+        		while(canUpdate)
+        		{
+        			ss.Update();
+        			canUpdate = false;
+        		}
+        		try {
+					this.wait(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        	}
+        });
         
     }
     

@@ -44,17 +44,18 @@ public class ShippingScreen
 		populateListView();
 		mRecords = new SimpleAdapter(act, mylist, R.layout.list_item,
 				new String[] {field1.getText().toString(), field2.getText().toString()}, new int[] {R.id.FIELD1, R.id.FIELD2});
-		 lv.setAdapter(mRecords);
-		 lv.setTextFilterEnabled(true);
-		 lv.setOnItemClickListener(new OnItemClickListener() 
-		 {
-    		public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) 
-    		{
+		lv.setAdapter(mRecords);
+		lv.setTextFilterEnabled(true);
+		lv.setOnItemClickListener(new OnItemClickListener() 
+		{
+			public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) 
+			{
     			CustomDialogListView cldv = new CustomDialogListView(act, R.style.CustomDialogTheme, table, arg2 + 1);
     			Log.v("ADP", "ShippingScreen.class - tablename: " + table.getTableName() + " Record ID: " + arg2 + 1);
     			cldv.show();
     		}
        });
+		
 	}
 
 	private void populateListView() {
@@ -82,13 +83,13 @@ public class ShippingScreen
 		this.field2 = (TextView) act.findViewById(R.id.header_txt2);
 		try
 		{
-			field1.setText(fields[0].toString());
-			field2.setText(fields[1].toString());
+			this.field1.setText(fields[0].toString());
+			this.field2.setText(fields[1].toString());
 		}
 		 catch(Exception e)
 		 {
-			field1.setText(table.getFields()[0]);
-			field2.setText(table.getFields()[1]);
+			this.field1.setText(table.getFields()[0]);
+			this.field2.setText(table.getFields()[1]);
 			Log.v("ADP", "No Fields Selected");
 		 }
 		
@@ -111,25 +112,30 @@ public class ShippingScreen
 				 if(!(type[i] == null))
 				 {
 						 map = new HashMap<String, String>();
-						 map.put(field1.getText().toString(), type[i].getFields()[0]);
-						 map.put(field2.getText().toString(), type[i].getFields()[1]);
+						 map.put(this.field1.getText().toString(), type[i].getFields()[0]);
+						 map.put(this.field2.getText().toString(), type[i].getFields()[1]);
 						 mylist.add(map);
 				 }
 			 }
 			 catch(Exception e)
 			 {
 				 
-			 }
+			 } 
 		 }
 	}
 
 	public void Update() 
 	{
 		Log.d("ADP", "Inside Update");
-		populateListView();
-		mRecords = new SimpleAdapter(act, mylist, R.layout.list_item,
-				new String[] {field1.getText().toString(), field2.getText().toString()}, new int[] {R.id.FIELD1, R.id.FIELD2});
-		lv.setAdapter(mRecords);
+//		mylist.clear();
+//		populateListView();
+//		mRecords = new SimpleAdapter(act, mylist, R.layout.list_item,
+//				new String[] {field1.getText().toString(), field2.getText().toString()}, new int[] {R.id.FIELD1, R.id.FIELD2});
+//		lv.setAdapter(mRecords);
+		
+		act.finish();
+		act.startActivity(act.getIntent());
+		
 		Log.d("TCP", "Refreshed List");
 		Log.d("ADP", "Exit Update");
 	}

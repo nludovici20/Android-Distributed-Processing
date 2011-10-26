@@ -18,7 +18,7 @@ public class Initialize
 	private Table vehicle_table, driver_table, shipment_table, routing_table, contractor_table, depot_table, warehouse_table,
 				  vehicle_type_table, maintenance_table, technician_table, contact_table, report_table;
 	public static TCPClient tcp;
-	String[] contactFields, dbContactFields, depotFields, dbDepotFields, driverFields, dbDriverFields, vehicleTypeFields, dbVehicleTypeFields, vehicleFields, dbVehicleFields;
+	static String[] contactFields, dbContactFields, depotFields, dbDepotFields, driverFields, dbDriverFields, vehicleTypeFields, dbVehicleTypeFields, vehicleFields, dbVehicleFields;
 	
 	public Initialize(Activity act)
 	{		
@@ -26,7 +26,7 @@ public class Initialize
 		//initialize a new Client and connect with server
 		try
 		{
-			tcp = new TCPClient(act, "10.1.42.71", 4004); //connect to server
+			tcp = new TCPClient("192.168.1.3", 4004); //connect to server
 			tcp.start(); //start the thread
 			tcp.send("Hello Server, From Client"); //send initial message to server
 		}catch (Exception e)

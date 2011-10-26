@@ -19,14 +19,6 @@ import android.util.Log;
   
 public class TCPClient extends Thread
 {
-	
-	private class UIUpdate implements Runnable {
-		@Override
-		public void run() {
-			IntelliSyncActivity.ss.Update();	
-		}	
-	}
-	
 	private final String host;
 	private final int port;
 	private final Socket socket;
@@ -41,13 +33,10 @@ public class TCPClient extends Thread
 	static final char DELETE = 4;
 	private String lastTable;
 	private int numFields;
-	UIUpdate uiUpdate;
-	Activity act;
 	
-	public TCPClient(Activity act, final String host, final int port) throws IOException
+	
+	public TCPClient(final String host, final int port) throws IOException
 	{
-		this.act = act;
-		this.uiUpdate = new UIUpdate();
 		this.host = host;
 		this.port = port;InetAddress serverAddr = InetAddress.getByName(host); 
 		Log.d("ADP", "TCPClient.class - C: Connecting..."); 
@@ -91,10 +80,11 @@ public class TCPClient extends Thread
 						recieveDeleteRequest(data);
 						break;
 					default:
+						
+						IntelliSyncActivity.canUpdate = true;
 						Log.v("ADP", "TCPClient.class - Default Case");	
 					}
 					
-					act.runOnUiThread(uiUpdate);
 					Log.v("ADP","TCPClient.class - " + data);
 				}
 			} 

@@ -50,6 +50,7 @@ public class Main extends Activity
 			public void onClick(View v) 
 			{
 				Intent engineIntent = new Intent(Main.this, ContactEditor.class);
+				engineIntent.putExtra("Fields", Initialize.contactFields);
 				startActivity(engineIntent);
 			}
 		});

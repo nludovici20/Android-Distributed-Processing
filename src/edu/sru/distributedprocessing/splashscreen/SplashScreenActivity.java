@@ -22,7 +22,6 @@ public class SplashScreenActivity extends Activity {
 		final Thread splashThread = new Thread() {
 		
 			int wait = 0;
-			
 			@Override
 			public void run() {
 				try {

@@ -13,10 +13,20 @@ import edu.sru.distributedprocessing.shippingscreen.ShippingScreen;
 import edu.sru.distributedprocessing.tableobjects.Record;
 import edu.sru.distributedprocessing.tableobjects.Table;
 import edu.sru.distributedprocessing.tools.Constants;
+import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
   
 public class TCPClient extends Thread
 {
+	
+	private class UIUpdate implements Runnable {
+		@Override
+		public void run() {
+			IntelliSyncActivity.ss.Update();	
+		}	
+	}
+	
 	private final String host;
 	private final int port;
 	private final Socket socket;
@@ -31,9 +41,13 @@ public class TCPClient extends Thread
 	static final char DELETE = 4;
 	private String lastTable;
 	private int numFields;
+	UIUpdate uiUpdate;
+	Activity act;
 	
-	public TCPClient(final String host, final int port) throws IOException
+	public TCPClient(Activity act, final String host, final int port) throws IOException
 	{
+		this.act = act;
+		this.uiUpdate = new UIUpdate();
 		this.host = host;
 		this.port = port;InetAddress serverAddr = InetAddress.getByName(host); 
 		Log.d("ADP", "TCPClient.class - C: Connecting..."); 
@@ -62,6 +76,7 @@ public class TCPClient extends Thread
 					{
 					case GET_TABLE:
 						recieveTableRequest(lastTable, data);
+						//IntelliSyncActivity.canUpdate = true;
 						break;
 					case GET_RECORD:
 						recieveRecordRequest(lastTable, data);
@@ -76,9 +91,10 @@ public class TCPClient extends Thread
 						recieveDeleteRequest(data);
 						break;
 					default:
-						Log.v("ADP", "TCPClient.class - Default Case");
-						
+						Log.v("ADP", "TCPClient.class - Default Case");	
 					}
+					
+					act.runOnUiThread(uiUpdate);
 					Log.v("ADP","TCPClient.class - " + data);
 				}
 			} 
@@ -272,15 +288,6 @@ public class TCPClient extends Thread
 					}
 				}
 				Constants.db.getTables()[i].addRecords(rec);
-				
-				try
-				{
-					IntelliSyncActivity.ss.refreshListItems(); //notify list values changed
-					Log.v("ADP", "TCPClient.class - Refreshed List Items Successfully");
-				}catch (Exception e)
-				{
-					Log.v("ADP", "TCPClient.class - Error Refreshing list items");
-				}
 			}
 		}
 		Log.v("ADP", "/******** End Recieve Table Request ********\"");

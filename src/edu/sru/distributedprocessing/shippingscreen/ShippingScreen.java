@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -23,9 +24,12 @@ public class ShippingScreen
 	private ArrayList<Record> records;
 	private Record[] type;
 	private Activity act;
-	private int vehicleIndex, tableSizeLimit;
+	private int tableIndex, tableSizeLimit;
 	private Table table;
 	private SimpleAdapter mRecords;
+	private  ListView lv;
+	private TextView field1, field2;
+	private ArrayList<HashMap<String, String>> mylist;
 	
 	//Table constructor
 	public ShippingScreen(Activity act, Table table)
@@ -37,6 +41,23 @@ public class ShippingScreen
 		
 	public void Initialize() 
 	{
+		populateListView();
+		mRecords = new SimpleAdapter(act, mylist, R.layout.list_item,
+				new String[] {field1.getText().toString(), field2.getText().toString()}, new int[] {R.id.FIELD1, R.id.FIELD2});
+		 lv.setAdapter(mRecords);
+		 lv.setTextFilterEnabled(true);
+		 lv.setOnItemClickListener(new OnItemClickListener() 
+		 {
+    		public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) 
+    		{
+    			CustomDialogListView cldv = new CustomDialogListView(act, R.style.CustomDialogTheme, table, arg2 + 1);
+    			Log.v("ADP", "ShippingScreen.class - tablename: " + table.getTableName() + " Record ID: " + arg2 + 1);
+    			cldv.show();
+    		}
+       });
+	}
+
+	private void populateListView() {
 		//Collection<String> fields = null;
 		String[] fields = new String[2];
 		//set the vehicle objects in view to the screen
@@ -48,7 +69,7 @@ public class ShippingScreen
 				if(table.getRecordType().equalsIgnoreCase(Constants.db.getTables()[i].getRecordType()))
 				{
 					fields = Constants.db.getTables()[i].getFieldsInView().toArray(new String[1]);
-					vehicleIndex = Constants.db.getTables()[i].getIndex();
+					tableIndex = Constants.db.getTables()[i].getIndex();
 					tableSizeLimit = Constants.db.getTables()[i].tableSize();
 				}
 			}catch (Exception e)
@@ -57,8 +78,8 @@ public class ShippingScreen
 			}
 		}
 		
-		TextView field1 = (TextView) act.findViewById(R.id.header_txt1);
-		TextView field2 = (TextView) act.findViewById(R.id.header_txt2);
+		this.field1 = (TextView) act.findViewById(R.id.header_txt1);
+		this.field2 = (TextView) act.findViewById(R.id.header_txt2);
 		try
 		{
 			field1.setText(fields[0].toString());
@@ -68,23 +89,23 @@ public class ShippingScreen
 		 {
 			field1.setText(table.getFields()[0]);
 			field2.setText(table.getFields()[1]);
-			Log.v("Distributed-Processing", "No Fields Selected");
+			Log.v("ADP", "No Fields Selected");
 		 }
 		
 		 //scroll through Vehicles[] and add to listview
-		 ListView lv = (ListView) act.findViewById(R.id.listView1);
-		 ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();	
+		 lv = (ListView) act.findViewById(R.id.listView1);
+		 mylist = new ArrayList<HashMap<String, String>>();	
 		 HashMap<String, String> map;		
 		 
-		 if(vehicleIndex + 100 > tableSizeLimit)
+		 if(tableIndex + 100 > tableSizeLimit)
 		 {
-			 vehicleIndex = tableSizeLimit - 100;
+			 tableIndex = tableSizeLimit - 100;
 		 }else
-			 if(vehicleIndex < 0)
+			 if(tableIndex < 0)
 			 {
-				 vehicleIndex = 0;
+				 tableIndex = 0;
 			 }
-		 for(int i = vehicleIndex; i < (vehicleIndex + 100); i++)
+		 for(int i = tableIndex; i < (tableIndex + 100); i++)
 		 {
 			 try{
 				 if(!(type[i] == null))
@@ -100,25 +121,17 @@ public class ShippingScreen
 				 
 			 }
 		 }
-		
-		 mRecords = new SimpleAdapter(act, mylist, R.layout.list_item, 
-    		  new String[] {field1.getText().toString(), field2.getText().toString()}, new int[] {R.id.FIELD1, R.id.FIELD2});
-		 lv.setAdapter(mRecords);
-		 lv.setTextFilterEnabled(true);
-		 lv.setOnItemClickListener(new OnItemClickListener() 
-		 {
-    		public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) 
-    		{
-    			CustomDialogListView cldv = new CustomDialogListView(act, R.style.CustomDialogTheme, table, arg2);
-    			Log.v("ADP", "ShippingScreen.class - tablename: " + table.getTableName() + " Record ID: " + arg2);
-    			cldv.show();
-    		}
-       });
 	}
 
 	public void Update() 
 	{
-		
+		Log.d("ADP", "Inside Update");
+		populateListView();
+		mRecords = new SimpleAdapter(act, mylist, R.layout.list_item,
+				new String[] {field1.getText().toString(), field2.getText().toString()}, new int[] {R.id.FIELD1, R.id.FIELD2});
+		lv.setAdapter(mRecords);
+		Log.d("TCP", "Refreshed List");
+		Log.d("ADP", "Exit Update");
 	}
 
 	public void Finalize() 
@@ -130,10 +143,10 @@ public class ShippingScreen
 	{
 		return this.type;
 	}
-	
-	public void refreshListItems()
-	{
-		mRecords.notifyDataSetChanged();
-		Log.d("TCP", "List Refresh Notified");
+
+	public void deleteRecordAt(int index) {
+		mylist.remove(index);
+		
 	}
+	
 }

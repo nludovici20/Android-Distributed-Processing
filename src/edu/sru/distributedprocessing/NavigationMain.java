@@ -46,8 +46,8 @@ public class NavigationMain extends Activity implements OnClickListener
         		Table tbl = Constants.db.getTable("contacts");
     		
         		Initialize.tcp.sendTableRequest(tbl);
-        		Initialize.tcp.sendChangeRequest(tbl.getTableName(),  new String[] { "one", "two", "three", "four", "five"});
-        		Initialize.tcp.sendInsertRequest(tbl.getTableName(), (int)Math.random()*10, new String[] { "one", "two", "three", "four", "five"});
+        		//Initialize.tcp.sendChangeRequest(tbl.getTableName(),  new String[] { "one", "two", "three", "four", "five"});
+        		//Initialize.tcp.sendInsertRequest(tbl.getTableName(), (int)Math.random()*10, new String[] { "one", "two", "three", "four", "five"});
         		
     			engineIntent.putExtra("Type", "ContactType");
     			startActivity(engineIntent);

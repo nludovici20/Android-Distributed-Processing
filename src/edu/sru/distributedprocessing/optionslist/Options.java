@@ -284,9 +284,9 @@ public class Options extends ExpandableListActivity
     	Constants.db.saveDB(this); //save db attributes to file
     	finish(); //finish activity
     	Intent engineIntent = new Intent(Options.this, IntelliSyncActivity.class); //create a new intent
-    	Log.v("ADP", "Options.class - " + type);
     	engineIntent.putExtra("Type", type); //send in the type
     	startActivity(engineIntent); //start the activity
+    	Log.v("ADP", "Options.class - " + type);
     	
     }
 }

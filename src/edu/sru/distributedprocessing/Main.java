@@ -18,7 +18,7 @@ public class Main extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
       
-        Initialize init = new Initialize(getBaseContext()); 
+        Initialize init = new Initialize(this); 
         
         Button start_btn = (Button) findViewById(R.id.start_btn);
         start_btn.setOnClickListener(new View.OnClickListener() 

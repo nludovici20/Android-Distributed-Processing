@@ -18,6 +18,7 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
 {    
     private String type; //navigation type
     public static ShippingScreen ss; //shipping screen list
+    public static boolean canUpdate;
     
     @Override
     public void onCreate(Bundle savedInstanceState) 
@@ -43,7 +44,8 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
         }
         
         ss.Initialize(); //initialize some stuff
-                
+        
+        
     }
     
     

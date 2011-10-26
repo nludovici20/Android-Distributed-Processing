@@ -8,6 +8,7 @@ import edu.sru.distributedprocessing.editors.DepotEditor;
 import edu.sru.distributedprocessing.editors.DriverEditor;
 import edu.sru.distributedprocessing.editors.VehicleEditor;
 import edu.sru.distributedprocessing.editors.VehicleTypeEditor;
+import edu.sru.distributedprocessing.tableobjects.Record;
 import edu.sru.distributedprocessing.tableobjects.Table;
 import edu.sru.distributedprocessing.tools.Constants;
 import android.app.Activity;
@@ -45,7 +46,7 @@ public class CustomDialogListView extends Dialog
         final ListView lst=(ListView)findViewById(R.id.myList);
         
         //List of options
-        String[] list = {"Edit Record", "Delete Record"};
+        final String[] list = {"New Record", "Edit Record", "Delete Record"};
         
         lst.setAdapter(new ArrayAdapter<String>(activity,R.layout.custom_popup_row, list));      
         
@@ -58,54 +59,69 @@ public class CustomDialogListView extends Dialog
         		String clicked = ((TextView) v).getText().toString();
         		Log.v("ADP", "CustomDialogListView.class - " + clicked);
         		Intent engineIntent = null;
-    			if(clicked.equalsIgnoreCase("Edit Record"))
-    			{
-    				for(int i = 0; i < Constants.db.getTables().length; i++)
-    				{
-    					if (type.getTableName().equalsIgnoreCase("contacts"))
-						{
-    						engineIntent = new Intent(activity, ContactEditor.class);
-						}else
-							if (type.getTableName().equalsIgnoreCase("depots"))
+        		if(clicked.equalsIgnoreCase(list[0]))
+        		{
+        			//new record
+        			try
+        			{
+        				Constants.db.getTable(type.getTableName()).addRecord(new Record(""+ type.getIndex() + 101, "Jack", "Lambert"));
+        				Log.v("ADP", "CustomDialogListView.class - Insert Record");        		
+        			}catch(Exception e)
+        			{
+        				Log.v("ADP", "CustomDialogListView.class - Error Inserting New Record");
+        			}
+        			
+        		}else	
+        			if(clicked.equalsIgnoreCase(list[1]))
+	    			{
+	    				//Edit Record
+	    				for(int i = 0; i < Constants.db.getTables().length; i++)
+	    				{
+	    					if (type.getTableName().equalsIgnoreCase("contacts"))
 							{
-								engineIntent = new Intent(activity, DepotEditor.class);
+	    						engineIntent = new Intent(activity, ContactEditor.class);
 							}else
-								if (type.getTableName().equalsIgnoreCase("drivers"))
+								if (type.getTableName().equalsIgnoreCase("depots"))
 								{
-									engineIntent = new Intent(activity, DriverEditor.class);
+									engineIntent = new Intent(activity, DepotEditor.class);
 								}else
-									if (type.getTableName().equalsIgnoreCase("vehicle type"))
+									if (type.getTableName().equalsIgnoreCase("drivers"))
 									{
-										engineIntent = new Intent(activity, VehicleTypeEditor.class);
+										engineIntent = new Intent(activity, DriverEditor.class);
 									}else
-										if (type.getTableName().equalsIgnoreCase("vehicles"))
+										if (type.getTableName().equalsIgnoreCase("vehicle type"))
 										{
-											engineIntent = new Intent(activity, VehicleEditor.class);
-										}
-    				}
-    				
-    				//pull in entire record from db
-    				Initialize.tcp.getRecordRequest(type.getTableName(), index);
-    				
-    				engineIntent.putExtra("Fields", type.getFields());
-    				activity.startActivity(engineIntent);
-    			 }
-    			else 
-    				if(clicked.equalsIgnoreCase("Delete Record"))
-    				{
-    					Initialize.tcp.sendDeleteRequest(type.getTableName(), index);
-    					try{
-    						IntelliSyncActivity.ss.refreshListItems();    						
-    					}catch (Exception e)
-    					{
-    						Log.v("ADP", "CustomDialogListView.class - Error refreshing list");
-    					}
-    					Log.v("ADP", "CustomDialogListView.class - Delete Table: " + type.getTableName() + " Index of Record to delete: " + index);
-    				}
-    		
-        		dismissCustomDialog();
-           	}
-        	});
+											engineIntent = new Intent(activity, VehicleTypeEditor.class);
+										}else
+											if (type.getTableName().equalsIgnoreCase("vehicles"))
+											{
+												engineIntent = new Intent(activity, VehicleEditor.class);
+											}
+	    				}
+	    				
+	    				//pull in entire record from db
+	    				Initialize.tcp.getRecordRequest(type.getTableName(), index);
+	    				
+	    				engineIntent.putExtra("Fields", type.getFields());
+	    				activity.startActivity(engineIntent);
+	    			 }
+	    			else 
+	    				if(clicked.equalsIgnoreCase(list[2]))
+	    				{
+	    					//Delete Record
+	    					
+	    					Initialize.tcp.sendDeleteRequest(type.getTableName(), index);
+	    					
+	    					IntelliSyncActivity.ss.deleteRecordAt(index);
+	    					
+	    					IntelliSyncActivity.ss.Update();    						
+	    					
+	    					Log.v("ADP", "CustomDialogListView.class - Delete Table: " + type.getTableName() + " Index of Record to delete: " + index);
+	    				}
+	    		
+	        		dismissCustomDialog();
+	           	}
+	        });
         
     }
     

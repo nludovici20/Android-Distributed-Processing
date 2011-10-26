@@ -3,6 +3,7 @@ package edu.sru.distributedprocessing;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import edu.sru.distributedprocessing.net.TCPClient;
@@ -19,13 +20,13 @@ public class Initialize
 	public static TCPClient tcp;
 	String[] contactFields, dbContactFields, depotFields, dbDepotFields, driverFields, dbDriverFields, vehicleTypeFields, dbVehicleTypeFields, vehicleFields, dbVehicleFields;
 	
-	public Initialize(Context context)
+	public Initialize(Activity act)
 	{		
 		
 		//initialize a new Client and connect with server
 		try
 		{
-			tcp = new TCPClient("10.1.43.123", 4004); //connect to server
+			tcp = new TCPClient(act, "10.1.42.71", 4004); //connect to server
 			tcp.start(); //start the thread
 			tcp.send("Hello Server, From Client"); //send initial message to server
 		}catch (Exception e)
@@ -80,7 +81,7 @@ public class Initialize
 		try
 		{
 			//read starting info from text file
-			FileManager.readTextFile(context);
+			FileManager.readTextFile(act);
 		}catch(Exception e)
 		{
 			Log.v("ADP", "Initialize.class - Error reading file");

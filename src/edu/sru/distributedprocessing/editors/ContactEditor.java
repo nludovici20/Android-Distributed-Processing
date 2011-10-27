@@ -24,7 +24,7 @@ public class ContactEditor extends Activity {
         
         //Editor Items
         TextView header = (TextView)findViewById(R.id.group_header);
-        header.setText(Constants.record.get(fields[0]));
+        header.setText(header.getText().toString() + " " + Constants.record.get(fields[0]));
         
         EditText lastName_edit = (EditText)findViewById(R.id.lastName_edit);
         lastName_edit.setText(Constants.record.get(fields[1]));

@@ -27,11 +27,6 @@ public class TCPClient extends Thread
 	private final PrintWriter out;
 	private boolean running;
 	//private final Object sendLock = new Object();
-	static final char GET_TABLE = 0;
-	static final char GET_RECORD = 1;
-	static final char CHANGE = 2;
-	static final char INSERT = 3;
-	static final char DELETE = 4;
 	private String lastTable;
 	private int numFields;
 	
@@ -64,30 +59,29 @@ public class TCPClient extends Thread
 					 */
 					switch (data.charAt(0))
 					{
-					case GET_TABLE:
+					case Message.Type.GET_TABLE:
 						recieveTableRequest(lastTable, data);
 						//IntelliSyncActivity.canUpdate = true;
 						break;
-					case GET_RECORD:
+					case Message.Type.GET_RECORD:
 						recieveRecordRequest(lastTable, data);
 						break;
-					case CHANGE:
+					case Message.Type.GET_CHANGE:
 						recieveChangeRequest(data);
 						break;
-					case INSERT:
+					case Message.Type.GET_INSERT:
 						recieveInsertRequest(data);
 						break;
-					case DELETE:
+					case Message.Type.GET_DELETE:
 						recieveDeleteRequest(data);
 						break;
 					default:
 						
-						IntelliSyncActivity.canUpdate = true;
 						Log.v("ADP", "TCPClient.class - Default Case");	
 					}
 					
 					try{
-						IntelliSyncActivity.autoRefresh();
+						IntelliSyncActivity.refresh();
 					}catch(Exception e)
 					{
 						Log.v("ADP", "TCPClient.class - Error Refreshing");
@@ -103,145 +97,6 @@ public class TCPClient extends Thread
 			}
 		}				
 	}
-	
-	/*
-	 * Recieve data and handle deletion of a record
-	 * data contains a tablename, and an index to delete
-	 */
-	private void recieveDeleteRequest(String data) {
-		String[] temp = data.substring(1).split("\4");
-		
-		//temp[0] is tablename
-		//temp[n+1] is index of deleted record
-		for(int i = 1; i < temp.length; i++)
-		{
-			//delete record at index passed in
-			Constants.db.getTable(temp[0]).deleteRecord(Integer.parseInt(temp[i]));
-		}
-		
-	}
-	
-	/*
-	 * send a deletion request to the database
-	 */
-	public final void sendDeleteRequest(String tablename, int indexOfDeletedRecord)
-	{
-		Log.v("ADP", "/******** Send Delete Request ********\"");
-		String str = "\4" + tablename + "\4" + indexOfDeletedRecord; //construct the string
-		out.println(str); //send str to server
-		Log.v("ADP", "/******** END Send Delete Request ********\"");
-	}
-
-	private void recieveRecordRequest(String tableName, String data) {
-		Log.v("ADP", "/******** Recieve Record Request ********\"");
-		Constants.record.clear();
-		String[] temp = data.substring(1).split("\1");
-		int length = Constants.db.getTable(tableName).getFields().length;
-		for(int i = 0; i < length-1; i++)
-		{
-			Constants.record.put(Constants.db.getTable(tableName).getFields()[i], temp[i]);
-			Log.v("ADP", "TCPClient.class - Field: " + Constants.db.getTable(tableName).getFields()[i] + " Value: " + temp[i]);
-		}
-		Log.v("ADP", "/******** End Recieve Record Request ********\"");
-	}
-	
-	/*
-	 * pull in an entire record from database
-	 */
-	public void getRecordRequest(String tablename, int indexOfRecord)
-	{
-		Log.v("ADP", "/******** Get Record Request ********\"");
-		this.lastTable = tablename; //set table in view
-		String str = "\1" + tablename + "\1" + indexOfRecord; //construct appropriate string
-		out.println(str); //send to server
-		Log.v("ADP", "/******** End Get Record Request ********\"");
-	}
-
-	/*
-	 * recieve inserted data and handle accordingly
-	 */
-	private void recieveInsertRequest(String data) {
-		Log.v("ADP", "/******** Recieve Insert Request ********\"");
-		String[] temp = data.substring(1).split("\3"); //split data by designated char
-		
-		//loop until no more elements in temp
-		for(int i = 0; i < temp.length; i++)
-		{
-			String[] fields = new String[2]; //create a new String[]
-			fields[0] = temp[i]; //temp[i] = fieldInView1 value
-			fields[1] = temp[++i]; //temp[++i] = fieldInView2 value
-			Constants.db.getTable(this.lastTable).addRecord(new Record(fields));
-			Log.d("ADP", "TCPClient.class - " + fields[0] + " " + fields[1]);
-		}
-		Log.v("ADP", "/******** End Insert Request ********\"");
-	}
-	
-	/*
-	 * Send a newly inserted Record from client to the server
-	 */
-	public void sendInsertRequest(String tablename, int indexOfNewRecord, String[] rec)
-	{
-		Log.v("ADP", "/******** Send Insert Request ********\"");
-		this.lastTable = tablename; //set table in view
-		String str = "\3" + tablename + "\3" + indexOfNewRecord; //create string to send
-		for(int i = 0; i < rec.length; i++)
-		{
-			str+="\3" + rec[i]; //append string to send with elements of new record
-		} 
-		out.println(str); //send request to server
-		Log.v("ADP", "TCPClient.class - Sent: " + str);
-		Log.v("ADP", "/******** End Send Insert Request ********\"");
-	}
-
-	private void recieveChangeRequest(String data) 
-	{
-		Log.v("ADP", "/******** Recieve Change Request ********\"");
-		//tablename, id of record changed, fieldInView1, fieldInView2 <- changes to inview
-		String[] temp = data.substring(1).split("\2");
-		ArrayList<Record> rec = new ArrayList<Record>();
-		
-		for(int i = 0; i < temp.length; i++)
-		{
-			//temp[++i] = id of record changed
-			for(int j = 0; j < Constants.db.getTable(temp[i]).getRecords().length; j++)
-			{
-				//if at the record to be inserted, insert else add original record
-				if(j == Integer.parseInt(temp[++i]))
-				{
-					String inView1 = temp[++i];
-					String inView2 = temp[++i];
-					rec.add(new Record(""+j, inView1, inView2));
-					Log.v("ADP", "TCPClient.class - changed record: ID - " + j + " Field1.value: " + inView1 + " Field2.value: " + inView2);
-				}else
-				{
-					rec.add(Constants.db.getTable(temp[i]).getRecords()[j]);
-				}
-				
-			}
-			
-		}
-		Log.v("ADP", "/******** End Recieve Change Request ********\"");
-		
-	}
-	
-	public void sendChangeRequest(String tablename, String[] rec)
-	{
-		Log.v("ADP", "/******** Send Change Request ********\"");
-		String str = "\2" + tablename; //tablename where record is getting changed
-		for(int i = 0; i < rec.length; i++)
-		{
-			/*
-			 * loop through records (including ID # 
-			 * and add to string to be sent to database to update
-			 */
-			str+="\2" + rec[i];
-		}
-		
-		out.println(str);
-		Log.v("ADP", "TCPClient.class - Sent: " + str);
-		Log.v("ADP", "/******** End Send Change Request ********\"");
-	}
-
 	/*
 	 * recieve an entire table for the fieldsInView()
 	 */
@@ -264,7 +119,7 @@ public class TCPClient extends Thread
 				}
 				
 				//split data recieved by appropriate char indicator
-				String[] temp = data.substring(1).split("\0");
+				String[] temp = data.substring(1).split(""+Message.Type.GET_TABLE);
 				for(int j = 0; j < (temp.length); j++)
 				{
 					try
@@ -299,6 +154,8 @@ public class TCPClient extends Thread
 	 */
 	public final void sendTableRequest(Table tbl)
 	{		
+		char msgChar = Message.Type.GET_TABLE;
+		
 		Log.v("ADP", "/******** Send Table Request ********\"");
 		this.lastTable = tbl.getTableName(); //current table in view
 		if(tbl.getFieldsInView().size() < 2)
@@ -309,15 +166,162 @@ public class TCPClient extends Thread
 			this.numFields = tbl.getFieldsInView().size();
 		}
 		
-		String str = "\0" + lastTable  + "\0" + tbl.getIndex() + "\0" + tbl.getDBName(tbl.getFields()[0]); //construct string
+		String str = msgChar + lastTable  + msgChar + tbl.getIndex() + msgChar + tbl.getDBName(tbl.getFields()[0]); //construct string
 
 		for(int i = 0; i < numFields; i++)
 		{
-			str+="\0" + tbl.getDBName(tbl.getFieldsInView().get(i)); //append string
+			str+=msgChar + tbl.getDBName(tbl.getFieldsInView().get(i)); //append string
 		}
 		Log.v("ADP", "TCPClient.class - Sent: " + str);
 		out.println(str); //send request to server
-		Log.v("ADP", "/******** End Send Data Request ********\"");
+		Log.v("ADP", "/******** End Send Table Request ********\"");
+	}
+	
+	private void recieveRecordRequest(String tableName, String data) 
+	{
+		Log.v("ADP", "/******** Recieve Record Request ********\"");
+		Constants.record.clear();
+		String[] temp = data.substring(1).split(""+Message.Type.GET_RECORD);
+		int length = Constants.db.getTable(tableName).getFields().length;
+		for(int i = 0; i < length; i++)
+		{
+			Constants.record.put(Constants.db.getTable(tableName).getFields()[i], temp[i]);
+			Log.v("ADP", "TCPClient.class - Field: " + Constants.db.getTable(tableName).getFields()[i] + " Value: " + temp[i]);
+		}
+		Log.v("ADP", "/******** End Recieve Record Request ********\"");
+	}
+	
+	/*
+	 * pull in an entire record from database
+	 */
+	public void sendRecordRequest(String tablename, int indexOfRecord)
+	{
+		char msgChar = Message.Type.GET_RECORD;
+		Log.v("ADP", "/******** send Record Request ********\"");
+		this.lastTable = tablename; //set table in view
+		String str = msgChar + tablename + msgChar + indexOfRecord; //construct appropriate string
+		out.println(str); //send to server
+		
+		Log.v("ADP", str);
+		Log.v("ADP", "/******** End send Record Request ********\"");
+	}
+	
+	private void recieveChangeRequest(String data) 
+	{
+		Log.v("ADP", "/******** Recieve Change Request ********\"");
+		//tablename, id of record changed, fieldInView1, fieldInView2 <- changes to inview
+		String[] temp = data.substring(1).split(""+Message.Type.GET_CHANGE);
+		ArrayList<Record> rec = new ArrayList<Record>();
+		
+		for(int i = 0; i < temp.length; i++)
+		{
+			//temp[++i] = id of record changed
+			for(int j = 0; j < Constants.db.getTable(temp[i]).getRecords().length; j++)
+			{
+				//if at the record to be inserted, insert else add original record
+				if(j == Integer.parseInt(temp[++i]))
+				{
+					String inView1 = temp[++i];
+					String inView2 = temp[++i];
+					rec.add(new Record(""+j, inView1, inView2));
+					Log.v("ADP", "TCPClient.class - changed record: ID - " + j + " Field1.value: " + inView1 + " Field2.value: " + inView2);
+				}else
+				{
+					rec.add(Constants.db.getTable(temp[i]).getRecords()[j]);
+				}
+				
+			}
+			
+		}
+		Log.v("ADP", "/******** End Recieve Change Request ********\"");
+		
+	}
+	
+	public void sendChangeRequest(String tablename, String[] rec)
+	{
+		char msgChar = Message.Type.GET_CHANGE;
+		Log.v("ADP", "/******** Send Change Request ********\"");
+		String str = msgChar + tablename; //tablename where record is getting changed
+		for(int i = 0; i < rec.length; i++)
+		{
+			/*
+			 * loop through records (including ID # 
+			 * and add to string to be sent to database to update
+			 */
+			str+=msgChar + rec[i];
+		}
+		
+		out.println(str);
+		Log.v("ADP", "TCPClient.class - Sent: " + str);
+		Log.v("ADP", "/******** End Send Change Request ********\"");
+	}
+	
+	/*
+	 * recieve inserted data and handle accordingly
+	 */
+	private void recieveInsertRequest(String data)
+	{
+		Log.v("ADP", "/******** Recieve Insert Request ********\"");
+		String[] temp = data.substring(1).split(""+Message.Type.GET_INSERT); //split data by designated char
+		
+		//loop until no more elements in temp
+		for(int i = 0; i < temp.length; i++)
+		{
+			String[] fields = new String[2]; //create a new String[]
+			fields[0] = temp[i]; //temp[i] = fieldInView1 value
+			fields[1] = temp[++i]; //temp[++i] = fieldInView2 value
+			Constants.db.getTable(this.lastTable).addRecord(new Record(fields));
+			Log.d("ADP", "TCPClient.class - " + fields[0] + " " + fields[1]);
+		}
+		Log.v("ADP", "/******** End Insert Request ********\"");
+	}
+	
+	/*
+	 * Send a newly inserted Record from client to the server
+	 */
+	public void sendInsertRequest(String tablename, int indexOfNewRecord, String[] rec)
+	{
+		char msgChar = Message.Type.GET_INSERT;
+		Log.v("ADP", "/******** Send Insert Request ********\"");
+		this.lastTable = tablename; //set table in view
+		String str = msgChar + tablename + msgChar + indexOfNewRecord; //create string to send
+		for(int i = 0; i < rec.length; i++)
+		{
+			str+= msgChar + rec[i]; //append string to send with elements of new record
+		} 
+		out.println(str); //send request to server
+		Log.v("ADP", "TCPClient.class - Sent: " + str);
+		Log.v("ADP", "/******** End Send Insert Request ********\"");
+	}
+	
+	/*
+	 * Recieve data and handle deletion of a record
+	 * data contains a tablename, and an index to delete
+	 */
+	private void recieveDeleteRequest(String data) {
+		String[] temp = data.substring(1).split(""+Message.Type.GET_DELETE);
+		
+		//temp[0] is tablename
+		//temp[n+1] is index of deleted record
+		for(int i = 1; i < temp.length; i++)
+		{
+			//delete record at index passed in
+			Constants.db.getTable(temp[0]).deleteRecord(Integer.parseInt(temp[i]));
+		}
+				
+	}
+	
+	/*
+	 * send a deletion request to the database
+	 */
+	public final void sendDeleteRequest(String tablename, int indexOfDeletedRecord)
+	{
+		char msgChar = Message.Type.GET_DELETE;
+		Log.v("ADP", "/******** Send Delete Request ********\"");
+		String str = msgChar + tablename + msgChar + indexOfDeletedRecord; //construct the string
+		out.println(str); //send str to server
+		Log.v("ADP", str);
+		Log.v("ADP", "/******** END Send Delete Request ********\"");
 	}
 
 	public final void send(final String data)

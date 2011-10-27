@@ -19,7 +19,6 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
 {    
     private String type; //navigation type
     public static ShippingScreen ss; //shipping screen list
-    public static boolean canUpdate;
     private static Handler handler;
     
     @Override
@@ -49,7 +48,7 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
         
     }
     
-    public static void autoRefresh() {
+    public static void refresh() {
     	Log.v("ADP", "IntelliSyncActivity.class - Refreshing...");
         handler.postDelayed(new Runnable() {
         	@Override

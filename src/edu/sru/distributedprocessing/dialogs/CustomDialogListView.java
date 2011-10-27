@@ -8,6 +8,7 @@ import edu.sru.distributedprocessing.editors.DepotEditor;
 import edu.sru.distributedprocessing.editors.DriverEditor;
 import edu.sru.distributedprocessing.editors.VehicleEditor;
 import edu.sru.distributedprocessing.editors.VehicleTypeEditor;
+import edu.sru.distributedprocessing.splashscreen.SplashScreenActivity;
 import edu.sru.distributedprocessing.tableobjects.Record;
 import edu.sru.distributedprocessing.tableobjects.Table;
 import edu.sru.distributedprocessing.tools.Constants;
@@ -27,14 +28,16 @@ public class CustomDialogListView extends Dialog
 {
     Activity activity;	//current activity
     Table type;
-    int index;
+    int recordIndex;
+    int listIndex;
     
-    public CustomDialogListView(Activity act, int theme, Table type, int index) 
+    public CustomDialogListView(Activity act, int theme, Table type, int recordIndex, int listIndex) 
     {
         super(act, theme);
         this.activity = act;
         this.type = type;
-        this.index = index;
+        this.recordIndex = recordIndex; 
+        this.listIndex = listIndex;
     }
     
     @Override
@@ -100,7 +103,7 @@ public class CustomDialogListView extends Dialog
 	    				}
 	    				
 	    				//pull in entire record from db
-	    				Initialize.tcp.getRecordRequest(type.getTableName(), index);
+	    				Initialize.tcp.sendRecordRequest(type.getTableName(), recordIndex);
 	    				
 	    				engineIntent.putExtra("Fields", type.getFields());
 	    				activity.startActivity(engineIntent);
@@ -109,13 +112,14 @@ public class CustomDialogListView extends Dialog
 	    				if(clicked.equalsIgnoreCase(list[2]))
 	    				{
 	    					//Delete Record
+	    					Initialize.tcp.sendDeleteRequest(type.getTableName(), recordIndex);
 	    					
-	    					Initialize.tcp.sendDeleteRequest(type.getTableName(), index);
+	    					IntelliSyncActivity.ss.deleteRecordAt(listIndex);
+	    					Log.v("ADP", "CustomDialogListView.class - deleting real record index: " + listIndex);
+
+	    					//refresh list view
 	    					
-	    					IntelliSyncActivity.ss.deleteRecordAt(index);
-	    			    						
-	    					
-	    					Log.v("ADP", "CustomDialogListView.class - Delete Table: " + type.getTableName() + " Index of Record to delete: " + index);
+	    					Log.v("ADP", "CustomDialogListView.class - Delete Record: " + type.getTableName() + " Index of Record to delete: " + recordIndex);
 	    				}
 	    		
 	        		dismissCustomDialog();

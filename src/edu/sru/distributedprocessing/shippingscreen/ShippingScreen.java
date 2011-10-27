@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import edu.sru.distributedprocessing.IntelliSyncActivity;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.dialogs.CustomDialogListView;
 import edu.sru.distributedprocessing.tableobjects.Record;
@@ -50,8 +51,8 @@ public class ShippingScreen
 		{
 			public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) 
 			{
-    			CustomDialogListView cldv = new CustomDialogListView(act, R.style.CustomDialogTheme, table, arg2 + 1);
-    			Log.v("ADP", "ShippingScreen.class - tablename: " + table.getTableName() + " Record ID: " + arg2 + 1);
+    			CustomDialogListView cldv = new CustomDialogListView(act, R.style.CustomDialogTheme, table, Integer.parseInt(table.getRecords()[arg2].getID()), arg2);
+    			Log.v("ADP", "ShippingScreen.class - tablename: " + table.getTableName() + " Record ID: " +  table.getRecords()[arg2].getID());
     			cldv.show();
     		}
        });
@@ -124,22 +125,6 @@ public class ShippingScreen
 		 }
 	}
 
-//	public void Update() 
-//	{
-//		Log.d("ADP", "Inside Update");
-////		mylist.clear();
-////		populateListView();
-////		mRecords = new SimpleAdapter(act, mylist, R.layout.list_item,
-////				new String[] {field1.getText().toString(), field2.getText().toString()}, new int[] {R.id.FIELD1, R.id.FIELD2});
-////		lv.setAdapter(mRecords);
-//		
-//		act.finish();
-//		act.startActivity(act.getIntent());
-//		
-//		Log.d("TCP", "Refreshed List");
-//		Log.d("ADP", "Exit Update");
-//	}
-
 	public void Finalize() 
 	{
 		//save everything and exit
@@ -152,7 +137,6 @@ public class ShippingScreen
 
 	public void deleteRecordAt(int index) {
 		mylist.remove(index);
-		
 	}
 	
 }

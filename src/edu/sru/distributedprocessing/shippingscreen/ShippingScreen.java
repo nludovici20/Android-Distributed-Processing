@@ -124,21 +124,21 @@ public class ShippingScreen
 		 }
 	}
 
-	public void Update() 
-	{
-		Log.d("ADP", "Inside Update");
-//		mylist.clear();
-//		populateListView();
-//		mRecords = new SimpleAdapter(act, mylist, R.layout.list_item,
-//				new String[] {field1.getText().toString(), field2.getText().toString()}, new int[] {R.id.FIELD1, R.id.FIELD2});
-//		lv.setAdapter(mRecords);
-		
-		act.finish();
-		act.startActivity(act.getIntent());
-		
-		Log.d("TCP", "Refreshed List");
-		Log.d("ADP", "Exit Update");
-	}
+//	public void Update() 
+//	{
+//		Log.d("ADP", "Inside Update");
+////		mylist.clear();
+////		populateListView();
+////		mRecords = new SimpleAdapter(act, mylist, R.layout.list_item,
+////				new String[] {field1.getText().toString(), field2.getText().toString()}, new int[] {R.id.FIELD1, R.id.FIELD2});
+////		lv.setAdapter(mRecords);
+//		
+//		act.finish();
+//		act.startActivity(act.getIntent());
+//		
+//		Log.d("TCP", "Refreshed List");
+//		Log.d("ADP", "Exit Update");
+//	}
 
 	public void Finalize() 
 	{

@@ -7,6 +7,7 @@ import edu.sru.distributedprocessing.tools.Constants;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,6 +20,7 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
     private String type; //navigation type
     public static ShippingScreen ss; //shipping screen list
     public static boolean canUpdate;
+    private static Handler handler;
     
     @Override
     public void onCreate(Bundle savedInstanceState) 
@@ -27,8 +29,9 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
         setContentView(R.layout.intelli_sync_activity);  
         
         //passed in navigation type
-        type = getIntent().getExtras().getString("Type");       
+        type = getIntent().getExtras().getString("Type");
         
+        handler  = new Handler();
         ss = null; //initialize shipping screen
         
         /*
@@ -40,30 +43,22 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
         	 if(type.equalsIgnoreCase(Constants.db.getTables()[i].getRecordType()))
              {
              	ss = new ShippingScreen(this, Constants.db.getTables()[i]);
+             	ss.Initialize(); //initialize some stuff
              }
         }
         
-        ss.Initialize(); //initialize some stuff
-        
-        runOnUiThread(new Runnable(){
-        	@Override 
-        	public void run(){
-        		while(canUpdate)
-        		{
-        			ss.Update();
-        			canUpdate = false;
-        		}
-        		try {
-					this.wait(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-        	}
-        });
-        
     }
     
+    public static void autoRefresh() {
+    	Log.v("ADP", "IntelliSyncActivity.class - Refreshing...");
+        handler.postDelayed(new Runnable() {
+        	@Override
+			public void run() {
+				ss.Initialize(); // this is where you put your refresh code
+			}
+             }, 500);
+        Log.v("ADP", "IntelliSyncActivity.class - Done Refreshing");
+    }
     
     /*
      * Method that handles different views onclick methods if set in xml layout

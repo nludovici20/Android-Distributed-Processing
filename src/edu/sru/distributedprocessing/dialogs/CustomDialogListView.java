@@ -113,8 +113,7 @@ public class CustomDialogListView extends Dialog
 	    					Initialize.tcp.sendDeleteRequest(type.getTableName(), index);
 	    					
 	    					IntelliSyncActivity.ss.deleteRecordAt(index);
-	    					
-	    					IntelliSyncActivity.ss.Update();    						
+	    			    						
 	    					
 	    					Log.v("ADP", "CustomDialogListView.class - Delete Table: " + type.getTableName() + " Index of Record to delete: " + index);
 	    				}

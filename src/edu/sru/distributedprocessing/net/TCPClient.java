@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import edu.sru.distributedprocessing.Initialize;
 import edu.sru.distributedprocessing.IntelliSyncActivity;
 import edu.sru.distributedprocessing.shippingscreen.ShippingScreen;
 import edu.sru.distributedprocessing.tableobjects.Record;
@@ -83,6 +84,13 @@ public class TCPClient extends Thread
 						
 						IntelliSyncActivity.canUpdate = true;
 						Log.v("ADP", "TCPClient.class - Default Case");	
+					}
+					
+					try{
+						IntelliSyncActivity.autoRefresh();
+					}catch(Exception e)
+					{
+						Log.v("ADP", "TCPClient.class - Error Refreshing");
 					}
 					
 					Log.v("ADP","TCPClient.class - " + data);
@@ -261,17 +269,19 @@ public class TCPClient extends Thread
 				{
 					try
 					{
+						String id = null;
 						String[] fields = new String[2]; //fields array
 						for(int k = 0; k < fields.length - 1; k++)
 						{
-							//fields[0] = temp[j]; 	//temp[j] = id
-							fields[0] = temp[j]; 	//temp[++j] = fieldInView(1)
+							
+							id = temp[j]; 	//temp[j] = id
+							fields[0] = temp[++j]; 	//temp[++j] = fieldInView(1)
 							fields[1] = temp[++j]; //temp[++j] = fieldInView(2)
 							//log data
-							Log.v("ADP", "TCPClient.class - " + fields[0].toString() + " " + fields[1].toString());
+							Log.v("ADP", "TCPClient.class - " + id + " " + fields[0].toString() + " " + fields[1].toString());
 						}
 						
-						rec.add(new Record(fields));
+						rec.add(new Record(id, fields));
 					}catch (Exception e)
 					{
 						Log.v("ADP", "ERROR Creating Record");
@@ -299,7 +309,7 @@ public class TCPClient extends Thread
 			this.numFields = tbl.getFieldsInView().size();
 		}
 		
-		String str = "\0" + lastTable + "\0" + tbl.getIndex(); //construct string
+		String str = "\0" + lastTable  + "\0" + tbl.getIndex() + "\0" + tbl.getDBName(tbl.getFields()[0]); //construct string
 
 		for(int i = 0; i < numFields; i++)
 		{

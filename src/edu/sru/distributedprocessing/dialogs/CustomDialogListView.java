@@ -116,8 +116,7 @@ public class CustomDialogListView extends Dialog
 	    					
 	    					IntelliSyncActivity.ss.deleteRecordAt(listIndex);
 	    					Log.v("ADP", "CustomDialogListView.class - deleting real record index: " + listIndex);
-
-	    					//refresh list view
+	    					
 	    					
 	    					Log.v("ADP", "CustomDialogListView.class - Delete Record: " + type.getTableName() + " Index of Record to delete: " + recordIndex);
 	    				}

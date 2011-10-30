@@ -22,7 +22,6 @@ import edu.sru.distributedprocessing.tools.Constants;
 
 public class ShippingScreen 
 {
-	private ArrayList<Record> records;
 	private Record[] type;
 	private Activity act;
 	private int tableIndex, tableSizeLimit;
@@ -42,24 +41,6 @@ public class ShippingScreen
 		
 	public void Initialize() 
 	{
-		populateListView();
-		mRecords = new SimpleAdapter(act, mylist, R.layout.list_item,
-				new String[] {field1.getText().toString(), field2.getText().toString()}, new int[] {R.id.FIELD1, R.id.FIELD2});
-		lv.setAdapter(mRecords);
-		lv.setTextFilterEnabled(true);
-		lv.setOnItemClickListener(new OnItemClickListener() 
-		{
-			public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) 
-			{
-    			CustomDialogListView cldv = new CustomDialogListView(act, R.style.CustomDialogTheme, table, Integer.parseInt(table.getRecords()[arg2].getID()), arg2);
-    			Log.v("ADP", "ShippingScreen.class - tablename: " + table.getTableName() + " Record ID: " +  table.getRecords()[arg2].getID());
-    			cldv.show();
-    		}
-       });
-		
-	}
-
-	private void populateListView() {
 		//Collection<String> fields = null;
 		String[] fields = new String[2];
 		//set the vehicle objects in view to the screen
@@ -123,6 +104,21 @@ public class ShippingScreen
 				 
 			 } 
 		 }
+		
+		mRecords = new SimpleAdapter(act, mylist, R.layout.list_item,
+				new String[] {field1.getText().toString(), field2.getText().toString()}, new int[] {R.id.FIELD1, R.id.FIELD2});
+		lv.setAdapter(mRecords);
+		lv.setTextFilterEnabled(true);
+		lv.setOnItemClickListener(new OnItemClickListener() 
+		{
+			public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) 
+			{
+    			CustomDialogListView cldv = new CustomDialogListView(act, R.style.CustomDialogTheme, table, Integer.parseInt(table.getRecords()[arg2].getID()), arg2);
+    			Log.v("ADP", "ShippingScreen.class - tablename: " + table.getTableName() + " Record ID: " +  table.getRecords()[arg2].getID());
+    			cldv.show();
+    		}
+       });
+		
 	}
 
 	public void Finalize() 
@@ -136,7 +132,10 @@ public class ShippingScreen
 	}
 
 	public void deleteRecordAt(int index) {
-		mylist.remove(index);
+		Log.v("ADP", "Deleting: "  + type[index].getFields()[0] + " " + type[index].getFields()[1]);
+		table.deleteRecord(index);
+		type = table.getRecords();
+		Initialize();
 	}
 	
 }

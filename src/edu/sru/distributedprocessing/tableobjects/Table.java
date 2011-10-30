@@ -82,6 +82,7 @@ public class Table {
 	public void deleteRecord(int index)
 	{
 		this.table_data.remove(index);
+		this.data = table_data.toArray(new Record[1]);
 	}
 	public void addField(String field)
 	{

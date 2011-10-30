@@ -49,7 +49,7 @@ public class CustomDialogListView extends Dialog
         final ListView lst=(ListView)findViewById(R.id.myList);
         
         //List of options
-        final String[] list = {"New Record", "Edit Record", "Delete Record"};
+        final String[] list = { "Edit Record", "Delete Record"};
         
         lst.setAdapter(new ArrayAdapter<String>(activity,R.layout.custom_popup_row, list));      
         
@@ -62,68 +62,56 @@ public class CustomDialogListView extends Dialog
         		String clicked = ((TextView) v).getText().toString();
         		Log.v("ADP", "CustomDialogListView.class - " + clicked);
         		Intent engineIntent = null;
-        		if(clicked.equalsIgnoreCase(list[0]))
-        		{
-        			//new record
-        			try
-        			{
-        				Constants.db.getTable(type.getTableName()).addRecord(new Record(""+ type.getIndex() + 101, "Jack", "Lambert"));
-        				Log.v("ADP", "CustomDialogListView.class - Insert Record");        		
-        			}catch(Exception e)
-        			{
-        				Log.v("ADP", "CustomDialogListView.class - Error Inserting New Record");
-        			}
-        			
-        		}else	
-        			if(clicked.equalsIgnoreCase(list[1]))
-	    			{
-	    				//Edit Record
-	    				for(int i = 0; i < Constants.db.getTables().length; i++)
-	    				{
-	    					if (type.getTableName().equalsIgnoreCase("contacts"))
+        		
+    			if(clicked.equalsIgnoreCase(list[0]))
+    			{
+    				//Edit Record
+    				for(int i = 0; i < Constants.db.getTables().length; i++)
+    				{
+    					if (type.getTableName().equalsIgnoreCase("contacts"))
+						{
+    						engineIntent = new Intent(activity, ContactEditor.class);
+						}else
+							if (type.getTableName().equalsIgnoreCase("depots"))
 							{
-	    						engineIntent = new Intent(activity, ContactEditor.class);
+								engineIntent = new Intent(activity, DepotEditor.class);
 							}else
-								if (type.getTableName().equalsIgnoreCase("depots"))
+								if (type.getTableName().equalsIgnoreCase("drivers"))
 								{
-									engineIntent = new Intent(activity, DepotEditor.class);
+									engineIntent = new Intent(activity, DriverEditor.class);
 								}else
-									if (type.getTableName().equalsIgnoreCase("drivers"))
+									if (type.getTableName().equalsIgnoreCase("vehicle type"))
 									{
-										engineIntent = new Intent(activity, DriverEditor.class);
+										engineIntent = new Intent(activity, VehicleTypeEditor.class);
 									}else
-										if (type.getTableName().equalsIgnoreCase("vehicle type"))
+										if (type.getTableName().equalsIgnoreCase("vehicles"))
 										{
-											engineIntent = new Intent(activity, VehicleTypeEditor.class);
-										}else
-											if (type.getTableName().equalsIgnoreCase("vehicles"))
-											{
-												engineIntent = new Intent(activity, VehicleEditor.class);
-											}
-	    				}
-	    				
-	    				//pull in entire record from db
-	    				Initialize.tcp.sendRecordRequest(type.getTableName(), recordIndex);
-	    				
-	    				engineIntent.putExtra("Fields", type.getFields());
-	    				activity.startActivity(engineIntent);
-	    			 }
-	    			else 
-	    				if(clicked.equalsIgnoreCase(list[2]))
-	    				{
-	    					//Delete Record
-	    					Initialize.tcp.sendDeleteRequest(type.getTableName(), recordIndex);
-	    					
-	    					IntelliSyncActivity.ss.deleteRecordAt(listIndex);
-	    					Log.v("ADP", "CustomDialogListView.class - deleting real record index: " + listIndex);
-	    					
-	    					
-	    					Log.v("ADP", "CustomDialogListView.class - Delete Record: " + type.getTableName() + " Index of Record to delete: " + recordIndex);
-	    				}
-	    		
-	        		dismissCustomDialog();
-	           	}
-	        });
+											engineIntent = new Intent(activity, VehicleEditor.class);
+										}
+    				}
+    				
+    				//pull in entire record from db
+    				Initialize.tcp.sendRecordRequest(type.getTableName(), recordIndex);
+    				engineIntent.putExtra("Intent", "edit");
+    				engineIntent.putExtra("Fields", type.getFields());
+    				activity.startActivity(engineIntent);
+    			 }
+    			else 
+    				if(clicked.equalsIgnoreCase(list[1]))
+    				{
+    					//Delete Record
+    					Initialize.tcp.sendDeleteRequest(type.getTableName(), recordIndex);
+    					
+    					IntelliSyncActivity.ss.deleteRecordAt(listIndex);
+    					Log.v("ADP", "CustomDialogListView.class - deleting real record index: " + listIndex);
+    					
+    					
+    					Log.v("ADP", "CustomDialogListView.class - Delete Record: " + type.getTableName() + " Index of Record to delete: " + recordIndex);
+    				}
+    		
+        		dismissCustomDialog();
+           	}
+        });
         
     }
     

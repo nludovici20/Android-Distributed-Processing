@@ -1,5 +1,10 @@
 package edu.sru.distributedprocessing;
 
+import edu.sru.distributedprocessing.editors.ContactEditor;
+import edu.sru.distributedprocessing.editors.DepotEditor;
+import edu.sru.distributedprocessing.editors.DriverEditor;
+import edu.sru.distributedprocessing.editors.VehicleEditor;
+import edu.sru.distributedprocessing.editors.VehicleTypeEditor;
 import edu.sru.distributedprocessing.optionslist.Options;
 import edu.sru.distributedprocessing.shippingscreen.ShippingScreen;
 import edu.sru.distributedprocessing.tableobjects.Table;
@@ -17,7 +22,7 @@ import android.widget.Toast;
 
 public class IntelliSyncActivity extends Activity implements View.OnClickListener
 {    
-    private String type; //navigation type
+    private String type, tableName; //navigation type, tablename
     public static ShippingScreen ss; //shipping screen list
     private static Handler handler;
     
@@ -42,6 +47,7 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
         	 if(type.equalsIgnoreCase(Constants.db.getTables()[i].getRecordType()))
              {
              	ss = new ShippingScreen(this, Constants.db.getTables()[i]);
+             	tableName = Constants.db.getTables()[i].getTableName();
              	ss.Initialize(); //initialize some stuff
              }
         }
@@ -108,8 +114,9 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
     @Override
 	public boolean onOptionsItemSelected(MenuItem item) 
     {
-    	Intent engineIntent;
-		switch (item.getItemId()) 
+    	Intent engineIntent = null;
+		
+    	switch (item.getItemId()) 
 		{
 		case R.id.options_menu_item:
 			engineIntent = new Intent(IntelliSyncActivity.this, Options.class);
@@ -119,6 +126,48 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
 			
 	    case R.id.new_record_item:
 			//open up a new record creator
+	    	//Get Record Type
+			for(int i = 0; i < Constants.db.getTables().length; i++)
+			{
+				if (tableName.equalsIgnoreCase("contacts"))
+				{
+					engineIntent = new Intent(IntelliSyncActivity.this, ContactEditor.class);
+				}else
+					if (tableName.equalsIgnoreCase("depots"))
+					{
+						engineIntent = new Intent(IntelliSyncActivity.this, DepotEditor.class);
+					}else
+						if (tableName.equalsIgnoreCase("drivers"))
+						{
+							engineIntent = new Intent(IntelliSyncActivity.this, DriverEditor.class);
+						}else
+							if (tableName.equalsIgnoreCase("vehicle type"))
+							{
+								engineIntent = new Intent(IntelliSyncActivity.this, VehicleTypeEditor.class);
+							}else
+								if (tableName.equalsIgnoreCase("vehicles"))
+								{
+									engineIntent = new Intent(IntelliSyncActivity.this, VehicleEditor.class);
+								}
+			}
+			
+			//new blank record
+			for(int i = 0; i < Constants.db.getTable(tableName).getFields().length; i++)
+			{
+				Constants.record.put(Constants.db.getTable(tableName).getFields()[i], "");
+			}
+			
+			try
+			{
+				engineIntent.putExtra("Fields", Constants.db.getTable(tableName).getFields());
+				engineIntent.putExtra("Intent", "insert");
+				IntelliSyncActivity.this.startActivity(engineIntent);
+				Log.v("ADP", "CustomDialogListView.class - Insert Record");        		
+			}catch(Exception e)
+			{
+				Log.v("ADP", "CustomDialogListView.class - Error Inserting New Record");
+			}
+			
     	}
 		return true;
 	}

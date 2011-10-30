@@ -279,12 +279,12 @@ public class TCPClient extends Thread
 	/*
 	 * Send a newly inserted Record from client to the server
 	 */
-	public void sendInsertRequest(String tablename, int indexOfNewRecord, String[] rec)
+	public void sendInsertRequest(String tablename, String[] rec)
 	{
 		char msgChar = Message.Type.GET_INSERT;
 		Log.v("ADP", "/******** Send Insert Request ********\"");
 		this.lastTable = tablename; //set table in view
-		String str = msgChar + tablename + msgChar + indexOfNewRecord; //create string to send
+		String str = msgChar + tablename; //create string to send
 		for(int i = 0; i < rec.length; i++)
 		{
 			str+= msgChar + rec[i]; //append string to send with elements of new record

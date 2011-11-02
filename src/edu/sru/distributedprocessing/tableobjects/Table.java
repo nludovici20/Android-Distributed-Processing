@@ -84,6 +84,13 @@ public class Table {
 		this.table_data.remove(index);
 		this.data = table_data.toArray(new Record[1]);
 	}
+	
+	public void changeRecord(int index, String[] values)
+	{
+		this.table_data.get(index).fields = new Record(values).getFields();
+		this.data = table_data.toArray(new Record[1]);
+	}
+	
 	public void addField(String field)
 	{
 		if(fieldsInView.size() < 2)

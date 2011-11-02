@@ -83,45 +83,8 @@
 	            	android:layout_alignParentRight="true">
 	            </EditText>
 				<!-- Row 2 -->
-	            <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/primaryPhone_header" android:id="@+id/ghost2" android:layout_width="match_parent"></TextView>
-				<TextView 
-					android:layout_height="match_parent" 
-	            	android:gravity="center"
-	            	android:layout_alignBottom="@+id/streetAdd_edit"
-					android:text="Street Address 1: " 
-					android:layout_width="wrap_content" 
-					android:layout_below="@+id/ghost2" 
-					android:id="@+id/streetAdd_header">
-				</TextView>
-				 <EditText 
-	            	android:layout_height="wrap_content"
-	            	android:layout_below="@+id/ghost2"
-	            	android:id="@+id/streetAdd_edit" 
-	            	android:layout_width="wrap_content" 
-	            	android:text="" 
-	            	android:layout_alignParentRight="true">
-	            </EditText>
-	            <!-- Row 3 -->
-	            <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/streetAdd_header" android:id="@+id/ghost3" android:layout_width="match_parent"></TextView>
-				<TextView 
-					android:layout_height="match_parent" 
-	            	android:gravity="center"
-	            	android:layout_alignBottom="@+id/city_edit"
-					android:text="City: " 
-					android:layout_width="wrap_content" 
-					android:layout_below="@+id/ghost3" 
-					android:id="@+id/city_header">
-				</TextView>
-				 <EditText 
-	            	android:layout_height="wrap_content"
-	            	android:layout_below="@+id/ghost3"
-	            	android:id="@+id/city_edit" 
-	            	android:layout_width="wrap_content" 
-	            	android:text="" 
-	            	android:layout_alignParentRight="true">
-	            </EditText>
 	            <!-- Row 4 -->
-	            <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/city_header" android:id="@+id/ghost4" android:layout_width="match_parent"></TextView>
+	            <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/primaryPhone_header" android:id="@+id/ghost4" android:layout_width="match_parent"></TextView>
 				<Button 
 					android:id="@+id/save_btn"
 					android:background="@layout/button_component1"
@@ -157,95 +120,19 @@
 	            </EditText>
 	            <!-- Row 1 -->
 	            <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/middleInitial_header" android:id="@+id/ghost1" android:layout_width="match_parent"></TextView>
-	            <TextView 
-	            	android:layout_height="match_parent" 
-	            	android:gravity="center"
-	            	android:layout_alignBottom="@+id/emailAddress_edit"
-	            	android:text="Email Address: " 
-	            	android:layout_width="wrap_content"
-	            	android:layout_below="@+id/ghost1" 
-	            	android:id="@+id/emailAddress_header">
-	            </TextView>
-	            <EditText 
-	            	android:layout_height="wrap_content"
-	            	android:layout_below="@+id/ghost1"
-	            	android:id="@+id/emailAddress_edit" 
-	            	android:layout_width="wrap_content" 
-	            	android:text="" 
-	            	android:layout_alignParentRight="true">
-	            </EditText>
-	            <!-- Row 2 -->
-	            <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/emailAddress_header" android:id="@+id/ghost2" android:layout_width="match_parent"></TextView>
 				<TextView 
 					android:layout_height="match_parent" 
 	            	android:gravity="center"
 	            	android:layout_alignBottom="@+id/workPhone_edit"
 					android:text="Work Phone: " 
 					android:layout_width="wrap_content" 
-					android:layout_below="@+id/ghost2" 
+					android:layout_below="@+id/ghost1" 
 					android:id="@+id/workPhone_header">
 				</TextView>
 				 <EditText 
 	            	android:layout_height="wrap_content"
-	            	android:layout_below="@+id/ghost2"
+	            	android:layout_below="@+id/ghost1"
 	            	android:id="@+id/workPhone_edit" 
-	            	android:layout_width="wrap_content" 
-	            	android:text="" 
-	            	android:layout_alignParentRight="true">
-	            </EditText>
-				<!-- Row 3 -->
-	            <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/workPhone_header" android:id="@+id/ghost3" android:layout_width="match_parent"></TextView>
-				<TextView 
-					android:layout_height="match_parent" 
-	            	android:gravity="center"
-	            	android:layout_alignBottom="@+id/streetAdd2_edit"
-					android:text="Street Address 2: " 
-					android:layout_width="wrap_content" 
-					android:layout_below="@+id/ghost3" 
-					android:id="@+id/streetAdd2_header">
-				</TextView>
-				 <EditText 
-	            	android:layout_height="wrap_content"
-	            	android:layout_below="@+id/ghost3"
-	            	android:id="@+id/streetAdd2_edit" 
-	            	android:layout_width="wrap_content" 
-	            	android:text="" 
-	            	android:layout_alignParentRight="true">
-	            </EditText>
-	            <!-- Row 4 -->
-	            <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/streetAdd2_header" android:id="@+id/ghost4" android:layout_width="match_parent"></TextView>
-				<TextView 
-					android:layout_height="match_parent" 
-	            	android:gravity="center"
-	            	android:layout_alignBottom="@+id/zip_edit"
-					android:text="Zip Code: " 
-					android:layout_width="wrap_content" 
-					android:layout_below="@+id/ghost4" 
-					android:id="@+id/zip_header">
-				</TextView>
-				 <EditText 
-	            	android:layout_height="wrap_content"
-	            	android:layout_below="@+id/ghost4"
-	            	android:id="@+id/zip_edit" 
-	            	android:layout_width="wrap_content" 
-	            	android:text="" 
-	            	android:layout_alignParentRight="true">
-	            </EditText>
-	            <!-- Row 2 -->
-	            <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/zip_header" android:id="@+id/ghost5" android:layout_width="match_parent"></TextView>
-				<TextView 
-					android:layout_height="match_parent" 
-	            	android:gravity="center"
-	            	android:layout_alignBottom="@+id/state_edit"
-					android:text="State: " 
-					android:layout_width="wrap_content" 
-					android:layout_below="@+id/ghost5" 
-					android:id="@+id/state_header">
-				</TextView>
-				 <EditText 
-	            	android:layout_height="wrap_content"
-	            	android:layout_below="@+id/ghost5"
-	            	android:id="@+id/state_edit" 
 	            	android:layout_width="wrap_content" 
 	            	android:text="" 
 	            	android:layout_alignParentRight="true">

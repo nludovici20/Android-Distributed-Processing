@@ -122,7 +122,8 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
 			engineIntent = new Intent(IntelliSyncActivity.this, Options.class);
 			engineIntent.putExtra("Type", type);
 			startActivity(engineIntent);
-			finish();
+			IntelliSyncActivity.this.finish();
+			break;
 			
 	    case R.id.new_record_item:
 			//open up a new record creator
@@ -167,6 +168,8 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
 			{
 				Log.v("ADP", "CustomDialogListView.class - Error Inserting New Record");
 			}
+			
+			break;
 			
     	}
 		return true;

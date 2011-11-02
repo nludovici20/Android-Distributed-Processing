@@ -13,7 +13,7 @@
 	    	style="@style/Heading"
 	    	android:textSize="20sp"
 	    	android:id="@+id/group_header" 
-	    	android:text="Vehicle ID #"
+	    	android:text="Vehicle Type ID #"
 	    	android:layout_width="match_parent">
 	    </TextView>
 	    <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/group_header" android:id="@+id/ghost1" android:layout_alignLeft="@+id/group_header" android:layout_width="match_parent"></TextView>
@@ -32,60 +32,58 @@
 	        	<TextView 
 	            	android:layout_height="match_parent" 
 	            	android:gravity="center"
-	            	android:layout_alignBottom="@+id/driverChoices_edit"
-	            	android:text="Driver Choices: " 
+	            	android:layout_alignBottom="@+id/type_edit"
+	            	android:text="Type " 
 	            	android:layout_alignParentLeft="true" 
-	            	android:id="@+id/driverChoices_header" android:layout_width="wrap_content">
+	            	android:id="@+id/type_header" android:layout_width="wrap_content">
 	            </TextView>
-	           <Spinner
-					android:id="@+id/driverChoices_edit"
-					android:layout_below="@+id/group_header"
-					android:layout_alignParentRight="true"
-					android:layout_toRightOf="@id/driverChoices_header"
-					android:text="Driver's Name: "
-					android:layout_height="wrap_content" 
-					android:layout_width="wrap_content">
-				</Spinner>
-	            <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/driverChoices_header" android:id="@+id/ghost0" android:layout_width="match_parent"></TextView>
-	           <TextView 
-	            	android:layout_height="match_parent" 
-	            	android:gravity="center"
-	            	android:layout_alignBottom="@+id/depotChoices_edit"
-	            	android:layout_below="@+id/ghost0" 
-	            	android:text="Depot Choices: " 
-	            	android:layout_alignParentLeft="true" 
-	            	android:id="@+id/depotChoices_header" android:layout_width="wrap_content">
-	            </TextView>
-	           <Spinner
-					android:id="@+id/depotChoices_edit"
-					android:layout_below="@+id/ghost0"
-					android:layout_alignParentRight="true"
-					android:layout_toRightOf="@id/depotChoices_header"
-					android:text="Depot Name: "
-					android:layout_height="wrap_content" 
-					android:layout_width="wrap_content">
-				</Spinner>
-	            <!-- Row 1 -->
-	            <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/depotChoices_header" android:id="@+id/ghost1" android:layout_width="match_parent"></TextView>
+	            <EditText 
+	            	android:layout_height="wrap_content"
+	              	android:text="Depot Name"
+	            	android:id="@+id/type_edit" 
+	            	android:layout_width="wrap_content"  
+	            	android:layout_alignParentRight="true">
+	            </EditText>
+	            <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/type_header" android:id="@+id/ghost0" android:layout_width="match_parent"></TextView>
 	            <TextView 
 	            	android:layout_height="match_parent" 
 	            	android:gravity="center"
-	            	android:layout_alignBottom="@+id/licenseNO_edit"
-	            	android:text="License #: " 
+	            	android:layout_alignBottom="@+id/subType_edit"
+	            	android:text="Sub Type: " 
+	            	android:layout_alignParentLeft="true" 
+	            	android:layout_below="@+id/ghost0"
+	            	android:layout_width="wrap_content" 
+	            	android:id="@+id/subType_header">
+	            </TextView>
+	            <EditText 
+	            	android:layout_height="wrap_content"
+	            	android:text="Sub Type"
+	            	android:id="@+id/subType_edit" 
+	            	android:layout_width="wrap_content"  
+	            	android:layout_below="@+id/ghost0"
+	            	android:layout_alignParentRight="true">
+	            </EditText>
+	            <!-- Row 1 -->
+	            <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/subType_header" android:id="@+id/ghost1" android:layout_width="match_parent"></TextView>
+	            <TextView 
+	            	android:layout_height="match_parent" 
+	            	android:gravity="center"
+	            	android:layout_alignBottom="@+id/model_edit"
+	            	android:text="Model: " 
 	            	android:layout_width="wrap_content"
 	            	android:layout_below="@+id/ghost1" 
-	            	android:id="@+id/licenseNO_header">
+	            	android:id="@+id/model_header">
 	            </TextView>
 	            <EditText 
 	            	android:layout_height="wrap_content"
 	            	android:layout_below="@+id/ghost1"
 	            	android:text=""
-	            	android:id="@+id/licenseNO_edit" 
+	            	android:id="@+id/model_edit" 
 	            	android:layout_width="wrap_content" 
 	            	android:layout_alignParentRight="true">
 	            </EditText>
 				<!-- Row 2 -->
-	            <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/licenseNO_header" android:id="@+id/ghost4" android:layout_width="match_parent"></TextView>
+	            <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/model_header" android:id="@+id/ghost4" android:layout_width="match_parent"></TextView>
 				<Button 
 					android:id="@+id/save_btn"
 					android:background="@layout/button_component1"
@@ -103,70 +101,60 @@
 	        	android:layout_weight="1"
 	        	android:id="@+id/linearLayout4" 
 	        	android:layout_height="match_parent">
-	        	 <TextView 
+	        	<TextView 
 	            	android:layout_height="match_parent" 
 	            	android:gravity="center"
-	            	android:layout_alignBottom="@+id/vehicleType_edit"
-	            	android:text="Vehicle Type: " 
+	            	android:layout_alignBottom="@+id/weight_edit"
+	            	android:text="Max Weight: " 
 	            	android:layout_alignParentLeft="true" 
-	            	android:id="@+id/vehicleType_header" android:layout_width="wrap_content">
+	            	android:layout_width="wrap_content" 
+	            	android:id="@+id/weight_header">
 	            </TextView>
-	           <Spinner
-					android:id="@+id/vehicleType_edit"
-					android:layout_below="@+id/ghost0"
-					android:layout_alignParentRight="true"
-					android:layout_toRightOf="@id/vehicleType_header"
-					android:text="Vehicle Type"
-					android:layout_height="wrap_content" 
-					android:layout_width="wrap_content">
-				</Spinner>
+	            <EditText 
+	            	android:layout_height="wrap_content"
+	            	android:id="@+id/weight_edit" 
+	            	android:layout_width="wrap_content" 
+	            	android:text="" 
+	            	android:layout_alignParentRight="true">
+	            </EditText>
 	            <!-- Row 1 -->
-	            <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/vehicleType_header" android:id="@+id/ghost1" android:layout_width="match_parent"></TextView>
+	            <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/weight_header" android:id="@+id/ghost1" android:layout_width="match_parent"></TextView>
 				<TextView 
 					android:layout_height="match_parent" 
 	            	android:gravity="center"
-	            	android:layout_alignBottom="@+id/vinNO_edit"
-					android:text="Vin Number: " 
+	            	android:layout_alignBottom="@+id/range_edit"
+					android:text="Max Range: " 
 					android:layout_width="wrap_content" 
 					android:layout_below="@+id/ghost1" 
-					android:id="@+id/vinNO_header">
+					android:id="@+id/range_header">
 				</TextView>
 				 <EditText 
 	            	android:layout_height="wrap_content"
 	            	android:layout_below="@+id/ghost1"
-	            	android:id="@+id/vinNO_edit" 
+	            	android:id="@+id/range_edit" 
 	            	android:layout_width="wrap_content" 
 	            	android:text="" 
 	            	android:layout_alignParentRight="true">
 	            </EditText>
 	            <!-- Row 2 -->
-	            <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/vinNO_header" android:id="@+id/ghost2" android:layout_width="match_parent"></TextView>
+	            <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/range_header" android:id="@+id/ghost2" android:layout_width="match_parent"></TextView>
 				<TextView 
 					android:layout_height="match_parent" 
 	            	android:gravity="center"
-	            	android:layout_alignBottom="@+id/year_edit"
-					android:text="Manufactured In " 
+	            	android:layout_alignBottom="@+id/length_edit"
+					android:text="Length: " 
 					android:layout_width="wrap_content" 
 					android:layout_below="@+id/ghost2" 
-					android:id="@+id/year_header">
+					android:id="@+id/length_header">
 				</TextView>
 				 <EditText 
 	            	android:layout_height="wrap_content"
 	            	android:layout_below="@+id/ghost2"
-	            	android:id="@+id/year_edit" 
+	            	android:id="@+id/length_edit" 
 	            	android:layout_width="wrap_content" 
 	            	android:text="" 
 	            	android:layout_alignParentRight="true">
 	            </EditText>
-	             <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/year_header" android:id="@+id/ghost3" android:layout_width="match_parent"></TextView>
-				<CheckBox 
-			    	android:text="  Is Available?  " 
-			    	android:layout_below="@+id/ghost3"
-			    	android:layout_alignParentRight="true"
-			    	android:layout_height="wrap_content" 
-			    	android:layout_width="wrap_content" 
-			    	android:id="@+id/available_box"> 
-			    </CheckBox>
 	        </RelativeLayout>
 	    </LinearLayout>
 	</RelativeLayout>

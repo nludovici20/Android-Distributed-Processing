@@ -10,7 +10,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class VehicleEditor extends Activity {
-	String tableName;
+	String tableName, intent;
+	int index;
 	
     /** Called when the activity is first created. */
     @Override
@@ -19,16 +20,21 @@ public class VehicleEditor extends Activity {
         setContentView(R.layout.vehicle_editor);
        
         tableName = "vehicles";
+        intent = getIntent().getExtras().getString("Intent");
+        index = getIntent().getExtras().getInt("Index");
+        
+        String[] fields = getIntent().getExtras().getStringArray("Fields");
+        final String[] new_record = new String[fields.length];
         
         //Editor Items
         TextView group_header = (TextView) findViewById(R.id.group_header);
-        EditText vin_text = (EditText) findViewById(R.id.vin_edit);
-        EditText license_text = (EditText) findViewById(R.id.license_edit);
+        EditText vin_text = (EditText) findViewById(R.id.vinNO_edit);
+        EditText license_text = (EditText) findViewById(R.id.licenseNO_edit);
         EditText year_text = (EditText) findViewById(R.id.year_edit); 
         CheckBox avail_box = (CheckBox) findViewById(R.id.available_box);
-        Spinner driver_group = (Spinner) findViewById(R.id.driver_choices);
-        Spinner vehicle_type_group = (Spinner) findViewById(R.id.vehicle_choices);
-        Spinner depot_group = (Spinner) findViewById(R.id.depot_choices);
+        Spinner driver_group = (Spinner) findViewById(R.id.driverChoices_edit);
+        Spinner vehicle_type_group = (Spinner) findViewById(R.id.vehicleType_edit);
+        Spinner depot_group = (Spinner) findViewById(R.id.depotChoices_edit);
         
         /*
          *  Pass in record ID selected

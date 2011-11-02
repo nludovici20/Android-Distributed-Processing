@@ -37,9 +37,7 @@ public class Main extends Activity
 			//@Override
 			public void onClick(View v) 
 			{
-				Intent engineIntent = new Intent(Main.this, Options.class);
-				engineIntent.putExtra("Type", "VehicleType");
-				startActivity(engineIntent);
+				
 			}
 		});
         
@@ -49,9 +47,7 @@ public class Main extends Activity
 			//@Override
 			public void onClick(View v) 
 			{
-				Intent engineIntent = new Intent(Main.this, ContactEditor.class);
-				engineIntent.putExtra("Fields", Initialize.contactFields);
-				startActivity(engineIntent);
+				
 			}
 		});
         

@@ -138,4 +138,12 @@ public class ShippingScreen
 		Initialize();
 	}
 	
+	public void changeRecordAt(int index,String[] values)
+	{
+		Log.v("ADP", "Updating Record");
+		table.changeRecord(index, values);
+		type = table.getRecords();
+		Initialize();
+	}
+	
 }

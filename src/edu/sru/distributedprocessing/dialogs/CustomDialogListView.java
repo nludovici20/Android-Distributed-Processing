@@ -94,6 +94,7 @@ public class CustomDialogListView extends Dialog
     				Initialize.tcp.sendRecordRequest(type.getTableName(), recordIndex);
     				engineIntent.putExtra("Intent", "edit");
     				engineIntent.putExtra("Fields", type.getFields());
+    				engineIntent.putExtra("Index", listIndex);
     				activity.startActivity(engineIntent);
     			 }
     			else 

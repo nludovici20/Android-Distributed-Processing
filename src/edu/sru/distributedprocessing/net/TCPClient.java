@@ -196,12 +196,12 @@ public class TCPClient extends Thread
 	 */
 	public void sendRecordRequest(String tablename, int indexOfRecord)
 	{
+		Constants.record.clear();
 		char msgChar = Message.Type.GET_RECORD;
 		Log.v("ADP", "/******** send Record Request ********\"");
 		this.lastTable = tablename; //set table in view
 		String str = msgChar + tablename + msgChar + indexOfRecord; //construct appropriate string
 		out.println(str); //send to server
-		
 		Log.v("ADP", str);
 		Log.v("ADP", "/******** End send Record Request ********\"");
 	}
@@ -211,23 +211,22 @@ public class TCPClient extends Thread
 		Log.v("ADP", "/******** Recieve Change Request ********\"");
 		//tablename, id of record changed, fieldInView1, fieldInView2 <- changes to inview
 		String[] temp = data.substring(1).split(""+Message.Type.GET_CHANGE);
-		ArrayList<Record> rec = new ArrayList<Record>();
-		
+		String[] inView = new String[2];
 		for(int i = 0; i < temp.length; i++)
 		{
 			//temp[++i] = id of record changed
-			for(int j = 0; j < Constants.db.getTable(temp[i]).getRecords().length; j++)
+			for(int j = Constants.db.getTable(lastTable).getIndex(); j < Constants.db.getTable(lastTable).getRecords().length; j++)
 			{
 				//if at the record to be inserted, insert else add original record
-				if(j == Integer.parseInt(temp[++i]))
+				if(""+j == temp[i])
 				{
-					String inView1 = temp[++i];
-					String inView2 = temp[++i];
-					rec.add(new Record(""+j, inView1, inView2));
-					Log.v("ADP", "TCPClient.class - changed record: ID - " + j + " Field1.value: " + inView1 + " Field2.value: " + inView2);
+					inView[0] = temp[++i];
+					inView[1] = temp[++i];
+					Constants.db.getTable(lastTable).changeRecordAt(j, inView);
+					Log.v("ADP", "TCPClient.class - changed record: ID - " + j + " Field1.value: " + inView[0] + " Field2.value: " + inView[1]);
 				}else
 				{
-					rec.add(Constants.db.getTable(temp[i]).getRecords()[j]);
+					//nothing
 				}
 				
 			}
@@ -239,6 +238,7 @@ public class TCPClient extends Thread
 	
 	public void sendChangeRequest(String tablename, String[] rec)
 	{
+		this.lastTable = tablename;
 		char msgChar = Message.Type.GET_CHANGE;
 		Log.v("ADP", "/******** Send Change Request ********\"");
 		String str = "";

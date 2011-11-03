@@ -6,6 +6,7 @@ import java.util.Hashtable;
 import edu.sru.distributedprocessing.tools.FileManager;
 
 import android.content.Context;
+import android.util.Log;
 
 public class Table {
 	private String table_name;
@@ -89,6 +90,19 @@ public class Table {
 	{
 		this.table_data.get(index).fields = new Record(values).getFields();
 		this.data = table_data.toArray(new Record[1]);
+	}
+	
+	public void changeRecordAt(int recordIndex, String[] values)
+	{
+		for(int i = 0; i < this.data.length; i++)
+		{
+			if(Integer.parseInt(this.data[i].getID()) == recordIndex)
+			{
+				this.table_data.get(i).fields = new Record(values).getFields();
+				this.data = table_data.toArray(new Record[1]);
+				Log.v("ADP", "Table.class: " + this.data[i].getID() + " " + recordIndex);
+			}
+		}
 	}
 	
 	public void addField(String field)

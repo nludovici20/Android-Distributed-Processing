@@ -21,5 +21,6 @@
 	<activity android:name=".dialogs.CustomDialogListView"/>
 	<activity android:name="NavigationMain"/>
 	<activity android:name="IntelliSyncActivity"/>
+	<activity android:name="About"/>
     </application>
 </manifest>

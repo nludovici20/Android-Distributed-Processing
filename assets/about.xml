@@ -1,0 +1,27 @@
+<about>
+<text>About IntelliSystems Mobile:
+
+
+	The Development team that created IntelliSystems Mobile consists of:
+	- Eric Thortsen / Client-Server model/Server Code
+	- Tenzing Lama / Database System
+	- Nick Ludovici / GUI, Android Client
+
+
+IntelliSystems Mobile was a project in a semester long Operating Systems class aimed to...
+
+
+Resources Used:
+- MySQL
+- Expandable Lists
+	- http://mylifewithandroid.blogspot.com/2008/05/expandable-lists.html
+	
+	
+Android Code at:
+- http://github.com/nludovici20/Android-Distributed-Processing
+
+
+Liscense used:
+	???
+</text>
+</about>

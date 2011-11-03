@@ -47,7 +47,8 @@ public class Main extends Activity
 			//@Override
 			public void onClick(View v) 
 			{
-				
+				Intent engineIntent = new Intent(Main.this, About.class);
+				startActivity(engineIntent);
 			}
 		});
         

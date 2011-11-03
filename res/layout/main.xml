@@ -10,7 +10,7 @@
 		android:layout_height="wrap_content" 
 		android:id="@+id/relativeLayout1">
 		<TextView 
-			android:text="IntelliSync Mobile v1.0"
+			android:text="IntelliSystems Mobile v1.0"
 			android:gravity="center_horizontal"
 			android:textSize="22sp"
 			android:layout_centerVertical="true" 

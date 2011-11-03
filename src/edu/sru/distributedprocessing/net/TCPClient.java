@@ -241,7 +241,7 @@ public class TCPClient extends Thread
 	{
 		char msgChar = Message.Type.GET_CHANGE;
 		Log.v("ADP", "/******** Send Change Request ********\"");
-		String str = msgChar + tablename; //tablename where record is getting changed
+		String str = "";
 		for(int i = 0; i < rec.length; i++)
 		{
 			/*

@@ -1,5 +1,6 @@
 package edu.sru.distributedprocessing;
 
+import edu.sru.distributedprocessing.loadingscreen.TableLoading;
 import edu.sru.distributedprocessing.tableobjects.Table;
 import edu.sru.distributedprocessing.tools.Constants;
 import android.app.Activity;
@@ -25,74 +26,44 @@ public class NavigationMain extends Activity implements OnClickListener
 
 	@Override
 	public void onClick(View v) {
-		Intent engineIntent = new Intent(NavigationMain.this, IntelliSyncActivity.class);		
+		Intent engineIntent = new Intent(NavigationMain.this, TableLoading.class);		
+		String tablename="";
     	if(v.getTag().equals(0))
     	{
-    		//driver
-    		Toast.makeText(NavigationMain.this, "Vehicle Selected", Toast.LENGTH_SHORT).show();
-    		
-    		Table tbl = Constants.db.getTable("vehicles");
-    		
-    		Initialize.tcp.sendTableRequest(tbl);
-    		    		
-			engineIntent.putExtra("Type", tbl.getRecordType());
-    		startActivity(engineIntent);
+       		Toast.makeText(NavigationMain.this, "Vehicle Selected", Toast.LENGTH_SHORT).show();
+    		tablename="vehicles";
     	}else
     		if(v.getTag().equals(1))
     		{
     			//contact
         		Toast.makeText(NavigationMain.this, "Contact Selected", Toast.LENGTH_SHORT).show();
-        			
-        		Table tbl = Constants.db.getTable("contacts");
-    		
-        		Initialize.tcp.sendTableRequest(tbl);
-        		//Initialize.tcp.sendChangeRequest(tbl.getTableName(),  new String[] { "one", "two", "three", "four", "five"});
-        		//Initialize.tcp.sendInsertRequest(tbl.getTableName(), (int)Math.random()*10, new String[] { "one", "two", "three", "four", "five"});
-        		
-    			engineIntent.putExtra("Type", "ContactType");
-    			startActivity(engineIntent);
+        		tablename="contacts";
     		}else
     			if(v.getTag().equals(2))
     			{
-    				//driver
             		Toast.makeText(NavigationMain.this, "Driver Selected", Toast.LENGTH_SHORT).show();
-            		
-            		Table tbl = Constants.db.getTable("drivers");
-            		
-            		Initialize.tcp.sendTableRequest(tbl);
-            		
-    				engineIntent.putExtra("Type","DriverType");
-    				startActivity(engineIntent);
+            		tablename = "drivers";
     			}else
         			if(v.getTag().equals(3))
         			{
-        				//vehicle type
                 		Toast.makeText(NavigationMain.this, "Vehicle Type Selected", Toast.LENGTH_SHORT).show();
-        				
-                		Table tbl = Constants.db.getTable("vehicle type");
-                		               		
-                		Initialize.tcp.sendTableRequest(tbl);
-                		
-                		engineIntent.putExtra("Type", "VehicleTypesType");
-        				startActivity(engineIntent);
+        				tablename = "vehicle type";
         			}else
             			if(v.getTag().equals(4))
             			{
             				//warehouse
                     		Toast.makeText(NavigationMain.this, "Warehouse Selected", Toast.LENGTH_SHORT).show();
+                    		tablename = "warehouses";
             			}else
                 			if(v.getTag().equals(5))
                 			{
                 				//depot
                         		Toast.makeText(NavigationMain.this, "Depot Selected", Toast.LENGTH_SHORT).show();
-                        		
-                        		Table tbl = Constants.db.getTable("depots");
-                        		
-                        		Initialize.tcp.sendTableRequest(tbl);
-                        		
-                        		engineIntent.putExtra("Type", "DepotType");
-                				startActivity(engineIntent);  
+                        		tablename = "depots";
                 			}
+    	
+    	engineIntent.putExtra("TableName", tablename);
+    	startActivity(engineIntent);
 	}
     
 }

@@ -25,6 +25,7 @@ import edu.sru.distributedprocessing.IntelliSyncActivity;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.R.id;
 import edu.sru.distributedprocessing.R.layout;
+import edu.sru.distributedprocessing.loadingscreen.TableLoading;
 import edu.sru.distributedprocessing.shippingscreen.ShippingScreen;
 import edu.sru.distributedprocessing.tableobjects.Table;
 import edu.sru.distributedprocessing.tools.Constants;
@@ -261,6 +262,8 @@ public class Options extends ExpandableListActivity
     @Override
     public void onBackPressed()
     {
+    	finish(); //finish activity
+    	Intent engineIntent = new Intent(Options.this, TableLoading.class); //create a new intent
     	//loop through tables
     	for(int i = 0; i < Constants.db.getTables().length; i++)
 		{
@@ -271,8 +274,7 @@ public class Options extends ExpandableListActivity
 				{
 					//set appropriate starting index
 					Constants.db.getTables()[i].setStartingIndex(Integer.parseInt(index.getText().toString()));
-					Table tbl = Constants.db.getTables()[i]; //create temp table
-					Initialize.tcp.sendTableRequest(tbl); //request table from database
+					engineIntent.putExtra("TableName", Constants.db.getTables()[i].getTableName());
 				}
     		}catch (Exception e)
     		{
@@ -280,10 +282,7 @@ public class Options extends ExpandableListActivity
     		}
 		}
  
-    	Constants.db.saveDB(this); //save db attributes to file
-    	finish(); //finish activity
-    	Intent engineIntent = new Intent(Options.this, IntelliSyncActivity.class); //create a new intent
-    	engineIntent.putExtra("Type", type); //send in the type
+    	Constants.db.saveDB(this); //save db attributes to file    	
     	startActivity(engineIntent); //start the activity
     	Log.v("ADP", "Options.class - " + type);
     	

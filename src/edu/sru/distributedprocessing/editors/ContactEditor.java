@@ -1,17 +1,17 @@
 package edu.sru.distributedprocessing.editors;
 
-import edu.sru.distributedprocessing.Initialize;
 import edu.sru.distributedprocessing.IntelliSyncActivity;
 import edu.sru.distributedprocessing.R;
+import edu.sru.distributedprocessing.loadingscreen.InsertLoading;
 import edu.sru.distributedprocessing.tools.Constants;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ContactEditor extends Activity {
 	String tableName, intent; //tablename and intent -> edit/insert
@@ -61,31 +61,28 @@ public class ContactEditor extends Activity {
 				new_record[3] = middleInitial_edit.getText().toString();
 				new_record[4] = primaryPhone_edit.getText().toString();
 				new_record[5] = workPhone_edit.getText().toString();
-				if(intent.equalsIgnoreCase("insert"))
+				if(intent.equalsIgnoreCase("edit"))
 				{
-					Log.v("ADP", "ContactEditor - Insert Request");
-					
-					Initialize.tcp.sendInsertRequest(tableName, new_record);	
-				}else
-					if(intent.equalsIgnoreCase("edit"))
+					Log.v("ADP", "ContactEditor - Edit Request");
+					String[] tmp = new String[2];
+					int count = 0;
+					for(int i = 0; i < Constants.db.getTable(tableName).getFields().length; i++)
 					{
-						Log.v("ADP", "ContactEditor - Edit Request");
-						String[] tmp = new String[2];
-						int count = 0;
-						for(int i = 0; i < Constants.db.getTable(tableName).getFields().length; i++)
+						if(Constants.db.getTable(tableName).getFieldsInView().get(0).equalsIgnoreCase(Constants.db.getTable(tableName).getFields()[i]) || Constants.db.getTable(tableName).getFieldsInView().get(1).equalsIgnoreCase(Constants.db.getTable(tableName).getFields()[i]))
 						{
-							if(Constants.db.getTable(tableName).getFieldsInView().get(0).equalsIgnoreCase(Constants.db.getTable(tableName).getFields()[i]) || Constants.db.getTable(tableName).getFieldsInView().get(1).equalsIgnoreCase(Constants.db.getTable(tableName).getFields()[i]))
-							{
-								tmp[count] = new_record[i];
-								count++;
-								Log.v("ADP", new_record[i]);
-							}
+							tmp[count] = new_record[i];
+							count++;
+							Log.v("ADP", new_record[i]);
 						}
-						IntelliSyncActivity.ss.changeRecordAt(index, tmp);
-						Initialize.tcp.sendChangeRequest(tableName, new_record);
 					}
+					IntelliSyncActivity.ss.changeRecordAt(index, tmp);
+				}
 				
 				ContactEditor.this.finish();
+				Intent engineIntent = new Intent(ContactEditor.this, InsertLoading.class);
+				engineIntent.putExtra("TableName", tableName);
+				engineIntent.putExtra("Record", new_record);
+				startActivity(engineIntent);
 			}
 			
 		});

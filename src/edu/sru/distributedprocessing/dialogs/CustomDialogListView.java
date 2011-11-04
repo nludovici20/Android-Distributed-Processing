@@ -8,7 +8,7 @@ import edu.sru.distributedprocessing.editors.DepotEditor;
 import edu.sru.distributedprocessing.editors.DriverEditor;
 import edu.sru.distributedprocessing.editors.VehicleEditor;
 import edu.sru.distributedprocessing.editors.VehicleTypeEditor;
-import edu.sru.distributedprocessing.splashscreen.SplashScreenActivity;
+import edu.sru.distributedprocessing.loadingscreen.RecordLoading;
 import edu.sru.distributedprocessing.tableobjects.Record;
 import edu.sru.distributedprocessing.tableobjects.Table;
 import edu.sru.distributedprocessing.tools.Constants;
@@ -65,37 +65,18 @@ public class CustomDialogListView extends Dialog
         		
     			if(clicked.equalsIgnoreCase(list[0]))
     			{
-    				//Edit Record
-    				for(int i = 0; i < Constants.db.getTables().length; i++)
-    				{
-    					if (type.getTableName().equalsIgnoreCase("contacts"))
-						{
-    						engineIntent = new Intent(activity, ContactEditor.class);
-						}else
-							if (type.getTableName().equalsIgnoreCase("depots"))
-							{
-								engineIntent = new Intent(activity, DepotEditor.class);
-							}else
-								if (type.getTableName().equalsIgnoreCase("drivers"))
-								{
-									engineIntent = new Intent(activity, DriverEditor.class);
-								}else
-									if (type.getTableName().equalsIgnoreCase("vehicle type"))
-									{
-										engineIntent = new Intent(activity, VehicleTypeEditor.class);
-									}else
-										if (type.getTableName().equalsIgnoreCase("vehicles"))
-										{
-											engineIntent = new Intent(activity, VehicleEditor.class);
-										}
-    				}
+    				
+    				
     				
     				//pull in entire record from db
-    				Initialize.tcp.sendRecordRequest(type.getTableName(), recordIndex);
-    				engineIntent.putExtra("Intent", "edit");
-    				engineIntent.putExtra("Fields", type.getFields());
-    				engineIntent.putExtra("Index", listIndex);
-    				activity.startActivity(engineIntent);
+    				//Initialize.tcp.sendRecordRequest(type.getTableName(), recordIndex);
+    				
+    				//RecordLoading rc = new RecordLoading(engineIntent, type.getTableName(), recordIndex);    
+    				Intent i = new Intent(activity, RecordLoading.class);
+    				i.putExtra("Name", type.getTableName());
+    				i.putExtra("Index", recordIndex);
+    				i.putExtra("ListIndex", listIndex);
+    				activity.startActivity(i);
     			 }
     			else 
     				if(clicked.equalsIgnoreCase(list[1]))

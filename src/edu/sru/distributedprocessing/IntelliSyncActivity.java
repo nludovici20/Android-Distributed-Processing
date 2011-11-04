@@ -5,6 +5,7 @@ import edu.sru.distributedprocessing.editors.DepotEditor;
 import edu.sru.distributedprocessing.editors.DriverEditor;
 import edu.sru.distributedprocessing.editors.VehicleEditor;
 import edu.sru.distributedprocessing.editors.VehicleTypeEditor;
+import edu.sru.distributedprocessing.loadingscreen.TableLoading;
 import edu.sru.distributedprocessing.optionslist.Options;
 import edu.sru.distributedprocessing.shippingscreen.ShippingScreen;
 import edu.sru.distributedprocessing.tableobjects.Table;
@@ -86,13 +87,10 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
 	    			finish(); //end current activity
 	    			
 	    			//start a new activity
-	    			Intent engineIntent = new Intent(IntelliSyncActivity.this, IntelliSyncActivity.class);
+	    			Intent engineIntent = new Intent(IntelliSyncActivity.this, TableLoading.class);
 	    			
-	    			//pull in data from server corresponding with table
-	    			Table tbl = Constants.db.getTable(v.getTag().toString());
-	    			Initialize.tcp.sendTableRequest(tbl);
-	    			
-	    			engineIntent.putExtra("Type", tbl.getRecordType()); //add navigation type
+	    			//pull in data from server corresponding with table	
+	    			engineIntent.putExtra("TableName", v.getTag().toString()); //add navigation type
 	    			startActivity(engineIntent);
 	    			
     			}catch (Exception e)

@@ -74,7 +74,7 @@ public class Table {
 		this.data = this.table_data.toArray(new Record[1]);
 		this.tableSize = this.table_data.size();
 	}
-	
+		
 	public void deleteRecords()
 	{
 		this.table_data.clear();			

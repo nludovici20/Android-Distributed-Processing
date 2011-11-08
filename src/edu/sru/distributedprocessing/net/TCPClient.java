@@ -287,7 +287,13 @@ public class TCPClient extends Thread
 		String str = ""; //create string to send
 		for(int i = 0; i < rec.length-1; i++)
 		{
-			str+= msgChar + rec[i]; //append string to send with elements of new record
+			if(rec[i].equalsIgnoreCase(""))
+			{
+				str+=msgChar + "\0";
+			}else
+			{
+				str+= msgChar + rec[i]; //append string to send with elements of new record
+			}
 		} 
 		str+=msgChar;
 		out.println(str); //send request to server

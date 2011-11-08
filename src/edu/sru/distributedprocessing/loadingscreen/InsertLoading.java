@@ -17,7 +17,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class InsertLoading extends Activity {
-	String tableName; 
+	String tableName, intent; 
 	String[] record;
 	Intent engineIntent = null;
 		
@@ -33,6 +33,7 @@ public class InsertLoading extends Activity {
 		//get passed in tablename
 		tableName = getIntent().getExtras().getString("TableName");
 		record = getIntent().getExtras().getStringArray("Record");
+		intent = getIntent().getExtras().getString("Intent");
 		
 		engineIntent = new Intent(this, IntelliSyncActivity.class);
 		
@@ -51,7 +52,14 @@ public class InsertLoading extends Activity {
 				try {
 					super.run();
 					
-					Initialize.tcp.sendInsertRequest(tableName, record);
+					if(intent.equalsIgnoreCase("edit"))
+					{
+						Initialize.tcp.sendChangeRequest(tableName, record);	
+					}else
+						if(intent.equalsIgnoreCase("insert"))
+						{
+							Initialize.tcp.sendInsertRequest(tableName, record);
+						}
 					
 					//wait certain amount of time
 					while (wait < splashDisplayTime) {

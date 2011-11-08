@@ -3,8 +3,10 @@ package edu.sru.distributedprocessing.editors;
 import edu.sru.distributedprocessing.Initialize;
 import edu.sru.distributedprocessing.IntelliSyncActivity;
 import edu.sru.distributedprocessing.R;
+import edu.sru.distributedprocessing.loadingscreen.InsertLoading;
 import edu.sru.distributedprocessing.tools.Constants;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -61,40 +63,49 @@ public class DepotEditor extends Activity {
         save_btn.setOnClickListener(new View.OnClickListener() {
 			
 			public void onClick(View v) {
-				Toast.makeText(DepotEditor.this, "Save button clicked", Toast.LENGTH_SHORT).show();	
-				new_record[0] = Constants.record.get(fields[0]);
-			    new_record[1] = depotName_edit.getText().toString();
-			    new_record[2] = depotAddress_edit.getText().toString();
-		        new_record[3] = city_edit.getText().toString();
-		        new_record[4] = state_edit.getText().toString();
-		        new_record[5] = zip_edit.getText().toString();
-		        new_record[6] = latitude_edit.getText().toString();
-		        new_record[7] = longitude_edit.getText().toString();
-		        
-				if(intent.equalsIgnoreCase("insert"))
+				Toast.makeText(DepotEditor.this, "Save button clicked", Toast.LENGTH_SHORT).show();	  
+				if(intent.equalsIgnoreCase("edit"))
 				{
-					Log.v("ADP", "DepotEditor.class - Insert Request");
-			    	Initialize.tcp.sendInsertRequest(tableName, new_record);	
-				}else
-					if(intent.equalsIgnoreCase("edit"))
-					{
-						Log.v("ADP", "DepotEditor.class - Edit Request");
-						String[] tmp = new String[2];
-						int count = 0;
-						for(int i = 0; i < Constants.db.getTable(tableName).getFields().length; i++)
+					new_record[0] = Constants.record.get(fields[0]);
+				    new_record[1] = depotName_edit.getText().toString();
+				    new_record[2] = depotAddress_edit.getText().toString();
+			        new_record[3] = city_edit.getText().toString();
+			        new_record[4] = state_edit.getText().toString();
+			        new_record[5] = zip_edit.getText().toString();
+			        new_record[6] = latitude_edit.getText().toString();
+			        new_record[7] = longitude_edit.getText().toString();
+					Log.v("ADP", "DepotEditor.class - Edit Request");
+//						String[] tmp = new String[2];
+//						int count = 0;
+//						for(int i = 0; i < Constants.db.getTable(tableName).getFields().length; i++)
+//						{
+//							if(Constants.db.getTable(tableName).getFieldsInView().get(0).equalsIgnoreCase(Constants.db.getTable(tableName).getFields()[i]) || Constants.db.getTable(tableName).getFieldsInView().get(1).equalsIgnoreCase(Constants.db.getTable(tableName).getFields()[i]))
+//							{
+//								tmp[count] = new_record[i];
+//								count++;
+//								Log.v("ADP", new_record[i]);
+//							}
+//						}
+//						IntelliSyncActivity.ss.changeRecordAt(index, tmp);					
+					}else
+						if(intent.equalsIgnoreCase("insert"))
 						{
-							if(Constants.db.getTable(tableName).getFieldsInView().get(0).equalsIgnoreCase(Constants.db.getTable(tableName).getFields()[i]) || Constants.db.getTable(tableName).getFieldsInView().get(1).equalsIgnoreCase(Constants.db.getTable(tableName).getFields()[i]))
-							{
-								tmp[count] = new_record[i];
-								count++;
-								Log.v("ADP", new_record[i]);
-							}
+						    new_record[0] = depotName_edit.getText().toString();
+						    new_record[1] = depotAddress_edit.getText().toString();
+					        new_record[2] = city_edit.getText().toString();
+					        new_record[3] = state_edit.getText().toString();
+					        new_record[4] = zip_edit.getText().toString();
+					        new_record[5] = latitude_edit.getText().toString();
+					        new_record[6] = longitude_edit.getText().toString();
+					        Log.v("ADP", "DepotEditor.class - Insert Request");
 						}
-						IntelliSyncActivity.ss.changeRecordAt(index, tmp);
-						Initialize.tcp.sendChangeRequest(tableName, new_record);						
-					}
 				
 				DepotEditor.this.finish();
+				Intent engineIntent = new Intent(DepotEditor.this, InsertLoading.class);
+				engineIntent.putExtra("TableName", tableName);
+				engineIntent.putExtra("Record", new_record);
+				engineIntent.putExtra("Intent", intent);
+				startActivity(engineIntent);
 			}
 			
 		});

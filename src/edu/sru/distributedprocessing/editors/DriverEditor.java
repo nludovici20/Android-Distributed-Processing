@@ -61,35 +61,45 @@ public class DriverEditor extends Activity {
 			
 			public void onClick(View v) {
 				Toast.makeText(DriverEditor.this, "Save button clicked", Toast.LENGTH_SHORT).show();	
-				new_record[0] = Constants.record.get(fields[0]);
-				new_record[1] = firstName_edit.getText().toString();
-				new_record[2] = lastName_edit.getText().toString();
-				new_record[3] = plateNO_edit.getText().toString();
-				new_record[4] = licenseNO_edit.getText().toString();
-				new_record[5] = licenseEXP_edit.getText().toString();
-				new_record[6] = licenseClass_edit.getText().toString();
-				
 				if(intent.equalsIgnoreCase("edit"))
 				{
+					new_record[0] = Constants.record.get(fields[0]);
+					new_record[1] = firstName_edit.getText().toString();
+					new_record[2] = lastName_edit.getText().toString();
+					new_record[3] = plateNO_edit.getText().toString();
+					new_record[4] = licenseNO_edit.getText().toString();
+					new_record[5] = licenseEXP_edit.getText().toString();
+					new_record[6] = licenseClass_edit.getText().toString();
 					Log.v("ADP", "ContactEditor - Edit Request");
-					String[] tmp = new String[2];
-					int count = 0;
-					for(int i = 0; i < Constants.db.getTable(tableName).getFields().length; i++)
+//					String[] tmp = new String[2];
+//					int count = 0;
+//					for(int i = 0; i < Constants.db.getTable(tableName).getFields().length; i++)
+//					{
+//						if(Constants.db.getTable(tableName).getFieldsInView().get(0).equalsIgnoreCase(Constants.db.getTable(tableName).getFields()[i]) || Constants.db.getTable(tableName).getFieldsInView().get(1).equalsIgnoreCase(Constants.db.getTable(tableName).getFields()[i]))
+//						{
+//							tmp[count] = new_record[i];
+//							count++;
+//							Log.v("ADP", new_record[i]);
+//						}
+//					}
+//					IntelliSyncActivity.ss.changeRecordAt(index, tmp);
+				}else
+					if(intent.equalsIgnoreCase("insert"))
 					{
-						if(Constants.db.getTable(tableName).getFieldsInView().get(0).equalsIgnoreCase(Constants.db.getTable(tableName).getFields()[i]) || Constants.db.getTable(tableName).getFieldsInView().get(1).equalsIgnoreCase(Constants.db.getTable(tableName).getFields()[i]))
-						{
-							tmp[count] = new_record[i];
-							count++;
-							Log.v("ADP", new_record[i]);
-						}
+						new_record[0] = firstName_edit.getText().toString();
+						new_record[1] = lastName_edit.getText().toString();
+						new_record[2] = plateNO_edit.getText().toString();
+						new_record[3] = licenseNO_edit.getText().toString();
+						new_record[4] = licenseEXP_edit.getText().toString();
+						new_record[5] = licenseClass_edit.getText().toString();
+						Log.v("ADP", "DriverEditor.class - Insert Request");
 					}
-					IntelliSyncActivity.ss.changeRecordAt(index, tmp);
-				}
 				
 				DriverEditor.this.finish();
 				Intent engineIntent = new Intent(DriverEditor.this, InsertLoading.class);
 				engineIntent.putExtra("TableName", tableName);
 				engineIntent.putExtra("Record", new_record);
+				engineIntent.putExtra("Intent", intent);
 				startActivity(engineIntent);
 			}
 			

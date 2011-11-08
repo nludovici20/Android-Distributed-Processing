@@ -60,34 +60,46 @@ public class VehicleTypeEditor extends Activity {
 			
 			public void onClick(View v) {
 				Toast.makeText(VehicleTypeEditor.this, "Save button clicked", Toast.LENGTH_SHORT).show();	
-				new_record[0] = Constants.record.get(fields[0]);
-				new_record[1] = vehicleType_edit.getText().toString();
-				new_record[2] = subType_edit.getText().toString();
-				new_record[3] = vehicleModel_edit.getText().toString();
-				new_record[4] = maxWeight_edit.getText().toString();
-				new_record[5] = maxRange_edit.getText().toString();
-				new_record[6] = maxLength_edit.getText().toString();
+				
 				if(intent.equalsIgnoreCase("edit"))
 				{
+					new_record[0] = Constants.record.get(fields[0]);
+					new_record[1] = vehicleType_edit.getText().toString();
+					new_record[2] = subType_edit.getText().toString();
+					new_record[3] = vehicleModel_edit.getText().toString();
+					new_record[4] = maxWeight_edit.getText().toString();
+					new_record[5] = maxRange_edit.getText().toString();
+					new_record[6] = maxLength_edit.getText().toString();
 					Log.v("ADP", "ContactEditor - Edit Request");
-					String[] tmp = new String[2];
-					int count = 0;
-					for(int i = 0; i < Constants.db.getTable(tableName).getFields().length; i++)
+//					String[] tmp = new String[2];
+//					int count = 0;
+//					for(int i = 0; i < Constants.db.getTable(tableName).getFields().length; i++)
+//					{
+//						if(Constants.db.getTable(tableName).getFieldsInView().get(0).equalsIgnoreCase(Constants.db.getTable(tableName).getFields()[i]) || Constants.db.getTable(tableName).getFieldsInView().get(1).equalsIgnoreCase(Constants.db.getTable(tableName).getFields()[i]))
+//						{
+//							tmp[count] = new_record[i];
+//							count++;
+//							Log.v("ADP", new_record[i]);
+//						}
+//					}
+//					IntelliSyncActivity.ss.changeRecordAt(index, tmp);
+				}else
+					if(intent.equalsIgnoreCase("insert"))
 					{
-						if(Constants.db.getTable(tableName).getFieldsInView().get(0).equalsIgnoreCase(Constants.db.getTable(tableName).getFields()[i]) || Constants.db.getTable(tableName).getFieldsInView().get(1).equalsIgnoreCase(Constants.db.getTable(tableName).getFields()[i]))
-						{
-							tmp[count] = new_record[i];
-							count++;
-							Log.v("ADP", new_record[i]);
-						}
+						new_record[0] = vehicleType_edit.getText().toString();
+						new_record[1] = subType_edit.getText().toString();
+						new_record[2] = vehicleModel_edit.getText().toString();
+						new_record[3] = maxWeight_edit.getText().toString();
+						new_record[4] = maxRange_edit.getText().toString();
+						new_record[5] = maxLength_edit.getText().toString();
+						Log.v("ADP", "VehicleTypeEditor.class - Insert Request");
 					}
-					IntelliSyncActivity.ss.changeRecordAt(index, tmp);
-				}
 				
 				VehicleTypeEditor.this.finish();
 				Intent engineIntent = new Intent(VehicleTypeEditor.this, InsertLoading.class);
 				engineIntent.putExtra("TableName", tableName);
 				engineIntent.putExtra("Record", new_record);
+				engineIntent.putExtra("Intent", intent);
 				startActivity(engineIntent);
 			}
 			

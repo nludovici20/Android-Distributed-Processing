@@ -1,6 +1,6 @@
 package edu.sru.distributedprocessing;
 
-import edu.sru.distributedprocessing.editors.ContactEditor;
+import edu.sru.distributedprocessing.editors.ContractorEditor;
 import edu.sru.distributedprocessing.optionslist.Options;
 import android.app.Activity;
 import android.content.Intent;

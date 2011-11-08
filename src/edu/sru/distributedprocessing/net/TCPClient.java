@@ -284,11 +284,12 @@ public class TCPClient extends Thread
 		char msgChar = Message.Type.GET_INSERT;
 		Log.v("ADP", "/******** Send Insert Request ********\"");
 		this.lastTable = tablename; //set table in view
-		String str = msgChar + tablename; //create string to send
-		for(int i = 0; i < rec.length; i++)
+		String str = ""; //create string to send
+		for(int i = 0; i < rec.length-1; i++)
 		{
 			str+= msgChar + rec[i]; //append string to send with elements of new record
 		} 
+		str+=msgChar;
 		out.println(str); //send request to server
 		Log.v("ADP", "TCPClient.class - Sent: " + str);
 		Log.v("ADP", "/******** End Send Insert Request ********\"");

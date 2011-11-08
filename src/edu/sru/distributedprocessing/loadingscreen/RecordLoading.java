@@ -3,7 +3,7 @@ package edu.sru.distributedprocessing.loadingscreen;
 import edu.sru.distributedprocessing.Initialize;
 import edu.sru.distributedprocessing.Main;
 import edu.sru.distributedprocessing.R;
-import edu.sru.distributedprocessing.editors.ContactEditor;
+import edu.sru.distributedprocessing.editors.ContractorEditor;
 import edu.sru.distributedprocessing.editors.DepotEditor;
 import edu.sru.distributedprocessing.editors.DriverEditor;
 import edu.sru.distributedprocessing.editors.VehicleEditor;
@@ -29,9 +29,9 @@ public class RecordLoading extends Activity {
 		//Edit Record
 		for(int i = 0; i < Constants.db.getTables().length; i++)
 		{
-			if (tableName.equalsIgnoreCase("contacts"))
+			if (tableName.equalsIgnoreCase("contractors"))
 			{
-				engineIntent = new Intent(this, ContactEditor.class);
+				engineIntent = new Intent(this, ContractorEditor.class);
 			}else
 				if (tableName.equalsIgnoreCase("depots"))
 				{

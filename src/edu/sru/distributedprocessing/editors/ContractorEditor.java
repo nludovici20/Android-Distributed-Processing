@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class ContactEditor extends Activity {
+public class ContractorEditor extends Activity {
 	String tableName, intent; //tablename and intent -> edit/insert
 	int index;
 	
@@ -21,9 +21,9 @@ public class ContactEditor extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.contact_editor);
+        setContentView(R.layout.contractor_editor);
        
-        tableName = "contacts";
+        tableName = "contractors";
         intent = getIntent().getExtras().getString("Intent");
         index = getIntent().getExtras().getInt("Index");
        
@@ -52,18 +52,17 @@ public class ContactEditor extends Activity {
         Button save_btn = (Button)findViewById(R.id.save_btn);
         save_btn.setOnClickListener(new View.OnClickListener() {
 			
-			@Override
 			public void onClick(View v) {
 				//Toast.makeText(ContactEditor.this, "Save button clicked", Toast.LENGTH_SHORT).show();	
-				new_record[0] = Constants.record.get(fields[0]);
-				new_record[1] = lastName_edit.getText().toString();
-				new_record[2] = firstName_edit.getText().toString();
-				new_record[3] = middleInitial_edit.getText().toString();
-				new_record[4] = primaryPhone_edit.getText().toString();
-				new_record[5] = workPhone_edit.getText().toString();
 				if(intent.equalsIgnoreCase("edit"))
 				{
-					Log.v("ADP", "ContactEditor - Edit Request");
+					new_record[0] = Constants.record.get(fields[0]);
+					new_record[1] = lastName_edit.getText().toString();
+					new_record[2] = firstName_edit.getText().toString();
+					new_record[3] = middleInitial_edit.getText().toString();
+					new_record[4] = primaryPhone_edit.getText().toString();
+					new_record[5] = workPhone_edit.getText().toString();
+					Log.v("ADP", "ContractorEditor - Edit Request");
 					String[] tmp = new String[2];
 					int count = 0;
 					for(int i = 0; i < Constants.db.getTable(tableName).getFields().length; i++)
@@ -76,10 +75,18 @@ public class ContactEditor extends Activity {
 						}
 					}
 					IntelliSyncActivity.ss.changeRecordAt(index, tmp);
-				}
+				}else
+					if(intent.equalsIgnoreCase("insert"))
+					{
+						new_record[0] = lastName_edit.getText().toString();
+						new_record[1] = firstName_edit.getText().toString();
+						new_record[2] = middleInitial_edit.getText().toString();
+						new_record[3] = primaryPhone_edit.getText().toString();
+						new_record[4] = workPhone_edit.getText().toString();
+					}
 				
-				ContactEditor.this.finish();
-				Intent engineIntent = new Intent(ContactEditor.this, InsertLoading.class);
+				ContractorEditor.this.finish();
+				Intent engineIntent = new Intent(ContractorEditor.this, InsertLoading.class);
 				engineIntent.putExtra("TableName", tableName);
 				engineIntent.putExtra("Record", new_record);
 				startActivity(engineIntent);

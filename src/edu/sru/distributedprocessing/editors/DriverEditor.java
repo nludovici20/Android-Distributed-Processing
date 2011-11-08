@@ -59,7 +59,6 @@ public class DriverEditor extends Activity {
         Button save_btn = (Button)findViewById(R.id.save_btn);
         save_btn.setOnClickListener(new View.OnClickListener() {
 			
-			@Override
 			public void onClick(View v) {
 				Toast.makeText(DriverEditor.this, "Save button clicked", Toast.LENGTH_SHORT).show();	
 				new_record[0] = Constants.record.get(fields[0]);

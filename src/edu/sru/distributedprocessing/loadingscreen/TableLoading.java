@@ -4,7 +4,7 @@ import edu.sru.distributedprocessing.Initialize;
 import edu.sru.distributedprocessing.IntelliSyncActivity;
 import edu.sru.distributedprocessing.Main;
 import edu.sru.distributedprocessing.R;
-import edu.sru.distributedprocessing.editors.ContactEditor;
+import edu.sru.distributedprocessing.editors.ContractorEditor;
 import edu.sru.distributedprocessing.editors.DepotEditor;
 import edu.sru.distributedprocessing.editors.DriverEditor;
 import edu.sru.distributedprocessing.editors.VehicleEditor;

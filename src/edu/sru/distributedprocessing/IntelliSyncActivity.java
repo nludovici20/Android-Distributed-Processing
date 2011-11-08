@@ -1,6 +1,6 @@
 package edu.sru.distributedprocessing;
 
-import edu.sru.distributedprocessing.editors.ContactEditor;
+import edu.sru.distributedprocessing.editors.ContractorEditor;
 import edu.sru.distributedprocessing.editors.DepotEditor;
 import edu.sru.distributedprocessing.editors.DriverEditor;
 import edu.sru.distributedprocessing.editors.VehicleEditor;
@@ -58,8 +58,7 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
     public static void refresh() {
     	Log.v("ADP", "IntelliSyncActivity.class - Refreshing...");
         handler.postDelayed(new Runnable() {
-        	@Override
-			public void run() {
+        	public void run() {
 				ss.Initialize(); // this is where you put your refresh code
 			}
              }, 500);
@@ -70,7 +69,6 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
      * Method that handles different views onclick methods if set in xml layout
      * Used to find which button was clicked and handle accordingly
      */
-    @Override
     public void onClick(View v)
     {
     	//alert user which table button was selected
@@ -128,9 +126,9 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
 	    	//Get Record Type
 			for(int i = 0; i < Constants.db.getTables().length; i++)
 			{
-				if (tableName.equalsIgnoreCase("contacts"))
+				if (tableName.equalsIgnoreCase("contractors"))
 				{
-					engineIntent = new Intent(IntelliSyncActivity.this, ContactEditor.class);
+					engineIntent = new Intent(IntelliSyncActivity.this, ContractorEditor.class);
 				}else
 					if (tableName.equalsIgnoreCase("depots"))
 					{

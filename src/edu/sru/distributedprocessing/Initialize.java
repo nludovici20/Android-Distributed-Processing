@@ -16,9 +16,9 @@ public class Initialize
 {
 	//declaration of table(s), field(s), and TCP Client
 	private Table vehicle_table, driver_table, shipment_table, routing_table, contractor_table, depot_table, warehouse_table,
-				  vehicle_type_table, maintenance_table, technician_table, contact_table, report_table;
+				  vehicle_type_table, maintenance_table, technician_table, report_table;
 	public static TCPClient tcp;
-	static String[] contactFields, dbContactFields, depotFields, dbDepotFields, driverFields, dbDriverFields, vehicleTypeFields, dbVehicleTypeFields, vehicleFields, dbVehicleFields;
+	static String[] contractorFields, dbContractorFields, depotFields, dbDepotFields, driverFields, dbDriverFields, vehicleTypeFields, dbVehicleTypeFields, vehicleFields, dbVehicleFields;
 	
 	public Initialize(Activity act)
 	{		
@@ -26,7 +26,7 @@ public class Initialize
 		//initialize a new Client and connect with server
 		try
 		{
-			tcp = new TCPClient("192.168.1.3", 4000); //connect to server
+			tcp = new TCPClient("10.1.42.254", 4000); //connect to server
 			tcp.start(); //start the thread
 			tcp.send("Hello Server, From Client"); //send initial message to server
 		}catch (Exception e)
@@ -35,19 +35,19 @@ public class Initialize
 		}
 		
 		//different fields available for tables
-		contactFields = new String[] { "ID", "Last Name", "First Name", "Middle Initial", "Primary Phone", "Work Phone" };
-		dbContactFields = new String[] { "idContacts", "LastName", "FirstName", "MiddleInitial", "PrimaryPhone", "WorkPhone" };
+		contractorFields = new String[] { "ID", "Last Name", "First Name", "Middle Initial", "Primary Phone", "Work Phone" };
+		dbContractorFields = new String[] { "idContractors", "LastName", "FirstName", "MiddleInitial", "PrimaryPhone", "WorkPhone" };
 		depotFields = new String[] { "ID", "Depot Name", "Depot Address", "City", "State", "Zip Code", "Latitude", "Longitude" };
 		dbDepotFields = new String[] { "idDepots", "Name", "Address", "City", "State", "ZipCode", "Latitude", "Longitude" };
-		driverFields = new String[] { "ID", "Last Name", "First Name", "Vehicle Plate No.", "License Number", "License Expiration", "License Class" };
-		dbDriverFields = new String[] { "idDrivers", "LastName", "FirstName", "VehiclePlateNO", "LicenseNumber", "LicenseExpiration", "LicenseClass" };
+		driverFields = new String[] { "ID", "Last Name", "First Name", "Middle Initial", "Primary Phone", "Work Phone", "Vehicle Plate No.", "License Number", "License Expiration", "License Class" };
+		dbDriverFields = new String[] { "idDrivers", "LastName", "FirstName", "MiddleInitial", "PrimaryPhone", "WorkPhone", "VehiclePlateNO", "LicenseNumber", "LicenseExpiration", "LicenseClass" };
 		vehicleTypeFields = new String[] {  "ID", "Vehicle Type", "Sub Type", "Model", "Max Weight", "Max Range", "Length" };
 		dbVehicleTypeFields = new String[] { "idVehicleType", "Type", "SubType", "Model", "MaxWeight", "MaxRange", "Length" };
 		vehicleFields = new String[] { "ID", "License Plate Number", "Vin Number", "Manufactured Year", "Vehicle Type", "Driver", "Depot", "Available?" };
 		dbVehicleFields = new String[] { "idVehicles", "PlateNumber", "VINNumber", "ManufacturedYear", "VehicleType", "Driver", "Depot", "Available?" };
 				
 		//initialize tables
-		contact_table = new Table("contacts", contactFields, dbContactFields, "ContactType", "Contacts");
+		contractor_table = new Table("contractors", contractorFields, dbContractorFields, "ContractorType", "Contractors");
 		depot_table = new Table("depots", depotFields, dbDepotFields, "DepotType", "Depots");
 		driver_table = new Table("drivers",driverFields, dbDriverFields, "DriverType", "Drivers");
 		vehicle_type_table = new Table("vehicle type", vehicleTypeFields, dbVehicleTypeFields, "VehicleTypeType", "Vehicle Types");
@@ -69,7 +69,7 @@ public class Initialize
 		Constants.db.addTable(driver_table);
 		Constants.db.addTable(depot_table);
 		Constants.db.addTable(vehicle_type_table);
-		Constants.db.addTable(contact_table);
+		Constants.db.addTable(contractor_table);
 		/*Constants.db.addTable(shipment_table);
 		Constants.db.addTable(routing_table);
 		Constants.db.addTable(contractor_table);

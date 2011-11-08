@@ -13,7 +13,7 @@
 	    	style="@style/Heading"
 	    	android:textSize="20sp"
 	    	android:id="@+id/group_header" 
-	    	android:text="Contact ID #"
+	    	android:text="Contractor ID #"
 	    	android:layout_width="match_parent">
 	    </TextView>
 	    <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/group_header" android:id="@+id/ghost1" android:layout_alignLeft="@+id/group_header" android:layout_width="match_parent"></TextView>

@@ -81,6 +81,19 @@ public class Options extends ExpandableListActivity
 		   
 		 //child options in the groupNames (field elements)
 	    field_options = new ArrayList<ArrayList<FieldOption>>(); 
+	    	for(int i = 0; i < Constants.db.getTables().length; i++)
+	    	{
+	    		fields = new ArrayList<FieldOption>();
+	    		Log.v("ADP", "Creating OptionsList for table: " + Constants.db.getTables()[i].getTableName());
+	    		for(int j = 0; j < Constants.db.getTables()[i].getFields().length; j++)
+	    		{
+	    			fields.add(new FieldOption( Constants.db.getTables()[i].getFields()[j], false) );
+	    			Log.v("ADP", "Field Option: " + Constants.db.getTables()[i].getFields()[j]);
+	    		}
+	    		field_options.add(fields);
+    		}
+	    	
+	    /*
 	     
 	     fields = new ArrayList<FieldOption>();
 	     	//Vehicle Fields
@@ -99,6 +112,9 @@ public class Options extends ExpandableListActivity
 			fields.add( new FieldOption ( "ID", false ) );
 			fields.add( new FieldOption ( "Last Name", false ) );
 			fields.add( new FieldOption ( "First Name", false ) );
+			fields.add( new FieldOption ( "Middle Initial", false ) );
+			fields.add( new FieldOption ( "Primary Phone", false ) );
+			fields.add( new FieldOption ( "Work Phone", false ) );
 			fields.add( new FieldOption ( "Vehicle Plate No.", false ) );
 			fields.add( new FieldOption ( "License Number", false ) );
 			fields.add( new FieldOption ( "License Expiration", false ) );
@@ -115,6 +131,12 @@ public class Options extends ExpandableListActivity
 		 
 		 fields = new ArrayList<FieldOption>();
 		 	//Contractors Fields
+		 	fields.add( new FieldOption ( "ID", false ) );
+			fields.add( new FieldOption ( "Last Name", false ) );
+			fields.add( new FieldOption ( "First Name", false ) );
+			fields.add( new FieldOption ( "Middle Initial", false ) );
+			fields.add( new FieldOption ( "Primary Phone", false ) );
+			fields.add( new FieldOption ( "Work Phone", false ) );
 		 	field_options.add( fields );
 		 
 		 fields = new ArrayList<FieldOption>();
@@ -153,17 +175,11 @@ public class Options extends ExpandableListActivity
 			
 		fields = new ArrayList<FieldOption>();
 			//Contact Fields
-		fields.add( new FieldOption ( "ID", false ) );
-		fields.add( new FieldOption ( "Last Name", false ) );
-		fields.add( new FieldOption ( "First Name", false ) );
-		fields.add( new FieldOption ( "Middle Initial", false ) );
-		fields.add( new FieldOption ( "Primary Phone", false ) );
-		fields.add( new FieldOption ( "Work Phone", false ) );
 			field_options.add( fields );
 		
 		fields = new ArrayList<FieldOption>();
 			//Report Fields
-			field_options.add( fields );
+			field_options.add( fields );*/
 			
 			expListAdapter = new FieldOptionAdapter( this,groupNames, field_options );
 			setListAdapter( expListAdapter );

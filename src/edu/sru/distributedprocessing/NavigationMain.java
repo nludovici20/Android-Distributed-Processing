@@ -24,7 +24,6 @@ public class NavigationMain extends Activity implements OnClickListener
         gridview.setAdapter(new GridAdapter(this, this));
     }
 
-	@Override
 	public void onClick(View v) {
 		Intent engineIntent = new Intent(NavigationMain.this, TableLoading.class);		
 		String tablename="";
@@ -36,8 +35,8 @@ public class NavigationMain extends Activity implements OnClickListener
     		if(v.getTag().equals(1))
     		{
     			//contact
-        		Toast.makeText(NavigationMain.this, "Contact Selected", Toast.LENGTH_SHORT).show();
-        		tablename="contacts";
+        		Toast.makeText(NavigationMain.this, "Contractor Selected", Toast.LENGTH_SHORT).show();
+        		tablename="contractors";
     		}else
     			if(v.getTag().equals(2))
     			{

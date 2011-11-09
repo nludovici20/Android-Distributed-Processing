@@ -80,9 +80,15 @@ public class Table {
 		this.table_data.clear();			
 	}
 	
-	public void deleteRecord(int index)
+	public void deleteRecord(String index)
 	{
-		this.table_data.remove(index);
+		for(int i = 0; i < table_data.size(); i++)
+		{
+			if(this.table_data.get(i).getID().equalsIgnoreCase(index));
+			{
+				this.table_data.remove(i);
+			}
+		}
 		this.data = table_data.toArray(new Record[1]);
 	}
 	

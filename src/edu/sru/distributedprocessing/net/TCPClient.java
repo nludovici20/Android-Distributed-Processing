@@ -313,7 +313,7 @@ public class TCPClient extends Thread
 		for(int i = 1; i < temp.length; i++)
 		{
 			//delete record at index passed in
-			Constants.db.getTable(temp[0]).deleteRecord(Integer.parseInt(temp[i]));
+			Constants.db.getTable(temp[0]).deleteRecord(temp[i]);
 		}
 				
 	}

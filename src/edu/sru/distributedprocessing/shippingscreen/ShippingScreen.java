@@ -131,12 +131,12 @@ public class ShippingScreen
 		return this.type;
 	}
 
-	public void deleteRecordAt(int index) {
-		Log.v("ADP", "Deleting: "  + type[index].getFields()[0] + " " + type[index].getFields()[1]);
-		table.deleteRecord(index);
-		type = table.getRecords();
-		Initialize();
-	}
+//	public void deleteRecordAt(int index) {
+//		Log.v("ADP", "Deleting: "  + type[index].getFields()[0] + " " + type[index].getFields()[1]);
+//		table.deleteLocalRecord(index);
+//		type = table.getRecords();
+//		Initialize();
+//	}
 	
 	public void changeRecordAt(int index,String[] values)
 	{

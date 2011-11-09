@@ -51,6 +51,18 @@ public class Options extends ExpandableListActivity
 	    type = getIntent().getExtras().getString("Type"); //type of records
 	    index = (EditText) findViewById(R.id.starting_index); //starting index of list
 	    
+	    //add the group names (navigation panel elements)
+	    groupNames = new ArrayList<String>();
+	   /* groupNames.add( "Vehicles" );    groupNames.add( "Drivers" );
+	    groupNames.add( "Shipments" );   groupNames.add( "Routing" );
+	    groupNames.add( "Contractors" ); groupNames.add( "Depots" );
+	    groupNames.add( "Warehouses" );  groupNames.add( "Vehicle Type" );
+	    groupNames.add( "Maintenance" ); groupNames.add( "Technicians" );
+	    groupNames.add( "Contacts" );	 groupNames.add( "Reports" );*/
+	    
+	    //child options in the groupNames (field elements)
+	    field_options = new ArrayList<ArrayList<FieldOption>>(); 
+	   
 	    /*
 	     * loop through tables
 	     * if passed in type = tables records type, set index from table
@@ -62,6 +74,17 @@ public class Options extends ExpandableListActivity
 				if(type.equalsIgnoreCase(Constants.db.getTables()[i].getRecordType()))
 				{
 					index.setText(""+Constants.db.getTables()[i].getIndex());
+					
+					groupNames.add( Constants.db.getTables()[i].getTableName());
+					
+					fields = new ArrayList<FieldOption>();
+		    		Log.v("ADP", "Creating OptionsList for table: " + Constants.db.getTables()[i].getTableName());
+		    		for(int j = 0; j < Constants.db.getTables()[i].getFields().length; j++)
+		    		{
+		    			fields.add(new FieldOption( Constants.db.getTables()[i].getFields()[j], false) );
+		    			Log.v("ADP", "Field Option: " + Constants.db.getTables()[i].getFields()[j]);
+		    		}
+		    		field_options.add(fields);
 				}
 			}catch (Exception e)
 			{
@@ -70,18 +93,8 @@ public class Options extends ExpandableListActivity
 			Log.v("ADP", "" + "Options.class - " + Constants.db.getTables()[i].getIndex());
 		}
 			    
-		//add the group names (navigation panel elements)
-	    groupNames = new ArrayList<String>();
-	    	groupNames.add( "Vehicles" );    groupNames.add( "Drivers" );
-		    groupNames.add( "Shipments" );   groupNames.add( "Routing" );
-		    groupNames.add( "Contractors" ); groupNames.add( "Depots" );
-		    groupNames.add( "Warehouses" );  groupNames.add( "Vehicle Type" );
-		    groupNames.add( "Maintenance" ); groupNames.add( "Technicians" );
-		    groupNames.add( "Contacts" );	 groupNames.add( "Reports" );
-		   
-		 //child options in the groupNames (field elements)
-	    field_options = new ArrayList<ArrayList<FieldOption>>(); 
-	    	for(int i = 0; i < Constants.db.getTables().length; i++)
+	    /*	
+	    for(int i = 0; i < Constants.db.getTables().length; i++)
 	    	{
 	    		fields = new ArrayList<FieldOption>();
 	    		Log.v("ADP", "Creating OptionsList for table: " + Constants.db.getTables()[i].getTableName());
@@ -93,7 +106,7 @@ public class Options extends ExpandableListActivity
 	    		field_options.add(fields);
     		}
 	    	
-	    /*
+	    
 	     
 	     fields = new ArrayList<FieldOption>();
 	     	//Vehicle Fields

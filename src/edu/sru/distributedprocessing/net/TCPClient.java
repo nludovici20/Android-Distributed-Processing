@@ -61,7 +61,6 @@ public class TCPClient extends Thread
 					{
 					case Message.Type.GET_TABLE:
 						recieveTableRequest(lastTable, data);
-						//IntelliSyncActivity.canUpdate = true;
 						break;
 					case Message.Type.GET_RECORD:
 						recieveRecordRequest(lastTable, data);
@@ -80,12 +79,12 @@ public class TCPClient extends Thread
 						Log.v("ADP", "TCPClient.class - Default Case");	
 					}
 					
-					try{
-						IntelliSyncActivity.refresh();
-					}catch(Exception e)
-					{
-						Log.v("ADP", "TCPClient.class - Error Refreshing");
-					}
+//					try{
+//						IntelliSyncActivity.refresh();
+//					}catch(Exception e)
+//					{
+//						Log.v("ADP", "TCPClient.class - Error Refreshing");
+//					}
 					
 					Log.v("ADP","TCPClient.class - " + data);
 				}
@@ -215,14 +214,15 @@ public class TCPClient extends Thread
 		for(int i = 0; i < temp.length; i++)
 		{
 			//temp[++i] = id of record changed
-			for(int j = Constants.db.getTable(lastTable).getIndex(); j < Constants.db.getTable(lastTable).getRecords().length; j++)
+			for(int j = 0; j < Constants.db.getTable(lastTable).getRecords().length; j++)
 			{
 				//if at the record to be inserted, insert else add original record
-				if(""+j == temp[i])
+				if(Constants.db.getTable(lastTable).getRecords()[j].getID().equalsIgnoreCase(temp[i]))
 				{
-					inView[0] = temp[++i];
+					inView[0] = temp[i];
 					inView[1] = temp[++i];
-					Constants.db.getTable(lastTable).changeRecordAt(j, inView);
+					//Constants.db.getTable(lastTable).changeRecordAt(j, inView);
+					IntelliSyncActivity.changeRecordAt(j, inView);
 					Log.v("ADP", "TCPClient.class - changed record: ID - " + j + " Field1.value: " + inView[0] + " Field2.value: " + inView[1]);
 				}else
 				{
@@ -268,10 +268,11 @@ public class TCPClient extends Thread
 		for(int i = 0; i < temp.length; i++)
 		{
 			String[] fields = new String[2]; //create a new String[]
-			fields[0] = temp[i]; //temp[i] = fieldInView1 value
+			String index = temp[i];
+			fields[0] = temp[++i]; //temp[i] = fieldInView1 value
 			fields[1] = temp[++i]; //temp[++i] = fieldInView2 value
-			Constants.db.getTable(this.lastTable).addRecord(new Record(fields));
-			Log.d("ADP", "TCPClient.class - " + fields[0] + " " + fields[1]);
+			IntelliSyncActivity.insertRecordAt(index, fields);	
+			Log.d("ADP", "TCPClient.class - New Record:" + index + " " + fields[0] + " " + fields[1]);
 		}
 		Log.v("ADP", "/******** End Insert Request ********\"");
 	}
@@ -305,17 +306,19 @@ public class TCPClient extends Thread
 	 * Recieve data and handle deletion of a record
 	 * data contains a tablename, and an index to delete
 	 */
-	private void recieveDeleteRequest(String data) {
+	private void recieveDeleteRequest(String data)
+	{
+		Log.v("ADP", "/******** Recieve Delete Request ********\"");
 		String[] temp = data.substring(1).split(""+Message.Type.GET_DELETE);
-		
 		//temp[0] is tablename
 		//temp[n+1] is index of deleted record
-		for(int i = 1; i < temp.length; i++)
+		for(int i = 0; i < temp.length; i++)
 		{
 			//delete record at index passed in
-			Constants.db.getTable(temp[0]).deleteRecord(temp[i]);
+			IntelliSyncActivity.deleteRecordAt(temp[i]);
+			Log.v("ADP", "TCPClient.class - Deleting record at index " + temp[i]);
 		}
-				
+		Log.v("ADP", "/******** End Recieve Delete Request ********\"");	
 	}
 	
 	/*

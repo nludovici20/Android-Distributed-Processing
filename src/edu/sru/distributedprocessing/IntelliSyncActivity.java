@@ -55,15 +55,39 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
         
     }
     
-    public static void refresh() {
-    	Log.v("ADP", "IntelliSyncActivity.class - Refreshing...");
-        handler.postDelayed(new Runnable() {
-        	public void run() {
-				ss.Initialize(); // this is where you put your refresh code
+//    public static void refresh() {
+//    	Log.v("ADP", "IntelliSyncActivity.class - Refreshing...");
+//        handler.postDelayed(new Runnable() {
+//        	public void run() {
+//				ss.Initialize(); // this is where you put your refresh code
+//			}
+//             }, 500);
+//        Log.v("ADP", "IntelliSyncActivity.class - Done Refreshing");
+//    }
+    
+    public static void changeRecordAt(final int index, final String[] inView) {
+		handler.postDelayed(new Runnable() {
+			public void run(){
+				ss.changeRecordAt(index, inView);
 			}
-             }, 500);
-        Log.v("ADP", "IntelliSyncActivity.class - Done Refreshing");
-    }
+		}, 500);
+	}
+    
+    public static void deleteRecordAt(final String index) {
+		handler.postDelayed(new Runnable() {
+			public void run(){
+				ss.deleteRecordAt(index);
+			}
+		}, 500);
+	}
+    
+    public static void insertRecordAt(final String index, final String[] record) {
+		handler.postDelayed(new Runnable() {
+			public void run(){
+				ss.insertRecordAt(index, record);
+			}
+		}, 500);
+	}
     
     /*
      * Method that handles different views onclick methods if set in xml layout
@@ -159,6 +183,7 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
 				engineIntent.putExtra("Fields", Constants.db.getTable(tableName).getFields());
 				engineIntent.putExtra("Intent", "insert");
 				IntelliSyncActivity.this.startActivity(engineIntent);
+				IntelliSyncActivity.this.finish();
 				Log.v("ADP", "CustomDialogListView.class - Insert Record");        		
 			}catch(Exception e)
 			{

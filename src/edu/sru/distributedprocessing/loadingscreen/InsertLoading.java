@@ -70,8 +70,8 @@ public class InsertLoading extends Activity {
 					//handle
 				} finally {
 					//after splash screen, return to activity
-					startActivity(engineIntent);
 					finish();
+					startActivity(engineIntent);
 				}
 			}
 		};

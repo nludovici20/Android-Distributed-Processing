@@ -78,8 +78,8 @@ public class RecordLoading extends Activity {
 					//handle
 				} finally {
 					//after splash screen, return to activity
-					startActivity(engineIntent);
 					finish();
+					startActivity(engineIntent);
 				}
 			}
 		};

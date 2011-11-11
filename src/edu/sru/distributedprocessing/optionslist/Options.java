@@ -53,13 +53,7 @@ public class Options extends ExpandableListActivity
 	    
 	    //add the group names (navigation panel elements)
 	    groupNames = new ArrayList<String>();
-	   /* groupNames.add( "Vehicles" );    groupNames.add( "Drivers" );
-	    groupNames.add( "Shipments" );   groupNames.add( "Routing" );
-	    groupNames.add( "Contractors" ); groupNames.add( "Depots" );
-	    groupNames.add( "Warehouses" );  groupNames.add( "Vehicle Type" );
-	    groupNames.add( "Maintenance" ); groupNames.add( "Technicians" );
-	    groupNames.add( "Contacts" );	 groupNames.add( "Reports" );*/
-	    
+	   	    
 	    //child options in the groupNames (field elements)
 	    field_options = new ArrayList<ArrayList<FieldOption>>(); 
 	   
@@ -92,108 +86,7 @@ public class Options extends ExpandableListActivity
 			}
 			Log.v("ADP", "" + "Options.class - " + Constants.db.getTables()[i].getIndex());
 		}
-			    
-	    /*	
-	    for(int i = 0; i < Constants.db.getTables().length; i++)
-	    	{
-	    		fields = new ArrayList<FieldOption>();
-	    		Log.v("ADP", "Creating OptionsList for table: " + Constants.db.getTables()[i].getTableName());
-	    		for(int j = 0; j < Constants.db.getTables()[i].getFields().length; j++)
-	    		{
-	    			fields.add(new FieldOption( Constants.db.getTables()[i].getFields()[j], false) );
-	    			Log.v("ADP", "Field Option: " + Constants.db.getTables()[i].getFields()[j]);
-	    		}
-	    		field_options.add(fields);
-    		}
-	    	
-	    
-	     
-	     fields = new ArrayList<FieldOption>();
-	     	//Vehicle Fields
-			fields.add( new FieldOption( "ID", false ) );  			
-			fields.add( new FieldOption( "License Plate Number", false ) ); 
-			fields.add( new FieldOption( "Vin Number", false ) );  	
-			fields.add( new FieldOption( "Manufactured Year", false ) ); 	
-			fields.add( new FieldOption( "Vehicle Type", false ) ); 	
-			fields.add( new FieldOption( "Driver", false ) ); 
-			fields.add( new FieldOption( "Depot", false ) ); 			
-			fields.add( new FieldOption( "Available?", false ) );  
-			field_options.add(fields);
-		 
-		fields = new ArrayList<FieldOption>();
-			//Driver Fields
-			fields.add( new FieldOption ( "ID", false ) );
-			fields.add( new FieldOption ( "Last Name", false ) );
-			fields.add( new FieldOption ( "First Name", false ) );
-			fields.add( new FieldOption ( "Middle Initial", false ) );
-			fields.add( new FieldOption ( "Primary Phone", false ) );
-			fields.add( new FieldOption ( "Work Phone", false ) );
-			fields.add( new FieldOption ( "Vehicle Plate No.", false ) );
-			fields.add( new FieldOption ( "License Number", false ) );
-			fields.add( new FieldOption ( "License Expiration", false ) );
-			fields.add( new FieldOption ( "License Class", false ) ); 
-		    field_options.add(fields);
-		     
-		 fields = new ArrayList<FieldOption>();
-			 //Shipment Fields
-		 	 field_options.add( fields );
-		     
-		 fields = new ArrayList<FieldOption>();
-		 	//Routing Fields
-		 	 field_options.add( fields );
-		 
-		 fields = new ArrayList<FieldOption>();
-		 	//Contractors Fields
-		 	fields.add( new FieldOption ( "ID", false ) );
-			fields.add( new FieldOption ( "Last Name", false ) );
-			fields.add( new FieldOption ( "First Name", false ) );
-			fields.add( new FieldOption ( "Middle Initial", false ) );
-			fields.add( new FieldOption ( "Primary Phone", false ) );
-			fields.add( new FieldOption ( "Work Phone", false ) );
-		 	field_options.add( fields );
-		 
-		 fields = new ArrayList<FieldOption>();
-		 	//Depot Fields
-			fields.add( new FieldOption ( "ID", false ) );
-			fields.add( new FieldOption ( "Name", false ) );
-			fields.add( new FieldOption ( "Address", false ) );
-			fields.add( new FieldOption ( "City", false ) );
-			fields.add( new FieldOption ( "State", false ) );
-			fields.add( new FieldOption ( "Zip Code", false ) );
-			fields.add( new FieldOption ( "Latitude", false ) );
-			fields.add( new FieldOption ( "Longitude", false ) );
-			field_options.add( fields );
-			
-		fields = new ArrayList<FieldOption>();
-			//Warehouse Fields
-			field_options.add( fields );
-			
-		fields = new ArrayList<FieldOption>();
-			//Vehicle Type Fields
-			fields.add( new FieldOption ( "ID", false ) );
-			fields.add( new FieldOption ( "SubType", false ) );
-			fields.add( new FieldOption ( "Model", false ) );
-			fields.add( new FieldOption ( "Max Weight", false ) );
-			fields.add( new FieldOption ( "Max Range", false ) );
-			fields.add( new FieldOption ( "Length", false ) );
-			field_options.add( fields );
-			
-		fields = new ArrayList<FieldOption>();
-			//Maintenance Fields
-			field_options.add( fields );
-			
-		fields = new ArrayList<FieldOption>();
-			//Technician Fields
-			field_options.add( fields );
-			
-		fields = new ArrayList<FieldOption>();
-			//Contact Fields
-			field_options.add( fields );
-		
-		fields = new ArrayList<FieldOption>();
-			//Report Fields
-			field_options.add( fields );*/
-			
+			    			
 			expListAdapter = new FieldOptionAdapter( this,groupNames, field_options );
 			setListAdapter( expListAdapter );
 			

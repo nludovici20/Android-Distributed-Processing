@@ -86,8 +86,26 @@ public class Options extends ExpandableListActivity
 			}
 			Log.v("ADP", "" + "Options.class - " + Constants.db.getTables()[i].getIndex());
 		}
-			    			
+		
+		//check the fields in view's checkbox
+		for(int i = 0; i < Constants.db.getTables().length; i++)
+		{
+			if(type.equalsIgnoreCase(Constants.db.getTables()[i].getRecordType()))
+			{
+				for(int j = 0; j < fields.size(); j++)
+				{
+					if(fields.get(j).getField().equalsIgnoreCase(Constants.db.getTables()[i].getFieldsInView().get(0)) || fields.get(j).getField().equalsIgnoreCase(Constants.db.getTables()[i].getFieldsInView().get(1)))
+					{
+						Log.v("ADP", "Options.class" + fields.get(j).getField() + " " + Constants.db.getTables()[i].getFieldsInView().get(0) + " "  + Constants.db.getTables()[i].getFieldsInView().get(1));
+						fields.get(j).state = true;
+					}
+				}
+			}
+		}
+					    			
 			expListAdapter = new FieldOptionAdapter( this,groupNames, field_options );
+			
+			
 			setListAdapter( expListAdapter );
 			
 			/**							**/
@@ -102,6 +120,13 @@ public class Options extends ExpandableListActivity
 					{
 						Constants.db.getTables()[i].getFieldsInView().clear();
 					}
+					
+					//clear all checkboxes
+					for(int i = 0; i < fields.size(); i++)
+					{
+						fields.get(i).state = false;
+					}
+					expListAdapter.notifyDataSetChanged();
 				}
 			});
 	}

@@ -20,13 +20,13 @@ public class Initialize
 	public static TCPClient tcp;
 	static String[] contractorFields, dbContractorFields, depotFields, dbDepotFields, driverFields, dbDriverFields, vehicleTypeFields, dbVehicleTypeFields, vehicleFields, dbVehicleFields;
 	
-	public Initialize(Activity act)
+	public Initialize(String username, String password, String ip, int port, Activity act)
 	{		
 		
 		//initialize a new Client and connect with server
 		try
 		{
-			tcp = new TCPClient("192.168.1.3", 4000); //connect to server
+			tcp = new TCPClient(/*username, password*/ip, port); //connect to server
 			tcp.start(); //start the thread
 			tcp.send("Hello Server, From Client"); //send initial message to server
 		}catch (Exception e)

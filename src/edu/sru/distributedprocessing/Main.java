@@ -1,5 +1,6 @@
 package edu.sru.distributedprocessing;
 
+import edu.sru.distributedprocessing.dialogs.AuthenticationDialog;
 import edu.sru.distributedprocessing.editors.ContractorEditor;
 import edu.sru.distributedprocessing.optionslist.Options;
 import android.app.Activity;
@@ -17,9 +18,7 @@ public class Main extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-      
-        Initialize init = new Initialize(this); 
-        
+              
         Button start_btn = (Button) findViewById(R.id.start_btn);
         start_btn.setOnClickListener(new View.OnClickListener() 
         {

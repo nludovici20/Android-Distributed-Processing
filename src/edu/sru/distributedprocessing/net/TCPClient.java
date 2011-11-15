@@ -263,7 +263,7 @@ public class TCPClient extends Thread
 	{
 		Log.v("ADP", "/******** Recieve Insert Request ********\"");
 		String[] temp = data.substring(1).split(""+Message.Type.GET_INSERT); //split data by designated char
-		
+		Log.v("ADP", data);
 		//loop until no more elements in temp
 		for(int i = 0; i < temp.length; i++)
 		{
@@ -274,7 +274,7 @@ public class TCPClient extends Thread
 			IntelliSyncActivity.insertRecordAt(index, fields);	
 			Log.d("ADP", "TCPClient.class - New Record:" + index + " " + fields[0] + " " + fields[1]);
 		}
-		Log.v("ADP", "/******** End Insert Request ********\"");
+		Log.v("ADP", "/******** End ReceiveInsert Request ********\"");
 	}
 	
 	/*

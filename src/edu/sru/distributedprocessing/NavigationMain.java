@@ -1,5 +1,6 @@
 package edu.sru.distributedprocessing;
 
+import edu.sru.distributedprocessing.dialogs.AuthenticationDialog;
 import edu.sru.distributedprocessing.loadingscreen.TableLoading;
 import edu.sru.distributedprocessing.tableobjects.Table;
 import edu.sru.distributedprocessing.tools.Constants;
@@ -19,6 +20,9 @@ public class NavigationMain extends Activity implements OnClickListener
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.navigation_main);
+        
+        AuthenticationDialog authenticate = new AuthenticationDialog(this, R.style.CustomDialogTheme);
+        authenticate.show();
         
         GridView gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new GridAdapter(this, this));

@@ -149,7 +149,7 @@ public class ShippingScreen
 	public void insertRecordAt(String index, String[] rec)
 	{
 		Log.v("ADP", "Inserting new Record");
-		table.addRecord(new Record(rec));
+		table.addRecord(new Record(index, rec));
 		type = table.getRecords();
 		Initialize();
 	}

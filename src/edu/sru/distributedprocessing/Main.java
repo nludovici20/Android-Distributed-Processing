@@ -2,6 +2,7 @@ package edu.sru.distributedprocessing;
 
 import edu.sru.distributedprocessing.dialogs.AuthenticationDialog;
 import edu.sru.distributedprocessing.editors.ContractorEditor;
+import edu.sru.distributedprocessing.net.Authenticate;
 import edu.sru.distributedprocessing.optionslist.Options;
 import android.app.Activity;
 import android.content.Intent;
@@ -18,7 +19,9 @@ public class Main extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-              
+          
+        Initialize init = new Initialize(this);
+        
         Button start_btn = (Button) findViewById(R.id.start_btn);
         start_btn.setOnClickListener(new View.OnClickListener() 
         {
@@ -58,7 +61,7 @@ public class Main extends Activity
 			public void onClick(View v) 
 			{
 				try {
-					Initialize.tcp.finish();
+					Authenticate.tcp.finish();
 				} catch (Exception e) {
 					Log.v("ADP", "Main.class - Error finishing tcp thread");
 				}

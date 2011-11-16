@@ -9,6 +9,7 @@ import edu.sru.distributedprocessing.editors.DriverEditor;
 import edu.sru.distributedprocessing.editors.VehicleEditor;
 import edu.sru.distributedprocessing.editors.VehicleTypeEditor;
 import edu.sru.distributedprocessing.loadingscreen.RecordLoading;
+import edu.sru.distributedprocessing.net.Authenticate;
 import edu.sru.distributedprocessing.tableobjects.Record;
 import edu.sru.distributedprocessing.tableobjects.Table;
 import edu.sru.distributedprocessing.tools.Constants;
@@ -83,7 +84,7 @@ public class CustomDialogListView extends Dialog
     				if(clicked.equalsIgnoreCase(list[1]))
     				{
     					//Delete Record
-    					Initialize.tcp.sendDeleteRequest(type.getTableName(), recordIndex);
+    					Authenticate.tcp.sendDeleteRequest(type.getTableName(), recordIndex);
     					Log.v("ADP", "CustomDialogListView.class - Delete Record: " + type.getTableName() + " Index of Record to delete: " + recordIndex);
     				}
     		

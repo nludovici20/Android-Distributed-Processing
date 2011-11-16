@@ -9,6 +9,7 @@ import edu.sru.distributedprocessing.editors.DepotEditor;
 import edu.sru.distributedprocessing.editors.DriverEditor;
 import edu.sru.distributedprocessing.editors.VehicleEditor;
 import edu.sru.distributedprocessing.editors.VehicleTypeEditor;
+import edu.sru.distributedprocessing.net.Authenticate;
 import edu.sru.distributedprocessing.tableobjects.Table;
 import edu.sru.distributedprocessing.tools.Constants;
 import android.app.Activity;
@@ -45,7 +46,7 @@ public class TableLoading extends Activity {
 				try {
 					super.run();
 					
-					Initialize.tcp.sendTableRequest(tbl);
+					Authenticate.tcp.sendTableRequest(tbl);
 					
 					//wait certain amount of time
 					while (wait < splashDisplayTime) {

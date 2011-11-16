@@ -1,40 +1,23 @@
 package edu.sru.distributedprocessing.dialogs;
 
-import edu.sru.distributedprocessing.Initialize;
-import edu.sru.distributedprocessing.IntelliSyncActivity;
 import edu.sru.distributedprocessing.R;
-import edu.sru.distributedprocessing.editors.ContractorEditor;
-import edu.sru.distributedprocessing.editors.DepotEditor;
-import edu.sru.distributedprocessing.editors.DriverEditor;
-import edu.sru.distributedprocessing.editors.VehicleEditor;
-import edu.sru.distributedprocessing.editors.VehicleTypeEditor;
-import edu.sru.distributedprocessing.loadingscreen.RecordLoading;
-import edu.sru.distributedprocessing.tableobjects.Record;
-import edu.sru.distributedprocessing.tableobjects.Table;
-import edu.sru.distributedprocessing.tools.Constants;
+import edu.sru.distributedprocessing.net.Authenticate;
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
 
 public class AuthenticationDialog extends Dialog 
 {
     Activity activity;	//current activity
-      
+    Authenticate auth;
+    
     public AuthenticationDialog(Activity act, int theme) 
     {
         super(act, theme);
         this.activity = act;
-       
     }
     
     @Override
@@ -54,7 +37,7 @@ public class AuthenticationDialog extends Dialog
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				Initialize init = new Initialize(username.getText().toString(), password.getText().toString(), ipNum.getText().toString(), Integer.parseInt(portNum.getText().toString()), activity);
+				auth = new Authenticate(activity, username.getText().toString(), password.getText().toString(), ipNum.getText().toString(), Integer.parseInt(portNum.getText().toString()));
 				dismissCustomDialog();
 			}
         });

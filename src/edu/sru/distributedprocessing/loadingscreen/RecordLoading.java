@@ -8,6 +8,7 @@ import edu.sru.distributedprocessing.editors.DepotEditor;
 import edu.sru.distributedprocessing.editors.DriverEditor;
 import edu.sru.distributedprocessing.editors.VehicleEditor;
 import edu.sru.distributedprocessing.editors.VehicleTypeEditor;
+import edu.sru.distributedprocessing.net.Authenticate;
 import edu.sru.distributedprocessing.tools.Constants;
 import android.app.Activity;
 import android.content.Intent;
@@ -67,7 +68,7 @@ public class RecordLoading extends Activity {
 				try {
 					super.run();
 					
-					Initialize.tcp.sendRecordRequest(tableName, recordIndex);					
+					Authenticate.tcp.sendRecordRequest(tableName, recordIndex);					
 					
 					//wait certain amount of time
 					while (wait < splashDisplayTime) {

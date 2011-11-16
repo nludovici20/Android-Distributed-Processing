@@ -9,6 +9,7 @@ import edu.sru.distributedprocessing.editors.DepotEditor;
 import edu.sru.distributedprocessing.editors.DriverEditor;
 import edu.sru.distributedprocessing.editors.VehicleEditor;
 import edu.sru.distributedprocessing.editors.VehicleTypeEditor;
+import edu.sru.distributedprocessing.net.Authenticate;
 import edu.sru.distributedprocessing.tableobjects.Table;
 import edu.sru.distributedprocessing.tools.Constants;
 import android.app.Activity;
@@ -54,11 +55,11 @@ public class InsertLoading extends Activity {
 					
 					if(intent.equalsIgnoreCase("edit"))
 					{
-						Initialize.tcp.sendChangeRequest(tableName, record);	
+						Authenticate.tcp.sendChangeRequest(tableName, record);	
 					}else
 						if(intent.equalsIgnoreCase("insert"))
 						{
-							Initialize.tcp.sendInsertRequest(tableName, record);
+							Authenticate.tcp.sendInsertRequest(tableName, record);
 						}
 					
 					//wait certain amount of time

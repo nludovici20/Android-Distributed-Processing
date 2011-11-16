@@ -50,7 +50,7 @@
     <SlidingDrawer 
 	    android:id="@+id/slidingDrawer1" 
 	    android:orientation="vertical"
-	    android:layout_width="175px"
+	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    android:handle="@+id/handle" 
 	    android:content="@+id/content">
@@ -70,7 +70,7 @@
 	        android:scrollbarAlwaysDrawVerticalTrack="true"
 	        android:layout_height="match_parent">
     			<Button 
-    				android:layout_height="wrap_content" 
+    				android:layout_height="wrap_content"
     				android:tag="vehicles"
     				android:onClick="onClick"
     				android:id="@+id/vehicle_btn" 
@@ -78,7 +78,7 @@
     				android:text="Vehicles"> 
     			</Button>
 	      		<Button 
-    				android:layout_height="wrap_content" 
+    				android:layout_height="wrap_content"
     				android:tag="drivers"
     				android:onClick="onClick"
     				android:id="@+id/drivers_btn" 

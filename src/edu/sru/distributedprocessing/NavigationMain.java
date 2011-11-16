@@ -1,13 +1,10 @@
 package edu.sru.distributedprocessing;
 
-import edu.sru.distributedprocessing.dialogs.AuthenticationDialog;
 import edu.sru.distributedprocessing.loadingscreen.TableLoading;
-import edu.sru.distributedprocessing.tableobjects.Table;
-import edu.sru.distributedprocessing.tools.Constants;
+import edu.sru.distributedprocessing.tools.FileManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.GridView;
@@ -21,8 +18,14 @@ public class NavigationMain extends Activity implements OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.navigation_main);
         
-        AuthenticationDialog authenticate = new AuthenticationDialog(this, R.style.CustomDialogTheme);
-        authenticate.show();
+        try
+        {
+        	FileManager.readConfigFile(NavigationMain.this);
+        }
+        catch(Exception e)
+        {
+        	//error
+        }
         
         GridView gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new GridAdapter(this, this));

@@ -6,8 +6,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
+import edu.sru.distributedprocessing.R;
+import edu.sru.distributedprocessing.dialogs.AuthenticationDialog;
+import edu.sru.distributedprocessing.net.Authenticate;
 import edu.sru.distributedprocessing.tableobjects.Record;
 import edu.sru.distributedprocessing.tableobjects.Table;
 
@@ -29,7 +33,7 @@ public class FileManager {
 				InputStreamReader inputreader = new InputStreamReader(fis);
 				BufferedReader buffreader = new BufferedReader(inputreader);
 				
-				// read every line of the file into the line-variable, on line at the time
+				// read every line of the file into the line-variable, one line at the time
 				while (( line = buffreader.readLine()) != null)
 				{
 					String[] temp = line.split("  ");
@@ -90,6 +94,71 @@ public class FileManager {
 		catch(Exception e)
 		{
 			Log.v("ADP", "FileManager.class - Error creating file");
+		}
+	}
+	
+	public static void saveConfigFile(Context context, String[] info, String filename)
+	{
+		//create file here and save data
+		try
+		{
+			OutputStreamWriter out = new OutputStreamWriter(context.openFileOutput(filename + ".txt", context.MODE_PRIVATE));
+			for(int i = 0; i < info.length; i++)
+			{
+				try
+				{
+					out.write(info[i]);
+					out.write("\r\n");
+				}catch (Exception e)
+				{
+					Log.v("ADP", "FileManager.class - Error writing to config file");
+					
+				}
+			}
+			
+			out.close();
+			Log.v("ADP", "FileManager.class - Config File Created Successfully");
+		}
+		catch(Exception e)
+		{
+			Log.v("ADP", "FileManager.class - Error creating config file");
+		}
+	}
+	
+	public static void readConfigFile(Activity act)
+	{
+		String line;
+		int index = 0;
+		String[] info = new String[4];
+		// try opening the myfilename.txt
+		try 
+		{
+			// open the file for reading
+			FileInputStream fis = act.getBaseContext().openFileInput("Config.txt");
+			// if file the available for reading
+			if (fis != null)
+			{
+				// prepare the file for reading
+				InputStreamReader inputreader = new InputStreamReader(fis);
+				BufferedReader buffreader = new BufferedReader(inputreader);
+				// read every line of the file into the line-variable, on line at the time
+				while (( line = buffreader.readLine()) != null)
+				{
+					info[index] = line;
+					index++;
+				}
+				Authenticate auth = new Authenticate(act, info[0], info[1], info[2], Integer.parseInt(info[3]));
+			}
+			// close the file again
+			fis.close();
+			Log.v("ADP", "FileManager.class - Successfully read config file");
+		}
+		catch (Exception e)
+		{
+			Log.v("ADP", "FileManager.class - Config file not read");
+			AuthenticationDialog authenticate = new AuthenticationDialog(act, R.style.CustomDialogTheme);
+	        authenticate.show();
+			
 		}
 	}
 }

@@ -65,7 +65,7 @@
 				android:textSize="20sp"
 				android:gravity="center"
 				android:layout_centerHorizontal="true" 
-				android:text="Options" 
+				android:text="Settings" 
 				android:layout_below="@+id/start_btn" 
 				android:layout_height="wrap_content" 
 				android:id="@+id/options_btn"> 

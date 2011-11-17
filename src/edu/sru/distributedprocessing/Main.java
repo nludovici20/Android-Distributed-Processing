@@ -39,7 +39,7 @@ public class Main extends Activity
 			//@Override
 			public void onClick(View v) 
 			{
-				engineIntent = new Intent(Main.this, Options.class);
+				engineIntent = new Intent(Main.this, Settings.class);
 				startActivity(engineIntent);
 			}
 		});

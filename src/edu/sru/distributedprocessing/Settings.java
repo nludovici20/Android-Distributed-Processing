@@ -13,10 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import edu.sru.distributedprocessing.tools.FileManager;
 
-public class Options extends Activity 
+public class Settings extends Activity 
 {
 	private EditText username, password, ipNum, portNum;
-	private Button authenticate_btn;
+	private Button settings_btn;
 	
 	@Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -28,15 +28,16 @@ public class Options extends Activity
         ipNum = (EditText)findViewById(R.id.ipNum);
         portNum = (EditText)findViewById(R.id.portNum);
         
-        authenticate_btn = (Button) findViewById(R.id.authenticate_btn);
-        authenticate_btn.setOnClickListener(new View.OnClickListener()
+        settings_btn = (Button) findViewById(R.id.authenticate_btn);
+        settings_btn.setText("Save Settings");
+        settings_btn.setOnClickListener(new View.OnClickListener()
         {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				String[] info = { username.getText().toString(), password.getText().toString(), ipNum.getText().toString(), portNum.getText().toString() };
 				try
 				{
-					FileManager.saveConfigFile(Options.this, info, "Config");
+					FileManager.saveConfigFile(Settings.this, info, "Config");
 					Log.v("ADP", "Options.class - Successfully saved Config file");
 				}catch(Exception e)
 				{

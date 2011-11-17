@@ -1,15 +1,5 @@
 package edu.sru.distributedprocessing;
 
-import edu.sru.distributedprocessing.editors.ContractorEditor;
-import edu.sru.distributedprocessing.editors.DepotEditor;
-import edu.sru.distributedprocessing.editors.DriverEditor;
-import edu.sru.distributedprocessing.editors.VehicleEditor;
-import edu.sru.distributedprocessing.editors.VehicleTypeEditor;
-import edu.sru.distributedprocessing.loadingscreen.TableLoading;
-import edu.sru.distributedprocessing.optionslist.Options;
-import edu.sru.distributedprocessing.shippingscreen.ShippingScreen;
-import edu.sru.distributedprocessing.tableobjects.Table;
-import edu.sru.distributedprocessing.tools.Constants;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +10,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+import edu.sru.distributedprocessing.editors.ContractorEditor;
+import edu.sru.distributedprocessing.editors.DepotEditor;
+import edu.sru.distributedprocessing.editors.DriverEditor;
+import edu.sru.distributedprocessing.editors.VehicleEditor;
+import edu.sru.distributedprocessing.editors.VehicleTypeEditor;
+import edu.sru.distributedprocessing.loadingscreen.TableLoading;
+import edu.sru.distributedprocessing.optionslist.Options;
+import edu.sru.distributedprocessing.shippingscreen.ShippingScreen;
+import edu.sru.distributedprocessing.tools.Constants;
 
 public class IntelliSyncActivity extends Activity implements View.OnClickListener
 {    

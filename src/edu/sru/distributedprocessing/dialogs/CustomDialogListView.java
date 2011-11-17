@@ -1,18 +1,5 @@
 package edu.sru.distributedprocessing.dialogs;
 
-import edu.sru.distributedprocessing.Initialize;
-import edu.sru.distributedprocessing.IntelliSyncActivity;
-import edu.sru.distributedprocessing.R;
-import edu.sru.distributedprocessing.editors.ContractorEditor;
-import edu.sru.distributedprocessing.editors.DepotEditor;
-import edu.sru.distributedprocessing.editors.DriverEditor;
-import edu.sru.distributedprocessing.editors.VehicleEditor;
-import edu.sru.distributedprocessing.editors.VehicleTypeEditor;
-import edu.sru.distributedprocessing.loadingscreen.RecordLoading;
-import edu.sru.distributedprocessing.net.Authenticate;
-import edu.sru.distributedprocessing.tableobjects.Record;
-import edu.sru.distributedprocessing.tableobjects.Table;
-import edu.sru.distributedprocessing.tools.Constants;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -24,6 +11,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import edu.sru.distributedprocessing.R;
+import edu.sru.distributedprocessing.loadingscreen.RecordLoading;
+import edu.sru.distributedprocessing.net.Authenticate;
+import edu.sru.distributedprocessing.tableobjects.Table;
 
 public class CustomDialogListView extends Dialog 
 {
@@ -31,6 +22,7 @@ public class CustomDialogListView extends Dialog
     Table type;
     int recordIndex;
     int listIndex;
+    Intent engineIntent;
     
     public CustomDialogListView(Activity act, int theme, Table type, int recordIndex, int listIndex) 
     {
@@ -62,7 +54,7 @@ public class CustomDialogListView extends Dialog
         	{
         		String clicked = ((TextView) v).getText().toString();
         		Log.v("ADP", "CustomDialogListView.class - " + clicked);
-        		Intent engineIntent = null;
+        		engineIntent = null;
         		
     			if(clicked.equalsIgnoreCase(list[0]))
     			{

@@ -1,18 +1,15 @@
 package edu.sru.distributedprocessing.optionslist;
 
-import android.content.Context;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.LayoutInflater;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.BaseExpandableListAdapter;
-import android.widget.CheckBox;
 import java.util.ArrayList;
 
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseExpandableListAdapter;
+import android.widget.CheckBox;
+import android.widget.TextView;
 import edu.sru.distributedprocessing.R;
-import edu.sru.distributedprocessing.R.id;
-import edu.sru.distributedprocessing.R.layout;
 
 public class FieldOptionAdapter extends BaseExpandableListAdapter 
 {

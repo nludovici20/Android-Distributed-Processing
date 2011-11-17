@@ -1,33 +1,31 @@
 package edu.sru.distributedprocessing.loadingscreen;
 
-import edu.sru.distributedprocessing.Initialize;
-import edu.sru.distributedprocessing.IntelliSyncActivity;
-import edu.sru.distributedprocessing.Main;
-import edu.sru.distributedprocessing.R;
-import edu.sru.distributedprocessing.editors.ContractorEditor;
-import edu.sru.distributedprocessing.editors.DepotEditor;
-import edu.sru.distributedprocessing.editors.DriverEditor;
-import edu.sru.distributedprocessing.editors.VehicleEditor;
-import edu.sru.distributedprocessing.editors.VehicleTypeEditor;
-import edu.sru.distributedprocessing.net.Authenticate;
-import edu.sru.distributedprocessing.tableobjects.Table;
-import edu.sru.distributedprocessing.tools.Constants;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import edu.sru.distributedprocessing.IntelliSyncActivity;
+import edu.sru.distributedprocessing.R;
+import edu.sru.distributedprocessing.net.Authenticate;
+import edu.sru.distributedprocessing.tableobjects.Table;
+import edu.sru.distributedprocessing.tools.Constants;
 
-public class InsertLoading extends Activity {
-	String tableName, intent; 
-	String[] record;
-	Intent engineIntent = null;
+public class InsertLoading extends Activity 
+{
+	private String tableName, intent; 
+	private String[] record;
+	private Intent engineIntent;
+	private TextView loadingMessage;
+	private Table tbl;
+	private int splashDisplayTime;
+	private Thread splashThread;
 		
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash);
 		
-		TextView loadingMessage = (TextView) findViewById(R.id.loadingMessage);
+		loadingMessage = (TextView) findViewById(R.id.loadingMessage);
 		loadingMessage.setText("Sending Data...");
 		
 		
@@ -38,14 +36,14 @@ public class InsertLoading extends Activity {
 		
 		engineIntent = new Intent(this, IntelliSyncActivity.class);
 		
-		final Table tbl = Constants.db.getTable(tableName);
+		tbl = Constants.db.getTable(tableName);
 		engineIntent.putExtra("Type", tbl.getRecordType());
 		
 		// set time to splash out
-		final int splashDisplayTime = 3000;
+		splashDisplayTime = 3000;
 		
 		// create a thread to show splash up to splash time
-		final Thread splashThread = new Thread() {
+		splashThread = new Thread() {
 		
 			int wait = 0;
 			@Override

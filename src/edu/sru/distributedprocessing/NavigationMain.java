@@ -1,7 +1,5 @@
 package edu.sru.distributedprocessing;
 
-import edu.sru.distributedprocessing.loadingscreen.TableLoading;
-import edu.sru.distributedprocessing.tools.FileManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,9 +7,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.GridView;
 import android.widget.Toast;
+import edu.sru.distributedprocessing.loadingscreen.TableLoading;
+import edu.sru.distributedprocessing.tools.FileManager;
 
 public class NavigationMain extends Activity implements OnClickListener
 {
+	private GridView gridview;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {
@@ -27,7 +29,7 @@ public class NavigationMain extends Activity implements OnClickListener
         	//error
         }
         
-        GridView gridview = (GridView) findViewById(R.id.gridview);
+        gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new GridAdapter(this, this));
     }
 

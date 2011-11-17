@@ -1,25 +1,26 @@
 package edu.sru.distributedprocessing.editors;
 
-import edu.sru.distributedprocessing.Initialize;
-import edu.sru.distributedprocessing.IntelliSyncActivity;
-import edu.sru.distributedprocessing.R;
-import edu.sru.distributedprocessing.loadingscreen.InsertLoading;
-import edu.sru.distributedprocessing.tools.Constants;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import edu.sru.distributedprocessing.R;
+import edu.sru.distributedprocessing.loadingscreen.InsertLoading;
+import edu.sru.distributedprocessing.tools.Constants;
 
 public class VehicleTypeEditor extends Activity {
-	String tableName, intent;
+	private String tableName, intent;
 	int index;
+	private String[] fields, new_record;
+	private TextView header;
+	private EditText vehicleType_edit, subType_edit, vehicleModel_edit, maxWeight_edit, maxRange_edit, maxLength_edit;
+	private Button save_btn;
+	private Intent engineIntent;
 	
     /** Called when the activity is first created. */
     @Override
@@ -31,31 +32,32 @@ public class VehicleTypeEditor extends Activity {
         intent = getIntent().getExtras().getString("Intent");
         index = getIntent().getExtras().getInt("Index");
         
-        final String[] fields = getIntent().getExtras().getStringArray("Fields");
-        final String[] new_record = new String[fields.length];
+        fields = getIntent().getExtras().getStringArray("Fields");
+        new_record = new String[fields.length];
         
         //Editor Items
-        TextView header = (TextView)findViewById(R.id.group_header);
+        header = (TextView)findViewById(R.id.group_header);
         header.setText(header.getText().toString() + " " + Constants.record.get(fields[0]));
         
-        final EditText vehicleType_edit = (EditText)findViewById(R.id.type_edit);
+        vehicleType_edit = (EditText)findViewById(R.id.type_edit);
         vehicleType_edit.setText(Constants.record.get(fields[1]));
         
-        final EditText subType_edit = (EditText)findViewById(R.id.subType_edit);
+        subType_edit = (EditText)findViewById(R.id.subType_edit);
         subType_edit.setText(Constants.record.get(fields[2]));
         
-        final EditText vehicleModel_edit = (EditText)findViewById(R.id.model_edit);
+        vehicleModel_edit = (EditText)findViewById(R.id.model_edit);
         vehicleModel_edit.setText(Constants.record.get(fields[3]));
         
-        final EditText maxWeight_edit = (EditText)findViewById(R.id.weight_edit);
+        maxWeight_edit = (EditText)findViewById(R.id.weight_edit);
         maxWeight_edit.setText(Constants.record.get(fields[4]));
-        final EditText maxRange_edit = (EditText)findViewById(R.id.range_edit);
+        
+        maxRange_edit = (EditText)findViewById(R.id.range_edit);
         maxRange_edit.setText(Constants.record.get(fields[5]));
         
-        final EditText maxLength_edit = (EditText)findViewById(R.id.length_edit);
+       maxLength_edit = (EditText)findViewById(R.id.length_edit);
         maxLength_edit.setText(Constants.record.get(fields[6]));
        
-        Button save_btn = (Button)findViewById(R.id.save_btn);
+        save_btn = (Button)findViewById(R.id.save_btn);
         save_btn.setOnClickListener(new View.OnClickListener() {
 			
 			public void onClick(View v) {
@@ -96,7 +98,7 @@ public class VehicleTypeEditor extends Activity {
 					}
 				
 				VehicleTypeEditor.this.finish();
-				Intent engineIntent = new Intent(VehicleTypeEditor.this, InsertLoading.class);
+				engineIntent = new Intent(VehicleTypeEditor.this, InsertLoading.class);
 				engineIntent.putExtra("TableName", tableName);
 				engineIntent.putExtra("Record", new_record);
 				engineIntent.putExtra("Intent", intent);

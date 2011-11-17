@@ -1,9 +1,9 @@
 package edu.sru.distributedprocessing.net;
 
-import edu.sru.distributedprocessing.tools.FileManager;
 import android.app.Activity;
 import android.util.Log;
 import android.widget.Toast;
+import edu.sru.distributedprocessing.tools.FileManager;
 
 public class Authenticate {
 	public static TCPClient tcp;

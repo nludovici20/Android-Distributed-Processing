@@ -1,35 +1,20 @@
 package edu.sru.distributedprocessing.optionslist;
 
+import java.util.ArrayList;
+
 import android.app.ExpandableListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.CheckBox;
-import android.widget.ExpandableListView;
-import android.widget.SimpleExpandableListAdapter;
-import android.widget.Toast;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
-
-import edu.sru.distributedprocessing.Initialize;
-import edu.sru.distributedprocessing.IntelliSyncActivity;
-import edu.sru.distributedprocessing.R;
-import edu.sru.distributedprocessing.R.id;
-import edu.sru.distributedprocessing.R.layout;
-import edu.sru.distributedprocessing.loadingscreen.TableLoading;
-import edu.sru.distributedprocessing.shippingscreen.ShippingScreen;
-import edu.sru.distributedprocessing.tableobjects.Table;
-import edu.sru.distributedprocessing.tools.Constants;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ExpandableListView;
+import android.widget.Toast;
+import edu.sru.distributedprocessing.R;
+import edu.sru.distributedprocessing.loadingscreen.TableLoading;
+import edu.sru.distributedprocessing.tools.Constants;
 
 public class Options extends ExpandableListActivity
 {

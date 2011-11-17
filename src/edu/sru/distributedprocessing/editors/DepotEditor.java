@@ -1,25 +1,26 @@
 package edu.sru.distributedprocessing.editors;
 
-import edu.sru.distributedprocessing.Initialize;
-import edu.sru.distributedprocessing.IntelliSyncActivity;
-import edu.sru.distributedprocessing.R;
-import edu.sru.distributedprocessing.loadingscreen.InsertLoading;
-import edu.sru.distributedprocessing.tools.Constants;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import edu.sru.distributedprocessing.R;
+import edu.sru.distributedprocessing.loadingscreen.InsertLoading;
+import edu.sru.distributedprocessing.tools.Constants;
 
 public class DepotEditor extends Activity {
-	String tableName, intent;
-	int index; 
+	private String tableName, intent;
+	//private int index; 
+	private String[] fields, new_record;
+	private TextView header;
+	private EditText depotName_edit, depotAddress_edit, city_edit, state_edit, zip_edit, latitude_edit, longitude_edit;
+	private Button save_btn;
+	private Intent engineIntent;
 	
     /** Called when the activity is first created. */
     @Override
@@ -27,42 +28,41 @@ public class DepotEditor extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vehicle_editor);
        
-        tableName = "depots";
-        intent = getIntent().getExtras().getString("Intent");
-        index = getIntent().getExtras().getInt("Index");
+       tableName = "depots";
+       intent = getIntent().getExtras().getString("Intent");
+       //index = getIntent().getExtras().getInt("Index");
         
-        final String[] fields = getIntent().getExtras().getStringArray("Fields");
-        final String[] new_record = new String[fields.length];
+       fields = getIntent().getExtras().getStringArray("Fields");
+       new_record = new String[fields.length];
         
-        //Editor Items
-        final TextView header = (TextView)findViewById(R.id.group_header);
-        header.setText(header.getText().toString() + " " + Constants.record.get(fields[0]));
+       //Editor Items
+       header = (TextView)findViewById(R.id.group_header);
+       header.setText(header.getText().toString() + " " + Constants.record.get(fields[0]));
         
-        final EditText depotName_edit = (EditText)findViewById(R.id.depotName_edit);
-        depotName_edit.setText(Constants.record.get(fields[1]));
+       depotName_edit = (EditText)findViewById(R.id.depotName_edit);
+       depotName_edit.setText(Constants.record.get(fields[1]));
         
-        final EditText depotAddress_edit = (EditText)findViewById(R.id.depotAddress_edit);
-        depotAddress_edit.setText(Constants.record.get(fields[2]));
+       depotAddress_edit = (EditText)findViewById(R.id.depotAddress_edit);
+       depotAddress_edit.setText(Constants.record.get(fields[2]));
         
-        final EditText city_edit = (EditText)findViewById(R.id.city_edit);
-        city_edit.setText(Constants.record.get(fields[3]));
+       city_edit = (EditText)findViewById(R.id.city_edit);
+       city_edit.setText(Constants.record.get(fields[3]));
         
-        final EditText state_edit = (EditText)findViewById(R.id.state_edit);
-        state_edit.setText(Constants.record.get(fields[4]));
+       state_edit = (EditText)findViewById(R.id.state_edit);
+       state_edit.setText(Constants.record.get(fields[4]));
         
-        final EditText zip_edit = (EditText)findViewById(R.id.zip_edit);
-        zip_edit.setText(Constants.record.get(fields[5]));
+       zip_edit = (EditText)findViewById(R.id.zip_edit);
+       zip_edit.setText(Constants.record.get(fields[5]));
         
-        final EditText latitude_edit = (EditText)findViewById(R.id.latitude_edit);
-        latitude_edit.setText(Constants.record.get(fields[6]));
+       latitude_edit = (EditText)findViewById(R.id.latitude_edit);
+       latitude_edit.setText(Constants.record.get(fields[6]));
         
-        final EditText longitude_edit = (EditText)findViewById(R.id.longitude_edit);
-        longitude_edit.setText(Constants.record.get(fields[7]));
+       longitude_edit = (EditText)findViewById(R.id.longitude_edit);
+       longitude_edit.setText(Constants.record.get(fields[7]));
        
-        Button save_btn = (Button)findViewById(R.id.save_btn);
-        save_btn.setOnClickListener(new View.OnClickListener() {
-			
-			public void onClick(View v) {
+       save_btn.setOnClickListener(new View.OnClickListener() 
+       {
+    	   public void onClick(View v) {
 				Toast.makeText(DepotEditor.this, "Save button clicked", Toast.LENGTH_SHORT).show();	  
 				if(intent.equalsIgnoreCase("edit"))
 				{
@@ -101,7 +101,7 @@ public class DepotEditor extends Activity {
 						}
 				
 				DepotEditor.this.finish();
-				Intent engineIntent = new Intent(DepotEditor.this, InsertLoading.class);
+				engineIntent = new Intent(DepotEditor.this, InsertLoading.class);
 				engineIntent.putExtra("TableName", tableName);
 				engineIntent.putExtra("Record", new_record);
 				engineIntent.putExtra("Intent", intent);

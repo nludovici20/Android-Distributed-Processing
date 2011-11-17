@@ -3,9 +3,6 @@ package edu.sru.distributedprocessing.tableobjects;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-import edu.sru.distributedprocessing.tools.FileManager;
-
-import android.content.Context;
 import android.util.Log;
 
 public class Table {

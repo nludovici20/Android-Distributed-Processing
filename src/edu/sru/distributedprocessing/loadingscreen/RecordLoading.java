@@ -1,7 +1,8 @@
 package edu.sru.distributedprocessing.loadingscreen;
 
-import edu.sru.distributedprocessing.Initialize;
-import edu.sru.distributedprocessing.Main;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.editors.ContractorEditor;
 import edu.sru.distributedprocessing.editors.DepotEditor;
@@ -10,14 +11,12 @@ import edu.sru.distributedprocessing.editors.VehicleEditor;
 import edu.sru.distributedprocessing.editors.VehicleTypeEditor;
 import edu.sru.distributedprocessing.net.Authenticate;
 import edu.sru.distributedprocessing.tools.Constants;
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
 
 public class RecordLoading extends Activity {
-	String tableName; 
-	int recordIndex;
-	Intent engineIntent = null;
+	private String tableName; 
+	private int recordIndex, splashDisplayTime;
+	private Intent engineIntent = null;
+	private Thread splashThread;
 		
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -57,10 +56,10 @@ public class RecordLoading extends Activity {
 		engineIntent.putExtra("Index", getIntent().getExtras().getInt("ListIndex"));
 		
 		// set time to splash out
-		final int splashDisplayTime = 3000;
+		splashDisplayTime = 3000;
 		
 		// create a thread to show splash up to splash time
-		final Thread splashThread = new Thread() {
+		splashThread = new Thread() {
 		
 			int wait = 0;
 			@Override

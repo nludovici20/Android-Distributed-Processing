@@ -1,19 +1,16 @@
 package edu.sru.distributedprocessing.shippingscreen;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
+
 import android.app.Activity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
-import edu.sru.distributedprocessing.IntelliSyncActivity;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.dialogs.CustomDialogListView;
 import edu.sru.distributedprocessing.tableobjects.Record;

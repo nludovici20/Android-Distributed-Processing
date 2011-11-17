@@ -2,7 +2,6 @@ package edu.sru.distributedprocessing;
 
 import android.app.Activity;
 import android.util.Log;
-import edu.sru.distributedprocessing.net.TCPClient;
 import edu.sru.distributedprocessing.tableobjects.Table;
 import edu.sru.distributedprocessing.tools.Constants;
 import edu.sru.distributedprocessing.tools.FileManager;

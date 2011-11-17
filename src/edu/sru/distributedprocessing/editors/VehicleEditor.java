@@ -1,17 +1,23 @@
 package edu.sru.distributedprocessing.editors;
 
-import edu.sru.distributedprocessing.R;
-import edu.sru.distributedprocessing.tools.Constants;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import edu.sru.distributedprocessing.R;
 
 public class VehicleEditor extends Activity {
-	String tableName, intent;
+	private String tableName, intent;
 	int index;
+	private TextView group_header;
+	private EditText vin_text, license_text, year_text;
+	private CheckBox avail_box;
+	private Spinner driver_group, vehicle_type_group, depot_group;
+	private String[] fields, new_record;
+	private Intent engineIntent;
 	
     /** Called when the activity is first created. */
     @Override
@@ -23,18 +29,18 @@ public class VehicleEditor extends Activity {
         intent = getIntent().getExtras().getString("Intent");
         index = getIntent().getExtras().getInt("Index");
         
-        String[] fields = getIntent().getExtras().getStringArray("Fields");
-        final String[] new_record = new String[fields.length];
+        fields = getIntent().getExtras().getStringArray("Fields");
+        new_record = new String[fields.length];
         
         //Editor Items
-        TextView group_header = (TextView) findViewById(R.id.group_header);
-        EditText vin_text = (EditText) findViewById(R.id.vinNO_edit);
-        EditText license_text = (EditText) findViewById(R.id.licenseNO_edit);
-        EditText year_text = (EditText) findViewById(R.id.year_edit); 
-        CheckBox avail_box = (CheckBox) findViewById(R.id.available_box);
-        Spinner driver_group = (Spinner) findViewById(R.id.driverChoices_edit);
-        Spinner vehicle_type_group = (Spinner) findViewById(R.id.vehicleType_edit);
-        Spinner depot_group = (Spinner) findViewById(R.id.depotChoices_edit);
+        group_header = (TextView) findViewById(R.id.group_header);
+        vin_text = (EditText) findViewById(R.id.vinNO_edit);
+        license_text = (EditText) findViewById(R.id.licenseNO_edit);
+        year_text = (EditText) findViewById(R.id.year_edit); 
+        avail_box = (CheckBox) findViewById(R.id.available_box);
+        driver_group = (Spinner) findViewById(R.id.driverChoices_edit);
+        vehicle_type_group = (Spinner) findViewById(R.id.vehicleType_edit);
+        depot_group = (Spinner) findViewById(R.id.depotChoices_edit);
         
         /*
          *  Pass in record ID selected

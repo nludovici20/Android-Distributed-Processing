@@ -25,5 +25,6 @@
 	<activity android:name="NavigationMain"/>
 	<activity android:name="IntelliSyncActivity"/>
 	<activity android:name="About"/>
+	<activity android:name="Options"/>
     </application>
 </manifest>

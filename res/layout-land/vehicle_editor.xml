@@ -33,38 +33,38 @@
 	            	android:layout_height="match_parent" 
 	            	android:gravity="center"
 	            	android:layout_alignBottom="@+id/driverChoices_edit"
-	            	android:text="Driver Choices: " 
+	            	android:text="Driver: " 
 	            	android:layout_alignParentLeft="true" 
 	            	android:id="@+id/driverChoices_header" android:layout_width="wrap_content">
 	            </TextView>
-	           <Spinner
+	           <EditText
 					android:id="@+id/driverChoices_edit"
 					android:layout_below="@+id/group_header"
 					android:layout_alignParentRight="true"
 					android:layout_toRightOf="@id/driverChoices_header"
-					android:text="Driver's Name: "
+					android:text=" "
 					android:layout_height="wrap_content" 
 					android:layout_width="wrap_content">
-				</Spinner>
+				</EditText>>
 	            <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/driverChoices_header" android:id="@+id/ghost0" android:layout_width="match_parent"></TextView>
 	           <TextView 
 	            	android:layout_height="match_parent" 
 	            	android:gravity="center"
 	            	android:layout_alignBottom="@+id/depotChoices_edit"
 	            	android:layout_below="@+id/ghost0" 
-	            	android:text="Depot Choices: " 
+	            	android:text="Depot: " 
 	            	android:layout_alignParentLeft="true" 
 	            	android:id="@+id/depotChoices_header" android:layout_width="wrap_content">
 	            </TextView>
-	           <Spinner
+	           <EditText
 					android:id="@+id/depotChoices_edit"
 					android:layout_below="@+id/ghost0"
 					android:layout_alignParentRight="true"
 					android:layout_toRightOf="@id/depotChoices_header"
-					android:text="Depot Name: "
+					android:text=" "
 					android:layout_height="wrap_content" 
 					android:layout_width="wrap_content">
-				</Spinner>
+				</EditText>>
 	            <!-- Row 1 -->
 	            <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/depotChoices_header" android:id="@+id/ghost1" android:layout_width="match_parent"></TextView>
 	            <TextView 
@@ -111,15 +111,15 @@
 	            	android:layout_alignParentLeft="true" 
 	            	android:id="@+id/vehicleType_header" android:layout_width="wrap_content">
 	            </TextView>
-	           <Spinner
+	           <EditText
 					android:id="@+id/vehicleType_edit"
 					android:layout_below="@+id/ghost0"
 					android:layout_alignParentRight="true"
 					android:layout_toRightOf="@id/vehicleType_header"
-					android:text="Vehicle Type"
+					android:text=" "
 					android:layout_height="wrap_content" 
 					android:layout_width="wrap_content">
-				</Spinner>
+				</EditText>>
 	            <!-- Row 1 -->
 	            <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/vehicleType_header" android:id="@+id/ghost1" android:layout_width="match_parent"></TextView>
 				<TextView 

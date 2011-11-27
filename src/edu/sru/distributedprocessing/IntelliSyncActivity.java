@@ -1,5 +1,8 @@
 package edu.sru.distributedprocessing;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,7 +27,9 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
 {    
     private String type, tableName; //navigation type, tablename
     public static ShippingScreen ss; //shipping screen list
-    private static Handler handler;
+    private static Handler handler; //handler to connect TCP thread with UI thread
+    private TimerTask reloadTask;
+    private Timer timer;
     
     @Override
     public void onCreate(Bundle savedInstanceState) 
@@ -51,18 +56,31 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
              	ss.Initialize(); //initialize some stuff
              }
         }
+       
+       timer = new Timer();
+       reload(); //call the reload method 
         
     }
     
-//    public static void refresh() {
-//    	Log.v("ADP", "IntelliSyncActivity.class - Refreshing...");
-//        handler.postDelayed(new Runnable() {
-//        	public void run() {
-//				ss.Initialize(); // this is where you put your refresh code
-//			}
-//             }, 500);
-//        Log.v("ADP", "IntelliSyncActivity.class - Done Refreshing");
-//    }
+    /*
+     * method that every 5 seconds checks for changes and refreshes the listview
+     */
+    public void reload()
+    {
+          reloadTask = new TimerTask() {
+                public void run() {
+                    handler.post(new Runnable() {
+                        public void run() {
+                        	ss.refresh();
+                            Log.v("ADP", "Refeshing ListView");
+                        }
+                    });
+                }
+            };
+
+            timer.schedule(reloadTask, 300, 30000);
+    }
+
     
     public static void changeRecordAt(final int index, final String[] inView) {
 		handler.postDelayed(new Runnable() {

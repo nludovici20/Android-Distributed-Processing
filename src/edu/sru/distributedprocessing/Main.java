@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import edu.sru.distributedprocessing.navigation.NavigationMain;
 import edu.sru.distributedprocessing.net.Authenticate;
 
 public class Main extends Activity 

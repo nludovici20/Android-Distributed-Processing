@@ -1,4 +1,4 @@
-package edu.sru.distributedprocessing;
+package edu.sru.distributedprocessing.navigation;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.GridView;
 import android.widget.Toast;
+import edu.sru.distributedprocessing.R;
+import edu.sru.distributedprocessing.R.id;
+import edu.sru.distributedprocessing.R.layout;
 import edu.sru.distributedprocessing.loadingscreen.TableLoading;
 import edu.sru.distributedprocessing.tools.FileManager;
 
@@ -57,13 +60,7 @@ public class NavigationMain extends Activity implements OnClickListener
                 		Toast.makeText(NavigationMain.this, "Vehicle Type Selected", Toast.LENGTH_SHORT).show();
         				tablename = "vehicle type";
         			}else
-            			if(v.getTag().equals(4))
-            			{
-            				//warehouse
-                    		Toast.makeText(NavigationMain.this, "Warehouse Selected", Toast.LENGTH_SHORT).show();
-                    		tablename = "warehouses";
-            			}else
-                			if(v.getTag().equals(5))
+        				if(v.getTag().equals(4))
                 			{
                 				//depot
                         		Toast.makeText(NavigationMain.this, "Depot Selected", Toast.LENGTH_SHORT).show();

@@ -214,7 +214,7 @@ public class TCPClient extends Thread
 				//if at the record to be inserted, insert else add original record
 				if(Constants.db.getTable(lastTable).getRecords()[j].getID().equalsIgnoreCase(temp[i]))
 				{
-					inView[0] = temp[+i];
+					inView[0] = temp[i];
 					inView[1] = temp[++i];
 					//Constants.db.getTable(lastTable).changeRecordAt(j, inView);
 					IntelliSyncActivity.changeRecordAt(j, inView);

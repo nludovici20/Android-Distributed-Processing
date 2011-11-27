@@ -1,5 +1,8 @@
-package edu.sru.distributedprocessing;
+package edu.sru.distributedprocessing.navigation;
 
+import edu.sru.distributedprocessing.R;
+import edu.sru.distributedprocessing.R.drawable;
+import edu.sru.distributedprocessing.R.layout;
 import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -55,6 +58,6 @@ public class GridAdapter extends BaseAdapter {
     private Integer[] mThumbIds = {
             R.drawable.vehicle, R.drawable.contact,
             R.drawable.icon, R.drawable.vehicle_types,
-            R.drawable.warehouse, R.drawable.icon
+            R.drawable.depot
     };
 }

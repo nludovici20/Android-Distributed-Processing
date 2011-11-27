@@ -77,15 +77,7 @@ public class ShippingScreen
 		 mylist = new ArrayList<HashMap<String, String>>();	
 		 HashMap<String, String> map;		
 		 
-		 if(tableIndex + 100 > tableSizeLimit)
-		 {
-			 tableIndex = tableSizeLimit - 100;
-		 }else
-			 if(tableIndex < 0)
-			 {
-				 tableIndex = 0;
-			 }
-		 for(int i = tableIndex; i < (tableIndex + 100); i++)
+		 for(int i = 0; i < tableSizeLimit; i++)
 		 {
 			 try{
 				 if(!(type[i] == null))
@@ -121,6 +113,11 @@ public class ShippingScreen
 	public void Finalize() 
 	{
 		//save everything and exit
+	}
+	
+	public void refresh()
+	{
+		Initialize();
 	}
 
 	public Record[] getType()

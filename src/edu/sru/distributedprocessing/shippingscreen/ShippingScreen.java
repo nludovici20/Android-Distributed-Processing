@@ -58,15 +58,18 @@ public class ShippingScreen
 			}
 		}
 		
+		//field headers
 		this.field1 = (TextView) act.findViewById(R.id.header_txt1);
 		this.field2 = (TextView) act.findViewById(R.id.header_txt2);
 		try
 		{
+			//set the field headers from file
 			this.field1.setText(fields[0].toString());
 			this.field2.setText(fields[1].toString());
 		}
 		 catch(Exception e)
 		 {
+			 //else set general field headers
 			this.field1.setText(table.getFields()[0]);
 			this.field2.setText(table.getFields()[1]);
 			Log.v("ADP", "No Fields Selected");
@@ -82,18 +85,20 @@ public class ShippingScreen
 			 try{
 				 if(!(type[i] == null))
 				 {
-						 map = new HashMap<String, String>();
-						 map.put(this.field1.getText().toString(), type[i].getFields()[0]);
-						 map.put(this.field2.getText().toString(), type[i].getFields()[1]);
-						 mylist.add(map);
+					 //create the items to be put in the list
+					 map = new HashMap<String, String>();
+					 map.put(this.field1.getText().toString(), type[i].getFields()[0]); //header name, value
+					 map.put(this.field2.getText().toString(), type[i].getFields()[1]); //header name, value
+					 mylist.add(map);
 				 }
 			 }
 			 catch(Exception e)
 			 {
-				 
+				 //handle exception
 			 } 
 		 }
 		
+		//ListView Adapter -> Holds List Items (records)
 		mRecords = new SimpleAdapter(act, mylist, R.layout.list_item,
 				new String[] {field1.getText().toString(), field2.getText().toString()}, new int[] {R.id.FIELD1, R.id.FIELD2});
 		lv.setAdapter(mRecords);
@@ -102,6 +107,7 @@ public class ShippingScreen
 		{
 			public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) 
 			{
+				//click, pop up dialog box with options
     			CustomDialogListView cldv = new CustomDialogListView(act, R.style.CustomDialogTheme, table, Integer.parseInt(table.getRecords()[arg2].getID()), arg2);
     			Log.v("ADP", "ShippingScreen.class - tablename: " + table.getTableName() + " Record ID: " +  table.getRecords()[arg2].getID());
     			cldv.show();
@@ -115,16 +121,19 @@ public class ShippingScreen
 		//save everything and exit
 	}
 	
+	//refresh the listview
 	public void refresh()
 	{
 		Initialize();
 	}
 
-	public Record[] getType()
+	//get the records from the listview
+	public Record[] getRecords()
 	{
 		return this.type;
 	}
 
+	//delete a record at <index> and refresh Listview
 	public void deleteRecordAt(String index) {
 		Log.v("ADP", "Deleting Record with ID: " + index);
 		table.deleteRecord(index);
@@ -132,6 +141,7 @@ public class ShippingScreen
 		Initialize();
 	}
 	
+	//change a record at <index> with <values> and refresh listview
 	public void changeRecordAt(int index,String[] values)
 	{
 		Log.v("ADP", "Updating Record");
@@ -140,6 +150,7 @@ public class ShippingScreen
 		Initialize();
 	}
 	
+	//insert a new record at <index> with new <rec> and refresh listview
 	public void insertRecordAt(String index, String[] rec)
 	{
 		Log.v("ADP", "Inserting new Record");

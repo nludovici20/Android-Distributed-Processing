@@ -12,12 +12,12 @@ import edu.sru.distributedprocessing.net.Authenticate;
 public class AuthenticationDialog extends Dialog 
 {
     private Activity activity;	//current activity
-    private EditText username, password, ipNum, portNum;
+    private EditText username, password, ipNum, portNum; //config attributes
     private Button authenticate_btn;
     
     public AuthenticationDialog(Activity act, int theme) 
     {
-        super(act, theme);
+        super(act, theme); //Dialog
         this.activity = act;
     }
     
@@ -27,6 +27,7 @@ public class AuthenticationDialog extends Dialog
         super.onCreate(savedInstanceState);
         setContentView(R.layout.authentication);
         
+        //config attributes
         username = (EditText)findViewById(R.id.userName);
         password = (EditText)findViewById(R.id.userPassword);
         ipNum = (EditText)findViewById(R.id.ipNum);

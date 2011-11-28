@@ -1,5 +1,5 @@
 /*
- * Class that displays our About page.
+ * Allows user to change the currently saved username, password, DB IP and Port #
  */
 
 package edu.sru.distributedprocessing;
@@ -25,6 +25,7 @@ public class Settings extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.authentication);
         
+        //inputs
         username = (EditText)findViewById(R.id.userName);
         password = (EditText)findViewById(R.id.userPassword);
         ipNum = (EditText)findViewById(R.id.ipNum);
@@ -39,6 +40,7 @@ public class Settings extends Activity
 				String[] info = { username.getText().toString(), password.getText().toString(), ipNum.getText().toString(), portNum.getText().toString() };
 				try
 				{
+					//save the new config file
 					FileManager.saveConfigFile(Settings.this, info, "Config");
 					Log.v("ADP", "Options.class - Successfully saved Config file");
 				}catch(Exception e)

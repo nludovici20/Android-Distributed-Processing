@@ -14,7 +14,7 @@ public class Constants
 	public static HashMap<String, String> record = new HashMap<String, String>();
 	
 	public static ArrayList<ArrayList<String>> vehicleEditorItems = new ArrayList<ArrayList<String>>();
-	//vehicleEditorItems[0] = driver_group;
-	//vehicleEditorItems[1] = vehicle_type_group;
-	//vehicleEditorItems[2] = depot_group;
+	//vehicleEditorItems[0] is driver_group;
+	//vehicleEditorItems[1] is vehicle_type_group;
+	//vehicleEditorItems[2] is depot_group;
 }

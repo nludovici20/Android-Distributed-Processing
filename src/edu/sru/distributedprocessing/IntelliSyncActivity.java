@@ -81,7 +81,9 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
             timer.schedule(reloadTask, 300, 30000);
     }
 
-    
+    /*
+     * Method used by the TCP thread to handle a change request via UI thread
+     */
     public static void changeRecordAt(final int index, final String[] inView) {
 		handler.postDelayed(new Runnable() {
 			public void run(){
@@ -90,6 +92,9 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
 		}, 500);
 	}
     
+    /*
+     * Method used by the TCP thread to handle a deletion request via UI Thread
+     */
     public static void deleteRecordAt(final String index) {
 		handler.postDelayed(new Runnable() {
 			public void run(){
@@ -98,6 +103,9 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
 		}, 500);
 	}
     
+    /*
+     * Method used by the TCP Thread to handle an insert request via UI Thread
+     */
     public static void insertRecordAt(final String index, final String[] record) {
 		handler.postDelayed(new Runnable() {
 			public void run(){
@@ -140,6 +148,10 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
     	}
     }
     
+    /*
+     * (non-Javadoc)
+     * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+     */
     @Override
 	public boolean onCreateOptionsMenu(Menu menu) 
     {
@@ -148,6 +160,10 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
 		return true;
 	}
     
+    /*
+     * (non-Javadoc)
+     * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+     */
     @Override
 	public boolean onOptionsItemSelected(MenuItem item) 
     {
@@ -156,15 +172,15 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
     	switch (item.getItemId()) 
 		{
 		case R.id.options_menu_item:
+			//open up the options list activity
+			IntelliSyncActivity.this.finish(); //finish this activity
 			engineIntent = new Intent(IntelliSyncActivity.this, Options.class);
-			engineIntent.putExtra("Type", type);
-			startActivity(engineIntent);
-			IntelliSyncActivity.this.finish();
+			engineIntent.putExtra("Type", type); //pass in record type
+			startActivity(engineIntent); //start Options Activity
 			break;
 			
 	    case R.id.new_record_item:
-			//open up a new record creator
-	    	//Get Record Type
+			//open up a new record editor
 			for(int i = 0; i < Constants.db.getTables().length; i++)
 			{
 				if (tableName.equalsIgnoreCase("contractors"))
@@ -197,10 +213,10 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
 			
 			try
 			{
+				IntelliSyncActivity.this.finish();
 				engineIntent.putExtra("Fields", Constants.db.getTable(tableName).getFields());
 				engineIntent.putExtra("Intent", "insert");
-				IntelliSyncActivity.this.startActivity(engineIntent);
-				IntelliSyncActivity.this.finish();
+				startActivity(engineIntent);
 				Log.v("ADP", "CustomDialogListView.class - Insert Record");        		
 			}catch(Exception e)
 			{

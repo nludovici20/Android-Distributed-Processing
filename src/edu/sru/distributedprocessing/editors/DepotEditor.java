@@ -74,31 +74,19 @@ public class DepotEditor extends Activity {
 			        new_record[5] = zip_edit.getText().toString();
 			        new_record[6] = latitude_edit.getText().toString();
 			        new_record[7] = longitude_edit.getText().toString();
-					Log.v("ADP", "DepotEditor.class - Edit Request");
-//						String[] tmp = new String[2];
-//						int count = 0;
-//						for(int i = 0; i < Constants.db.getTable(tableName).getFields().length; i++)
-//						{
-//							if(Constants.db.getTable(tableName).getFieldsInView().get(0).equalsIgnoreCase(Constants.db.getTable(tableName).getFields()[i]) || Constants.db.getTable(tableName).getFieldsInView().get(1).equalsIgnoreCase(Constants.db.getTable(tableName).getFields()[i]))
-//							{
-//								tmp[count] = new_record[i];
-//								count++;
-//								Log.v("ADP", new_record[i]);
-//							}
-//						}
-//						IntelliSyncActivity.ss.changeRecordAt(index, tmp);					
-					}else
-						if(intent.equalsIgnoreCase("insert"))
-						{
-						    new_record[0] = depotName_edit.getText().toString();
-						    new_record[1] = depotAddress_edit.getText().toString();
-					        new_record[2] = city_edit.getText().toString();
-					        new_record[3] = state_edit.getText().toString();
-					        new_record[4] = zip_edit.getText().toString();
-					        new_record[5] = latitude_edit.getText().toString();
-					        new_record[6] = longitude_edit.getText().toString();
-					        Log.v("ADP", "DepotEditor.class - Insert Request");
-						}
+					Log.v("ADP", "DepotEditor.class - Edit Request");					
+				}else
+					if(intent.equalsIgnoreCase("insert"))
+					{
+					    new_record[0] = depotName_edit.getText().toString();
+					    new_record[1] = depotAddress_edit.getText().toString();
+				        new_record[2] = city_edit.getText().toString();
+				        new_record[3] = state_edit.getText().toString();
+				        new_record[4] = zip_edit.getText().toString();
+				        new_record[5] = latitude_edit.getText().toString();
+				        new_record[6] = longitude_edit.getText().toString();
+				        Log.v("ADP", "DepotEditor.class - Insert Request");
+					}
 				
 				DepotEditor.this.finish();
 				engineIntent = new Intent(DepotEditor.this, InsertLoading.class);

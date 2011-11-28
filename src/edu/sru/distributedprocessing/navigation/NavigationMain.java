@@ -23,17 +23,18 @@ public class NavigationMain extends Activity implements OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.navigation_main);
         
+        gridview = (GridView) findViewById(R.id.gridview);
+        gridview.setAdapter(new GridAdapter(this, this));
+        
         try
         {
+        	//read config file to authenticate
         	FileManager.readConfigFile(NavigationMain.this);
         }
         catch(Exception e)
         {
         	//error
         }
-        
-        gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setAdapter(new GridAdapter(this, this));
     }
 
 	public void onClick(View v) {

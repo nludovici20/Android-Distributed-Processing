@@ -187,6 +187,7 @@ public class FileManager {
 		}
 	}
 	
+	//Reads the about.xml file for about page
 	public static String readXML(Activity act ,String file, String tag_name)
 	{
         try {

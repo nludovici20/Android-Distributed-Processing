@@ -58,13 +58,7 @@ public class CustomDialogListView extends Dialog
         		
     			if(clicked.equalsIgnoreCase(list[0]))
     			{
-    				
-    				
-    				
-    				//pull in entire record from db
-    				//Initialize.tcp.sendRecordRequest(type.getTableName(), recordIndex);
-    				
-    				//RecordLoading rc = new RecordLoading(engineIntent, type.getTableName(), recordIndex);    
+    				//open record editor & pull in entire record selected
     				Intent i = new Intent(activity, RecordLoading.class);
     				i.putExtra("Name", type.getTableName());
     				i.putExtra("Index", recordIndex);
@@ -75,7 +69,7 @@ public class CustomDialogListView extends Dialog
     			else 
     				if(clicked.equalsIgnoreCase(list[1]))
     				{
-    					//Delete Record
+    					//Delete Record selected
     					Authenticate.tcp.sendDeleteRequest(type.getTableName(), recordIndex);
     					Log.v("ADP", "CustomDialogListView.class - Delete Record: " + type.getTableName() + " Index of Record to delete: " + recordIndex);
     				}

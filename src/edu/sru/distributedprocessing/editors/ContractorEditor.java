@@ -67,18 +67,6 @@ public class ContractorEditor extends Activity {
 					new_record[4] = primaryPhone_edit.getText().toString();
 					new_record[5] = workPhone_edit.getText().toString();
 					Log.v("ADP", "ContractorEditor - Edit Request");
-//					String[] tmp = new String[2];
-//					int count = 0;
-//					for(int i = 0; i < Constants.db.getTable(tableName).getFields().length; i++)
-//					{
-//						if(Constants.db.getTable(tableName).getFieldsInView().get(0).equalsIgnoreCase(Constants.db.getTable(tableName).getFields()[i]) || Constants.db.getTable(tableName).getFieldsInView().get(1).equalsIgnoreCase(Constants.db.getTable(tableName).getFields()[i]))
-//						{
-//							tmp[count] = new_record[i];
-//							count++;
-//							Log.v("ADP", new_record[i]);
-//						}
-//					}
-////					IntelliSyncActivity.ss.changeRecordAt(index, tmp);
 				}else
 					if(intent.equalsIgnoreCase("insert"))
 					{

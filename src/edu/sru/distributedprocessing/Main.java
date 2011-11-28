@@ -21,12 +21,11 @@ public class Main extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
           
-        init = new Initialize(this);
-        
+        init = new Initialize(this); //initialize the db and tables
+       
         Button start_btn = (Button) findViewById(R.id.start_btn);
         start_btn.setOnClickListener(new View.OnClickListener() 
         {
-			//@Override
 			public void onClick(View v) 
 			{
 				engineIntent = new Intent(Main.this, NavigationMain.class);
@@ -37,7 +36,6 @@ public class Main extends Activity
         Button options_btn = (Button) findViewById(R.id.options_btn);
         options_btn.setOnClickListener(new View.OnClickListener() 
         {
-			//@Override
 			public void onClick(View v) 
 			{
 				engineIntent = new Intent(Main.this, Settings.class);

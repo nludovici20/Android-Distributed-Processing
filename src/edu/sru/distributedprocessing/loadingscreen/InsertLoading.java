@@ -27,8 +27,7 @@ public class InsertLoading extends Activity
 		
 		loadingMessage = (TextView) findViewById(R.id.loadingMessage);
 		loadingMessage.setText("Sending Data...");
-		
-		
+				
 		//get passed in tablename
 		tableName = getIntent().getExtras().getString("TableName");
 		record = getIntent().getExtras().getStringArray("Record");

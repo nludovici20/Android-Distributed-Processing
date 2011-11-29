@@ -228,4 +228,12 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
     	}
 		return true;
 	}
+    
+    @Override
+    public void onBackPressed()
+    {
+    	Log.v("ADP", "canceling timer task...");
+    	timer.cancel();
+    	finish();
+    }
 }

@@ -27,7 +27,7 @@ public class TCPClient extends Thread
 	private String lastTable;
 	private int numFields;
 	private Activity act;
-	private boolean wasKicked;
+	private boolean wasKicked = false;
 	
 	public TCPClient(Activity act, final String host, final int port) throws Exception
 	{

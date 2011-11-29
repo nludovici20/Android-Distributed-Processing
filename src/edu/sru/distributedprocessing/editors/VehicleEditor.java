@@ -40,7 +40,7 @@ public class VehicleEditor extends Activity {
         fields = getIntent().getExtras().getStringArray("Fields");
         new_record = new String[fields.length];
         
-        //Editor Items
+        /***** Editor Items *****/
         group_header = (TextView) findViewById(R.id.group_header);
         group_header.setText(group_header.getText().toString() + " " + Constants.record.get(fields[0]));
         
@@ -54,7 +54,7 @@ public class VehicleEditor extends Activity {
         year_text.setText(Constants.record.get(fields[3]));
         
         avail_box = (CheckBox) findViewById(R.id.available_box);
-        if(Constants.record.get(fields[4]).equalsIgnoreCase("true"))
+        if(Constants.record.get(fields[4]).equalsIgnoreCase("1"))
         {
         	avail_box.setChecked(true);
         }else
@@ -74,9 +74,10 @@ public class VehicleEditor extends Activity {
         depot_group.setText(Constants.record.get(fields[7]));
                 
         save_btn = (Button)findViewById(R.id.save_btn);
-        save_btn.setOnClickListener(new View.OnClickListener() {
-			
-			public void onClick(View v) {
+        save_btn.setOnClickListener(new View.OnClickListener() 
+        {
+			public void onClick(View v) 
+			{
 				Toast.makeText(VehicleEditor.this, "Save button clicked", Toast.LENGTH_SHORT).show();	
 				if(intent.equalsIgnoreCase("edit"))
 				{
@@ -128,6 +129,4 @@ public class VehicleEditor extends Activity {
 		});     
        
     }
-        
-       
 }

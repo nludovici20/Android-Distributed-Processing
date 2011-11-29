@@ -24,5 +24,11 @@ public class Message
 		//TO SERVER: table name, index
 		//FROM SERVER: table name, index
 		public final static char GET_DELETE = '\4';
+		
+		//TO SERVER: username, password
+		//FROM Server: connection
+		public final static char AUTHENTICATE = '\5';
+
+		public static final char CONNECTION = '\6';
 	}
 }

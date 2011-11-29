@@ -78,7 +78,7 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
                 }
             };
 
-            timer.schedule(reloadTask, 300, 30000);
+            timer.schedule(reloadTask, 300, 15000);
     }
 
     /*

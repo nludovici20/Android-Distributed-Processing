@@ -63,7 +63,6 @@ public class CustomDialogListView extends Dialog
     				i.putExtra("Name", type.getTableName());
     				i.putExtra("Index", recordIndex);
     				i.putExtra("ListIndex", listIndex);
-    				activity.finish();
     				activity.startActivity(i);
     			 }
     			else 

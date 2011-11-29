@@ -7,33 +7,46 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.util.Log;
 import edu.sru.distributedprocessing.IntelliSyncActivity;
 import edu.sru.distributedprocessing.tableobjects.Record;
 import edu.sru.distributedprocessing.tableobjects.Table;
 import edu.sru.distributedprocessing.tools.Constants;
+import edu.sru.distributedprocessing.tools.FileManager;
   
 public class TCPClient extends Thread
 {
 	private final String host;
 	private final int port;
-	private final Socket socket;
-	private final BufferedReader in;
-	private final PrintWriter out;
+	private Socket socket;
+	private BufferedReader in;
+	private PrintWriter out;
 	private boolean running;
 	//private final Object sendLock = new Object();
 	private String lastTable;
 	private int numFields;
+	private Activity act;
+	private boolean wasKicked;
 	
-	
-	public TCPClient(final String host, final int port) throws IOException
+	public TCPClient(Activity act, final String host, final int port) throws Exception
 	{
+		wasKicked = false;
+		this.act = act;
 		this.host = host;
-		this.port = port;InetAddress serverAddr = InetAddress.getByName(host); 
+		this.port = port;
 		Log.d("ADP", "TCPClient.class - C: Connecting..."); 
+		connect();
+	}
+	
+	public void connect() throws Exception
+	{
+		Log.v("ADP", "Connecting");
+		InetAddress serverAddr = InetAddress.getByName(host); 
 		this.socket = new Socket(serverAddr, port);
 		this.in =  new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		out = new PrintWriter(socket.getOutputStream(),true);
+		wasKicked = false;
 	}
 	
 	public final void run() 
@@ -68,19 +81,19 @@ public class TCPClient extends Thread
 						break;
 					case Message.Type.GET_DELETE:
 						recieveDeleteRequest(data);
+						break;	
+					case Message.Type.AUTHENTICATE:
+						Log.v("ADP", data);
+						wasKicked = false;
+						break;
+					case Message.Type.CONNECTION:
+						Log.v("ADP", data);
+						socket.close();
+						wasKicked = true;
 						break;
 					default:
-						
 						Log.v("ADP", "TCPClient.class - Default Case");	
 					}
-					
-//					try{
-//						IntelliSyncActivity.refresh();
-//					}catch(Exception e)
-//					{
-//						Log.v("ADP", "TCPClient.class - Error Refreshing");
-//					}
-					
 					Log.v("ADP","TCPClient.class - " + data);
 				}
 			} 
@@ -167,7 +180,7 @@ public class TCPClient extends Thread
 			str+=msgChar + tbl.getDBName(tbl.getFieldsInView().get(i)); //append string
 		}
 		Log.v("ADP", "TCPClient.class - Sent: " + str);
-		out.println(str); //send request to server
+		send(str); //send request to server
 		Log.v("ADP", "/******** End Send Table Request ********\"");
 	}
 	
@@ -195,7 +208,7 @@ public class TCPClient extends Thread
 		Log.v("ADP", "/******** send Record Request ********\"");
 		this.lastTable = tablename; //set table in view
 		String str = msgChar + tablename + msgChar + indexOfRecord; //construct appropriate string
-		out.println(str); //send to server
+		send(str); //send to server
 		Log.v("ADP", str);
 		Log.v("ADP", "/******** End send Record Request ********\"");
 	}
@@ -246,7 +259,7 @@ public class TCPClient extends Thread
 			str+=msgChar + rec[i];
 		}
 		
-		out.println(str);
+		send(str);
 		Log.v("ADP", "TCPClient.class - Sent: " + str);
 		Log.v("ADP", "/******** End Send Change Request ********\"");
 	}
@@ -292,7 +305,7 @@ public class TCPClient extends Thread
 			}
 		} 
 		str+=msgChar;
-		out.println(str); //send request to server
+		send(str); //send request to server
 		Log.v("ADP", "TCPClient.class - Sent: " + str);
 		Log.v("ADP", "/******** End Send Insert Request ********\"");
 	}
@@ -324,13 +337,28 @@ public class TCPClient extends Thread
 		char msgChar = Message.Type.GET_DELETE;
 		Log.v("ADP", "/******** Send Delete Request ********\"");
 		String str = msgChar + tablename + msgChar + indexOfDeletedRecord; //construct the string
-		out.println(str); //send str to server
+		send(str); //send str to server
 		Log.v("ADP", str);
 		Log.v("ADP", "/******** END Send Delete Request ********\"");
 	}
 
 	public final void send(final String data)
 	{
+		if(wasKicked)
+		{
+			try {
+				socket.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				Log.v("ADP", "Re-Estabolishing connection...");
+				connect();
+				FileManager.readConfigFile(act);
+			} catch (Exception e) {
+				//kill whole program?
+			}
+		}
 		out.println(data);
 	}
 	

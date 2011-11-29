@@ -65,25 +65,46 @@
 	            </EditText>
 	            <!-- Row 1 -->
 	            <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/lastName_header" android:id="@+id/ghost1" android:layout_width="match_parent"></TextView>
-	            <TextView 
+				 <TextView 
 	            	android:layout_height="match_parent" 
 	            	android:gravity="center"
-	            	android:layout_alignBottom="@+id/plateNO_edit"
-	            	android:text="Vehicle Plate NO." 
-	            	android:layout_width="wrap_content"
-	            	android:layout_below="@+id/ghost1" 
-	            	android:id="@+id/plateNO_header">
+	            	android:layout_alignBottom="@+id/middleInitial_edit"
+	            	android:text="Middle Initial: " 
+	            	android:layout_alignParentLeft="true" 
+	            	android:layout_below="@+id/ghost1"
+	            	android:layout_width="wrap_content" 
+	            	android:id="@+id/middleInitial_header">
 	            </TextView>
 	            <EditText 
 	            	android:layout_height="wrap_content"
-	            	android:layout_below="@+id/ghost1"
 	            	android:text=""
-	            	android:id="@+id/plateNO_edit" 
-	            	android:layout_width="wrap_content" 
+	            	android:id="@+id/middleInitial_edit" 
+	            	android:layout_width="wrap_content"  
+	            	android:layout_below="@+id/ghost1"
 	            	android:layout_alignParentRight="true">
 	            </EditText>
 				<!-- Row 2 -->
-	            <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/plateNO_header" android:id="@+id/ghost4" android:layout_width="match_parent"></TextView>
+				<TextView android:layout_height="15px" android:text="" android:layout_below="@+id/middleInitial_header" android:id="@+id/ghost4" android:layout_width="match_parent"></TextView>
+				  <TextView 
+	            	android:layout_height="match_parent" 
+	            	android:gravity="center"
+	            	android:layout_alignBottom="@+id/primaryPhone_edit"
+	            	android:text="Primary Phone: " 
+	            	android:layout_alignParentLeft="true" 
+	            	android:layout_below="@+id/ghost4"
+	            	android:layout_width="wrap_content" 
+	            	android:id="@+id/primaryPhone_header">
+	            </TextView>
+	            <EditText 
+	            	android:layout_height="wrap_content"
+	            	android:text=""
+	            	android:id="@+id/primaryPhone_edit" 
+	            	android:layout_width="wrap_content"  
+	            	android:layout_below="@+id/ghost4"
+	            	android:layout_alignParentRight="true">
+	            </EditText>
+				<!-- Row 3 -->
+				<TextView android:layout_height="15px" android:text="" android:layout_below="@+id/primaryPhone_header" android:id="@+id/ghost5" android:layout_width="match_parent"></TextView>
 				<Button 
 					android:id="@+id/save_btn"
 					android:background="@layout/button_component1"
@@ -91,7 +112,7 @@
 					android:layout_height="wrap_content"
 					android:text="Save Changes" 
 					android:layout_width="wrap_content" 
-					android:layout_below="@+id/ghost4">
+					android:layout_below="@+id/ghost5">
 				</Button>
 	        </RelativeLayout>
 	        <!-- Column 2 -->
@@ -104,22 +125,41 @@
 	        	<TextView 
 	            	android:layout_height="match_parent" 
 	            	android:gravity="center"
-	            	android:layout_alignBottom="@+id/licenseNO_edit"
-	            	android:text="License NO" 
+	            	android:layout_alignBottom="@+id/workPhone_edit"
+	            	android:text="Work Phone: " 
 	            	android:layout_alignParentLeft="true" 
 	            	android:layout_width="wrap_content" 
-	            	android:id="@+id/licenseNO_header">
+	            	android:id="@+id/workPhone_header">
 	            </TextView>
 	            <EditText 
 	            	android:layout_height="wrap_content"
-	            	android:id="@+id/licenseNO_edit" 
+	            	android:id="@+id/workPhone_edit" 
 	            	android:layout_width="wrap_content" 
 	            	android:text="" 
 	            	android:layout_alignParentRight="true">
 	            </EditText>
 	            <!-- Row 1 -->
-	            <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/licenseNO_header" android:id="@+id/ghost1" android:layout_width="match_parent"></TextView>
+	            <TextView android:layout_height="15px" android:text="" android:layout_below="@+id/workPhone_header" android:id="@+id/ghost0" android:layout_width="match_parent"></TextView>
+				
 				<TextView 
+					android:layout_height="match_parent" 
+	            	android:gravity="center"
+	            	android:layout_alignBottom="@+id/licenseNO_edit"
+					android:text="License #: " 
+					android:layout_width="wrap_content" 
+					android:layout_below="@+id/ghost0" 
+					android:id="@+id/licenseNO_header">
+				</TextView>
+				 <EditText 
+	            	android:layout_height="wrap_content"
+	            	android:layout_below="@+id/ghost0"
+	            	android:id="@+id/licenseNO_edit" 
+	            	android:layout_width="wrap_content" 
+	            	android:text="" 
+	            	android:layout_alignParentRight="true">
+	            </EditText>
+				<TextView android:layout_height="15px" android:text="" android:layout_below="@+id/licenseNO_header" android:id="@+id/ghost1" android:layout_width="match_parent"></TextView>
+	            <TextView 
 					android:layout_height="match_parent" 
 	            	android:gravity="center"
 	            	android:layout_alignBottom="@+id/licenseEXP_edit"

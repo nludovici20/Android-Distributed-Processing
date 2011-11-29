@@ -41,7 +41,7 @@ public class RecordLoading extends Activity {
 					{
 						engineIntent = new Intent(this, DriverEditor.class);
 					}else
-						if (tableName.equalsIgnoreCase("vehicle type"))
+						if (tableName.equalsIgnoreCase("vehicletype"))
 						{
 							engineIntent = new Intent(this, VehicleTypeEditor.class);
 						}else

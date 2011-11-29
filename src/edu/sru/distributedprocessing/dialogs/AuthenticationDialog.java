@@ -3,9 +3,11 @@ package edu.sru.distributedprocessing.dialogs;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.net.Authenticate;
 
@@ -30,6 +32,7 @@ public class AuthenticationDialog extends Dialog
         //config attributes
         username = (EditText)findViewById(R.id.userName);
         password = (EditText)findViewById(R.id.userPassword);
+        password.setTransformationMethod(PasswordTransformationMethod.getInstance());
         ipNum = (EditText)findViewById(R.id.ipNum);
         portNum = (EditText)findViewById(R.id.portNum);
         
@@ -49,6 +52,13 @@ public class AuthenticationDialog extends Dialog
     private void dismissCustomDialog()
     {
     	this.dismiss();
+    }
+    
+    @Override
+    public void onBackPressed()
+    {
+    	dismissCustomDialog();
+    	activity.finish();
     }
     
    

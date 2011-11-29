@@ -59,7 +59,7 @@ public class NavigationMain extends Activity implements OnClickListener
         			if(v.getTag().equals(3))
         			{
                 		Toast.makeText(NavigationMain.this, "Vehicle Type Selected", Toast.LENGTH_SHORT).show();
-        				tablename = "vehicle type";
+        				tablename = "vehicletype";
         			}else
         				if(v.getTag().equals(4))
                 			{

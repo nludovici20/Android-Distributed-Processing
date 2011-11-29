@@ -18,7 +18,7 @@ public class DriverEditor extends Activity {
 	//private int index;
 	private String[] fields, new_record;
 	private TextView header;
-	private EditText firstName_edit, lastName_edit, plateNO_edit, licenseNO_edit, licenseEXP_edit, licenseClass_edit;
+	private EditText firstName_edit, lastName_edit, middleInitial_edit, primaryPhone_edit, workPhone_edit, licenseNO_edit, licenseEXP_edit, licenseClass_edit;
 	private Button save_btn;
 	private Intent engineIntent;
 	
@@ -26,7 +26,7 @@ public class DriverEditor extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.vehicle_editor);
+        setContentView(R.layout.driver_editor);
        
         tableName = "drivers";
         intent = getIntent().getExtras().getString("Intent");
@@ -39,23 +39,29 @@ public class DriverEditor extends Activity {
         header = (TextView)findViewById(R.id.group_header);
         header.setText(header.getText().toString() + " " + Constants.record.get(fields[0]));
         
-        firstName_edit = (EditText)findViewById(R.id.firstName_edit);
-        firstName_edit.setText(Constants.record.get(fields[1]));
-        
         lastName_edit = (EditText)findViewById(R.id.lastName_edit);
-        lastName_edit.setText(Constants.record.get(fields[2]));
+        lastName_edit.setText(Constants.record.get(fields[1]));
+       
+        firstName_edit = (EditText)findViewById(R.id.firstName_edit);
+        firstName_edit.setText(Constants.record.get(fields[2]));
         
-        plateNO_edit = (EditText)findViewById(R.id.plateNO_edit);
-        plateNO_edit.setText(Constants.record.get(fields[3]));
+        middleInitial_edit = (EditText)findViewById(R.id.middleInitial_edit);
+        middleInitial_edit.setText(Constants.record.get(fields[3]));
         
+        primaryPhone_edit = (EditText)findViewById(R.id.primaryPhone_edit);
+        primaryPhone_edit.setText(Constants.record.get(fields[4]));
+       
+        workPhone_edit = (EditText)findViewById(R.id.workPhone_edit);
+        workPhone_edit.setText(Constants.record.get(fields[5]));
+               
         licenseNO_edit = (EditText)findViewById(R.id.licenseNO_edit);
-        licenseNO_edit.setText(Constants.record.get(fields[4]));
+        licenseNO_edit.setText(Constants.record.get(fields[6]));
         
         licenseEXP_edit = (EditText)findViewById(R.id.licenseEXP_edit);
-        licenseEXP_edit.setText(Constants.record.get(fields[5]));
+        licenseEXP_edit.setText(Constants.record.get(fields[7]));
         
         licenseClass_edit = (EditText)findViewById(R.id.licenseClass_edit);
-        licenseClass_edit.setText(Constants.record.get(fields[6]));
+        licenseClass_edit.setText(Constants.record.get(fields[8]));
        
         save_btn = (Button)findViewById(R.id.save_btn);
         save_btn.setOnClickListener(new View.OnClickListener() {
@@ -67,20 +73,24 @@ public class DriverEditor extends Activity {
 					new_record[0] = Constants.record.get(fields[0]);
 					new_record[1] = firstName_edit.getText().toString();
 					new_record[2] = lastName_edit.getText().toString();
-					new_record[3] = plateNO_edit.getText().toString();
-					new_record[4] = licenseNO_edit.getText().toString();
-					new_record[5] = licenseEXP_edit.getText().toString();
-					new_record[6] = licenseClass_edit.getText().toString();
+					new_record[3] = middleInitial_edit.getText().toString();
+					new_record[4] = primaryPhone_edit.getText().toString();
+					new_record[5] = workPhone_edit.getText().toString();
+					new_record[6] = licenseNO_edit.getText().toString();
+					new_record[7] = licenseEXP_edit.getText().toString();
+					new_record[8] = licenseClass_edit.getText().toString();
 					Log.v("ADP", "ContactEditor - Edit Request");
 				}else
 					if(intent.equalsIgnoreCase("insert"))
 					{
 						new_record[0] = firstName_edit.getText().toString();
 						new_record[1] = lastName_edit.getText().toString();
-						new_record[2] = plateNO_edit.getText().toString();
-						new_record[3] = licenseNO_edit.getText().toString();
-						new_record[4] = licenseEXP_edit.getText().toString();
-						new_record[5] = licenseClass_edit.getText().toString();
+						new_record[2] = middleInitial_edit.getText().toString();
+						new_record[3] = primaryPhone_edit.getText().toString();
+						new_record[4] = workPhone_edit.getText().toString();
+						new_record[5] = licenseNO_edit.getText().toString();
+						new_record[6] = licenseEXP_edit.getText().toString();
+						new_record[7] = licenseClass_edit.getText().toString();
 						Log.v("ADP", "DriverEditor.class - Insert Request");
 					}
 				

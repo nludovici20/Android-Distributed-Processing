@@ -19,18 +19,18 @@ public class Initialize
 		dbContractorFields = new String[] { "idContractors", "LastName", "FirstName", "MiddleInitial", "PrimaryPhone", "WorkPhone" };
 		depotFields = new String[] { "ID", "Depot Name", "Depot Address", "City", "State", "Zip Code", "Latitude", "Longitude" };
 		dbDepotFields = new String[] { "idDepots", "Name", "Address", "City", "State", "ZipCode", "Latitude", "Longitude" };
-		driverFields = new String[] { "ID", "Last Name", "First Name", "Middle Initial", "Primary Phone", "Work Phone", "Vehicle Plate No.", "License Number", "License Expiration", "License Class" };
-		dbDriverFields = new String[] { "idDrivers", "LastName", "FirstName", "MiddleInitial", "PrimaryPhone", "WorkPhone", "VehiclePlateNO", "LicenseNumber", "LicenseExpiration", "LicenseClass" };
+		driverFields = new String[] { "ID", "Last Name", "First Name", "Middle Initial", "Primary Phone", "Work Phone", "License Number", "License Expiration", "License Class" };
+		dbDriverFields = new String[] { "idDrivers", "LastName", "FirstName", "MiddleInitial", "PrimaryPhone", "WorkPhone", "LicenseNumber", "LicenseExpiration", "LicenseClass" };
 		vehicleTypeFields = new String[] {  "ID", "Vehicle Type", "Sub Type", "Model", "Max Weight", "Max Range", "Length" };
 		dbVehicleTypeFields = new String[] { "idVehicleType", "Type", "SubType", "Model", "MaxWeight", "MaxRange", "Length" };
 		vehicleFields = new String[] { "ID", "License Plate Number", "Vin Number", "Manufactured Year", "Vehicle Type", "Driver", "Depot", "Available?" };
-		dbVehicleFields = new String[] { "idVehicles", "PlateNumber", "VINNumber", "ManufacturedYear", "VehicleType", "Driver", "Depot", "Available?" };
+		dbVehicleFields = new String[] { "idVehicles", "PlateNumber", "VINNumber", "ManufacturedYear", "VehicleType", "Driver", "Depot", "Available" };
 				
 		//initialize tables
 		contractor_table = new Table("contractors", contractorFields, dbContractorFields, "ContractorType", "Contractors");
 		depot_table = new Table("depots", depotFields, dbDepotFields, "DepotType", "Depots");
 		driver_table = new Table("drivers",driverFields, dbDriverFields, "DriverType", "Drivers");
-		vehicle_type_table = new Table("vehicle type", vehicleTypeFields, dbVehicleTypeFields, "VehicleTypeType", "Vehicle Types");
+		vehicle_type_table = new Table("vehicletype", vehicleTypeFields, dbVehicleTypeFields, "VehicleTypeType", "Vehicle Types");
 		vehicle_table = new Table("vehicles", vehicleFields, dbVehicleFields, "VehicleType", "Vehicles");
 	
 				

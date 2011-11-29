@@ -11,6 +11,7 @@ import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.R.id;
 import edu.sru.distributedprocessing.R.layout;
 import edu.sru.distributedprocessing.loadingscreen.TableLoading;
+import edu.sru.distributedprocessing.net.TCPClient;
 import edu.sru.distributedprocessing.tools.FileManager;
 
 public class NavigationMain extends Activity implements OnClickListener
@@ -26,14 +27,17 @@ public class NavigationMain extends Activity implements OnClickListener
         gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new GridAdapter(this, this));
         
-        try
+        if(!TCPClient.isConnected)
         {
-        	//read config file to authenticate
-        	FileManager.readConfigFile(NavigationMain.this);
-        }
-        catch(Exception e)
-        {
-        	//error
+	        try
+	        {
+	        	//read config file to authenticate
+	        	FileManager.readConfigFile(NavigationMain.this);
+	        }
+	        catch(Exception e)
+	        {
+	        	//error
+	        }
         }
     }
 

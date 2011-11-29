@@ -34,45 +34,50 @@ public class VehicleEditor extends Activity {
         setContentView(R.layout.vehicle_editor);
        
         tableName = "vehicles";
-
+        
         intent = getIntent().getExtras().getString("Intent");
         
         fields = getIntent().getExtras().getStringArray("Fields");
         new_record = new String[fields.length];
         
         /***** Editor Items *****/
-        group_header = (TextView) findViewById(R.id.group_header);
-        group_header.setText(group_header.getText().toString() + " " + Constants.record.get(fields[0]));
         
-        vin_text = (EditText) findViewById(R.id.vinNO_edit);
-        vin_text.setText(Constants.record.get(fields[1]));
-        
-        license_text = (EditText) findViewById(R.id.licenseNO_edit);
-        license_text.setText(Constants.record.get(fields[2]));
-        
-        year_text = (EditText) findViewById(R.id.year_edit); 
-        year_text.setText(Constants.record.get(fields[3]));
-        
-        avail_box = (CheckBox) findViewById(R.id.available_box);
-        if(Constants.record.get(fields[4]).equalsIgnoreCase("1"))
+        if(intent.equalsIgnoreCase("edit"))
         {
-        	avail_box.setChecked(true);
-        }else
-        {
-        	avail_box.setChecked(false);
+	        group_header = (TextView) findViewById(R.id.group_header);
+	        group_header.setText(group_header.getText().toString() + " " + Constants.record.get(fields[0]));
+			        
+	        license_text = (EditText) findViewById(R.id.licenseNO_edit);
+	        license_text.setText(Constants.record.get(fields[1]));
+	
+	        vin_text = (EditText) findViewById(R.id.vinNO_edit);
+	        vin_text.setText(Constants.record.get(fields[2]));
+	        
+	        year_text = (EditText) findViewById(R.id.year_edit); 
+	        year_text.setText(Constants.record.get(fields[3]));
+	
+	        vehicle_type_group = (EditText) findViewById(R.id.vehicleType_edit);
+	        vehicle_type_group.setText(Constants.record.get(fields[4]));
+	        
+	        driver_group = (EditText) findViewById(R.id.driverChoices_edit);
+	        driver_group.setText(Constants.record.get(fields[5]));
+	        
+	        depot_group = (EditText) findViewById(R.id.depotChoices_edit);   
+	        depot_group.setText(Constants.record.get(fields[6]));
+	        
+	        avail_box = (CheckBox) findViewById(R.id.available_box);
+	        
+	        Log.v("ADP", "ERROR AT " + Constants.record.get(fields[6]));
+	        
+	        if(Integer.parseInt(Constants.record.get(fields[7])) == 1)
+	        {
+	        	avail_box.setChecked(true);
+	        }else
+	        {
+	        	avail_box.setChecked(false);
+	        }
+        
         }
-        
-        driver_group = (EditText) findViewById(R.id.driverChoices_edit);
-        driver_group.setText(Constants.record.get(fields[5]));
-        
-         
-        vehicle_type_group = (EditText) findViewById(R.id.vehicleType_edit);
-        vehicle_type_group.setText(Constants.record.get(fields[6]));
-        
-        
-        depot_group = (EditText) findViewById(R.id.depotChoices_edit);   
-        depot_group.setText(Constants.record.get(fields[7]));
-                
         save_btn = (Button)findViewById(R.id.save_btn);
         save_btn.setOnClickListener(new View.OnClickListener() 
         {
@@ -82,48 +87,46 @@ public class VehicleEditor extends Activity {
 				if(intent.equalsIgnoreCase("edit"))
 				{
 					new_record[0] = Constants.record.get(fields[0]);
-					new_record[1] = group_header.getText().toString();
+					new_record[1] = license_text.getText().toString();
 					new_record[2] = vin_text.getText().toString();
-					new_record[3] = license_text.getText().toString();
-					new_record[4] = year_text.getText().toString();
+					new_record[3] = year_text.getText().toString();
+					new_record[4] = vehicle_type_group.getText().toString();
+					new_record[5] = driver_group.getText().toString();
+					new_record[6] = depot_group.getText().toString();
 					if(avail_box.isChecked())
 					{
-						new_record[5] = "true";
+						new_record[7] = ""+1;
 					}else
 					{
-						new_record[5] = "false";
+						new_record[7] = ""+0;
 					} 
-					new_record[6] = driver_group.getText().toString();
-					new_record[7] = vehicle_type_group.getText().toString();
-					new_record[8] = depot_group.getText().toString();
 					
 					Log.v("ADP", "ContactEditor - Edit Request");
 				}else
 					if(intent.equalsIgnoreCase("insert"))
 					{
-						new_record[0] = group_header.getText().toString();
+						new_record[0] = license_text.getText().toString();
 						new_record[1] = vin_text.getText().toString();
-						new_record[2] = license_text.getText().toString();
-						new_record[3] = year_text.getText().toString();
+						new_record[2] = year_text.getText().toString();
+						new_record[3] = vehicle_type_group.getText().toString();
+						new_record[4] = driver_group.getText().toString();
+						new_record[5] = depot_group.getText().toString();
 						if(avail_box.isChecked())
 						{
-							new_record[4] = "true";
+							new_record[6] = ""+1;
 						}else
 						{
-							new_record[4] = "false";
+							new_record[6] = ""+0;
 						} 
-						new_record[5] = driver_group.getText().toString();
-						new_record[6] = vehicle_type_group.getText().toString();
-						new_record[7] = depot_group.getText().toString();
 						Log.v("ADP", "DriverEditor.class - Insert Request");
 					}
 				
-				VehicleEditor.this.finish();
 				engineIntent = new Intent(VehicleEditor.this, InsertLoading.class);
 				engineIntent.putExtra("TableName", tableName);
 				engineIntent.putExtra("Record", new_record);
 				engineIntent.putExtra("Intent", intent);
 				startActivity(engineIntent);
+				VehicleEditor.this.finish();
 			}
 			
 		});     

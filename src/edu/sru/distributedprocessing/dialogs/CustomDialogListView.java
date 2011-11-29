@@ -64,6 +64,7 @@ public class CustomDialogListView extends Dialog
     				i.putExtra("Index", recordIndex);
     				i.putExtra("ListIndex", listIndex);
     				activity.startActivity(i);
+    				activity.finish();
     			 }
     			else 
     				if(clicked.equalsIgnoreCase(list[1]))

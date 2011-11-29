@@ -16,9 +16,11 @@ import org.w3c.dom.NodeList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.dialogs.AuthenticationDialog;
+import edu.sru.distributedprocessing.loadingscreen.AuthenticateLoading;
 import edu.sru.distributedprocessing.net.Authenticate;
 import edu.sru.distributedprocessing.tableobjects.Table;
 
@@ -172,7 +174,12 @@ public class FileManager {
 					info[index] = line;
 					index++;
 				}
-				Authenticate auth = new Authenticate(act, info[0], info[1], info[2], Integer.parseInt(info[3]));
+				Intent i = new Intent(act, AuthenticateLoading.class);
+				i.putExtra("Username", info[0]);
+				i.putExtra("Password", info[1]);
+				i.putExtra("IP",info[2]);
+				i.putExtra("Port", Integer.parseInt(info[3]));
+				act.startActivity(i);
 			}
 			// close the file again
 			fis.close();

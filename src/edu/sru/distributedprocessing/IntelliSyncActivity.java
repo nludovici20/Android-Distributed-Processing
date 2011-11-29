@@ -47,6 +47,11 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
          * loop through tables looking for corresponding type
          * initialize shipping screen with correct table
          */
+        if(Constants.db == null)
+        	Log.v("ADP", "DB is null");
+        else if(Constants.db.getTables() == null)
+        	Log.v("ADP", "getTables() return null");
+        	
         for(int i = 0; i < Constants.db.getTables().length; i++)
         {
         	 if(type.equalsIgnoreCase(Constants.db.getTables()[i].getRecordType()))
@@ -57,8 +62,8 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
              }
         }
        
-       timer = new Timer();
-       reload(); //call the reload method 
+//       timer = new Timer();
+//       reload(); //call the reload method 
         
     }
     
@@ -229,11 +234,11 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
 		return true;
 	}
     
-    @Override
-    public void onBackPressed()
-    {
-    	Log.v("ADP", "canceling timer task...");
-    	timer.cancel();
-    	finish();
-    }
+//    @Override
+//    public void onBackPressed()
+//    {
+////    	Log.v("ADP", "canceling timer task...");
+////    	timer.cancel();
+////    	finish();
+//    }
 }

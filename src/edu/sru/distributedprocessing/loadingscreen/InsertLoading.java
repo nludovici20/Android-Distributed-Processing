@@ -17,13 +17,13 @@ public class InsertLoading extends Activity
 	private Intent engineIntent;
 	private TextView loadingMessage;
 	private Table tbl;
-	private int splashDisplayTime;
 	private Thread splashThread;
+	public static boolean waiting = true;
 		
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.splash);
+		setContentView(R.layout.loading);
 		
 		loadingMessage = (TextView) findViewById(R.id.loadingMessage);
 		loadingMessage.setText("Sending Data...");
@@ -37,9 +37,6 @@ public class InsertLoading extends Activity
 		
 		tbl = Constants.db.getTable(tableName);
 		engineIntent.putExtra("Type", tbl.getRecordType());
-		
-		// set time to splash out
-		splashDisplayTime = 3000;
 		
 		// create a thread to show splash up to splash time
 		splashThread = new Thread() {
@@ -60,9 +57,8 @@ public class InsertLoading extends Activity
 						}
 					
 					//wait certain amount of time
-					while (wait < splashDisplayTime) {
+					while (waiting) {
 						sleep(100);
-						wait += 100;
 					}
 				} catch (Exception e) {
 					//handle

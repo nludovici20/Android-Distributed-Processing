@@ -14,14 +14,15 @@ import edu.sru.distributedprocessing.tools.Constants;
 
 public class RecordLoading extends Activity {
 	private String tableName; 
-	private int recordIndex, splashDisplayTime;
+	private int recordIndex;
 	private Intent engineIntent = null;
 	private Thread splashThread;
+	public static boolean waiting = true;
 		
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.splash);
+		setContentView(R.layout.loading);
 		
 		tableName = getIntent().getExtras().getString("Name");
 		recordIndex = getIntent().getExtras().getInt("Index");
@@ -56,7 +57,7 @@ public class RecordLoading extends Activity {
 		engineIntent.putExtra("Index", getIntent().getExtras().getInt("ListIndex"));
 		
 		// set time to splash out
-		splashDisplayTime = 3000;
+		//splashDisplayTime = 8000;
 		
 		// create a thread to show splash up to splash time
 		splashThread = new Thread() {
@@ -70,9 +71,8 @@ public class RecordLoading extends Activity {
 					Authenticate.tcp.sendRecordRequest(tableName, recordIndex);					
 					
 					//wait certain amount of time
-					while (wait < splashDisplayTime) {
+					while (waiting) {
 						sleep(100);
-						wait += 100;
 					}
 				} catch (Exception e) {
 					//handle

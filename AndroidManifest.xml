@@ -17,6 +17,7 @@
 	<activity android:name=".loadingscreen.RecordLoading" android:configChanges="orientation"/>
 	<activity android:name=".loadingscreen.TableLoading" android:configChanges="orientation"/>
 	<activity android:name=".loadingscreen.InsertLoading" android:configChanges="orientation"/>
+	<activity android:name=".loadingscreen.AuthenticateLoading" android:configChanges="orientation"/>
 	<activity android:name=".optionslist.Options"/>
 	<activity android:name=".editors.VehicleEditor" android:screenOrientation="landscape"/>
 	<activity android:name=".editors.ContractorEditor" android:screenOrientation="landscape"/>

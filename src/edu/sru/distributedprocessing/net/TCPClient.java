@@ -6,10 +6,15 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import android.app.Activity;
 import android.util.Log;
 import edu.sru.distributedprocessing.IntelliSyncActivity;
+import edu.sru.distributedprocessing.loadingscreen.AuthenticateLoading;
+import edu.sru.distributedprocessing.loadingscreen.InsertLoading;
+import edu.sru.distributedprocessing.loadingscreen.RecordLoading;
+import edu.sru.distributedprocessing.loadingscreen.TableLoading;
 import edu.sru.distributedprocessing.tableobjects.Record;
 import edu.sru.distributedprocessing.tableobjects.Table;
 import edu.sru.distributedprocessing.tools.Constants;
@@ -28,6 +33,7 @@ public class TCPClient extends Thread
 	private int numFields;
 	private Activity act;
 	private boolean wasKicked = false;
+	public static boolean isConnected = false;
 	
 	public TCPClient(Activity act, final String host, final int port) throws Exception
 	{
@@ -47,6 +53,7 @@ public class TCPClient extends Thread
 		this.in =  new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		out = new PrintWriter(socket.getOutputStream(),true);
 		wasKicked = false;
+		isConnected = true;
 	}
 	
 	public final void run() 
@@ -84,12 +91,14 @@ public class TCPClient extends Thread
 						break;	
 					case Message.Type.AUTHENTICATE:
 						Log.v("ADP", data);
+						AuthenticateLoading.waiting = false;
 						wasKicked = false;
 						break;
 					case Message.Type.CONNECTION:
 						Log.v("ADP", data);
 						socket.close();
 						wasKicked = true;
+						isConnected = false;
 						break;
 					default:
 						Log.v("ADP", "TCPClient.class - Default Case");	
@@ -152,6 +161,7 @@ public class TCPClient extends Thread
 				Constants.db.getTables()[i].addRecords(rec);
 			}
 		}
+		TableLoading.waiting = false;
 		Log.v("ADP", "/******** End Recieve Table Request ********\"");
 		
 	}
@@ -161,8 +171,8 @@ public class TCPClient extends Thread
 	 */
 	public final void sendTableRequest(Table tbl)
 	{		
+		TableLoading.waiting = true;
 		char msgChar = Message.Type.GET_TABLE;
-		
 		Log.v("ADP", "/******** Send Table Request ********\"");
 		this.lastTable = tbl.getTableName(); //current table in view
 		if(tbl.getFieldsInView().size() < 2)
@@ -187,7 +197,6 @@ public class TCPClient extends Thread
 	private void recieveRecordRequest(String tableName, String data) 
 	{
 		Log.v("ADP", "/******** Recieve Record Request ********\"");
-		Constants.record.clear();
 		String[] temp = data.substring(1).split(""+Message.Type.GET_RECORD);
 		int length = Constants.db.getTable(tableName).getFields().length;
 		for(int i = 0; i < length; i++)
@@ -195,6 +204,7 @@ public class TCPClient extends Thread
 			Constants.record.put(Constants.db.getTable(tableName).getFields()[i], temp[i]);
 			Log.v("ADP", "TCPClient.class - Field: " + Constants.db.getTable(tableName).getFields()[i] + " Value: " + temp[i]);
 		}
+		RecordLoading.waiting = false;
 		Log.v("ADP", "/******** End Recieve Record Request ********\"");
 	}
 	
@@ -203,6 +213,7 @@ public class TCPClient extends Thread
 	 */
 	public void sendRecordRequest(String tablename, int indexOfRecord)
 	{
+		RecordLoading.waiting = true;
 		Constants.record.clear();
 		char msgChar = Message.Type.GET_RECORD;
 		Log.v("ADP", "/******** send Record Request ********\"");
@@ -240,12 +251,14 @@ public class TCPClient extends Thread
 			}
 			
 		}
+		InsertLoading.waiting = false;
 		Log.v("ADP", "/******** End Recieve Change Request ********\"");
 		
 	}
 	
 	public void sendChangeRequest(String tablename, String[] rec)
 	{
+		InsertLoading.waiting = true;
 		this.lastTable = tablename;
 		char msgChar = Message.Type.GET_CHANGE;
 		Log.v("ADP", "/******** Send Change Request ********\"");
@@ -282,6 +295,7 @@ public class TCPClient extends Thread
 			IntelliSyncActivity.insertRecordAt(index, fields);	
 			Log.d("ADP", "TCPClient.class - New Record:" + index + " " + fields[0] + " " + fields[1]);
 		}
+		InsertLoading.waiting = false;
 		Log.v("ADP", "/******** End ReceiveInsert Request ********\"");
 	}
 	

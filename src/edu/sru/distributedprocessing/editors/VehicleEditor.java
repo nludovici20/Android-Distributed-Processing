@@ -41,34 +41,31 @@ public class VehicleEditor extends Activity {
         new_record = new String[fields.length];
         
         /***** Editor Items *****/
+        group_header = (TextView) findViewById(R.id.group_header);
+        group_header.setText(group_header.getText().toString() + " " + Constants.record.get(fields[0]));
+		        
+        license_text = (EditText) findViewById(R.id.licenseNO_edit);
+        license_text.setText(Constants.record.get(fields[1]));
+
+        vin_text = (EditText) findViewById(R.id.vinNO_edit);
+        vin_text.setText(Constants.record.get(fields[2]));
         
-        if(intent.equalsIgnoreCase("edit"))
-        {
-	        group_header = (TextView) findViewById(R.id.group_header);
-	        group_header.setText(group_header.getText().toString() + " " + Constants.record.get(fields[0]));
-			        
-	        license_text = (EditText) findViewById(R.id.licenseNO_edit);
-	        license_text.setText(Constants.record.get(fields[1]));
-	
-	        vin_text = (EditText) findViewById(R.id.vinNO_edit);
-	        vin_text.setText(Constants.record.get(fields[2]));
-	        
-	        year_text = (EditText) findViewById(R.id.year_edit); 
-	        year_text.setText(Constants.record.get(fields[3]));
-	
-	        vehicle_type_group = (EditText) findViewById(R.id.vehicleType_edit);
-	        vehicle_type_group.setText(Constants.record.get(fields[4]));
-	        
-	        driver_group = (EditText) findViewById(R.id.driverChoices_edit);
-	        driver_group.setText(Constants.record.get(fields[5]));
-	        
-	        depot_group = (EditText) findViewById(R.id.depotChoices_edit);   
-	        depot_group.setText(Constants.record.get(fields[6]));
-	        
-	        avail_box = (CheckBox) findViewById(R.id.available_box);
-	        
-	        Log.v("ADP", "ERROR AT " + Constants.record.get(fields[6]));
-	        
+        year_text = (EditText) findViewById(R.id.year_edit); 
+        year_text.setText(Constants.record.get(fields[3]));
+
+        vehicle_type_group = (EditText) findViewById(R.id.vehicleType_edit);
+        vehicle_type_group.setText(Constants.record.get(fields[4]));
+        
+        driver_group = (EditText) findViewById(R.id.driverChoices_edit);
+        driver_group.setText(Constants.record.get(fields[5]));
+        
+        depot_group = (EditText) findViewById(R.id.depotChoices_edit);   
+        depot_group.setText(Constants.record.get(fields[6]));
+        
+        avail_box = (CheckBox) findViewById(R.id.available_box);
+        
+        Log.v("ADP", "ERROR AT " + Constants.record.get(fields[6]));
+        try{
 	        if(Integer.parseInt(Constants.record.get(fields[7])) == 1)
 	        {
 	        	avail_box.setChecked(true);
@@ -76,8 +73,11 @@ public class VehicleEditor extends Activity {
 	        {
 	        	avail_box.setChecked(false);
 	        }
-        
+        }catch(Exception e)
+        {
+        	avail_box.setChecked(false);
         }
+        
         save_btn = (Button)findViewById(R.id.save_btn);
         save_btn.setOnClickListener(new View.OnClickListener() 
         {

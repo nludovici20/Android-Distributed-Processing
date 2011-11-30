@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.GridView;
 import android.widget.Toast;
+import edu.sru.distributedprocessing.Main;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.R.id;
 import edu.sru.distributedprocessing.R.layout;
@@ -17,12 +18,15 @@ import edu.sru.distributedprocessing.tools.FileManager;
 public class NavigationMain extends Activity implements OnClickListener
 {
 	private GridView gridview;
+	private boolean goBack;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.navigation_main);
+        
+        goBack = false;
         
         gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new GridAdapter(this, this));
@@ -70,10 +74,22 @@ public class NavigationMain extends Activity implements OnClickListener
                 				//depot
                         		Toast.makeText(NavigationMain.this, "Depot Selected", Toast.LENGTH_SHORT).show();
                         		tablename = "depots";
-                			}
+                			}else
+                				if(v.getTag().equals(5))
+                				{
+                					//Go Back
+                					goBack = true;
+                					
+                				}
     	
-    	engineIntent.putExtra("TableName", tablename);
-    	startActivity(engineIntent);
+    	if(!goBack)
+    	{
+    		engineIntent.putExtra("TableName", tablename);
+    		startActivity(engineIntent);
+    	}else
+    	{
+    		this.finish();
+    	}
 	}
     
 }

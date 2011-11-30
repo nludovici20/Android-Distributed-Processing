@@ -56,8 +56,8 @@ public class GridAdapter extends BaseAdapter {
 
     // references to our images
     private Integer[] mThumbIds = {
-            R.drawable.vehicle, R.drawable.contact,
-            R.drawable.icon, R.drawable.vehicle_types,
-            R.drawable.depot
+            R.drawable.vehicle, R.drawable.contractor,
+            R.drawable.driver, R.drawable.vehicle_types,
+            R.drawable.depot, R.drawable.back
     };
 }

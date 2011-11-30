@@ -39,11 +39,11 @@ public class DriverEditor extends Activity {
         header = (TextView)findViewById(R.id.group_header);
         header.setText(header.getText().toString() + " " + Constants.record.get(fields[0]));
         
-        lastName_edit = (EditText)findViewById(R.id.lastName_edit);
-        lastName_edit.setText(Constants.record.get(fields[1]));
-       
         firstName_edit = (EditText)findViewById(R.id.firstName_edit);
-        firstName_edit.setText(Constants.record.get(fields[2]));
+        firstName_edit.setText(Constants.record.get(fields[1]));
+
+        lastName_edit = (EditText)findViewById(R.id.lastName_edit);
+        lastName_edit.setText(Constants.record.get(fields[2]));
         
         middleInitial_edit = (EditText)findViewById(R.id.middleInitial_edit);
         middleInitial_edit.setText(Constants.record.get(fields[3]));

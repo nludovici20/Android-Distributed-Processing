@@ -31,6 +31,5 @@
 	<activity android:name=".navigation.NavigationMain"/>
 	<activity android:name="IntelliSyncActivity"/>
 	<activity android:name="About"/>
-	<activity android:name=".Settings"/>
     </application>
 </manifest>

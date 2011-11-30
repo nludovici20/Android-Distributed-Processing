@@ -55,20 +55,8 @@
 				android:gravity="center"
 				android:layout_centerHorizontal="true"
 				android:text="Start Program"  
-				android:layout_height="wrap_content" 
+				android:layout_height="100px" 
 				android:id="@+id/start_btn">
-			</Button>
-			<Button 
-				android:layout_width="match_parent"
-				android:background="@layout/button_component1"
-				style="@style/Heading2"
-				android:textSize="20sp"
-				android:gravity="center"
-				android:layout_centerHorizontal="true" 
-				android:text="Settings" 
-				android:layout_below="@+id/start_btn" 
-				android:layout_height="wrap_content" 
-				android:id="@+id/options_btn"> 
 			</Button>
 			<Button 
 				android:layout_width="match_parent" 
@@ -78,8 +66,8 @@
 				android:gravity="center"
 				android:layout_centerHorizontal="true"
 				android:text="About" 
-				android:layout_below="@+id/options_btn" 
-				android:layout_height="wrap_content" 
+				android:layout_below="@+id/start_btn" 
+				android:layout_height="100px" 
 				android:id="@+id/about_btn" >
 			</Button>
 			<Button 
@@ -91,7 +79,7 @@
 				android:layout_centerHorizontal="true" 
 				android:text="Exit Program" 
 				android:layout_below="@+id/about_btn"
-				android:layout_height="wrap_content" 
+				android:layout_height="100px" 
 				android:id="@+id/quit_btn">
 			</Button>
 		</RelativeLayout>

@@ -28,7 +28,7 @@ public class VehicleTypeEditor extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vehicle_type_editor);
        
-        tableName = "vehicle type";
+        tableName = "vehicletype";
         intent = getIntent().getExtras().getString("Intent");
         index = getIntent().getExtras().getInt("Index");
         

@@ -33,16 +33,6 @@ public class Main extends Activity
 			}
 		});
         
-        Button options_btn = (Button) findViewById(R.id.options_btn);
-        options_btn.setOnClickListener(new View.OnClickListener() 
-        {
-			public void onClick(View v) 
-			{
-				engineIntent = new Intent(Main.this, Settings.class);
-				startActivity(engineIntent);
-			}
-		});
-        
         Button about_btn = (Button) findViewById(R.id.about_btn);
         about_btn.setOnClickListener(new View.OnClickListener() 
         {

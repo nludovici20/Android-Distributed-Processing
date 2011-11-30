@@ -18,11 +18,22 @@ public class AuthenticationDialog extends Dialog
     private Activity activity;	//current activity
     private EditText username, password, ipNum, portNum; //config attributes
     private Button authenticate_btn;
+    private String user, pword, ip, port;
     
     public AuthenticationDialog(Activity act, int theme) 
     {
         super(act, theme); //Dialog
         this.activity = act;
+    }
+    
+    public AuthenticationDialog(Activity act, int theme, String username, String password, String ip, String port)
+    {
+    	super(act, theme);
+    	this.activity = act;
+    	this.user = username;
+    	this.pword = password;
+    	this.ip = ip;
+    	this.port = port;
     }
     
     @Override
@@ -37,6 +48,16 @@ public class AuthenticationDialog extends Dialog
         password.setTransformationMethod(PasswordTransformationMethod.getInstance());
         ipNum = (EditText)findViewById(R.id.ipNum);
         portNum = (EditText)findViewById(R.id.portNum);
+        
+        try{
+        	username.setText(user);
+        	password.setText(pword);
+        	ipNum.setText(ip);
+        	portNum.setText(port);
+        }catch(Exception e)
+        {
+        	//nothing
+        }
         
         authenticate_btn = (Button) findViewById(R.id.authenticate_btn);
         authenticate_btn.setOnClickListener(new View.OnClickListener()

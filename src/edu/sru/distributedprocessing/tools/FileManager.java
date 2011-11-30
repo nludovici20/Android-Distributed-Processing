@@ -25,6 +25,7 @@ import edu.sru.distributedprocessing.net.Authenticate;
 import edu.sru.distributedprocessing.tableobjects.Table;
 
 public class FileManager {
+	public static String username, password;
 	
 	/*
 	 * Method that reads the db file for saved attributes (Starting Index, Fields in View)
@@ -174,12 +175,8 @@ public class FileManager {
 					info[index] = line;
 					index++;
 				}
-				Intent i = new Intent(act, AuthenticateLoading.class);
-				i.putExtra("Username", info[0]);
-				i.putExtra("Password", info[1]);
-				i.putExtra("IP",info[2]);
-				i.putExtra("Port", Integer.parseInt(info[3]));
-				act.startActivity(i);
+					AuthenticationDialog authenticate = new AuthenticationDialog(act, R.style.CustomDialogTheme, info[0], info[1], info[2], info[3]);
+		        	authenticate.show();
 			}
 			// close the file again
 			fis.close();

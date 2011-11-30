@@ -34,6 +34,7 @@ public class TCPClient extends Thread
 	private Activity act;
 	private boolean wasKicked = false;
 	public static boolean isConnected = false;
+	private String lastMSG;
 	
 	public TCPClient(Activity act, final String host, final int port) throws Exception
 	{
@@ -191,6 +192,7 @@ public class TCPClient extends Thread
 		}
 		Log.v("ADP", "TCPClient.class - Sent: " + str);
 		send(str); //send request to server
+		this.lastMSG = str;
 		Log.v("ADP", "/******** End Send Table Request ********\"");
 	}
 	
@@ -220,6 +222,7 @@ public class TCPClient extends Thread
 		this.lastTable = tablename; //set table in view
 		String str = msgChar + tablename + msgChar + indexOfRecord; //construct appropriate string
 		send(str); //send to server
+		this.lastMSG = str;
 		Log.v("ADP", str);
 		Log.v("ADP", "/******** End send Record Request ********\"");
 	}
@@ -273,6 +276,7 @@ public class TCPClient extends Thread
 		}
 		
 		send(str);
+		this.lastMSG = str;
 		Log.v("ADP", "TCPClient.class - Sent: " + str);
 		Log.v("ADP", "/******** End Send Change Request ********\"");
 	}
@@ -320,6 +324,7 @@ public class TCPClient extends Thread
 		} 
 		str+=msgChar;
 		send(str); //send request to server
+		this.lastMSG = str;
 		Log.v("ADP", "TCPClient.class - Sent: " + str);
 		Log.v("ADP", "/******** End Send Insert Request ********\"");
 	}
@@ -352,6 +357,7 @@ public class TCPClient extends Thread
 		Log.v("ADP", "/******** Send Delete Request ********\"");
 		String str = msgChar + tablename + msgChar + indexOfDeletedRecord; //construct the string
 		send(str); //send str to server
+		this.lastMSG = str;
 		Log.v("ADP", str);
 		Log.v("ADP", "/******** END Send Delete Request ********\"");
 	}
@@ -368,7 +374,7 @@ public class TCPClient extends Thread
 			try {
 				Log.v("ADP", "Re-Estabolishing connection...");
 				connect();
-				FileManager.readConfigFile(act);
+				out.println(Message.Type.AUTHENTICATE + FileManager.username + Message.Type.AUTHENTICATE + FileManager.password + Message.Type.AUTHENTICATE + this.lastTable + Message.Type.AUTHENTICATE);
 			} catch (Exception e) {
 				//kill whole program?
 			}

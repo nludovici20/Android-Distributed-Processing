@@ -15,6 +15,8 @@ public class Authenticate {
 		//initialize a new Client and connect with server
 		try
 		{
+			FileManager.username = username;
+			FileManager.password = password;
 			tcp = new TCPClient(act, ip, port); //connect to server
 			tcp.start(); //start the thread
 			tcp.send(Message.Type.AUTHENTICATE + username + Message.Type.AUTHENTICATE + password + Message.Type.AUTHENTICATE); //send initial message to server

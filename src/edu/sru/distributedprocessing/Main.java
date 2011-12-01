@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import edu.sru.distributedprocessing.navigation.NavigationMain;
 import edu.sru.distributedprocessing.net.Authenticate;
+import edu.sru.distributedprocessing.net.TCPClient;
+import edu.sru.distributedprocessing.tools.FileManager;
 
 public class Main extends Activity 
 {
@@ -28,8 +30,8 @@ public class Main extends Activity
         {
 			public void onClick(View v) 
 			{
-				engineIntent = new Intent(Main.this, NavigationMain.class);
-				startActivity(engineIntent);
+				 engineIntent = new Intent(Main.this, NavigationMain.class);
+				 startActivity(engineIntent);
 			}
 		});
         

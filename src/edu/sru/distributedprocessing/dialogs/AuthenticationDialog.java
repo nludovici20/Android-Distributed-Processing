@@ -64,12 +64,19 @@ public class AuthenticationDialog extends Dialog
         {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(activity, AuthenticateLoading.class);
-				i.putExtra("Username", username.getText().toString());
-				i.putExtra("Password", password.getText().toString());
-				i.putExtra("IP", ipNum.getText().toString());
-				i.putExtra("Port", Integer.parseInt(portNum.getText().toString()));
-				activity.startActivity(i);
+				try
+				{
+					Intent i = new Intent(activity, AuthenticateLoading.class);
+					i.putExtra("Username", username.getText().toString());
+					i.putExtra("Password", password.getText().toString());
+					i.putExtra("IP", ipNum.getText().toString());
+					i.putExtra("Port", Integer.parseInt(portNum.getText().toString()));
+					activity.startActivity(i);
+				}catch(Exception e)
+				{
+					Toast.makeText(activity, "All Fields are Required to Authenticate", Toast.LENGTH_SHORT).show();
+					activity.finish();
+				}
 				dismissCustomDialog();
 			}
         });

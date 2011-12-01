@@ -24,7 +24,7 @@ public class Authenticate {
 		}catch (Exception e)
 		{
 			Log.d("ADP", "ERROR CONNECTING");
-			Toast.makeText(act, "Authentication Failed", Toast.LENGTH_SHORT).show();
+			act.finish();
 		}
 	}
 }

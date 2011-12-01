@@ -13,7 +13,6 @@ import edu.sru.distributedprocessing.tools.Constants;
 
 public class AuthenticateLoading extends Activity 
 {
-	private Intent engineIntent;
 	private TextView loadingMessage;
 	private Thread splashThread;
 	public static boolean waiting = true;
@@ -27,7 +26,6 @@ public class AuthenticateLoading extends Activity
 		
 		loadingMessage = (TextView) findViewById(R.id.loadingMessage);
 		loadingMessage.setText("Authenticating with the Server...");
-				
 		
 		this.username = getIntent().getExtras().getString("Username");
 		this.password = getIntent().getExtras().getString("Password");

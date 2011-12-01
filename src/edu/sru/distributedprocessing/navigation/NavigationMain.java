@@ -12,6 +12,7 @@ import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.R.id;
 import edu.sru.distributedprocessing.R.layout;
 import edu.sru.distributedprocessing.loadingscreen.TableLoading;
+import edu.sru.distributedprocessing.net.Authenticate;
 import edu.sru.distributedprocessing.net.TCPClient;
 import edu.sru.distributedprocessing.tools.FileManager;
 
@@ -30,7 +31,7 @@ public class NavigationMain extends Activity implements OnClickListener
         
         gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new GridAdapter(this, this));
-        
+       
         if(!TCPClient.isConnected)
         {
 	        try
@@ -40,7 +41,7 @@ public class NavigationMain extends Activity implements OnClickListener
 	        }
 	        catch(Exception e)
 	        {
-	        	//error
+	        	//nothing
 	        }
         }
     }

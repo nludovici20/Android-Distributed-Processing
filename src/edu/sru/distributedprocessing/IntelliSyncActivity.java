@@ -1,7 +1,9 @@
-package edu.sru.distributedprocessing;
+/*
+ * Main Activity where the list of data 
+ * is pulled in from the server and Displayed 
+ */
 
-import java.util.Timer;
-import java.util.TimerTask;
+package edu.sru.distributedprocessing;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -25,11 +27,11 @@ import edu.sru.distributedprocessing.tools.Constants;
 
 public class IntelliSyncActivity extends Activity implements View.OnClickListener
 {    
-    private String type, tableName; //navigation type, tablename
-    public static ShippingScreen ss; //shipping screen list
+    private String type, tableName; //Record type, Table Name
+    public static ShippingScreen ss;
     private static Handler handler; //handler to connect TCP thread with UI thread
-    private TimerTask reloadTask;
-    private Timer timer;
+//    private TimerTask reloadTask;
+//    private Timer timer;
     
     @Override
     public void onCreate(Bundle savedInstanceState) 
@@ -58,32 +60,9 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
              {
              	ss = new ShippingScreen(this, Constants.db.getTables()[i]);
              	tableName = Constants.db.getTables()[i].getTableName();
-             	ss.Initialize(); //initialize some stuff
+             	ss.Initialize(); //Method that Populates the ListView with data
              }
-        }
-       
-//       timer = new Timer();
-//       reload(); //call the reload method 
-        
-    }
-    
-    /*
-     * method that every 5 seconds checks for changes and refreshes the listview
-     */
-    public void reload()
-    {
-          reloadTask = new TimerTask() {
-                public void run() {
-                    handler.post(new Runnable() {
-                        public void run() {
-                        	ss.refresh();
-                            Log.v("ADP", "Refeshing ListView");
-                        }
-                    });
-                }
-            };
-
-            timer.schedule(reloadTask, 300, 15000);
+        }        
     }
 
     /*
@@ -120,7 +99,7 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
 	}
     
     /*
-     * Method that handles different views onclick methods if set in xml layout
+     * Method that handles different views onClick methods set in the xml layout
      * Used to find which button was clicked and handle accordingly
      */
     public void onClick(View v)
@@ -154,8 +133,8 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
     }
     
     /*
-     * (non-Javadoc)
-     * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+     * When user hits physical menu button create the Options Menu
+     * with the layout from the Res/Menu folder
      */
     @Override
 	public boolean onCreateOptionsMenu(Menu menu) 
@@ -166,14 +145,14 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
 	}
     
     /*
-     * (non-Javadoc)
-     * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+     * Handle when an option from the Options Menu is sleected
      */
     @Override
 	public boolean onOptionsItemSelected(MenuItem item) 
     {
     	Intent engineIntent = null;
 		
+    	//figure out which item was selected by the id given in the xml layout
     	switch (item.getItemId()) 
 		{
 		case R.id.options_menu_item:
@@ -185,7 +164,7 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
 			break;
 			
 	    case R.id.new_record_item:
-			//open up a new record editor
+			//open up a new record editor (depending on the table name passed in)
 			for(int i = 0; i < Constants.db.getTables().length; i++)
 			{
 				if (tableName.equalsIgnoreCase("contractors"))
@@ -218,13 +197,19 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
 			
 			try
 			{
-				IntelliSyncActivity.this.finish();
+				IntelliSyncActivity.this.finish(); //finish the current activity
+				
+				/*
+				 * Pass in data to the next Activity
+				 */
 				engineIntent.putExtra("Fields", Constants.db.getTable(tableName).getFields());
 				engineIntent.putExtra("Intent", "insert");
-				startActivity(engineIntent);
+				
+				startActivity(engineIntent); //start the new Activity
 				Log.v("ADP", "CustomDialogListView.class - Insert Record");        		
 			}catch(Exception e)
 			{
+				e.printStackTrace();
 				Log.v("ADP", "CustomDialogListView.class - Error Inserting New Record");
 			}
 			
@@ -234,11 +219,31 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
 		return true;
 	}
     
-//    @Override
-//    public void onBackPressed()
-//    {
-////    	Log.v("ADP", "canceling timer task...");
-////    	timer.cancel();
-////    	finish();
-//    }
+    /*
+     * method that every 5 seconds checks for changes and refreshes the listview
+     *
+    public void reload()
+    {
+          reloadTask = new TimerTask() {
+                public void run() {
+                    handler.post(new Runnable() {
+                        public void run() {
+                        	ss.refresh();
+                            Log.v("ADP", "Refeshing ListView");
+                        }
+                    });
+                }
+            };
+
+            timer.schedule(reloadTask, 300, 15000);
+    }*/
+    
+    /*
+    @Override
+    public void onBackPressed()
+    {
+    	Log.v("ADP", "canceling timer task...");
+    	timer.cancel();
+    	finish();
+    }*/
 }

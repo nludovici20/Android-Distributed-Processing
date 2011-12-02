@@ -1,3 +1,9 @@
+/*
+ * Provides the user with two options on selecting a record
+ * from the list:
+ * Edit Record
+ * New Record
+ */
 package edu.sru.distributedprocessing.dialogs;
 
 import android.app.Activity;
@@ -19,16 +25,20 @@ import edu.sru.distributedprocessing.tableobjects.Table;
 public class CustomDialogListView extends Dialog 
 {
     Activity activity;	//current activity
-    Table type;
-    int recordIndex;
-    int listIndex;
+    Table table; //table record was selected from
+    int recordIndex; //record id value
+    int listIndex; //list view id value
     Intent engineIntent;
     
+    /*
+     * Constructor with inputs:
+     * Activity, Table Name, record ID, listview index 
+     */
     public CustomDialogListView(Activity act, int theme, Table type, int recordIndex, int listIndex) 
     {
         super(act, theme);
         this.activity = act;
-        this.type = type;
+        this.table = type;
         this.recordIndex = recordIndex; 
         this.listIndex = listIndex;
     }
@@ -60,21 +70,25 @@ public class CustomDialogListView extends Dialog
     			{
     				//open record editor & pull in entire record selected
     				Intent i = new Intent(activity, RecordLoading.class);
-    				i.putExtra("Name", type.getTableName());
+    				
+    				/***** Attributes Passed into the next Activity *****/
+    				i.putExtra("Name", table.getTableName());
     				i.putExtra("Index", recordIndex);
     				i.putExtra("ListIndex", listIndex);
-    				activity.startActivity(i);
-    				activity.finish();
+    				/***** End Attributes Passed into the next Activity *****/
+    				
+    				activity.startActivity(i); //start the next activity
+    				activity.finish(); //kill the current activity
     			 }
     			else 
     				if(clicked.equalsIgnoreCase(list[1]))
     				{
     					//Delete Record selected
-    					Authenticate.tcp.sendDeleteRequest(type.getTableName(), recordIndex);
-    					Log.v("ADP", "CustomDialogListView.class - Delete Record: " + type.getTableName() + " Index of Record to delete: " + recordIndex);
+    					Authenticate.tcp.sendDeleteRequest(table.getTableName(), recordIndex);
+    					Log.v("ADP", "CustomDialogListView.class - Delete Record: " + table.getTableName() + " Index of Record to delete: " + recordIndex);
     				}
     		
-        		dismissCustomDialog();
+        		dismissCustomDialog(); //close the dialog
            	}
         });
         

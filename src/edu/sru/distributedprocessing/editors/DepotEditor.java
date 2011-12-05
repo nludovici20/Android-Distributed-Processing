@@ -1,3 +1,7 @@
+/*
+ * Editor for Depot Records
+ * Fields: Depot Name, Depot Address, City, State, Zip Code, Latitude, Longitude
+ */
 package edu.sru.distributedprocessing.editors;
 
 import android.app.Activity;
@@ -30,12 +34,11 @@ public class DepotEditor extends Activity {
        
        tableName = "depots";
        intent = getIntent().getExtras().getString("Intent");
-       //index = getIntent().getExtras().getInt("Index");
         
        fields = getIntent().getExtras().getStringArray("Fields");
        new_record = new String[fields.length];
         
-       //Editor Items
+       /*** Editor Items ***/
        header = (TextView)findViewById(R.id.group_header);
        header.setText(header.getText().toString() + " " + Constants.record.get(fields[0]));
         
@@ -59,6 +62,7 @@ public class DepotEditor extends Activity {
         
        longitude_edit = (EditText)findViewById(R.id.longitude_edit);
        longitude_edit.setText(Constants.record.get(fields[7]));
+       /*** End Editor Items ***/
        
        save_btn = (Button) findViewById(R.id.save_btn);
        save_btn.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +70,7 @@ public class DepotEditor extends Activity {
 				Toast.makeText(DepotEditor.this, "Save button clicked", Toast.LENGTH_SHORT).show();	  
 				if(intent.equalsIgnoreCase("edit"))
 				{
+					//pull items for edit request
 					new_record[0] = Constants.record.get(fields[0]);
 				    new_record[1] = depotName_edit.getText().toString();
 				    new_record[2] = depotAddress_edit.getText().toString();
@@ -78,6 +83,7 @@ public class DepotEditor extends Activity {
 				}else
 					if(intent.equalsIgnoreCase("insert"))
 					{
+						//pull items for insert request
 					    new_record[0] = depotName_edit.getText().toString();
 					    new_record[1] = depotAddress_edit.getText().toString();
 				        new_record[2] = city_edit.getText().toString();
@@ -88,12 +94,15 @@ public class DepotEditor extends Activity {
 				        Log.v("ADP", "DepotEditor.class - Insert Request");
 					}
 				
-				DepotEditor.this.finish();
+				DepotEditor.this.finish(); //finish current activity
 				engineIntent = new Intent(DepotEditor.this, InsertLoading.class);
+				
+				/*** Bundle Items to send to next activity ***/
 				engineIntent.putExtra("TableName", tableName);
 				engineIntent.putExtra("Record", new_record);
 				engineIntent.putExtra("Intent", intent);
-				startActivity(engineIntent);
+				
+				startActivity(engineIntent); //start next activity
 			}
 			
 		});

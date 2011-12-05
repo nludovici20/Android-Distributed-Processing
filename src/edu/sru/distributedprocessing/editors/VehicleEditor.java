@@ -1,3 +1,7 @@
+/*
+ * Editor for Vehicle Records
+ * Fields: Vin Number, License Number, Year, Driver, Vehicle Type, Depot
+ */
 package edu.sru.distributedprocessing.editors;
 
 import android.app.Activity;
@@ -34,9 +38,7 @@ public class VehicleEditor extends Activity {
         setContentView(R.layout.vehicle_editor);
        
         tableName = "vehicles";
-        
         intent = getIntent().getExtras().getString("Intent");
-        
         fields = getIntent().getExtras().getStringArray("Fields");
         new_record = new String[fields.length];
         
@@ -77,6 +79,7 @@ public class VehicleEditor extends Activity {
         {
         	avail_box.setChecked(false);
         }
+        /*** End Editor Items ***/
         
         save_btn = (Button)findViewById(R.id.save_btn);
         save_btn.setOnClickListener(new View.OnClickListener() 
@@ -86,6 +89,7 @@ public class VehicleEditor extends Activity {
 				Toast.makeText(VehicleEditor.this, "Save button clicked", Toast.LENGTH_SHORT).show();	
 				if(intent.equalsIgnoreCase("edit"))
 				{
+					//pull items for edit request
 					new_record[0] = Constants.record.get(fields[0]);
 					new_record[1] = license_text.getText().toString();
 					new_record[2] = vin_text.getText().toString();
@@ -105,6 +109,7 @@ public class VehicleEditor extends Activity {
 				}else
 					if(intent.equalsIgnoreCase("insert"))
 					{
+						//pull items for insert request
 						new_record[0] = license_text.getText().toString();
 						new_record[1] = vin_text.getText().toString();
 						new_record[2] = year_text.getText().toString();
@@ -121,12 +126,15 @@ public class VehicleEditor extends Activity {
 						Log.v("ADP", "DriverEditor.class - Insert Request");
 					}
 				
+				VehicleEditor.this.finish(); //finish current activity
 				engineIntent = new Intent(VehicleEditor.this, InsertLoading.class);
+				
+				/*** Prepare Items to be sent to next activity ***/
 				engineIntent.putExtra("TableName", tableName);
 				engineIntent.putExtra("Record", new_record);
 				engineIntent.putExtra("Intent", intent);
-				startActivity(engineIntent);
-				VehicleEditor.this.finish();
+				
+				startActivity(engineIntent); //start next activity
 			}
 			
 		});     

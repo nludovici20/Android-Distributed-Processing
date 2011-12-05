@@ -1,3 +1,7 @@
+/*
+ * Editor for Vehicle Type Records
+ * Fields: Vehicle Type, Sub Type, Vehicle Model, Max Weight, Max Range, Max Length
+ */
 package edu.sru.distributedprocessing.editors;
 
 import android.app.Activity;
@@ -35,7 +39,7 @@ public class VehicleTypeEditor extends Activity {
         fields = getIntent().getExtras().getStringArray("Fields");
         new_record = new String[fields.length];
         
-        //Editor Items
+        /*** Editor Items ***/
         header = (TextView)findViewById(R.id.group_header);
         header.setText(header.getText().toString() + " " + Constants.record.get(fields[0]));
         
@@ -55,7 +59,8 @@ public class VehicleTypeEditor extends Activity {
         maxRange_edit.setText(Constants.record.get(fields[5]));
         
        maxLength_edit = (EditText)findViewById(R.id.length_edit);
-        maxLength_edit.setText(Constants.record.get(fields[6]));
+       maxLength_edit.setText(Constants.record.get(fields[6]));
+       /*** End Editor Items ***/ 
        
         save_btn = (Button)findViewById(R.id.save_btn);
         save_btn.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +70,7 @@ public class VehicleTypeEditor extends Activity {
 				
 				if(intent.equalsIgnoreCase("edit"))
 				{
+					//pull edit request
 					new_record[0] = Constants.record.get(fields[0]);
 					new_record[1] = vehicleType_edit.getText().toString();
 					new_record[2] = subType_edit.getText().toString();
@@ -76,6 +82,7 @@ public class VehicleTypeEditor extends Activity {
 				}else
 					if(intent.equalsIgnoreCase("insert"))
 					{
+						//pull insert request
 						new_record[0] = vehicleType_edit.getText().toString();
 						new_record[1] = subType_edit.getText().toString();
 						new_record[2] = vehicleModel_edit.getText().toString();
@@ -85,12 +92,15 @@ public class VehicleTypeEditor extends Activity {
 						Log.v("ADP", "VehicleTypeEditor.class - Insert Request");
 					}
 				
-				VehicleTypeEditor.this.finish();
+				VehicleTypeEditor.this.finish(); //end current activity
 				engineIntent = new Intent(VehicleTypeEditor.this, InsertLoading.class);
+				
+				/*** Prepare items to be sent to next activity ***/
 				engineIntent.putExtra("TableName", tableName);
 				engineIntent.putExtra("Record", new_record);
 				engineIntent.putExtra("Intent", intent);
-				startActivity(engineIntent);
+				
+				startActivity(engineIntent); //start next activity
 			}
 			
 		});

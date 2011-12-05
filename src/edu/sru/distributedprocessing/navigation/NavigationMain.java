@@ -3,6 +3,7 @@ package edu.sru.distributedprocessing.navigation;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.GridView;
@@ -32,6 +33,7 @@ public class NavigationMain extends Activity implements OnClickListener
         gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new GridAdapter(this, this));
        
+        //Check connection status
         if(!TCPClient.isConnected)
         {
 	        try
@@ -41,11 +43,13 @@ public class NavigationMain extends Activity implements OnClickListener
 	        }
 	        catch(Exception e)
 	        {
-	        	//nothing
+	        	e.printStackTrace();
+	        	Log.v("ADP", "NavigationMain.class - Error reading config file");
 	        }
         }
     }
 
+    //Handle which Button was selected
 	public void onClick(View v) {
 		Intent engineIntent = new Intent(NavigationMain.this, TableLoading.class);		
 		String tablename="";
@@ -62,11 +66,13 @@ public class NavigationMain extends Activity implements OnClickListener
     		}else
     			if(v.getTag().equals(2))
     			{
+    				//drivers
             		Toast.makeText(NavigationMain.this, "Driver Selected", Toast.LENGTH_SHORT).show();
             		tablename = "drivers";
     			}else
         			if(v.getTag().equals(3))
         			{
+        				//vehicle type
                 		Toast.makeText(NavigationMain.this, "Vehicle Type Selected", Toast.LENGTH_SHORT).show();
         				tablename = "vehicletype";
         			}else
@@ -86,7 +92,7 @@ public class NavigationMain extends Activity implements OnClickListener
     	if(!goBack)
     	{
     		engineIntent.putExtra("TableName", tablename);
-    		startActivity(engineIntent);
+    		startActivity(engineIntent); //start next activity
     	}else
     	{
     		this.finish();

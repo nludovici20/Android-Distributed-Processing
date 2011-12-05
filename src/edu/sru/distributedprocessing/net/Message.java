@@ -29,6 +29,8 @@ public class Message
 		//FROM Server: connection
 		public final static char AUTHENTICATE = '\5';
 
+		//TO SERVER: Log Off
+		//FROM SERVER: Kick/Loss of Connection
 		public static final char CONNECTION = '\6';
 	}
 }

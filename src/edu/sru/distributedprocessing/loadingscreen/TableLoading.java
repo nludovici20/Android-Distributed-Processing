@@ -1,8 +1,12 @@
+/*
+ * Loading Screen while pulling in an entire table
+ */
 package edu.sru.distributedprocessing.loadingscreen;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import edu.sru.distributedprocessing.IntelliSyncActivity;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.net.Authenticate;
@@ -31,13 +35,12 @@ public class TableLoading extends Activity {
 		
 		// create a thread to show splash up to splash time
 		splashThread = new Thread() {
-		
-			int wait = 0;
 			@Override
 			public void run() {
 				try {
 					super.run();
 					
+					//send table request
 					Authenticate.tcp.sendTableRequest(tbl);
 					
 					//wait certain amount of time
@@ -45,7 +48,8 @@ public class TableLoading extends Activity {
 						sleep(100);
 					}
 				} catch (Exception e) {
-					//handle
+					e.printStackTrace();
+					Log.v("ADP", "TableLoading - Exception");
 				} finally {
 					//after splash screen, return to activity
 					finish();

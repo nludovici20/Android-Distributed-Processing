@@ -1,3 +1,7 @@
+/*
+ * Editor for Contract Records
+ * Fields: Last Name, First Name, Middle Initial, Primary Phone, Work Phone
+ */
 package edu.sru.distributedprocessing.editors;
 
 import android.app.Activity;
@@ -14,7 +18,6 @@ import edu.sru.distributedprocessing.tools.Constants;
 
 public class ContractorEditor extends Activity {
 	private String tableName, intent; //tablename and intent -> edit/insert
-	//int index;
 	private TextView header;
 	private EditText lastName_edit, firstName_edit, middleInitial_edit, primaryPhone_edit, workPhone_edit;
 	private Button save_btn;
@@ -34,7 +37,7 @@ public class ContractorEditor extends Activity {
         fields = getIntent().getExtras().getStringArray("Fields");
         new_record = new String[fields.length];
         
-        //Editor Items
+        /*** Editor Items ***/
         header = (TextView)findViewById(R.id.group_header);
         header.setText(header.getText().toString() + " " + Constants.record.get(fields[0]));
         
@@ -52,14 +55,15 @@ public class ContractorEditor extends Activity {
         
         workPhone_edit = (EditText)findViewById(R.id.workPhone_edit);
         workPhone_edit.setText(Constants.record.get(fields[5]));
-                
+        /*** End Editor Items ***/
+        
        save_btn = (Button)findViewById(R.id.save_btn);
         save_btn.setOnClickListener(new View.OnClickListener() {
 			
 			public void onClick(View v) {
-				//Toast.makeText(ContactEditor.this, "Save button clicked", Toast.LENGTH_SHORT).show();	
 				if(intent.equalsIgnoreCase("edit"))
 				{
+					//Pull Items for sending an Edit request
 					new_record[0] = Constants.record.get(fields[0]);
 					new_record[1] = lastName_edit.getText().toString();
 					new_record[2] = firstName_edit.getText().toString();
@@ -70,6 +74,7 @@ public class ContractorEditor extends Activity {
 				}else
 					if(intent.equalsIgnoreCase("insert"))
 					{
+						//pull items for insert request (all but ID)
 						new_record[0] = lastName_edit.getText().toString();
 						new_record[1] = firstName_edit.getText().toString();
 						new_record[2] = middleInitial_edit.getText().toString();
@@ -78,12 +83,15 @@ public class ContractorEditor extends Activity {
 						Log.v("ADP", "ContractorEditor.class - Insert Request");
 					}
 				
-				ContractorEditor.this.finish();
-				engineIntent = new Intent(ContractorEditor.this, InsertLoading.class);
+				ContractorEditor.this.finish(); //finish editor activity
+				engineIntent = new Intent(ContractorEditor.this, InsertLoading.class); 
+				
+				/*** Items to send to next Activity ***/
 				engineIntent.putExtra("TableName", tableName);
 				engineIntent.putExtra("Record", new_record);
 				engineIntent.putExtra("Intent", intent);
-				startActivity(engineIntent);
+				
+				startActivity(engineIntent); //start next activity
 			}
 			
 		});

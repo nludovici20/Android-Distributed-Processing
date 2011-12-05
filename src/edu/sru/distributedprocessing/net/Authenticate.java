@@ -23,6 +23,7 @@ public class Authenticate {
 			FileManager.saveConfigFile(act, info, "Config");
 		}catch (Exception e)
 		{
+			e.printStackTrace();
 			Log.d("ADP", "ERROR CONNECTING");
 			act.finish();
 		}

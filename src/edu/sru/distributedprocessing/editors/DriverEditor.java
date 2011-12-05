@@ -1,3 +1,8 @@
+/*
+ * Editor for Driver Records
+ * Fields: First Name, Last Name, Middle Initial, Primary Phone, Work Phone, License Number
+ *         License Expiration Date, License Class
+ */
 package edu.sru.distributedprocessing.editors;
 
 import android.app.Activity;
@@ -15,7 +20,6 @@ import edu.sru.distributedprocessing.tools.Constants;
 
 public class DriverEditor extends Activity {
 	private String tableName, intent;
-	//private int index;
 	private String[] fields, new_record;
 	private TextView header;
 	private EditText firstName_edit, lastName_edit, middleInitial_edit, primaryPhone_edit, workPhone_edit, licenseNO_edit, licenseEXP_edit, licenseClass_edit;
@@ -30,12 +34,11 @@ public class DriverEditor extends Activity {
        
         tableName = "drivers";
         intent = getIntent().getExtras().getString("Intent");
-        //index = getIntent().getExtras().getInt("Index");
         
         fields = getIntent().getExtras().getStringArray("Fields");
         new_record = new String[fields.length];
         
-        //Editor Items
+        /*** Editor Items ***/
         header = (TextView)findViewById(R.id.group_header);
         header.setText(header.getText().toString() + " " + Constants.record.get(fields[0]));
         
@@ -62,6 +65,7 @@ public class DriverEditor extends Activity {
         
         licenseClass_edit = (EditText)findViewById(R.id.licenseClass_edit);
         licenseClass_edit.setText(Constants.record.get(fields[8]));
+        /*** End Editor Items ***/
        
         save_btn = (Button)findViewById(R.id.save_btn);
         save_btn.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +74,7 @@ public class DriverEditor extends Activity {
 				Toast.makeText(DriverEditor.this, "Save button clicked", Toast.LENGTH_SHORT).show();	
 				if(intent.equalsIgnoreCase("edit"))
 				{
+					//pull items for edit request
 					new_record[0] = Constants.record.get(fields[0]);
 					new_record[1] = firstName_edit.getText().toString();
 					new_record[2] = lastName_edit.getText().toString();
@@ -83,6 +88,7 @@ public class DriverEditor extends Activity {
 				}else
 					if(intent.equalsIgnoreCase("insert"))
 					{
+						//pull items for insert request
 						new_record[0] = firstName_edit.getText().toString();
 						new_record[1] = lastName_edit.getText().toString();
 						new_record[2] = middleInitial_edit.getText().toString();
@@ -94,12 +100,15 @@ public class DriverEditor extends Activity {
 						Log.v("ADP", "DriverEditor.class - Insert Request");
 					}
 				
-				DriverEditor.this.finish();
+				DriverEditor.this.finish(); //finish current activity
 				engineIntent = new Intent(DriverEditor.this, InsertLoading.class);
+				
+				/*** Prepare Items to be sent to next Activity ***/
 				engineIntent.putExtra("TableName", tableName);
 				engineIntent.putExtra("Record", new_record);
 				engineIntent.putExtra("Intent", intent);
-				startActivity(engineIntent);
+				
+				startActivity(engineIntent); //start next activity
 			}
 			
 		});     

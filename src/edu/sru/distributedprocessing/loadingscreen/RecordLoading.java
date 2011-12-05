@@ -1,8 +1,12 @@
+/*
+ * Loading Screen that shows while pulling a record for editing
+ */
 package edu.sru.distributedprocessing.loadingscreen;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.editors.ContractorEditor;
 import edu.sru.distributedprocessing.editors.DepotEditor;
@@ -27,7 +31,7 @@ public class RecordLoading extends Activity {
 		tableName = getIntent().getExtras().getString("Name");
 		recordIndex = getIntent().getExtras().getInt("Index");
 		
-		//Edit Record
+		//Get correct Editor to pull data into
 		for(int i = 0; i < Constants.db.getTables().length; i++)
 		{
 			if (tableName.equalsIgnoreCase("contractors"))
@@ -52,22 +56,19 @@ public class RecordLoading extends Activity {
 							}
 		}
 		
+		/*** Prepare Data to send to Editor ***/
 		engineIntent.putExtra("Intent", "edit");
 		engineIntent.putExtra("Fields", Constants.db.getTable(tableName).getFields());
 		engineIntent.putExtra("Index", getIntent().getExtras().getInt("ListIndex"));
 		
-		// set time to splash out
-		//splashDisplayTime = 8000;
-		
 		// create a thread to show splash up to splash time
 		splashThread = new Thread() {
-		
-			int wait = 0;
 			@Override
 			public void run() {
 				try {
 					super.run();
 					
+					//send the record request to be pulled in
 					Authenticate.tcp.sendRecordRequest(tableName, recordIndex);					
 					
 					//wait certain amount of time
@@ -75,7 +76,8 @@ public class RecordLoading extends Activity {
 						sleep(100);
 					}
 				} catch (Exception e) {
-					//handle
+					e.printStackTrace();
+					Log.v("ADP", "RecordLoading - Exception");
 				} finally {
 					//after splash screen, return to activity
 					finish();

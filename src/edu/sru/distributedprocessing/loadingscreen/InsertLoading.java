@@ -1,8 +1,12 @@
+/*
+ * Loading screen that shows while inserting a new record into the Database
+ */
 package edu.sru.distributedprocessing.loadingscreen;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import edu.sru.distributedprocessing.IntelliSyncActivity;
 import edu.sru.distributedprocessing.R;
@@ -28,7 +32,7 @@ public class InsertLoading extends Activity
 		loadingMessage = (TextView) findViewById(R.id.loadingMessage);
 		loadingMessage.setText("Sending Data...");
 				
-		//get passed in tablename
+		/*** Items passed in from previous activity ***/
 		tableName = getIntent().getExtras().getString("TableName");
 		record = getIntent().getExtras().getStringArray("Record");
 		intent = getIntent().getExtras().getString("Intent");
@@ -41,12 +45,12 @@ public class InsertLoading extends Activity
 		// create a thread to show splash up to splash time
 		splashThread = new Thread() {
 		
-			int wait = 0;
 			@Override
 			public void run() {
 				try {
 					super.run();
 					
+					//Insert or Edit Request
 					if(intent.equalsIgnoreCase("edit"))
 					{
 						Authenticate.tcp.sendChangeRequest(tableName, record);	
@@ -61,7 +65,8 @@ public class InsertLoading extends Activity
 						sleep(100);
 					}
 				} catch (Exception e) {
-					//handle
+					e.printStackTrace();
+					Log.v("ADP", "InsertLoading - Exception");
 				} finally {
 					//after splash screen, return to activity
 					finish();

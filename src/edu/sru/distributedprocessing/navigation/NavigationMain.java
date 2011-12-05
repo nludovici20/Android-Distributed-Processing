@@ -8,20 +8,27 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.GridView;
 import android.widget.Toast;
-import edu.sru.distributedprocessing.Main;
 import edu.sru.distributedprocessing.R;
-import edu.sru.distributedprocessing.R.id;
-import edu.sru.distributedprocessing.R.layout;
 import edu.sru.distributedprocessing.loadingscreen.TableLoading;
-import edu.sru.distributedprocessing.net.Authenticate;
 import edu.sru.distributedprocessing.net.TCPClient;
 import edu.sru.distributedprocessing.tools.FileManager;
 
+/**
+ * This class is used for navigation of the tables available to the user.
+ * The user is presented with 5 Images corresponding to their own table.
+ * When an ImageButton is selected, the client will attempt to pull that table in for the users viewing.
+ * 
+ * @author Nick Ludovici
+ */
 public class NavigationMain extends Activity implements OnClickListener
 {
 	private GridView gridview;
 	private boolean goBack;
 	
+	/**
+     *  Called when the activity is first created.
+     *  All objects in the layout (navigation_main.xml) are handled here.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {
@@ -49,7 +56,12 @@ public class NavigationMain extends Activity implements OnClickListener
         }
     }
 
-    //Handle which Button was selected
+    /**
+     * Method that handles different views onClick methods set in the navigation_main.xml layout
+     * It is used to find which button's view was clicked and handle accordingly
+     * 
+     * @param v the view that has been clicked upon
+     */
 	public void onClick(View v) {
 		Intent engineIntent = new Intent(NavigationMain.this, TableLoading.class);		
 		String tablename="";

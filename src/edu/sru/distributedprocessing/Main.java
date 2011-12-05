@@ -1,7 +1,3 @@
-/*
- * The Main Activity in the Application
- * 3 Buttons: Start Program, About, Log off
- */
 package edu.sru.distributedprocessing;
 
 import android.app.Activity;
@@ -12,15 +8,21 @@ import android.view.View;
 import android.widget.Button;
 import edu.sru.distributedprocessing.navigation.NavigationMain;
 import edu.sru.distributedprocessing.net.Authenticate;
-import edu.sru.distributedprocessing.net.TCPClient;
-import edu.sru.distributedprocessing.tools.FileManager;
 
+/**
+ * This class is the first Activity that a user will see upon loading the application.
+ * The user has three options to choose from: Start Program, About, Log Off
+ * @author Nick Ludovici
+ */
 public class Main extends Activity 
 {
 	private Initialize init;
 	private Intent engineIntent;
 	
-    /** Called when the activity is first created. */
+    /**
+     *  Called when the activity is first created.
+     *  All objects in the layout (main.xml) are handled here.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {

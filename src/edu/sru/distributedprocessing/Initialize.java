@@ -1,13 +1,4 @@
-/*
- * Class that creates the database structure:
- * Database: (contains the Tables)
- * Tables: Vehicle, Vehicle Type, Driver, Contractor, and Depots
- * Fields (both local and DB names)
- */
-
 package edu.sru.distributedprocessing;
-
-import java.io.IOException;
 
 import android.app.Activity;
 import android.util.Log;
@@ -15,12 +6,29 @@ import edu.sru.distributedprocessing.tableobjects.Table;
 import edu.sru.distributedprocessing.tools.Constants;
 import edu.sru.distributedprocessing.tools.FileManager;
 
+/**
+ * This class creates the database structure for the android client. 
+ * Five tables are created including: vehicles, drivers, depots, vehicle types, and contractors.
+ * Fields used by both the local client for user view, and database to handle requests properly are initiated and added to the tables.
+ * 
+ * The tables are all added to the database, located in the Constants class. 
+ * 
+ * After construction of the tables, if there is a db file already created, read in the contents to set the users last fields in view, and
+ * index values in view.
+ * 
+ * @author Nick Ludovici
+ */
 public class Initialize 
 {
 	//declaration of table(s), field(s), and TCP Client
 	private Table vehicle_table, driver_table, contractor_table, depot_table, vehicle_type_table;
 	static String[] contractorFields, dbContractorFields, depotFields, dbDepotFields, driverFields, dbDriverFields, vehicleTypeFields, dbVehicleTypeFields, vehicleFields, dbVehicleFields;
 	
+	/**
+	 * Constructor that initializes all of the tables, fields and creates the database structure, before adding all the tables to the local db
+	 * 
+	 * @param act the activity currently running is needed to read/write the local database file
+	 */
 	public Initialize(Activity act)
 	{		
 		/*

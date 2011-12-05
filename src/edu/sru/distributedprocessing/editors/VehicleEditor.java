@@ -1,7 +1,3 @@
-/*
- * Editor for Vehicle Records
- * Fields: Vin Number, License Number, Year, Driver, Vehicle Type, Depot
- */
 package edu.sru.distributedprocessing.editors;
 
 import android.app.Activity;
@@ -9,18 +5,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.loadingscreen.InsertLoading;
-import edu.sru.distributedprocessing.net.Authenticate;
 import edu.sru.distributedprocessing.tools.Constants;
 
+/**
+ * The VehicleEditor class is used to Edit Vehicle Records.
+ * This class is only called if a user wishes to edit a record from the corresponding table.
+ * 
+ * @author Nick Ludovici
+ */
 public class VehicleEditor extends Activity {
 	private String tableName, intent;
 	int index;
@@ -31,7 +30,11 @@ public class VehicleEditor extends Activity {
 	private Intent engineIntent;
 	private Button save_btn;
 	
-    /** Called when the activity is first created. */
+	/**
+     * This method is called when the activity is first created.
+     * The layout's xml file is read, and all objects in the layout are initiated.
+     * Any information passed in from the previous Activity is handled.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

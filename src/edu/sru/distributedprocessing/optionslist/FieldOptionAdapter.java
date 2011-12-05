@@ -11,6 +11,10 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import edu.sru.distributedprocessing.R;
 
+/**
+ * @author Gustavo Matias
+ * url: http://mylifewithandroid.blogspot.com/2010/02/expandable-lists-and-check-boxes.html
+ */
 public class FieldOptionAdapter extends BaseExpandableListAdapter 
 {
     private ArrayList<String> groups; //optionList groups

@@ -1,9 +1,3 @@
-/*
- * Provides the user with two options on selecting a record
- * from the list:
- * Edit Record
- * New Record
- */
 package edu.sru.distributedprocessing.dialogs;
 
 import android.app.Activity;
@@ -22,6 +16,12 @@ import edu.sru.distributedprocessing.loadingscreen.RecordLoading;
 import edu.sru.distributedprocessing.net.Authenticate;
 import edu.sru.distributedprocessing.tableobjects.Table;
 
+/**
+ * This dialog class provides the user with two options when selecting a record from the list: 
+ * Edit Record, New Record
+ * 
+ * @author Nick
+ */
 public class CustomDialogListView extends Dialog 
 {
     Activity activity;	//current activity
@@ -30,9 +30,14 @@ public class CustomDialogListView extends Dialog
     int listIndex; //list view id value
     Intent engineIntent;
     
-    /*
-     * Constructor with inputs:
-     * Activity, Table Name, record ID, listview index 
+    /**
+     * A basic constructor used to handle when a user clicks on an item from the list view.
+     * 
+     * @param act the Current Activity in view to pop up the dialog.
+     * @param theme the theme of the menu located in the res/values/styles.xml file.
+     * @param type the current table that is being viewed by the user.
+     * @param recordIndex the current ID of the record that was selected.
+     * @param listIndex the physical location in the list view of the record that was selected.
      */
     public CustomDialogListView(Activity act, int theme, Table type, int recordIndex, int listIndex) 
     {
@@ -43,6 +48,10 @@ public class CustomDialogListView extends Dialog
         this.listIndex = listIndex;
     }
     
+    /**
+     * This method is called upon the dialogs creation.
+     * Sets up the dialog for the users viewing, including finding all attributes corresponding to the views layout.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {
@@ -94,7 +103,9 @@ public class CustomDialogListView extends Dialog
         
     }
     
-    //close the dialog
+    /**
+     * Method called to close the dialog.
+     */
     private void dismissCustomDialog()
     {
     	this.dismiss();

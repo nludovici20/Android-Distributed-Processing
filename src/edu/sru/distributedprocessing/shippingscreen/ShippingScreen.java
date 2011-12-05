@@ -17,6 +17,11 @@ import edu.sru.distributedprocessing.tableobjects.Record;
 import edu.sru.distributedprocessing.tableobjects.Table;
 import edu.sru.distributedprocessing.tools.Constants;
 
+/**
+ * This class is used by the main IntelliSyncActivity class to handle the instantiation, and manipulation of data the user is viewing.
+ * 
+ * @author Nick Ludovici
+ */
 public class ShippingScreen 
 {
 	private Record[] type;
@@ -28,7 +33,12 @@ public class ShippingScreen
 	private TextView field1, field2;
 	private ArrayList<HashMap<String, String>> mylist;
 	
-	//Table constructor
+	/**
+	 * Constructor that populates the list view with data for the user to view.
+	 * 
+	 * @param act the IntelliSyncActivity that is calling the class.
+	 * @param table the table that is currently being viewed .
+	 */
 	public ShippingScreen(Activity act, Table table)
 	{
 		this.act = act;
@@ -36,6 +46,10 @@ public class ShippingScreen
 		this.type = table.getRecords();	
 	}
 		
+	/**
+	 * Method that populates the list view with data sent by the server.
+	 * This method also handles when a record is selected from the list view and handles the pop up options.
+	 */
 	public void Initialize() 
 	{
 		//Collection<String> fields = null;
@@ -115,25 +129,30 @@ public class ShippingScreen
        });
 		
 	}
-
-	public void Finalize() 
-	{
-		//save everything and exit
-	}
 	
-	//refresh the listview
+	/**
+	 * Method that re-initializes the list view when any type of change has occured to the background data.
+	 */
 	public void refresh()
 	{
 		Initialize();
 	}
 
-	//get the records from the listview
+	/**
+	 * Method that returns the records that are shown in the list view.
+	 * 
+	 * @return the records shown in the list view.
+	 */
 	public Record[] getRecords()
 	{
 		return this.type;
 	}
 
-	//delete a record at <index> and refresh Listview
+	/**
+	 * Method that removes a record with ID passed in from the Database.
+	 * 
+	 * @param index the ID value of the record to be deleted.
+	 */
 	public void deleteRecordAt(String index) {
 		Log.v("ADP", "Deleting Record with ID: " + index);
 		table.deleteRecord(index);
@@ -141,7 +160,12 @@ public class ShippingScreen
 		Initialize();
 	}
 	
-	//change a record at <index> with <values> and refresh listview
+	/**
+	 * Method that changes a record at the specified ID with the values passed in.
+	 * 
+	 * @param index the ID value of the record to be modified.
+	 * @param values the values of the record that needs to be updated.
+	 */
 	public void changeRecordAt(int index,String[] values)
 	{
 		Log.v("ADP", "Updating Record");
@@ -150,7 +174,12 @@ public class ShippingScreen
 		Initialize();
 	}
 	
-	//insert a new record at <index> with new <rec> and refresh listview
+	/**
+	 * Method that inserts a new record into the table.
+	 * 
+	 * @param index the ID value of the record to be inserted.
+	 * @param rec the record to be inserted to the table.
+	 */
 	public void insertRecordAt(String index, String[] rec)
 	{
 		Log.v("ADP", "Inserting new Record");

@@ -1,7 +1,3 @@
-/*
- * Loading Screen that shows while authenticating 
- * Username/Password with Server
- */
 package edu.sru.distributedprocessing.loadingscreen;
 
 import android.app.Activity;
@@ -11,6 +7,11 @@ import android.widget.TextView;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.net.Authenticate;
 
+/**
+ * The AuthenticateLoading class is used to show the user that the client is communicating with the server.
+ * 
+ * @author Nick Ludovici
+ */
 public class AuthenticateLoading extends Activity 
 {
 	private TextView loadingMessage;
@@ -19,6 +20,10 @@ public class AuthenticateLoading extends Activity
 	private String username, password, ipNum;
 	private int port;
 	
+	/**
+	 * This method is called on the Activities creation.
+	 * The loading message is set, and the client attempts to authenticate with the server. 
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

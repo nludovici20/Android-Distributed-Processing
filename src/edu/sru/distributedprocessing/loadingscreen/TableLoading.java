@@ -1,6 +1,3 @@
-/*
- * Loading Screen while pulling in an entire table
- */
 package edu.sru.distributedprocessing.loadingscreen;
 
 import android.app.Activity;
@@ -12,14 +9,22 @@ import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.net.Authenticate;
 import edu.sru.distributedprocessing.tableobjects.Table;
 import edu.sru.distributedprocessing.tools.Constants;
-
+/**
+ * The TableLoading class is used to show the user that the client is communicating with the server.
+ * 
+ * @author Nick Ludovici
+ */
 public class TableLoading extends Activity {
 	private String tableName; 
 	private Intent engineIntent;
 	private Table tbl;
 	private Thread splashThread;
 	public static boolean waiting = true;
-		
+	
+	/**
+	 * This method is called on the Activities creation.
+	 * The loading message is set, and the client attempts to pull a table from the database. 
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

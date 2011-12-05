@@ -1,8 +1,5 @@
 package edu.sru.distributedprocessing.navigation;
 
-import edu.sru.distributedprocessing.R;
-import edu.sru.distributedprocessing.R.drawable;
-import edu.sru.distributedprocessing.R.layout;
 import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -10,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import edu.sru.distributedprocessing.R;
 
 public class GridAdapter extends BaseAdapter {
     private Context mContext; //current context

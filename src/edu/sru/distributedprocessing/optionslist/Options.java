@@ -16,6 +16,11 @@ import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.loadingscreen.TableLoading;
 import edu.sru.distributedprocessing.tools.Constants;
 
+/**
+ * This class presents the user with an interface that allows them to make changes to the fields in view, as well as the starting index of the records they are viewing.
+ * 
+ * @author Nick Ludovici
+ */
 public class Options extends ExpandableListActivity
 {
 	private ArrayList<String> groupNames;
@@ -25,7 +30,12 @@ public class Options extends ExpandableListActivity
 	private EditText index;
 	private String type;
 
-	/** Called when the activity is first created. */
+	/**
+	 * Method that is called when the Activity is created.
+	 * The Expandable list view is created from the table that is currently in view from the local field names, and the groupName.
+	 * 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -121,6 +131,16 @@ public class Options extends ExpandableListActivity
         super.onContentChanged();
     }
 
+    /**
+     * Method that figures out which child was selected from the list and sets the state of it appropriately.
+     * 
+     * @see android.app.ExpandableListActivity#onChildClick(android.widget.ExpandableListView, android.view.View, int, int, long)
+     * @param parent the ExpandableListView the child is located on.
+     * @param v the view the parent is located in.
+     * @param groupPosition the position the groupName is located in the list view.
+     * @param fieldPosition the position the child is located in the sublist.
+     * @param id the ID associated with the child selected.
+     */
     public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int fieldPosition, long id) 
     {
 		CheckBox cb = (CheckBox) v.findViewById(R.id.check_box);
@@ -181,14 +201,22 @@ public class Options extends ExpandableListActivity
     	return false;
     }
 
+    /**
+     * Method that executes when a user chooses to expand the list of field options to choose from.
+     * 
+     * @see android.app.ExpandableListActivity#onGroupExpand(int)
+     * @param groupPosition the position of the groupName that was expanded in the list view.
+     */
     public void  onGroupExpand  (int groupPosition) 
     {
     	//which group was expanded?
     	Log.v("ADP", "Options.class - " + groupNames.get(groupPosition).toString());
     }
     
-    /*
-     * (non-Javadoc)
+    /**
+     * Method that updates the local database with new index, fields in view, and saves the changes.
+     * Pull in the updated attributes from the server Database and give access to the user.
+     * 
      * @see android.app.Activity#onBackPressed()
      */
     @Override

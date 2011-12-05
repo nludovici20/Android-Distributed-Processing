@@ -1,8 +1,3 @@
-/*
- * Editor for Driver Records
- * Fields: First Name, Last Name, Middle Initial, Primary Phone, Work Phone, License Number
- *         License Expiration Date, License Class
- */
 package edu.sru.distributedprocessing.editors;
 
 import android.app.Activity;
@@ -18,6 +13,12 @@ import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.loadingscreen.InsertLoading;
 import edu.sru.distributedprocessing.tools.Constants;
 
+/**
+ * The DriverEditor class is used to Edit Driver Records.
+ * This class is only called if a user wishes to edit a record from the corresponding table.
+ * 
+ * @author Nick Ludovici
+ */
 public class DriverEditor extends Activity {
 	private String tableName, intent;
 	private String[] fields, new_record;
@@ -26,7 +27,11 @@ public class DriverEditor extends Activity {
 	private Button save_btn;
 	private Intent engineIntent;
 	
-    /** Called when the activity is first created. */
+	/**
+     * This method is called when the activity is first created.
+     * The layout's xml file is read, and all objects in the layout are initiated.
+     * Any information passed in from the previous Activity is handled.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

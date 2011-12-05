@@ -1,7 +1,3 @@
-/*
- * Editor for Vehicle Type Records
- * Fields: Vehicle Type, Sub Type, Vehicle Model, Max Weight, Max Range, Max Length
- */
 package edu.sru.distributedprocessing.editors;
 
 import android.app.Activity;
@@ -17,6 +13,12 @@ import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.loadingscreen.InsertLoading;
 import edu.sru.distributedprocessing.tools.Constants;
 
+/**
+ * The VehicleTypeEditor class is used to Edit Vehicle Type Records.
+ * This class is only called if a user wishes to edit a record from the corresponding table.
+ * 
+ * @author Nick Ludovici
+ */
 public class VehicleTypeEditor extends Activity {
 	private String tableName, intent;
 	int index;
@@ -26,7 +28,11 @@ public class VehicleTypeEditor extends Activity {
 	private Button save_btn;
 	private Intent engineIntent;
 	
-    /** Called when the activity is first created. */
+	/**
+     * This method is called when the activity is first created.
+     * The layout's xml file is read, and all objects in the layout are initiated.
+     * Any information passed in from the previous Activity is handled.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

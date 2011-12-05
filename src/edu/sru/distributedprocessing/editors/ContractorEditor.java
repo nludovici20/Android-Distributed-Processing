@@ -1,7 +1,3 @@
-/*
- * Editor for Contract Records
- * Fields: Last Name, First Name, Middle Initial, Primary Phone, Work Phone
- */
 package edu.sru.distributedprocessing.editors;
 
 import android.app.Activity;
@@ -16,6 +12,12 @@ import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.loadingscreen.InsertLoading;
 import edu.sru.distributedprocessing.tools.Constants;
 
+/**
+ * The ContractorEditor class is used to Edit Contractor Records.
+ * This class is only called if a user wishes to edit a record from the corresponding table.
+ * 
+ * @author Nick Ludovici
+ */
 public class ContractorEditor extends Activity {
 	private String tableName, intent; //tablename and intent -> edit/insert
 	private TextView header;
@@ -24,7 +26,11 @@ public class ContractorEditor extends Activity {
 	private Intent engineIntent;
 	private String[] fields, new_record;
 	
-    /** Called when the activity is first created. */
+    /**
+     * This method is called when the activity is first created.
+     * The layout's xml file is read, and all objects in the layout are initiated.
+     * Any information passed in from the previous Activity is handled.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

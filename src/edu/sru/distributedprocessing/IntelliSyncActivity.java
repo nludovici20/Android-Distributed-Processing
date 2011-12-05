@@ -1,8 +1,3 @@
-/*
- * Main Activity where the list of data 
- * is pulled in from the server and Displayed 
- */
-
 package edu.sru.distributedprocessing;
 
 import android.app.Activity;
@@ -25,14 +20,23 @@ import edu.sru.distributedprocessing.optionslist.Options;
 import edu.sru.distributedprocessing.shippingscreen.ShippingScreen;
 import edu.sru.distributedprocessing.tools.Constants;
 
+/**
+ * The IntelliSyncActivity class acts as the Main Activity where the list of data 
+ * is pulled in from the server and displayed to a user in a list view. 
+ * 
+ * @author Nick Ludovici
+ */
 public class IntelliSyncActivity extends Activity implements View.OnClickListener
 {    
     private String type, tableName; //Record type, Table Name
     public static ShippingScreen ss;
     private static Handler handler; //handler to connect TCP thread with UI thread
-//    private TimerTask reloadTask;
-//    private Timer timer;
     
+    /**
+     * This method is called when the Activity is first created. 
+     * Here, the Activity recieve's any objects passed in from the previous activity and populates the list view with
+     * data the user has requested to view.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {
@@ -65,8 +69,10 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
         }        
     }
 
-    /*
+    /**
      * Method used by the TCP thread to handle a change request via UI thread
+     * @param index the index of the physical list view in the Activity to be modified
+     * @param inView the two Fields currently in the users view
      */
     public static void changeRecordAt(final int index, final String[] inView) {
 		handler.postDelayed(new Runnable() {
@@ -76,8 +82,9 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
 		}, 500);
 	}
     
-    /*
+    /**
      * Method used by the TCP thread to handle a deletion request via UI Thread
+     * @param index the index of the physical list view in the Activity to be deleted
      */
     public static void deleteRecordAt(final String index) {
 		handler.postDelayed(new Runnable() {
@@ -87,8 +94,11 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
 		}, 500);
 	}
     
-    /*
+    
+    /**
      * Method used by the TCP Thread to handle an insert request via UI Thread
+     * @param index the id of the new record to be inserted to the list
+     * @param record the values of the Fields currently in view of the user
      */
     public static void insertRecordAt(final String index, final String[] record) {
 		handler.postDelayed(new Runnable() {
@@ -98,9 +108,11 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
 		}, 500);
 	}
     
-    /*
-     * Method that handles different views onClick methods set in the xml layout
-     * Used to find which button was clicked and handle accordingly
+    /**
+     * Method that handles different views onClick methods set in the intelli_sync_activity.xml layout
+     * It is used to find which button's view was clicked and handle accordingly
+     * 
+     * @param v the view that has been clicked upon
      */
     public void onClick(View v)
     {
@@ -131,10 +143,11 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
     		}
     	}
     }
-    
-    /*
-     * When user hits physical menu button create the Options Menu
-     * with the layout from the Res/Menu folder
+  
+    /**
+     * When user hits physical menu button, the Options Menu will be created
+     * with the layout (options_menu.xml) from the Res/Menu folder
+     * @param menu the Menu Interface provided by the Android SDK
      */
     @Override
 	public boolean onCreateOptionsMenu(Menu menu) 
@@ -144,8 +157,10 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
 		return true;
 	}
     
-    /*
-     * Handle when an option from the Options Menu is sleected
+    /**
+     * This method is called to handle when an option from the Options Menu is selected.
+     * 
+     * @param item the MenuItem that was clicked upon.
      */
     @Override
 	public boolean onOptionsItemSelected(MenuItem item) 
@@ -218,32 +233,4 @@ public class IntelliSyncActivity extends Activity implements View.OnClickListene
     	}
 		return true;
 	}
-    
-    /*
-     * method that every 5 seconds checks for changes and refreshes the listview
-     *
-    public void reload()
-    {
-          reloadTask = new TimerTask() {
-                public void run() {
-                    handler.post(new Runnable() {
-                        public void run() {
-                        	ss.refresh();
-                            Log.v("ADP", "Refeshing ListView");
-                        }
-                    });
-                }
-            };
-
-            timer.schedule(reloadTask, 300, 15000);
-    }*/
-    
-    /*
-    @Override
-    public void onBackPressed()
-    {
-    	Log.v("ADP", "canceling timer task...");
-    	timer.cancel();
-    	finish();
-    }*/
 }

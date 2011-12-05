@@ -1,6 +1,3 @@
-/*
- * Loading screen that shows while inserting a new record into the Database
- */
 package edu.sru.distributedprocessing.loadingscreen;
 
 import android.app.Activity;
@@ -13,7 +10,11 @@ import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.net.Authenticate;
 import edu.sru.distributedprocessing.tableobjects.Table;
 import edu.sru.distributedprocessing.tools.Constants;
-
+/**
+ * The InsertLoading class is used to show the user that the client is communicating with the server.
+ * 
+ * @author Nick Ludovici
+ */
 public class InsertLoading extends Activity 
 {
 	private String tableName, intent; 
@@ -23,7 +24,11 @@ public class InsertLoading extends Activity
 	private Table tbl;
 	private Thread splashThread;
 	public static boolean waiting = true;
-		
+	
+	/**
+	 * This method is called on the Activities creation.
+	 * The loading message is set, and the client attempts to insert a new record in the database. 
+	 */	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

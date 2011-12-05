@@ -1,12 +1,3 @@
-/*
- * Authentication Dialog that allows the user to input a:
- * Username
- * Password;
- * IP 
- * Port
- * to Authenticate with the server
- */
-
 package edu.sru.distributedprocessing.dialogs;
 
 import android.app.Activity;
@@ -20,8 +11,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.loadingscreen.AuthenticateLoading;
-import edu.sru.distributedprocessing.net.Authenticate;
 
+/**
+ * Authentication Dialog that allows the user to input a:
+ * Username, Password, IP, and Port to Authenticate with the server.
+ * 
+ * @author Nick
+ */
 public class AuthenticationDialog extends Dialog 
 {
     private Activity activity;	//current activity
@@ -29,19 +25,28 @@ public class AuthenticationDialog extends Dialog
     private Button authenticate_btn;
     private String user, pword, ip, port; //local config file attributes
     
-    /*
-     * Basic Constructor for first time Authentication
-     * inputs: Activity, Dialog Theme
+    /**
+     * Basic Constructor for first time Authentication. 
+     * All entry spots will be empty until the configuration file is created upon first time authentication.
+     * 
+     * @param act the Current Activity in view to pop up the dialog.
+     * @param theme the theme of the menu located in the res/values/styles.xml file.
      */
     public AuthenticationDialog(Activity act, int theme) 
     {
         super(act, theme); //Dialog
         this.activity = act;
     }
-    
-    /*
+
+    /**
      * Constructor Used to send in attributes from the Configuration File
-     * inputs: Activity, Dialog Theme, Username, Password, IP, Port Number
+     * 
+     * @param act the Current Activity in view to pop up the dialog.
+     * @param theme the theme of the menu located in the res/values/styles.xml file.
+     * @param username the username to be passed through authentication.
+     * @param password the password associated with the username to be passed though authentication.
+     * @param ip the IP of the machine containing the server program.
+     * @param port the Port the server is listening for incoming clients on.
      */
     public AuthenticationDialog(Activity act, int theme, String username, String password, String ip, String port)
     {
@@ -53,6 +58,10 @@ public class AuthenticationDialog extends Dialog
     	this.port = port;
     }
     
+    /**
+     * This method is called upon the Activities creation.
+     * Sets up the Activity for the users viewing, including finding all attributes corresponding to the views layout.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {
@@ -118,15 +127,17 @@ public class AuthenticationDialog extends Dialog
         
     }
     
-    //close the dialog
+    /**
+     * Method called to close the dialog.
+     */
     private void dismissCustomDialog()
     {
     	this.dismiss(); 
     }
-    
-    /*
-     * If physical back button is pressed,
-     * Close the dialog, and finish the activity
+
+    /**
+     * This method is called when the device's physical back button is pressed.
+     * It will close the dialog, and finish the activity
      */
     @Override
     public void onBackPressed()

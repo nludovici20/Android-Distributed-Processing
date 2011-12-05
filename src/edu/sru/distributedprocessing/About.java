@@ -1,7 +1,3 @@
-/*
- * Class that displays our About page.
- */
-
 package edu.sru.distributedprocessing;
 
 import android.app.Activity;
@@ -9,6 +5,12 @@ import android.os.Bundle;
 import android.widget.TextView;
 import edu.sru.distributedprocessing.tools.FileManager;
 
+/**
+ * This class is used to display the about page located in the assets folder.
+ * The about page contains information about the application, as well as those involved in creating it.
+ * 
+ * @author Nick Ludovici
+ */
 public class About extends Activity {
 	TextView about_text; //TextView holding the contents of the "About.xml" File
 	

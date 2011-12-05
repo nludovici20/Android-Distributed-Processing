@@ -6,7 +6,6 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import android.app.Activity;
 import android.util.Log;
@@ -20,6 +19,21 @@ import edu.sru.distributedprocessing.tableobjects.Table;
 import edu.sru.distributedprocessing.tools.Constants;
 import edu.sru.distributedprocessing.tools.FileManager;
   
+/**
+ * This class manages the TCP connection between the server and a client.
+ * It runs its main loop on its own thread where it checks for incoming messages,
+ * and handles them depending on the first character in the message.
+ * 
+ * @author Nick Ludovici
+ */
+/**
+ * @author Nick
+ *
+ */
+/**
+ * @author Nick
+ *
+ */
 public class TCPClient extends Thread
 {
 	private final String host;
@@ -36,6 +50,12 @@ public class TCPClient extends Thread
 	public static boolean isConnected = false;
 	private String lastTableRequestMSG;
 	
+	/**
+	 * @param act the current activity in view trying to create the TCP Client thread.
+	 * @param host the address of where the server is located.
+	 * @param port the port on which the server is listening for incoming requests.
+	 * @throws Exception
+	 */
 	public TCPClient(Activity act, final String host, final int port) throws Exception
 	{
 		wasKicked = false;
@@ -46,6 +66,11 @@ public class TCPClient extends Thread
 		connect();
 	}
 	
+	/**
+	 * This methods handles setting up (handshaking) between the client and server.
+	 * 
+	 * @throws Exception
+	 */
 	public void connect() throws Exception
 	{
 		Log.v("ADP", "Connecting");
@@ -57,6 +82,11 @@ public class TCPClient extends Thread
 		isConnected = true;
 	}
 	
+	/** 
+	 * The main loop that handles incoming messages from the server.
+	 * 
+	 * @see java.lang.Thread#run()
+	 */
 	public final void run() 
 	{ 
 		running = true;
@@ -114,8 +144,14 @@ public class TCPClient extends Thread
 			}
 		}				
 	}
-	/*
-	 * recieve an entire table for the fieldsInView()
+	
+	/**
+	 * This method handles the servers message for a table request.
+	 * 
+	 * The information passed in from the server is broken up into records, and inserted into the corresponding table.
+	 * 
+	 * @param tableName the name of the table that was requested by the client.
+	 * @param data the entire table's data sent to the client by the server from the database.
 	 */
 	private void recieveTableRequest(String tableName, String data) 
 	{
@@ -167,8 +203,12 @@ public class TCPClient extends Thread
 		
 	}
 	
-	/*
-	 * send the server a data request - entire table
+	/**
+	 * This method sends the server a table request.
+	 * 
+	 * From the argument passed in, the fields in view, and index is extracted and sent to the server.
+	 * 
+	 * @param tbl the table that is currently being requested.
 	 */
 	public final void sendTableRequest(Table tbl)
 	{		
@@ -196,6 +236,14 @@ public class TCPClient extends Thread
 		Log.v("ADP", "/******** End Send Table Request ********\"");
 	}
 	
+	/**
+	 * This method handles the servers message for a record request.
+	 * 
+	 * The information passed in from the server is added to a global record located in Constants.java.
+	 * 
+	 * @param tableName the name of the table that was requested by the client.
+	 * @param data the entire record sent to the client by the server from the database.
+	 */
 	private void recieveRecordRequest(String tableName, String data) 
 	{
 		Log.v("ADP", "/******** Recieve Record Request ********\"");
@@ -210,8 +258,13 @@ public class TCPClient extends Thread
 		Log.v("ADP", "/******** End Recieve Record Request ********\"");
 	}
 	
-	/*
-	 * pull in an entire record from database
+	/**
+	 * This method sends the server a Record request.
+	 * 
+	 * The current table, and ID of the record requested is prepared in a request and sent to the server.
+	 * 
+	 * @param tablename the name of the table that the record requested is in.
+	 * @param indexOfRecord the ID of the record that has been requested.
 	 */
 	public void sendRecordRequest(String tablename, int indexOfRecord)
 	{
@@ -226,6 +279,13 @@ public class TCPClient extends Thread
 		Log.v("ADP", "/******** End send Record Request ********\"");
 	}
 	
+	/**
+	 * This method handles the servers message for a change request.
+	 * 
+	 * The information passed in from the server is broken up into records, and the changes are made to the corresponding table.
+	 * 
+	 * @param data the entire records data sent to the client by the server from the database.
+	 */
 	private void recieveChangeRequest(String data) 
 	{
 		Log.v("ADP", "/******** Recieve Change Request ********\"");
@@ -258,6 +318,14 @@ public class TCPClient extends Thread
 		
 	}
 	
+	/**
+	 * This method sends the server a change request.
+	 * 
+	 * The table where the record is located, as well as the changes that have been made are prepared in the request message, and sent to the server.
+	 * 
+	 * @param tablename the name of the table where the record is held in.
+	 * @param rec the entire records data that has been changed on the client and needs to be updated the database.
+	 */
 	public void sendChangeRequest(String tablename, String[] rec)
 	{
 		InsertLoading.waiting = true;
@@ -279,8 +347,12 @@ public class TCPClient extends Thread
 		Log.v("ADP", "/******** End Send Change Request ********\"");
 	}
 	
-	/*
-	 * recieve inserted data and handle accordingly
+	/**
+	 * This method handles the servers message for an insert request.
+	 * 
+	 * The information passed in from the server is broken up into records, and inserted into the corresponding table.
+	 * 
+	 * @param data the entire record's data to be inserted sent to the client by the server from the database.
 	 */
 	private void recieveInsertRequest(String data)
 	{
@@ -301,8 +373,13 @@ public class TCPClient extends Thread
 		Log.v("ADP", "/******** End ReceiveInsert Request ********\"");
 	}
 	
-	/*
-	 * Send a newly inserted Record from client to the server
+	/**
+	 * This method sends the server an insert request.
+	 * 
+	 * The table where the record is located, as well as the attributes that have been added are prepared in the request message, and sent to the server.
+	 * 
+	 * @param tablename the name of the table where the new record is to be held in.
+	 * @param rec the entire records data that has been inserted on the client and needs to be inserted in the database.
 	 */
 	public void sendInsertRequest(String tablename, String[] rec)
 	{
@@ -326,9 +403,12 @@ public class TCPClient extends Thread
 		Log.v("ADP", "/******** End Send Insert Request ********\"");
 	}
 	
-	/*
-	 * Recieve data and handle deletion of a record
-	 * data contains a tablename, and an index to delete
+	/**
+	 * This method handles the servers message for a delete request.
+	 * 
+	 * The information passed in from the server gives the client instructions on which record that has been deleted.
+	 * 
+	 * @param data the entire table's data sent to the client by the server from the database.
 	 */
 	private void recieveDeleteRequest(String data)
 	{
@@ -345,8 +425,14 @@ public class TCPClient extends Thread
 		Log.v("ADP", "/******** End Recieve Delete Request ********\"");	
 	}
 	
-	/*
-	 * send a deletion request to the database
+	
+	/**
+	 * This method is used to send a delete request to the server.
+	 * 
+	 * The table where the record has been deleted, as well as its ID is sent to the server in a request message.
+	 * 
+	 * @param tablename the table where the record needs to be deleted from.
+	 * @param indexOfDeletedRecord the ID of the record that is to be deleted.
 	 */
 	public final void sendDeleteRequest(String tablename, int indexOfDeletedRecord)
 	{
@@ -358,8 +444,8 @@ public class TCPClient extends Thread
 		Log.v("ADP", "/******** END Send Delete Request ********\"");
 	}
 	
-	/*
-	 * Send a Log off Request
+	/**
+	 * This method is used to alert the server that the client has logged off and to stop tracking it.
 	 */
 	public final void sendLogOffRequest()
 	{
@@ -368,6 +454,12 @@ public class TCPClient extends Thread
 		Log.v("ADP", "/********** End Log Off Request **********/");
 	}
 	
+	/**
+	 * This method is used to ensure connection between the client and server.
+	 * It also sends requests to the server.
+	 * 
+	 * @param data the data to be sent from the client to the server.
+	 */
 	public final void send(final String data)
 	{
 		if(wasKicked)
@@ -392,6 +484,12 @@ public class TCPClient extends Thread
 		out.println(data);
 	}
 		
+	/**
+	 * This method cleanly closes the TCP socket, and terminates the TCP thread.
+	 * 
+	 * @throws InterruptedException
+	 * @throws IOException
+	 */
 	public final void finish() throws InterruptedException, IOException
 	{
 		socket.close();
@@ -399,11 +497,21 @@ public class TCPClient extends Thread
 		this.join();
 	}	
 	
+	/**
+	 * An accessor method used to retrieve the address to the server machine.
+	 * 
+	 * @return the address of the machine where the server is located.
+	 */
 	public final String getHost()
 	{
 		return host;
 	}
 	
+	/**
+	 * An accessor method used to retrieve the servers port number.
+	 * 
+	 * @return the port that the server is listening on.
+	 */
 	public final int getPort()
 	{
 		return port;

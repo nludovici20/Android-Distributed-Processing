@@ -16,19 +16,24 @@ import org.w3c.dom.NodeList;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.dialogs.AuthenticationDialog;
-import edu.sru.distributedprocessing.loadingscreen.AuthenticateLoading;
-import edu.sru.distributedprocessing.net.Authenticate;
 import edu.sru.distributedprocessing.tableobjects.Table;
 
+/**
+ * This class is used to handle file manipulation throughout the application.
+ * It allows for read/write ability of both .xml, and .txt files.
+ * 
+ * @author Nick Ludovici
+ */
 public class FileManager {
 	public static String username, password;
 	
-	/*
-	 * Method that reads the db file for saved attributes (Starting Index, Fields in View)
+	/**
+	 * Method that reads the database file for saved attributes (Starting Index, Fields in View)
+	 * 
+	 * @param context the context calling this method.
 	 */
 	public static void readTextFile(Context context)
 	{
@@ -75,10 +80,12 @@ public class FileManager {
 		
 	}
 	
-	/*
-	 * Method that saves a db attributes 
-	 * Input: Tables in DB
-	 * Output: File called <dbName>.txt with each tables starting index, fields in view
+	/**
+	 * Method that saves the database and the attributes needed for resuming the application if closed.
+	 * The Database file is saved as <database name>.txt and is private to all other applications.
+	 * 
+	 * @param context the context calling the method.
+	 * @param tables the tables that need their attributes saved.
 	 */
 	public static void saveTextFile(Context context, Table[] tables)
 	{
@@ -118,8 +125,13 @@ public class FileManager {
 		}
 	}
 	
-	/*
-	 * Method to save config file of network attributes (username, password, server ip, port num)
+	/**
+	 * Method that saves a configuration file that contains: username, password, server IP, and port Num
+	 * These attributes are used in authenticating the client with the server.
+	 * 
+	 * @param context the context that called this method.
+	 * @param info the info that is to be saved to the config file.
+	 * @param filename the name of the file that is to be saved.
 	 */
 	public static void saveConfigFile(Context context, String[] info, String filename)
 	{
@@ -149,9 +161,10 @@ public class FileManager {
 		}
 	}
 	
-	/*
-	 * Method to retrieve network attributes
-	 * Ouput: Username, Password, IP address, port #
+	/**
+	 * Method that reads a saved configuration file, and returns the attributes to the user for authentication with the server.
+	 * 
+	 * @param act the activity that called this method.
 	 */
 	public static void readConfigFile(Activity act)
 	{
@@ -191,7 +204,14 @@ public class FileManager {
 		}
 	}
 	
-	//Reads the about.xml file for about page
+	/**
+	 * Method that reads an XML file and returns information found at a specified tag.
+	 * 
+	 * @param act the activity that called this method.
+	 * @param file the name of the file to be read.
+	 * @param tag_name the xml tag that is to be read from the xml file.
+	 * @return the information located at the specified tag_name.
+	 */
 	public static String readXML(Activity act ,String file, String tag_name)
 	{
         try {

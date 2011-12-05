@@ -1,5 +1,9 @@
 package edu.sru.distributedprocessing.optionslist;
 
+/**
+ * @author Gustavo Matias
+ * url: http://mylifewithandroid.blogspot.com/2010/02/expandable-lists-and-check-boxes.html
+ */
 public class FieldOption 
 {
     public String field = null; //field name

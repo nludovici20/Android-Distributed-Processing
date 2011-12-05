@@ -1,6 +1,3 @@
-/*
- * Loading Screen that shows while pulling a record for editing
- */
 package edu.sru.distributedprocessing.loadingscreen;
 
 import android.app.Activity;
@@ -16,13 +13,22 @@ import edu.sru.distributedprocessing.editors.VehicleTypeEditor;
 import edu.sru.distributedprocessing.net.Authenticate;
 import edu.sru.distributedprocessing.tools.Constants;
 
+/**
+ * The RecordLoading class is used to show the user that the client is communicating with the server.
+ * 
+ * @author Nick Ludovici
+ */
 public class RecordLoading extends Activity {
 	private String tableName; 
 	private int recordIndex;
 	private Intent engineIntent = null;
 	private Thread splashThread;
 	public static boolean waiting = true;
-		
+	
+	/**
+	 * This method is called on the Activities creation.
+	 * The loading message is set, and the client attempts to pull in a record from the database. 
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

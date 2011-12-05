@@ -5,6 +5,12 @@ import java.util.HashMap;
 
 import edu.sru.distributedprocessing.tableobjects.DataBase;
 
+/**
+ * This class is a Global Class which gives access to the local database, and a single record.
+ * This class allows these objects to be manipulated or updated by any of the classes that give static reference to them.
+ * 
+ * @author Nick Ludovici
+ */
 public class Constants 
 {	
 	//keep track of DB
@@ -12,9 +18,4 @@ public class Constants
 	
 	//single record
 	public static HashMap<String, String> record = new HashMap<String, String>();
-	
-	public static ArrayList<ArrayList<String>> vehicleEditorItems = new ArrayList<ArrayList<String>>();
-	//vehicleEditorItems[0] is driver_group;
-	//vehicleEditorItems[1] is vehicle_type_group;
-	//vehicleEditorItems[2] is depot_group;
 }

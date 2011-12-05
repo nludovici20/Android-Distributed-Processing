@@ -1,3 +1,7 @@
+/*
+ * The Main Activity in the Application
+ * 3 Buttons: Start Program, About, Log off
+ */
 package edu.sru.distributedprocessing;
 
 import android.app.Activity;
@@ -25,11 +29,13 @@ public class Main extends Activity
           
         init = new Initialize(this); //initialize the db and tables
        
+        /***** Handle Button Clicks *****/
         Button start_btn = (Button) findViewById(R.id.start_btn);
         start_btn.setOnClickListener(new View.OnClickListener() 
         {
 			public void onClick(View v) 
 			{
+				//Start the navigation menu activity
 				 engineIntent = new Intent(Main.this, NavigationMain.class);
 				 startActivity(engineIntent);
 			}
@@ -41,6 +47,7 @@ public class Main extends Activity
 			//@Override
 			public void onClick(View v) 
 			{
+				//Start About activity to display the about page
 				engineIntent = new Intent(Main.this, About.class);
 				startActivity(engineIntent);
 			}
@@ -55,13 +62,14 @@ public class Main extends Activity
 			{
 				try {
 					Authenticate.tcp.sendLogOffRequest();
-					Authenticate.tcp.finish();
+					Authenticate.tcp.finish(); //finish the tcp thread
 				} catch (Exception e) {
 					Log.v("ADP", "Main.class - Error finishing tcp thread");
 				}
 				finish(); //finish current activity
 			}
-		});        
+		}); 
+        /***** End Handle Button Clicks *****/
         
     }		
 }

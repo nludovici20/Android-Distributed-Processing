@@ -357,7 +357,17 @@ public class TCPClient extends Thread
 		Log.v("ADP", str);
 		Log.v("ADP", "/******** END Send Delete Request ********\"");
 	}
-
+	
+	/*
+	 * Send a Log off Request
+	 */
+	public final void sendLogOffRequest()
+	{
+		Log.v("ADP", "/********** Send Log Off Request **********/");
+		send(""+Message.Type.CONNECTION);
+		Log.v("ADP", "/********** End Log Off Request **********/");
+	}
+	
 	public final void send(final String data)
 	{
 		if(wasKicked)
@@ -376,12 +386,12 @@ public class TCPClient extends Thread
 					out.println(this.lastTableRequestMSG);
 				}
 			} catch (Exception e) {
-				//kill whole program?
+				//kill program?
 			}
 		}
 		out.println(data);
 	}
-	
+		
 	public final void finish() throws InterruptedException, IOException
 	{
 		socket.close();

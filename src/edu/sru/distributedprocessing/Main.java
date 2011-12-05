@@ -47,12 +47,14 @@ public class Main extends Activity
 		});
         
         Button quit_btn = (Button) findViewById(R.id.quit_btn);
+        quit_btn.setText("Log Off");
         quit_btn.setOnClickListener(new View.OnClickListener() 
         {
 			//@Override
 			public void onClick(View v) 
 			{
 				try {
+					Authenticate.tcp.sendLogOffRequest();
 					Authenticate.tcp.finish();
 				} catch (Exception e) {
 					Log.v("ADP", "Main.class - Error finishing tcp thread");

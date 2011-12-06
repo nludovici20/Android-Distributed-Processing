@@ -21,14 +21,15 @@ import edu.sru.distributedprocessing.tools.Constants;
  * @author Nick Ludovici
  */
 public class VehicleEditor extends Activity {
+	
 	private String tableName, intent;
-	int index;
-	private TextView group_header;
+	int index; /** the ID of the record**/
+	private TextView group_header; /** the vehicle editor header sentence **/
 	private EditText vin_text, license_text, year_text, driver_group, vehicle_type_group, depot_group;
-	private CheckBox avail_box;
+	private CheckBox avail_box; /** the availability of the vehicle **/
 	private String[] fields, new_record;
 	private Intent engineIntent;
-	private Button save_btn;
+	private Button save_btn; /** sends the changes, or newly inserted record to the server **/
 	
 	/**
      * This method is called when the activity is first created.

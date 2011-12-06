@@ -24,10 +24,10 @@ import edu.sru.distributedprocessing.tools.Constants;
  */
 public class ShippingScreen 
 {
-	private Record[] type;
+	private Record[] type; /** records currently in the list view **/
 	private Activity act;
 	private int tableIndex, tableSizeLimit;
-	private Table table;
+	private Table table; /** table the records currently in view belong to**/
 	private SimpleAdapter mRecords;
 	private  ListView lv;
 	private TextView field1, field2;

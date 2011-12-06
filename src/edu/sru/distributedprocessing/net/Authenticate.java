@@ -11,7 +11,7 @@ import edu.sru.distributedprocessing.tools.FileManager;
  * @author Nick Ludovici
  */
 public class Authenticate {
-	public static TCPClient tcp;
+	public static TCPClient tcp; /** the TCP thread used for sending/recieving messages to the server **/
 	
 	/**
 	 * This constructor recieve's the users information, as well as the machine and port where the server program resides.

@@ -7,8 +7,8 @@ package edu.sru.distributedprocessing.tableobjects;
  */
 public class Record
 {
-	String id;
-	String[] fields;
+	String id; /** the record ID assigned by the server's Database **/
+	String[] fields; /** the field values assigned to the record **/
 	
 	/**
 	 * This Constructor method sets the data passed in to the correct attributes of the record.

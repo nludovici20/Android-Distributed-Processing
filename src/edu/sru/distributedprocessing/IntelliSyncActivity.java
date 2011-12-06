@@ -29,8 +29,8 @@ import edu.sru.distributedprocessing.tools.Constants;
 public class IntelliSyncActivity extends Activity implements View.OnClickListener
 {    
     private String type, tableName; //Record type, Table Name
-    public static ShippingScreen ss;
-    private static Handler handler; //handler to connect TCP thread with UI thread
+    public static ShippingScreen ss; /** where all the data manipulation is handled and changed on the screen **/
+    private static Handler handler; /** connects the TCP thread with UI thread **/
     
     /**
      * This method is called when the Activity is first created. 

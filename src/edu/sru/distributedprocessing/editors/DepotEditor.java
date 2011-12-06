@@ -20,11 +20,10 @@ import edu.sru.distributedprocessing.tools.Constants;
  */
 public class DepotEditor extends Activity {
 	private String tableName, intent;
-	//private int index; 
 	private String[] fields, new_record;
-	private TextView header;
+	private TextView header; /** the depot editor header sentence **/
 	private EditText depotName_edit, depotAddress_edit, city_edit, state_edit, zip_edit, latitude_edit, longitude_edit;
-	private Button save_btn;
+	private Button save_btn; /** sends the changes, or newly inserted record to the server **/
 	private Intent engineIntent;
 	
 	/**

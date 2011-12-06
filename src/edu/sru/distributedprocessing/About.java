@@ -12,8 +12,17 @@ import edu.sru.distributedprocessing.tools.FileManager;
  * @author Nick Ludovici
  */
 public class About extends Activity {
+	/**
+	 * Holds the text about the application.
+	 */
 	TextView about_text; //TextView holding the contents of the "About.xml" File
 	
+	/**
+	 * Method that is called when the Activity is first created.
+	 * Sets the text view to hold the data provided by the "about.xml" file.
+	 * 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

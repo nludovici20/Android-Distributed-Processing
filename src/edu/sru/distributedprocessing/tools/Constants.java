@@ -13,9 +13,13 @@ import edu.sru.distributedprocessing.tableobjects.DataBase;
  */
 public class Constants 
 {	
-	//keep track of DB
+	/**
+	 * the local database for keeping track of tables, and records.
+	 */
 	public static DataBase db = new DataBase("DataBase");
 	
-	//single record
+	/**
+	 * a single record used in record requests
+	 */
 	public static HashMap<String, String> record = new HashMap<String, String>();
 }

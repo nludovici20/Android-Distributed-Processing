@@ -20,14 +20,14 @@ import edu.sru.distributedprocessing.tableobjects.Table;
  * This dialog class provides the user with two options when selecting a record from the list: 
  * Edit Record, New Record
  * 
- * @author Nick
+ * @author Nick Ludovici
  */
 public class CustomDialogListView extends Dialog 
 {
-    Activity activity;	//current activity
-    Table table; //table record was selected from
-    int recordIndex; //record id value
-    int listIndex; //list view id value
+    Activity activity;	/** current activity in view **/
+    Table table; /** table record was selected from **/
+    int recordIndex; /** record id value **/
+    int listIndex; /** list view id value **/
     Intent engineIntent;
     
     /**

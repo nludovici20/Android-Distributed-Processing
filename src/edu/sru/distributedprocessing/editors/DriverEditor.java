@@ -22,9 +22,9 @@ import edu.sru.distributedprocessing.tools.Constants;
 public class DriverEditor extends Activity {
 	private String tableName, intent;
 	private String[] fields, new_record;
-	private TextView header;
+	private TextView header; /** the driver editor header sentence **/
 	private EditText firstName_edit, lastName_edit, middleInitial_edit, primaryPhone_edit, workPhone_edit, licenseNO_edit, licenseEXP_edit, licenseClass_edit;
-	private Button save_btn;
+	private Button save_btn; /** sends the changes, or newly inserted record to the server **/
 	private Intent engineIntent;
 	
 	/**

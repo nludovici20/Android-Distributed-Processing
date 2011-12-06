@@ -16,11 +16,11 @@ import edu.sru.distributedprocessing.loadingscreen.AuthenticateLoading;
  * Authentication Dialog that allows the user to input a:
  * Username, Password, IP, and Port to Authenticate with the server.
  * 
- * @author Nick
+ * @author Nick Ludovici
  */
 public class AuthenticationDialog extends Dialog 
 {
-    private Activity activity;	//current activity
+    private Activity activity;	/** current activity in view **/
     private EditText username, password, ipNum, portNum; //attribute input boxes
     private Button authenticate_btn;
     private String user, pword, ip, port; //local config file attributes

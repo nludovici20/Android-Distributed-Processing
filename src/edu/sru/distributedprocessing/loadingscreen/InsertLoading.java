@@ -18,11 +18,11 @@ import edu.sru.distributedprocessing.tools.Constants;
 public class InsertLoading extends Activity 
 {
 	private String tableName, intent; 
-	private String[] record;
+	private String[] record; /** record that is being edited **/
 	private Intent engineIntent;
-	private TextView loadingMessage;
-	private Table tbl;
-	private Thread splashThread;
+	private TextView loadingMessage; /** message the user will see while loading information **/
+	private Table tbl; /** table currently in view **/
+	private Thread splashThread; /** thread used to show the loading screen **/
 	public static boolean waiting = true;
 	
 	/**

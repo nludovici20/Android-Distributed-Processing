@@ -12,15 +12,15 @@ import android.util.Log;
  * @author Nick Ludovici
  */
 public class Table {
-	private String table_name;
-	private ArrayList<Record> table_data;
-	private Record[] data;
-	private int startingIndex;
-	private int tableSize;
-	private ArrayList<String> fieldsInView;
+	private String table_name; /** the table name associated with this table **/
+	private ArrayList<Record> table_data; /** the entire data associated with this table **/
+	private Record[] data; /** the records added to the table **/
+	private int startingIndex; /** the starting index of the records in the table **/
+	private int tableSize; /** the number of records in the table **/
+	private ArrayList<String> fieldsInView; /** the field names that are currently in view **/
 	private int index = 0;
 	private String[] dbNames, fieldNames;
-	private Hashtable<String, String> dbFields;
+	private Hashtable<String, String> dbFields; /** the fields names associated with the Server's database fields **/
 	String recordType, groupName;
 	
 	/**

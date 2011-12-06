@@ -23,9 +23,9 @@ public class VehicleTypeEditor extends Activity {
 	private String tableName, intent;
 	int index;
 	private String[] fields, new_record;
-	private TextView header;
+	private TextView header; /** the vehicle type editor header sentence **/
 	private EditText vehicleType_edit, subType_edit, vehicleModel_edit, maxWeight_edit, maxRange_edit, maxLength_edit;
-	private Button save_btn;
+	private Button save_btn; /** sends the changes, or newly inserted record to the server **/
 	private Intent engineIntent;
 	
 	/**

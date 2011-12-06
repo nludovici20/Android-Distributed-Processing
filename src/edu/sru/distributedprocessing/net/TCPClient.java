@@ -27,30 +27,29 @@ import edu.sru.distributedprocessing.tools.FileManager;
  * @author Nick Ludovici
  */
 /**
- * @author Nick
- *
- */
-/**
- * @author Nick
+ * @author Nick Ludovici
  *
  */
 public class TCPClient extends Thread
 {
-	private final String host;
-	private final int port;
+	private final String host; /** address to the server **/
+	private final int port; /** port the server is listening on **/
 	private Socket socket;
-	private BufferedReader in;
-	private PrintWriter out;
+	private BufferedReader in; /** reader used to read new messages in **/
+	private PrintWriter out; /** writer used for sending messages **/
 	private boolean running;
 	//private final Object sendLock = new Object();
-	private String lastTable;
-	private int numFields;
+	private String lastTable; /** the last table sent to the server **/
+	private int numFields; /** the number of fields currently in view **/
 	private Activity act;
-	private boolean wasKicked = false;
-	public static boolean isConnected = false;
-	private String lastTableRequestMSG;
+	private boolean wasKicked = false; /** boolean to detected if client was kicked **/
+	public static boolean isConnected = false; /** boolean to detect if the client is still connected to the server **/
+	private String lastTableRequestMSG; /** the last table request sent to the server **/
 	
 	/**
+	 * Constructor that specifies the host, and port to be used in connecting to the server.
+	 * The Activity that calls this class is also passed in for updating the UI thread on retrieval of requests.
+	 * 
 	 * @param act the current activity in view trying to create the TCP Client thread.
 	 * @param host the address of where the server is located.
 	 * @param port the port on which the server is listening for incoming requests.

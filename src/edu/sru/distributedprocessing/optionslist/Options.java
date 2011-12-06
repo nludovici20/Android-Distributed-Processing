@@ -23,12 +23,12 @@ import edu.sru.distributedprocessing.tools.Constants;
  */
 public class Options extends ExpandableListActivity
 {
-	private ArrayList<String> groupNames;
-	private ArrayList<ArrayList<FieldOption>> field_options;
-	private ArrayList<FieldOption> fields;
+	private ArrayList<String> groupNames; /** the header name seen in the option list **/
+	private ArrayList<ArrayList<FieldOption>> field_options; /** the options shown when the group is expanded **/
+	private ArrayList<FieldOption> fields; /** the local fields used in the options list **/
 	private FieldOptionAdapter expListAdapter;
 	private EditText index;
-	private String type;
+	private String type; /** the record type for the corresponding table **/
 
 	/**
 	 * Method that is called when the Activity is created.

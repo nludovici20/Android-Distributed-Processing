@@ -14,8 +14,8 @@ import edu.sru.distributedprocessing.net.Authenticate;
  */
 public class AuthenticateLoading extends Activity 
 {
-	private TextView loadingMessage;
-	private Thread splashThread;
+	private TextView loadingMessage; /** message the user will see while loading information **/
+	private Thread splashThread; /** thread used to show the loading screen **/
 	public static boolean waiting = true;
 	private String username, password, ipNum;
 	private int port;

@@ -12,11 +12,12 @@ import edu.sru.distributedprocessing.net.Authenticate;
 /**
  * This class is the first Activity that a user will see upon loading the application.
  * The user has three options to choose from: Start Program, About, Log Off
+ * 
  * @author Nick Ludovici
  */
 public class Main extends Activity 
 {
-	private Initialize init;
+	private Initialize init; /** class used to creat the database structure **/
 	private Intent engineIntent;
 	
     /**

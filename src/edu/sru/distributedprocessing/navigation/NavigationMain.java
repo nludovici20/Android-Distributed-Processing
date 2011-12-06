@@ -22,8 +22,8 @@ import edu.sru.distributedprocessing.tools.FileManager;
  */
 public class NavigationMain extends Activity implements OnClickListener
 {
-	private GridView gridview;
-	private boolean goBack;
+	private GridView gridview; /** the grid layout used in the activity **/
+	private boolean goBack; /** used to navigate backwards one activity **/
 	
 	/**
      *  Called when the activity is first created.

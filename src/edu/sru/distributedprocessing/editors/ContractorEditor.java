@@ -20,9 +20,9 @@ import edu.sru.distributedprocessing.tools.Constants;
  */
 public class ContractorEditor extends Activity {
 	private String tableName, intent; //tablename and intent -> edit/insert
-	private TextView header;
+	private TextView header; /** the contractor editor header sentence **/
 	private EditText lastName_edit, firstName_edit, middleInitial_edit, primaryPhone_edit, workPhone_edit;
-	private Button save_btn;
+	private Button save_btn; /** sends the changes, or newly inserted record to the server **/
 	private Intent engineIntent;
 	private String[] fields, new_record;
 	

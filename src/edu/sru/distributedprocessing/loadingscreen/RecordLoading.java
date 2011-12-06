@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.editors.ContractorEditor;
 import edu.sru.distributedprocessing.editors.DepotEditor;
@@ -19,10 +20,11 @@ import edu.sru.distributedprocessing.tools.Constants;
  * @author Nick Ludovici
  */
 public class RecordLoading extends Activity {
-	private String tableName; 
-	private int recordIndex;
+	private String tableName; /** name of the table currently in view **/
+	private int recordIndex; /** ID of the record being edited **/
+	private TextView loadingMessage; /** message the user will see while loading information **/
 	private Intent engineIntent = null;
-	private Thread splashThread;
+	private Thread splashThread; /** thread used to show the loading screen **/
 	public static boolean waiting = true;
 	
 	/**
@@ -36,6 +38,9 @@ public class RecordLoading extends Activity {
 		
 		tableName = getIntent().getExtras().getString("Name");
 		recordIndex = getIntent().getExtras().getInt("Index");
+		
+		loadingMessage = (TextView) findViewById(R.id.loadingMessage);
+		loadingMessage.setText("Pulling Record From Database...");
 		
 		//Get correct Editor to pull data into
 		for(int i = 0; i < Constants.db.getTables().length; i++)

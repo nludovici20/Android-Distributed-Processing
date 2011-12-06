@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 import edu.sru.distributedprocessing.IntelliSyncActivity;
 import edu.sru.distributedprocessing.R;
 import edu.sru.distributedprocessing.net.Authenticate;
@@ -15,10 +16,11 @@ import edu.sru.distributedprocessing.tools.Constants;
  * @author Nick Ludovici
  */
 public class TableLoading extends Activity {
-	private String tableName; 
+	private String tableName; /** name of the table currently in view **/
 	private Intent engineIntent;
-	private Table tbl;
-	private Thread splashThread;
+	private Table tbl; /** the table currently in view **/
+	private TextView loadingMessage; /** message the user will see while loading information **/
+	private Thread splashThread; /** thread used to show the loading screen **/
 	public static boolean waiting = true;
 	
 	/**
@@ -32,8 +34,10 @@ public class TableLoading extends Activity {
 		
 		//get passed in tablename
 		tableName = getIntent().getExtras().getString("TableName");
-		
 		engineIntent = new Intent(this, IntelliSyncActivity.class);
+		
+		loadingMessage = (TextView) findViewById(R.id.loadingMessage);
+		loadingMessage.setText("Loading Table from Server...");
 		
 		tbl = Constants.db.getTable(tableName);
 		engineIntent.putExtra("Type", tbl.getRecordType());

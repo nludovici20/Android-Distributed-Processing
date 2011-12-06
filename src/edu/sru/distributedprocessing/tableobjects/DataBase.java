@@ -11,8 +11,8 @@ import edu.sru.distributedprocessing.tools.FileManager;
  * @author Nick Ludovici
  */
 public class DataBase {
-	private String db_name;
-	private ArrayList<Table> dbTables;
+	private String db_name; /** the name assigned to the local database **/
+	private ArrayList<Table> dbTables; /** all of the tables added to the local database **/;
 	private Table[] tables;
 	
 	/**
